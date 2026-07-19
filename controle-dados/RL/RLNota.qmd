@@ -1,0 +1,116 @@
+---
+title: "Aprendizagem por Reforço"
+subtitle: "Reinforcement Learning para Controle"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+    toc: true
+---
+
+**Aprendizagem por reforço** (*reinforcement learning*, RL) é um paradigma
+de aprendizado no qual um **agente** aprende a agir sobre um **ambiente**
+por tentativa e erro, maximizando uma recompensa acumulada — sem que
+ninguém lhe informe a ação correta em cada situação, apenas o quão boa foi
+a consequência de suas ações. Suas raízes remontam à programação dinâmica
+de Bellman [@bellman1957dynamic], e o campo se consolidou como disciplina
+própria com o livro-texto de Sutton e Barto [@sutton2018reinforcement] e o
+levantamento de Kaelbling, Littman e Moore [@kaelbling1996reinforcement].
+
+## Processos de Decisão de Markov
+
+O formalismo padrão de RL é o **processo de decisão de Markov** (MDP), a
+tupla $(\mathcal{S}, \mathcal{A}, P, r, \gamma)$, em que $\mathcal{S}$ é o
+conjunto de estados, $\mathcal{A}$ o conjunto de ações, $P(s'|s,a)$ a
+probabilidade de transição para o estado $s'$ ao tomar a ação $a$ no estado
+$s$, $r(s,a)$ a recompensa imediata, e $\gamma \in [0,1)$ o fator de
+desconto. Uma **política** $\pi(a|s)$ mapeia estados em ações (ou
+distribuições sobre ações), e o objetivo é encontrar a política $\pi^\ast$
+que maximize o retorno esperado
+$\mathbb{E}\left[\sum_{k=0}^{\infty}\gamma^k r(s_k,a_k)\right]$.
+
+Para quem vem da teoria de controle, a tradução é direta: $\mathcal{S}$ é o
+estado da planta, $\mathcal{A}$ é a entrada de controle, e $-r$ é o custo
+por estágio de um problema de controle ótimo estocástico.
+
+## Função de Valor e Equação de Bellman
+
+A **função de valor** $V^\pi(s)$ é o retorno esperado seguindo a política
+$\pi$ a partir do estado $s$; a **função de ação-valor** $Q^\pi(s,a)$ fixa
+também a primeira ação tomada. A política ótima satisfaz a equação de
+otimalidade de Bellman,
+
+$$
+Q^\ast(s,a) = \mathbb{E}_{s'}\left[r(s,a) + \gamma \max_{a'} Q^\ast(s',a')\right],
+$$
+
+com $\pi^\ast(s) = \arg\max_a Q^\ast(s,a)$ — a mesma equação, em essência,
+por trás da programação dinâmica e da equação de Hamilton–Jacobi–Bellman em
+controle ótimo contínuo.
+
+## Q-Learning
+
+**Q-learning** [@watkins1992qlearning] aprende $Q^\ast$ diretamente por
+interação com o ambiente, sem conhecer $P$ nem $r$ explicitamente — apenas
+observando transições $(s,a,r,s')$ — por meio da atualização
+
+$$
+Q(s,a) \leftarrow Q(s,a) + \alpha\Big[r + \gamma \max_{a'}Q(s',a') - Q(s,a)\Big],
+$$
+
+onde $\alpha$ é a taxa de aprendizado. A exploração do espaço de ações é
+tipicamente feita por uma política $\varepsilon$-greedy (ação aleatória com
+probabilidade $\varepsilon$, gulosa caso contrário). Sob condições brandas
+— todas as ações visitadas infinitas vezes, $\alpha$ decrescente — o
+algoritmo converge para $Q^\ast$.
+
+## RL Profundo
+
+Para espaços de estado grandes ou contínuos, representar $Q(s,a)$ como uma
+tabela é inviável; aproxima-se $Q$, ou diretamente a política, por uma rede
+neural. O **DQN** aproxima $Q(s,a;\theta)$ por uma rede treinada com replay
+de experiência, alcançando nível humano em jogos Atari a partir de pixels
+brutos [@mnih2015humanlevel]; o **AlphaGo** combina redes neurais com busca
+em árvore de Monte Carlo para superar jogadores humanos de Go
+[@silver2016mastering]. Para ações **contínuas** — o caso relevante em
+controle —, o **DDPG** estende a ideia com uma arquitetura ator-crítico
+[@lillicrap2016continuous], e o **PPO** oferece um método de gradiente de
+política mais robusto e simples de sintonizar, hoje um dos mais usados em
+tarefas de controle contínuo [@schulman2017proximal].
+
+## RL e Controle Ótimo: a Ponte
+
+RL e controle ótimo resolvem, no fundo, o mesmo problema — uma dualidade
+explorada em profundidade por Bertsekas [@bertsekas2019reinforcement]:
+
+| Controle ótimo | RL |
+|:--|:--|
+| Custo por estágio $\ell(x,u)$ | Recompensa $-r(s,a)$ |
+| Função de custo-a-ir $V(x)$ | Função de valor $V^\pi(s)$ |
+| Equação de Riccati / HJB | Equação de Bellman |
+| Programação dinâmica | Iteração de valor / política |
+| LQR (caso linear-quadrático) | Caso particular exatamente solúvel |
+
+Benjamin Recht argumenta que, para controle contínuo, muito do que RL
+"descobre" por tentativa e erro já possui solução em forma fechada na teoria
+de controle clássica — nomeadamente, no caso linear-quadrático (LQR), onde
+a política ótima é conhecida analiticamente via equação algébrica de
+Riccati [@recht2019tour]. Isso não torna RL desnecessário: seu valor
+aparece justamente quando o modelo da planta não está disponível ou é caro
+demais para se obter, situação em que técnicas de RL "redescobrem" — com
+custo amostral maior — o que a teoria de controle resolveria diretamente se
+o modelo fosse conhecido. A comparação entre uma política aprendida por
+Q-learning tabular e a política ótima de um LQR escalar, no exemplo prático
+desta seção, ilustra exatamente essa relação.
+
+## Ver também
+
+- [Aprendizagem por Reforço — Introdução](RL01Introducao.qmd) (apresentação)
+- [Q-Learning vs. LQR](RL02QLearningControle.qmd) (apresentação)
+
+## Referências
+
+::: {#refs}
+:::

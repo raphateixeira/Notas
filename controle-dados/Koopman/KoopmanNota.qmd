@@ -1,0 +1,120 @@
+---
+title: "Operador de Koopman"
+subtitle: "Linearização Global de Sistemas Não Lineares"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+    toc: true
+---
+
+O **operador de Koopman** $\mathcal{K}$ é um operador linear — em geral de
+dimensão infinita — que descreve exatamente a evolução temporal de qualquer
+sistema dinâmico, linear ou não linear, ao atuar não sobre o estado $x$
+diretamente, mas sobre **funções observáveis** do estado. Introduzido por
+Bernard Koopman em 1931 no contexto de sistemas hamiltonianos
+[@koopman1931hamiltonian], o conceito permaneceu majoritariamente teórico
+até ganhar, a partir dos anos 2000, algoritmos práticos de aproximação a
+partir de dados — hoje a base de uma família de métodos de identificação e
+controle de sistemas não lineares.
+
+## Motivação
+
+Controle linear (LQR, alocação de polos, MPC linear) é maduro, barato de
+resolver numericamente e vem com garantias teóricas fortes. Controle não
+linear, por outro lado, exige ferramentas mais caras — MPC não linear,
+linearização por realimentação, backstepping — cada uma com seu próprio
+conjunto de hipóteses e limitações. A abordagem de Koopman propõe uma
+alternativa: em vez de linearizar a dinâmica **localmente** (como no
+jacobiano em torno de um ponto de equilíbrio), busca-se uma mudança de
+coordenadas $\phi(x)$ na qual a dinâmica seja linear **globalmente**, ou ao
+menos numa região grande do espaço de estados.
+
+## Definição Formal
+
+Para um sistema discreto $x_{k+1} = f(x_k)$, o operador de Koopman age
+sobre observáveis $\phi: \mathcal{X} \to \mathbb{R}$ por
+
+$$
+(\mathcal{K}\phi)(x) = \phi(f(x)).
+$$
+
+Ou seja, "compor com $f$" é uma operação linear em $\phi$: para quaisquer
+observáveis $\phi_1,\phi_2$ e escalares $a,b$,
+$\mathcal{K}(a\phi_1+b\phi_2) = a\,\mathcal{K}\phi_1 + b\,\mathcal{K}\phi_2$,
+mesmo que $f$ seja arbitrariamente não linear. O preço dessa linearidade é
+que $\mathcal{K}$ atua sobre um espaço de funções, tipicamente de dimensão
+infinita, em vez de atuar sobre $\mathcal{X}$ diretamente.
+
+### Autofunções e Modos de Koopman
+
+Se $\varphi$ é uma autofunção de $\mathcal{K}$ com autovalor $\lambda$,
+$\mathcal{K}\varphi = \lambda \varphi$, então ao longo de qualquer
+trajetória $\varphi(x_{k+1}) = \lambda\,\varphi(x_k)$: a autofunção evolui
+linearmente, por mais não linear que seja $f$. Expandindo o vetor de estado
+nas autofunções, $x = \sum_i \varphi_i(x)\,v_i$ — os $v_i$ são os **modos de
+Koopman** — obtém-se a solução explícita
+$x_k = \sum_i \lambda_i^k\,\varphi_i(x_0)\,v_i$, análoga à decomposição
+modal de um sistema linear $\dot x = Ax$, mas válida para o sistema não
+linear original [@mezic2005spectral].
+
+## Da Teoria ao Cálculo: DMD e EDMD
+
+Estimar $\mathcal{K}$ exatamente é inviável, por sua dimensão infinita. A
+primeira aproximação prática, historicamente, foi a **Dynamic Mode
+Decomposition** (DMD) [@schmid2010dynamic]: toma como observável o próprio
+estado, $\phi(x) = x$, e ajusta uma matriz $A$ tal que $x_{k+1} \approx Ax_k$
+por mínimos quadrados sobre pares de *snapshots*. DMD só captura bem a
+dinâmica quando ela já é aproximadamente linear no estado bruto.
+
+A **Extended Dynamic Mode Decomposition** (EDMD) [@williams2015data]
+generaliza a DMD enriquecendo os observáveis: escolhe-se uma biblioteca
+$\phi_1,\dots,\phi_n$ (monômios, funções trigonométricas, funções de base
+radial, ...), forma-se $z = \phi(x) \in \mathbb{R}^n$, e ajusta-se
+$K \in \mathbb{R}^{n\times n}$ por mínimos quadrados sobre pares de dados:
+
+$$
+K = \arg\min_K \sum_k \|\phi(x_{k+1}) - K\phi(x_k)\|_2^2.
+$$
+
+Uma variante baseada em kernels permite representar implicitamente
+bibliotecas de observáveis de dimensão muitíssimo alta, sem manipulá-las
+explicitamente [@williams2015kernel]. Quando a biblioteca escolhida gera um
+subespaço **invariante** por $\mathcal{K}$ — como ocorre para certos
+sistemas polinomiais —, o EDMD recupera $K$ exatamente, sem qualquer erro de
+aproximação.
+
+## Escolha de Observáveis
+
+A qualidade do preditor linear resultante depende inteiramente da escolha
+de $\phi$: se a biblioteca não contiver as funções necessárias para
+"fechar" a dinâmica, nenhuma quantidade de dados corrige o problema — é uma
+questão de especificação, não de otimização. Estratégias usadas na
+literatura incluem bibliotecas genéricas grandes (deixando a regressão
+eliminar termos irrelevantes), kernels, e observáveis aprendidos por redes
+neurais (autoencoders), treinados para que o espaço latente resultante seja
+aproximadamente invariante por Koopman — ver o levantamento de Brunton,
+Budišić, Kaiser e Kutz [@brunton2022modern] e a coletânea de aplicações
+organizada por Mauroy, Mezić e Susuki [@mauroy2020koopman].
+
+## Da Identificação ao Controle
+
+Uma vez obtido o preditor linear $z_{k+1} = Kz_k + Bu_k$ com $z=\phi(x)$,
+técnicas de controle lineares tornam-se aplicáveis a uma planta
+originalmente não linear: LQR sobre o espaço de observáveis, alocação de
+polos no sistema levantado (*lifted*), e — de particular interesse prático
+— **MPC linear com restrições**, em vez de MPC não linear, o que reduz
+drasticamente o custo computacional de resolver a otimização em tempo real
+[@korda2018linear].
+
+## Ver também
+
+- [Koopman — Introdução](Koopman01Introducao.qmd) (apresentação)
+- [EDMD na Prática](Koopman02EDMDPratica.qmd) (apresentação)
+
+## Referências
+
+::: {#refs}
+:::

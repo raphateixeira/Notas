@@ -1,0 +1,158 @@
+---
+title: "DeePC com Ruído"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## Recapitulando
+
+Em [DeePC — Introdução](DeePC01Introducao.qmd), previmos a resposta de um
+sistema resolvendo $g$ em $[U_p;Y_p;U_f]g=[u_{\text{ini}};y_{\text{ini}};u]$
+e predizendo $y=Y_fg$ — sem estimar $(A,B,C,D)$, e **sem ruído**.
+
+Aqui, adicionamos ruído de medição: a formulação crua falha, e a
+regularização de Tikhonov resolve [@coulson2019regularized].
+
+---
+
+## Por Que Regularizar?
+
+$A=[U_p;Y_p;U_f]$ tem mais colunas que linhas — $g$ não é único.
+
+::: {.incremental}
+- Sem ruído, qualquer solução de norma mínima já reproduz a trajetória certa;
+- Com ruído, $g$ pode se ajustar ao ruído em vez de à dinâmica —
+  **overfitting**;
+- $A^\top A$ fica mal-condicionada: pequenas mudanças nos dados, grandes
+  mudanças em $g$.
+:::
+
+---
+
+## Regularização de Tikhonov
+
+$$
+\min_{g} \; \|Ag - r\|_2^2 + \lambda \|g\|_2^2
+\quad \Longrightarrow \quad
+g_\lambda = (A^\top A + \lambda I)^{-1} A^\top r
+$$
+
+- $\lambda=0$: sensível a ruído; $\lambda$ grande: ignora os dados;
+- Existe um meio-termo, validado em conversores de potência
+  [@huang2021quadratic_converter].
+
+---
+
+## Python — Dados Ruidosos
+
+```{python}
+#| echo: true
+import numpy as np
+rng = np.random.default_rng(1)
+a, b = 0.8, 0.5
+
+def simulate(u, y0=0.0, noise=0.0):
+    y = [y0]
+    for uk in u: y.append(a*y[-1] + b*uk + rng.normal(0, noise))
+    return np.array(y[1:])
+
+u_d = rng.choice([-1.0, 1.0], size=200)
+y_d = simulate(u_d, noise=0.05)
+```
+
+---
+
+## Python — Mínimos Quadrados Regularizados {.small-slide}
+
+```{python}
+#| echo: true
+def hankel(x, L):
+    T = len(x) - L + 1
+    return np.array([x[i:i+T] for i in range(L)])
+
+Tini, N = 2, 10
+Hu, Hy = hankel(u_d, Tini+N), hankel(y_d, Tini+N)
+Up, Uf, Yp, Yf = Hu[:Tini], Hu[Tini:], Hy[:Tini], Hy[Tini:]
+
+u_ini = rng.choice([-1.0, 1.0], size=Tini)
+y_ini = simulate(u_ini, noise=0.05)
+u_fut = np.ones(N)
+y_true = simulate(u_fut, y0=y_ini[-1])
+
+A = np.vstack([Up, Yp, Uf])
+r = np.concatenate([u_ini, y_ini, u_fut])
+
+def solve_ridge(lam):
+    return Yf @ np.linalg.solve(A.T@A + lam*np.eye(A.shape[1]), A.T@r)
+```
+
+---
+
+## Resultado: Erro vs. $\lambda$
+
+```{python}
+#| echo: true
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 6.3
+import matplotlib.pyplot as plt
+lambdas = np.logspace(-8, 1, 40)
+rmse = [np.sqrt(np.mean((solve_ridge(lam) - y_true)**2)) for lam in lambdas]
+
+fig, ax = plt.subplots()
+_ = ax.plot(lambdas, rmse, "o-"); _ = ax.set_xscale("log")
+_ = ax.set_xlabel(r"$\lambda$"); _ = ax.set_ylabel("RMSE")
+plt.tight_layout(); plt.show()
+```
+
+---
+
+## Interpretação
+
+::: {.callout-insight}
+Amplo platô de bons $\lambda$ entre $10^{-8}$ e $10^{-2}$; depois o erro
+cresce (regularização demais ignora os dados). Em $\lambda=0$ exato,
+$A^\top A$ é singular — qualquer regularização pequena já estabiliza.
+:::
+
+---
+
+## Escolhendo $\lambda$
+
+::: {.incremental}
+- Na prática, usa-se **validação cruzada**, não busca exaustiva;
+- Mais ruído nos dados $\Rightarrow$ maior $\lambda$ necessário;
+- No limite $\lambda\to\infty$, o DeePC regularizado recupera um esquema
+  **indireto** — os paradigmas não são tão distantes
+  [@dorfler2023bridging_regularizations];
+- Em aplicações reais, $\lambda$ é mais um hiperparâmetro de sintonia
+  [@huang2021quadratic_converter].
+:::
+
+---
+
+## Referências
+
+::: {#refs}
+:::

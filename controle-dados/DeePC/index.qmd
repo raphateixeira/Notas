@@ -1,0 +1,30 @@
+---
+title: "DeePC"
+subtitle: "Data-Enabled Predictive Control"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+---
+
+Controle preditivo formulado diretamente sobre uma trajetória de dados, sem
+identificar um modelo de estado explícito da planta.
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="DeePCNota.qmd">
+  <h3>Nota</h3>
+  <p>Artigo de referência sobre DeePC</p>
+</a>
+<a class="categoria-card" href="DeePC01Introducao.qmd">
+  <h3>Slides 1</h3>
+  <p>Introdução: Lema de Willems, formulação e exemplo mínimo</p>
+</a>
+<a class="categoria-card" href="DeePC02Regularizacao.qmd">
+  <h3>Slides 2</h3>
+  <p>DeePC com ruído: regularização na prática</p>
+</a>
+</div>
+```

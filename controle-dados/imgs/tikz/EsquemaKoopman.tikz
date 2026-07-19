@@ -1,0 +1,19 @@
+% ---------------------------------------------------------------
+% Operador de Koopman: eleva o estado não linear a um espaço de
+% observáveis onde a dinâmica evolui de forma (aproximadamente) linear.
+% ---------------------------------------------------------------
+\begin{tikzpicture}[>=Latex, line width=1.0pt, node distance=2.0cm,
+  bloco/.style={draw, minimum width=3.0cm, minimum height=1.1cm, fill=blue!8, align=center},
+  seta/.style={->}]
+
+  \node[bloco] (x0) at (0,0) {$x_k$};
+  \node[bloco, right=3.6cm of x0] (x1) {$x_{k+1}$};
+  \node[bloco, above=1.8cm of x0] (z0) {$\phi(x_k)$};
+  \node[bloco, above=1.8cm of x1] (z1) {$\phi(x_{k+1})$};
+
+  \draw[seta, dashed] (x0) -- node[below, font=\small]{dinâmica não linear} (x1);
+  \draw[seta] (z0) -- node[above, font=\small]{$K$ (linear)} (z1);
+  \draw[seta] (x0) -- node[left, font=\small]{lifting} (z0);
+  \draw[seta] (z1) -- node[right, font=\small]{projeção} (x1);
+
+\end{tikzpicture}

@@ -1,0 +1,151 @@
+---
+title: "STLSQ na Prática"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## Recapitulando
+
+SINDy resolve $\dot X \approx \Theta(X)\Xi$ por regressão esparsa (STLSQ).
+Aqui, aplicamos a um sistema clássico: **Lotka–Volterra**.
+
+$$
+\dot x = a x - b\,xy \qquad \dot y = -c y + d\,xy
+$$
+
+---
+
+## Gerando os Dados
+
+```{python}
+#| echo: true
+import numpy as np
+from scipy.integrate import solve_ivp
+
+a, b, c, d = 1.1, 0.4, 0.4, 0.1
+def lotka_volterra(t, z):
+    x, y = z
+    return [a*x - b*x*y, -c*y + d*x*y]
+
+t_eval = np.linspace(0, 60, 3000)
+sol = solve_ivp(lotka_volterra, (0,60), [10,5], t_eval=t_eval, rtol=1e-10, atol=1e-10)
+X = sol.y.T
+dX = np.gradient(X, t_eval[1]-t_eval[0], axis=0)
+```
+
+---
+
+## Biblioteca de Candidatos
+
+Polinomial até grau 2 em $(x,y)$ — 6 candidatos, só 2 termos por equação
+são verdadeiros:
+
+```{python}
+#| echo: true
+x, y = X[:,0], X[:,1]
+Theta = np.column_stack([np.ones_like(x), x, y, x**2, x*y, y**2])
+nomes = ["1","x","y","x^2","xy","y^2"]
+```
+
+---
+
+## Implementando STLSQ
+
+```{python}
+#| echo: true
+def stlsq(Theta, dX, thresh=0.05, n_iter=10):
+    Xi = np.linalg.lstsq(Theta, dX, rcond=None)[0]
+    for _ in range(n_iter):
+        small = np.abs(Xi) < thresh
+        Xi[small] = 0
+        for c in range(dX.shape[1]):
+            big = ~small[:,c]
+            Xi[big,c] = np.linalg.lstsq(Theta[:,big], dX[:,c], rcond=None)[0]
+    return Xi
+
+Xi = stlsq(Theta, dX)
+```
+
+---
+
+## Resultado — Coeficientes
+
+```{python}
+#| echo: true
+for nome, linha in zip(nomes, Xi):
+    print(f"{nome:>4}: dx/dt={linha[0]:+.3f}  dy/dt={linha[1]:+.3f}")
+print(f"verdadeiro: a={a} b={-b} c={-c} d={d}")
+```
+
+::: {.callout-insight}
+STLSQ zera os 4 termos espúrios e recupera $a,-b,-c,d$ com 3 casas de
+precisão — só com `np.gradient`, sem PySINDy.
+:::
+
+---
+
+## Resultado — Reconstrução
+
+```{python}
+#| echo: true
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 6.3
+import matplotlib.pyplot as plt
+
+def modelo(t, z):
+    x, y = z
+    th = np.array([1, x, y, x**2, x*y, y**2])
+    return [th @ Xi[:,0], th @ Xi[:,1]]
+
+sol2 = solve_ivp(modelo, (0,60), [10,5], t_eval=t_eval, rtol=1e-8, atol=1e-8)
+fig, ax = plt.subplots()
+_ = ax.plot(sol.y[0], sol.y[1], "-", lw=2, label="verdadeiro")
+_ = ax.plot(sol2.y[0], sol2.y[1], "--", lw=2, label="descoberto")
+_ = ax.legend()
+plt.tight_layout(); plt.show()
+```
+
+---
+
+## O Que Pode Dar Errado
+
+::: {.incremental}
+- **Ruído** amplifica o erro de `np.gradient` — usar filtros ou
+  diferenciação robusta antes do STLSQ;
+- $\tau$ mal ajustado: descarta termos certos ou mantém espúrios;
+- Se $\Theta$ não contiver o termo certo, nenhum $\tau$ resolve — é
+  **especificação**, não otimização (como a escolha de observáveis no
+  Koopman).
+:::
+
+Para dados ruidosos: Ensemble-SINDy [@fasel2022ensemble] e SR3
+[@zheng2019unified].
+
+---
+
+## Referências
+
+::: {#refs}
+:::

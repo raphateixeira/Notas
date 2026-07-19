@@ -1,0 +1,160 @@
+---
+title: "EDMD na Prática"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## Recapitulando
+
+Em [Koopman — Introdução](Koopman01Introducao.qmd), EDMD estima $K$ tal
+que $\phi(x_{k+1}) \approx K\, \phi(x_k)$. Aqui, um sistema não linear
+**de propósito**, cujo espaço de observáveis invariante é conhecido — para
+conferir que EDMD recupera $K$ exatamente.
+
+---
+
+## Sistema de Exemplo
+
+$$
+x_{1,k+1} = \lambda_1 x_{1,k}
+\qquad
+x_{2,k+1} = \lambda_2 x_{2,k} + b\, x_{1,k}^2
+$$
+
+::: {.callout-insight}
+Não linear em $(x_1,x_2)$, mas **linear** no observável estendido
+$z=(x_1,x_2,x_1^2)$, já que $x_{1,k+1}^2=\lambda_1^2 x_{1,k}^2$:
+
+$$
+K = \begin{bmatrix} \lambda_1 & 0 & 0 \\ 0 & \lambda_2 & b \\ 0 & 0 & \lambda_1^2 \end{bmatrix}
+$$
+:::
+
+---
+
+## Python — Dados e Observáveis
+
+```{python}
+#| echo: true
+import numpy as np
+lam1, lam2, bcoef = 0.9, 0.5, 1.0
+
+def step(x):
+    x1, x2 = x
+    return np.array([lam1*x1, lam2*x2 + bcoef*x1**2])
+
+def phi(x):
+    x1, x2 = x
+    return np.array([x1, x2, x1**2])
+
+rng = np.random.default_rng(0)
+X = rng.uniform(-1, 1, size=(300, 2))
+Xnext = np.array([step(x) for x in X])
+```
+
+---
+
+## Python — Estimando $K$
+
+```{python}
+#| echo: true
+Phi = np.array([phi(x) for x in X])
+PhiNext = np.array([phi(x) for x in Xnext])
+K = np.linalg.lstsq(Phi, PhiNext, rcond=None)[0].T
+
+K_exact = np.array([[lam1,0,0], [0,lam2,bcoef], [0,0,lam1**2]])
+print("K estimado:\n", np.round(K, 3))
+```
+
+::: {.callout-note}
+Sem ruído, $K$ recupera $K_{\text{exato}}$ até erro de ponto flutuante.
+:::
+
+---
+
+## Resultado — Predição da Trajetória
+
+```{python}
+#| echo: true
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 6.3
+import matplotlib.pyplot as plt
+x0, steps = np.array([0.5, -0.3]), 15
+
+z = [phi(x0)]
+for _ in range(steps): z.append(K @ z[-1])
+z = np.array(z)
+
+x_true = [x0]
+for _ in range(steps): x_true.append(step(x_true[-1]))
+x_true = np.array(x_true)
+
+fig, ax = plt.subplots()
+_ = ax.plot(x_true[:,1], "o-", label="$x_2$ verdadeiro")
+_ = ax.plot(z[:,1], "x--", label="$x_2$ predito")
+_ = ax.legend()
+plt.tight_layout(); plt.show()
+```
+
+---
+
+## Por Que o Dicionário Importa
+
+Sem $x_1^2$ (DMD comum, $\phi(x)=(x_1,x_2)$):
+
+```{python}
+#| echo: true
+Klin = np.linalg.lstsq(X, Xnext, rcond=None)[0].T
+x_lin = [x0]
+for _ in range(steps): x_lin.append(Klin @ x_lin[-1])
+x_lin = np.array(x_lin)
+
+print("erro com x1²:", np.max(np.abs(z[:,1] - x_true[:,1])))
+print("erro sem x1²:", np.max(np.abs(x_lin[:,1] - x_true[:,1])))
+```
+
+::: {.callout-important}
+Sem $x_1^2$, o subespaço deixa de ser invariante: $K_{\text{lin}}$ é a
+melhor aproximação linear, mas erra sistematicamente.
+:::
+
+---
+
+## Escolhendo Observáveis
+
+::: {.incremental}
+- Bibliotecas grandes (polinômios, RBFs, Fourier) e deixar a regressão
+  eliminar o que não ajuda;
+- Kernels, para bibliotecas implícitas de dimensão muito alta
+  [@williams2015kernel];
+- Observáveis aprendidos por autoencoders [@brunton2022modern; @mauroy2020koopman].
+:::
+
+---
+
+## Referências
+
+::: {#refs}
+:::

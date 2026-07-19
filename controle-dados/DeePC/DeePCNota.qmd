@@ -1,0 +1,142 @@
+---
+title: "DeePC"
+subtitle: "Data-Enabled Predictive Control"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+    toc: true
+---
+
+**DeePC** (*Data-Enabled Predictive Control*) é um método de controle
+preditivo que substitui o modelo matemático explícito da planta — usado em
+todo MPC clássico — por uma trajetória de dados de entrada/saída coletada
+diretamente do sistema. Foi proposto por Coulson, Lygeros e Dörfler
+[@coulson2019shallows], e se apoia numa ideia da **teoria comportamental de
+sistemas dinâmicos** com quase duas décadas: o Lema Fundamental de Willems
+[@willems2005persistency].
+
+## Motivação
+
+O controle preditivo baseado em modelo (MPC) resolve, a cada instante, uma
+otimização sobre um horizonte futuro usando um modelo $(A,B,C,D)$ ou
+$G(s)$/$G(z)$ da planta. Esse modelo normalmente vem de uma etapa separada
+de **identificação de sistemas**: coletam-se dados, ajusta-se uma estrutura
+de modelo, valida-se, e só então se projeta o controlador. Cada uma dessas
+etapas introduz aproximações e custo de engenharia.
+
+DeePC elimina a etapa intermediária: os dados brutos $(u_d, y_d)$ tornam-se,
+eles mesmos, o "modelo" usado na otimização de controle. Isso é possível
+porque, sob uma condição de excitação persistente, uma trajetória de dados
+finita já contém informação suficiente para caracterizar **todas** as
+trajetórias possíveis de um sistema linear invariante no tempo.
+
+## O Lema Fundamental de Willems
+
+Seja $w_d = (u_d, y_d)$ uma trajetória de entrada/saída de comprimento $T$
+de um sistema LTI controlável de ordem $n$, com $m$ entradas. Sua matriz de
+Hankel de profundidade $L$ é
+
+$$
+H_L(w_d) = \begin{bmatrix}
+w_d(1) & w_d(2) & \cdots & w_d(T-L+1) \\
+w_d(2) & w_d(3) & \cdots & w_d(T-L+2) \\
+\vdots & \vdots & \ddots & \vdots \\
+w_d(L) & w_d(L+1) & \cdots & w_d(T)
+\end{bmatrix}.
+$$
+
+O sinal $u_d$ é **persistentemente excitante de ordem $L$** se $H_L(u_d)$
+tem posto linha completo ($mL$). O Lema Fundamental afirma que, se $u_d$ é
+persistentemente excitante de ordem $L+n$, então toda trajetória
+$(u,y)$ de comprimento $L$ do sistema pode ser escrita como combinação
+linear das colunas de $H_L(u_d), H_L(y_d)$ [@willems2005persistency]. Ou
+seja, a matriz de Hankel dos dados é um retrato fiel do comportamento do
+sistema — um modelo implícito, sem necessidade de estimar $(A,B,C,D)$. Esta
+é a ponte entre a abordagem comportamental de sistemas dinâmicos e o
+controle direto baseado em dados [@markovsky2023behavioral_power].
+
+## Formulação do Problema de Controle
+
+Particionando $H_L(u_d)$ e $H_L(y_d)$ em blocos "passado" (as primeiras
+$T_{\text{ini}}$ linhas, denotadas $U_p, Y_p$) e "futuro" (as $N$ linhas
+seguintes, $U_f, Y_f$), com $L = T_{\text{ini}} + N$, o DeePC resolve, a
+cada instante:
+
+$$
+\min_{g,\,u,\,y} \; \sum_{k=1}^{N} \|y_k - r_k\|_Q^2 + \|u_k\|_R^2
+\quad \text{s.a.} \quad
+\begin{bmatrix} U_p \\ Y_p \\ U_f \\ Y_f \end{bmatrix} g =
+\begin{bmatrix} u_{\text{ini}} \\ y_{\text{ini}} \\ u \\ y \end{bmatrix}.
+$$
+
+Os blocos $U_p, Y_p$ fixam $g$ a uma combinação compatível com o histórico
+recente $(u_{\text{ini}}, y_{\text{ini}})$ — desempenhando o papel de
+**estimador de estado** implícito — enquanto $U_f, Y_f$ predizem os
+próximos $N$ passos: $y = Y_f g$, $u = U_f g$. Como em qualquer MPC, aplica-
+se apenas o primeiro passo da solução ótima e repete-se o processo em
+horizonte deslizante.
+
+## Regularização
+
+Com dados ruidosos, o problema acima costuma ser mal-condicionado: $g$ pode
+não ser único, e pequenas perturbações no histórico produzem soluções que
+"explicam" o ruído em vez da dinâmica real. A solução usual acrescenta
+penalidades:
+
+$$
+\min_{g,\,u,\,y} \; \sum_{k=1}^{N} \|y_k - r_k\|_Q^2 + \|u_k\|_R^2
+\;+\; \lambda_g \|g\|_2^2 \;+\; \lambda_y \|\sigma_y\|_1,
+$$
+
+onde $\lambda_g \|g\|_2^2$ é uma regularização de Tikhonov sobre $g$ e
+$\sigma_y$ é uma variável de folga que absorve inconsistências entre
+$(u_{\text{ini}}, y_{\text{ini}})$ e os dados [@coulson2019regularized].
+Essa regularização foi validada experimentalmente em conversores de
+potência [@huang2021quadratic_converter], e Dörfler, Coulson e Markovsky
+mostram que, com o escalonamento adequado dos pesos, o DeePC regularizado
+recupera, em um limite, a solução de esquemas **indiretos**
+(identificar-depois-projetar) — os dois paradigmas, direto e indireto, não
+são tão distantes quanto parecem [@dorfler2023bridging_regularizations].
+
+## Relação com Outras Abordagens
+
+DeePC tem relação formal com o **controle preditivo por subespaços** (SPC),
+uma técnica indireta mais antiga que também usa matrizes de dados, mas para
+estimar um modelo de espaço de estados antes de projetar o controlador
+[@fiedler2021relationship]. Verheijen, Breschi e Lazar oferecem um
+tratamento unificado das variantes lineares de controle preditivo baseado
+em dados, situando DeePC dentro de uma família mais ampla de métodos
+[@verheijen2023handbook]. DeePC também pode ser lido como um caso particular
+de controle direto baseado em dados dentro do panorama mais amplo que inclui
+aprendizagem por reforço [@dorfler2022bridging_rl].
+
+## Garantias Teóricas
+
+Inicialmente uma heurística, o DeePC já conta com resultados formais de
+estabilidade e robustez em malha fechada, mesmo com dados ruidosos
+[@berberich2021datadriven_mpc_guarantees], e de otimalidade do problema
+data-driven equivalente ao MPC baseado em modelo no caso sem ruído
+[@dorfler2023bridging_regularizations]. Li et al. oferecem um levantamento
+recente do estado da arte e dos desafios em aberto para plantas não
+lineares [@li2025efficient_review].
+
+## Aplicações
+
+DeePC foi validado experimentalmente em eletrônica de potência: controle de
+conversores conectados à rede [@huang2019grid_converters], amortecimento
+descentralizado de oscilações em sistemas de potência usando apenas
+medições locais [@huang2021decentralized_oscillation], e extensões para
+plantas não lineares via redes neurais [@lazar2024neural_deepc].
+
+## Ver também
+
+- [DeePC — Introdução](DeePC01Introducao.qmd) (apresentação)
+- [DeePC com Ruído — Regularização na Prática](DeePC02Regularizacao.qmd) (apresentação)
+
+## Referências
+
+::: {#refs}
+:::

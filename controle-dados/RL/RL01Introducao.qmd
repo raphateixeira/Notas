@@ -1,0 +1,122 @@
+---
+title: "Aprendizagem por Reforço"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## O que é Aprendizagem por Reforço?
+
+Um **agente** aprende a agir sobre um **ambiente** por tentativa e erro,
+maximizando recompensa acumulada — sem que ninguém lhe diga a ação certa.
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 9
+\usetikzlibrary{arrows.meta, positioning, calc}
+\input{../imgs/tikz/EsquemaRL.tikz}
+```
+
+---
+
+## Processos de Decisão de Markov
+
+::: {.callout-definition}
+Um MDP é a tupla $(\mathcal{S}, \mathcal{A}, P, r, \gamma)$: estados,
+ações, $P(s'|s,a)$ (transição), $r(s,a)$ (recompensa), $\gamma$ (desconto).
+:::
+
+Uma política $\pi(a|s)$ mapeia estados em ações. Objetivo: maximizar
+$\mathbb{E}\left[\sum_{k} \gamma^k r(s_k,a_k)\right]$.
+
+::: {.callout-note}
+Em controle: $\mathcal{S}$ é o estado da planta, $\mathcal{A}$ a entrada,
+$-r$ o custo por estágio [@kaelbling1996reinforcement].
+:::
+
+---
+
+## Valor e Equação de Bellman
+
+$Q^\pi(s,a)$: retorno esperado seguindo $\pi$ a partir de $(s,a)$.
+
+::: {.callout-theorem}
+A política ótima satisfaz [@bellman1957dynamic]:
+$$
+Q^\ast(s,a) = \mathbb{E}_{s'}\left[r(s,a) + \gamma \max_{a'} Q^\ast(s',a')\right]
+$$
+e $\pi^\ast(s) = \arg\max_a Q^\ast(s,a)$.
+:::
+
+---
+
+## Q-Learning
+
+**Q-learning** [@watkins1992qlearning] aprende $Q^\ast$ só observando
+transições $(s,a,r,s')$:
+
+$$
+Q(s,a) \leftarrow Q(s,a) + \alpha \Big[ r + \gamma \max_{a'} Q(s',a') - Q(s,a) \Big]
+$$
+
+::: {.incremental}
+- Exploração $\varepsilon$-greedy: ação aleatória com prob. $\varepsilon$;
+- Converge para $Q^\ast$ sob condições brandas [@sutton2018reinforcement].
+:::
+
+---
+
+## RL Profundo
+
+Para estados contínuos, tabelas viram redes neurais:
+
+::: {.incremental}
+- **DQN**: nível humano em Atari, a partir de pixels [@mnih2015humanlevel];
+- **DDPG**: ações contínuas, ator-crítico [@lillicrap2016continuous];
+- **PPO**: gradiente de política, hoje padrão em controle contínuo
+  [@schulman2017proximal].
+:::
+
+---
+
+## RL e Controle Ótimo: a Ponte
+
+No fundo, o mesmo problema [@bertsekas2019reinforcement]:
+
+| Controle ótimo | RL |
+|:--|:--|
+| Custo $\ell(x,u)$ | Recompensa $-r(s,a)$ |
+| Riccati / HJB | Equação de Bellman |
+| Programação dinâmica | Iteração de valor/política |
+| LQR | Caso exatamente solúvel |
+
+Para controle contínuo, muito do que RL "descobre" já tem solução fechada
+na teoria clássica [@recht2019tour] — o exemplo a seguir mostra isso.
+
+---
+
+## Referências
+
+::: {#refs}
+:::

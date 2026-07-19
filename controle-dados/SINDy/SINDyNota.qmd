@@ -1,0 +1,114 @@
+---
+title: "SINDy"
+subtitle: "Sparse Identification of Nonlinear Dynamics"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+    toc: true
+---
+
+**SINDy** (*Sparse Identification of Nonlinear Dynamics*) é um método para
+descobrir, a partir de dados, as equações diferenciais que governam um
+sistema dinâmico, sob a hipótese de que **poucos** termos de uma biblioteca
+de funções candidatas bastam para descrever a dinâmica. Foi proposto por
+Brunton, Proctor e Kutz [@brunton2016discovering], com raízes na ideia mais
+antiga de "destilar" leis físicas de dados experimentais por regressão
+simbólica [@schmidt2009distilling].
+
+## Formulação
+
+Dado o estado medido $X \in \mathbb{R}^{m\times n}$ ($m$ instantes, $n$
+variáveis de estado) e sua derivada $\dot X$ — medida diretamente ou
+estimada por diferenciação numérica —, constrói-se uma biblioteca de
+candidatos
+
+$$
+\Theta(X) = \begin{bmatrix} 1 & X & X^2 & \sin(X) & \cdots \end{bmatrix}
+$$
+
+e resolve-se a regressão esparsa $\dot X = \Theta(X)\,\Xi$, com $\Xi$
+esparsa: cada coluna de $\Xi$ contém os coeficientes de uma equação, e um
+coeficiente $\Xi_{j,i}$ não nulo indica que o $j$-ésimo candidato de
+$\Theta$ participa da equação de $\dot x_i$.
+
+### O Algoritmo STLSQ
+
+O solver clássico de SINDy é a regressão por **mínimos quadrados
+sequencialmente truncados** (STLSQ):
+
+1. ajusta-se $\Xi$ por mínimos quadrados comum, $\Xi \leftarrow \Theta^\dagger \dot X$;
+2. zeram-se os coeficientes com $|\Xi_{j,i}| < \tau$ (limiar de esparsidade);
+3. reajustam-se por mínimos quadrados apenas os coeficientes que sobraram;
+4. repetem-se os passos 2–3 até convergência — poucas iterações bastam.
+
+O limiar $\tau$ controla o compromisso entre esparsidade (poucos termos,
+mais interpretável) e ajuste aos dados, normalmente escolhido por validação
+cruzada ou por conhecimento físico do problema.
+
+## Por que Esparsidade?
+
+A maioria dos sistemas físicos conhecidos — Navier–Stokes, o sistema de
+Lorenz, o oscilador de Duffing — é descrita por poucos termos: a esparsidade
+é, portanto, uma hipótese razoável, que também evita sobreajuste. Uma
+vantagem central de SINDy sobre modelos de caixa-preta (redes neurais, por
+exemplo) é que o resultado é **interpretável**: uma equação diferencial
+explícita, não uma função aproximada de milhares de parâmetros. A principal
+limitação é a sensibilidade ao ruído na derivada estimada $\dot X$, que
+normalmente exige filtragem ou diferenciação robusta (diferenciação por
+variação total, por exemplo) antes da regressão.
+
+## Extensões
+
+Diversas extensões ampliaram o alcance do método original:
+
+- **SINDYc** inclui entradas de controle $u$ na biblioteca, $\Theta(X,U)$,
+  permitindo descobrir $\dot x = \Theta(x,u)\Xi$ diretamente utilizável em
+  MPC [@kaiser2018sparse];
+- **PDE-FIND** estende a ideia para descobrir equações diferenciais
+  parciais — Navier–Stokes, a equação de Burgers, entre outras — a partir de
+  campos medidos no espaço e no tempo [@rudy2017datadriven];
+- Quando as variáveis "certas" não são observadas diretamente, um
+  autoencoder pode aprender uma mudança de coordenadas cujo espaço latente
+  já é esparso por SINDy, descobrindo simultaneamente coordenadas e
+  equações [@champion2019datadriven];
+- Para sistemas com simetrias ou restrições físicas conhecidas — como
+  conservação de energia —, a regressão pode ser restringida de modo a
+  respeitá-las [@loiseau2018constrained].
+
+## Robustez a Ruído
+
+STLSQ, na sua forma original, é sensível a ruído. Duas respostas
+consolidadas na literatura: **SR3** (*Sparse Relaxed Regularized
+Regression*) relaxa o problema de otimização, trocando o corte abrupto do
+limiar por uma penalização mais suave e numericamente mais estável
+[@zheng2019unified]; e **Ensemble-SINDy** ajusta muitos modelos SINDy sobre
+subamostras *bootstrap* dos dados e agrega os resultados, permanecendo
+robusto mesmo com poucos dados e ruído alto, e possibilitando estimar a
+incerteza dos coeficientes encontrados [@fasel2022ensemble].
+
+## Software
+
+A biblioteca de referência para uso em projetos reais é o **PySINDy**, que
+implementa STLSQ, SR3, SINDYc, discretização de PDEs e dezenas de
+bibliotecas de candidatos prontas para uso [@desilva2020pysindy;
+@kaptanoglu2022pysindy].
+
+## Aplicação a Controle
+
+Uma vez identificado o modelo esparso $\dot x = \Theta(x)\Xi$, ele pode ser
+usado diretamente como planta para projeto de controladores — MPC não
+linear, linearização por realimentação —, fechando o ciclo entre
+identificação baseada em dados e controle [@kaiser2018sparse].
+
+## Ver também
+
+- [SINDy — Introdução](SINDy01Introducao.qmd) (apresentação)
+- [STLSQ na Prática](SINDy02STLSQPratica.qmd) (apresentação)
+
+## Referências
+
+::: {#refs}
+:::

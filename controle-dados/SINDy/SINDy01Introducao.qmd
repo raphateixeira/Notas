@@ -1,0 +1,121 @@
+---
+title: "SINDy"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## O que é SINDy?
+
+**Sparse Identification of Nonlinear Dynamics**: descobre as equações
+diferenciais de um sistema, assumindo que **poucos** termos de uma
+biblioteca de candidatos bastam para descrever a dinâmica
+[@brunton2016discovering; @schmidt2009distilling].
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 10
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaSINDy.tikz}
+```
+
+---
+
+## Formulação
+
+Do estado medido $X$ e sua derivada $\dot X$, constrói-se uma biblioteca de
+candidatos e resolve-se uma regressão esparsa:
+
+$$
+\Theta(X) = \begin{bmatrix} 1 & X & X^2 & \sin(X) & \cdots \end{bmatrix}
+\qquad
+\dot X = \Theta(X)\,\Xi, \quad \Xi \text{ esparsa}
+$$
+
+Coeficiente $\Xi_{j,i}\ne 0$: o $j$-ésimo candidato participa da equação de
+$\dot x_i$.
+
+---
+
+## O Algoritmo STLSQ
+
+::: {.incremental}
+1. Ajusta-se $\Xi$ por mínimos quadrados: $\Xi \leftarrow \Theta^\dagger \dot X$;
+2. Zeram-se coeficientes com $|\Xi_{j,i}| < \tau$;
+3. Reajustam-se só os sobreviventes; repete-se até convergir.
+:::
+
+::: {.callout-note}
+$\tau$ equilibra esparsidade e ajuste aos dados.
+:::
+
+---
+
+## Por que Esparsidade?
+
+::: {.callout-insight}
+A maioria dos sistemas físicos é descrita por poucos termos — a
+esparsidade evita sobreajuste e dá um modelo **interpretável**.
+:::
+
+Sensível a ruído em $\dot X$: normalmente exige filtragem ou diferenciação
+robusta.
+
+---
+
+## Extensões
+
+::: {.incremental}
+- **SINDYc**: inclui controle $u$ na biblioteca, útil em MPC [@kaiser2018sparse];
+- **PDE-FIND**: descobre equações diferenciais **parciais** [@rudy2017datadriven];
+- **Coordenadas latentes**: autoencoder + SINDy no espaço latente [@champion2019datadriven].
+:::
+
+---
+
+## Robustez a Ruído
+
+::: {.incremental}
+- **SR3**: relaxa o corte abrupto do limiar, mais estável [@zheng2019unified];
+- **Ensemble-SINDy**: agrega modelos de subamostras *bootstrap*, robusto a
+  ruído alto [@fasel2022ensemble].
+:::
+
+---
+
+## Software e Aplicação a Controle
+
+**PySINDy** implementa STLSQ, SR3, SINDYc e bibliotecas prontas
+[@desilva2020pysindy; @kaptanoglu2022pysindy] — aqui usamos só `numpy` para
+deixar o algoritmo explícito.
+
+O modelo esparso $\dot x=\Theta(x)\Xi$ vira planta para MPC não linear ou
+linearização por realimentação [@kaiser2018sparse].
+
+---
+
+## Referências
+
+::: {#refs}
+:::

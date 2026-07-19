@@ -1,0 +1,125 @@
+---
+title: "Koopman"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## O que é o Operador de Koopman?
+
+Um sistema não linear $x_{k+1}=f(x_k)$ pode ser representado **exatamente**
+por um operador **linear** $\mathcal{K}$, agindo sobre observáveis
+$\phi(x)$ — ao custo de dimensão infinita [@koopman1931hamiltonian].
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 9
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaKoopman.tikz}
+```
+
+---
+
+## Motivação
+
+::: {.incremental}
+- Controle **linear** (LQR, MPC linear) é maduro e barato de resolver;
+- Controle **não linear** exige ferramentas mais caras;
+- Ideia de Koopman: em vez de linearizar **localmente** (jacobiano), buscar
+  coordenadas $\phi(x)$ em que a dinâmica seja linear **globalmente**.
+:::
+
+---
+
+## Definição do Operador
+
+::: {.callout-definition}
+$\mathcal{K}$ age sobre observáveis $\phi:\mathcal{X}\to\mathbb{R}$ por
+$$(\mathcal{K}\phi)(x) = \phi(f(x))$$
+"Compor com $f$" é **linear** em $\phi$, mesmo com $f$ não linear.
+:::
+
+O preço: $\mathcal{K}$ atua num espaço de **funções**, de dimensão
+infinita, não sobre $\mathcal{X}$ diretamente.
+
+---
+
+## Autofunções e Modos de Koopman
+
+::: {.callout-theorem}
+Se $\mathcal{K}\varphi=\lambda\varphi$, então
+$\varphi(x_{k+1})=\lambda\,\varphi(x_k)$ ao longo de qualquer trajetória —
+a autofunção evolui **linearmente**.
+:::
+
+Expandindo $x=\sum_i \varphi_i(x)\,v_i$ (os $v_i$ são os **modos de
+Koopman**):
+
+$$
+x_k = \sum_i \lambda_i^k\, \varphi_i(x_0)\, v_i
+$$
+
+Solução explícita, análoga a $\dot x=Ax$, mas para o sistema não linear
+[@mezic2005spectral].
+
+---
+
+## Da Teoria à Prática: DMD e EDMD
+
+**DMD** [@schmid2010dynamic]: usa $\phi(x)=x$, ajusta $A$ tal que
+$x_{k+1}\approx Ax_k$. Só funciona se a dinâmica já for quase linear.
+
+**EDMD** [@williams2015data]: enriquece com uma biblioteca
+$\phi_1,\dots,\phi_n$ (monômios, RBFs, ...) e ajusta $K$ por mínimos
+quadrados:
+
+$$
+K = \arg\min_{K} \sum_{k} \| \phi(x_{k+1}) - K\, \phi(x_k) \|_2^2
+$$
+
+---
+
+## Da Identificação ao Controle
+
+Com o preditor linear $z_{k+1}=Kz_k+Bu_k$ ($z=\phi(x)$), técnicas
+**lineares** se aplicam a uma planta não linear:
+
+::: {.incremental}
+- LQR e MPC **linear** com restrições, em vez de MPC não linear
+  [@korda2018linear];
+- Variante com kernels, para bibliotecas de dimensão muito alta
+  [@williams2015kernel].
+:::
+
+::: {.callout-important}
+A escolha da biblioteca de observáveis determina a qualidade do
+controlador — não há receita universal [@brunton2022modern].
+:::
+
+---
+
+## Referências
+
+::: {#refs}
+:::

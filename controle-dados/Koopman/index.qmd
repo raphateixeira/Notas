@@ -1,0 +1,31 @@
+---
+title: "Koopman"
+subtitle: "Linearização Global de Sistemas Não Lineares"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+---
+
+Operador linear (de dimensão infinita) que descreve exatamente a evolução
+de um sistema não linear, atuando sobre observáveis do estado em vez do
+estado bruto.
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="KoopmanNota.qmd">
+  <h3>Nota</h3>
+  <p>Artigo de referência sobre o operador de Koopman</p>
+</a>
+<a class="categoria-card" href="Koopman01Introducao.qmd">
+  <h3>Slides 1</h3>
+  <p>Introdução: definição, autofunções, DMD e EDMD</p>
+</a>
+<a class="categoria-card" href="Koopman02EDMDPratica.qmd">
+  <h3>Slides 2</h3>
+  <p>EDMD na prática: exemplo mínimo em Python</p>
+</a>
+</div>
+```

@@ -1,0 +1,262 @@
+---
+title: "DeePC"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## O que é DeePC?
+
+**Data-Enabled Predictive Control**: controle preditivo formulado direto
+sobre uma trajetória de dados, sem identificar um modelo de estado da planta.
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 10
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaDeePC.tikz}
+```
+
+---
+
+## Motivação
+
+::: {.incremental}
+- Identificar um modelo é uma etapa **separada**, com custo e erro próprios;
+- O DeePC substitui o modelo por uma trajetória de dados **persistentemente
+  excitante**, coletada uma única vez;
+- Identificação e controle viram **uma única otimização**.
+:::
+
+---
+
+## Excitação Persistente
+
+Seja $w_d=(u_d,y_d)$ uma trajetória de comprimento $T$ de um sistema LTI
+controlável de ordem $n$. Sua **matriz de Hankel** de profundidade $L$:
+
+$$
+H_L(w_d) = \begin{bmatrix}
+w_d(1) & \cdots & w_d(T-L+1) \\
+\vdots & \ddots & \vdots \\
+w_d(L) & \cdots & w_d(T)
+\end{bmatrix}
+$$
+
+::: {.callout-definition}
+$u_d$ é **persistentemente excitante de ordem $L$** se $H_L(u_d)$ tem posto
+linha completo — na prática, um PRBS longo o suficiente basta.
+:::
+
+---
+
+## Lema Fundamental de Willems
+
+::: {.callout-theorem}
+Se $u_d$ é persistentemente excitante de ordem $L+n$, toda trajetória
+$(u,y)$ de comprimento $L$ é combinação linear das colunas de
+$H_L(u_d), H_L(y_d)$: existe $g$ tal que
+
+$$
+\begin{bmatrix} H_L(u_d) \\ H_L(y_d) \end{bmatrix} g =
+\begin{bmatrix} u \\ y \end{bmatrix}
+$$
+
+[@willems2005persistency].
+:::
+
+A matriz de Hankel dos dados **é** um modelo implícito do sistema — a ponte
+entre a abordagem comportamental e o controle baseado em dados
+[@markovsky2023behavioral_power].
+
+---
+
+## Formulação do DeePC
+
+Particiona-se $H_L(u_d), H_L(y_d)$ em blocos "passado" ($T_{\text{ini}}$
+linhas) e "futuro" ($N$ linhas), $L=T_{\text{ini}}+N$:
+
+$$
+\min_{g,\, u,\, y} \; \sum_{k=1}^{N} \|y_k - r_k\|_Q^2 + \|u_k\|_R^2
+\quad \text{s.a.} \quad
+\begin{bmatrix} U_p \\ Y_p \\ U_f \\ Y_f \end{bmatrix} g =
+\begin{bmatrix} u_{\text{ini}} \\ y_{\text{ini}} \\ u \\ y \end{bmatrix}
+$$
+
+$U_p,Y_p$ fixam $g$ ao passado recente (estimam o estado); $U_f,Y_f$
+predizem: $y=Y_fg$, $u=U_fg$ [@coulson2019shallows].
+
+---
+
+## Horizonte Deslizante
+
+::: {.incremental}
+1. Atualiza-se $(u_{\text{ini}}, y_{\text{ini}})$ com as últimas medições;
+2. Resolve-se a otimização, obtendo $u^\ast_{1:N}$;
+3. Aplica-se só $u^\ast_1$ e repete-se.
+:::
+
+::: {.callout-note}
+$T_{\text{ini}}$ precisa ser $\geq$ à ordem do sistema, para fixar o estado
+inicial implícito.
+:::
+
+---
+
+## Python — Dados
+
+Sistema de 1ª ordem $y_{k+1}=ay_k+bu_k$, usado só para gerar dados (o DeePC
+nunca vê $a,b$):
+
+```{python}
+#| echo: true
+import numpy as np
+rng = np.random.default_rng(0)
+a, b = 0.8, 0.5
+
+def simulate(u, y0=0.0):
+    y = [y0]
+    for uk in u: y.append(a*y[-1] + b*uk)
+    return np.array(y[1:])
+
+u_d = rng.choice([-1.0, 1.0], size=200)  # PRBS
+y_d = simulate(u_d)
+```
+
+---
+
+## Python — Matrizes de Hankel {.small-slide}
+
+```{python}
+#| echo: true
+def hankel(x, L):
+    T = len(x) - L + 1
+    return np.array([x[i:i+T] for i in range(L)])
+
+Tini, N = 2, 10
+Hu, Hy = hankel(u_d, Tini+N), hankel(y_d, Tini+N)
+Up, Uf = Hu[:Tini], Hu[Tini:]
+Yp, Yf = Hy[:Tini], Hy[Tini:]
+```
+
+`Up`/`Yp`: passado ($T_{\text{ini}}$ amostras); `Uf`/`Yf`: futuro ($N$
+amostras).
+
+---
+
+## Python — Resolver e Predizer
+
+Nova condição inicial e um degrau futuro — a partir daqui, `a, b` **não**
+são usados:
+
+```{python}
+#| echo: true
+u_ini = rng.choice([-1.0, 1.0], size=Tini)
+y_ini = simulate(u_ini)
+u_fut = np.ones(N)
+
+A = np.vstack([Up, Yp, Uf])
+r = np.concatenate([u_ini, y_ini, u_fut])
+g, *_ = np.linalg.lstsq(A, r, rcond=None)
+y_pred = Yf @ g
+y_true = simulate(u_fut, y0=y_ini[-1])
+```
+
+---
+
+## Python — Resultado
+
+```{python}
+#| echo: true
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 6.3
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+_ = ax.plot(y_true, "o-", label="planta real")
+_ = ax.plot(y_pred, "x--", label="predição DeePC")
+_ = ax.legend()
+plt.tight_layout(); plt.show()
+```
+
+---
+
+## Interpretação
+
+::: {.callout-insight}
+As curvas coincidem: o Lema Fundamental garante que `Yf @ g` reproduz a
+planta exatamente, sem nunca estimar $a$ e $b$.
+:::
+
+---
+
+## Regularização
+
+Com ruído, $g$ fica mal-condicionado. Solução: penalidades
+[@coulson2019regularized]
+
+$$
+\min_{g,\, u,\, y} \; \sum_{k=1}^{N} \|y_k - r_k\|_Q^2 + \|u_k\|_R^2
+\;+\; \lambda_g \|g\|_2^2 \;+\; \lambda_y \|\sigma_y\|_1
+$$
+
+- $\lambda_g\|g\|_2^2$: regulariza $g$ (Tikhonov);
+- $\sigma_y$: absorve ruído em $(u_{\text{ini}},y_{\text{ini}})$;
+- Validado em conversores de potência [@huang2021quadratic_converter].
+
+---
+
+## Garantias Teóricas
+
+::: {.incremental}
+- **Estabilidade e robustez** com dados ruidosos [@berberich2021datadriven_mpc_guarantees];
+- **Otimalidade** equivalente ao MPC baseado em modelo, sem ruído [@dorfler2023bridging_regularizations];
+- Relação formal com controle preditivo por subespaços [@fiedler2021relationship].
+:::
+
+---
+
+## DeePC vs. MPC Clássico
+
+| | MPC clássico | DeePC |
+|:--|:--|:--|
+| Modelo | Sim, $(A,B,C,D)$ | Não |
+| Identificação | Separada | Embutida na otimização |
+| Ruído | Modelo já filtra | Exige regularização |
+| Garantias | Maduras | Em consolidação [@li2025efficient_review] |
+
+---
+
+## Aplicações
+
+- Conversores conectados à rede [@huang2019grid_converters];
+- Amortecimento descentralizado de oscilações [@huang2021decentralized_oscillation];
+- Extensões não lineares via redes neurais [@lazar2024neural_deepc].
+
+---
+
+## Referências
+
+::: {#refs}
+:::

@@ -1,0 +1,31 @@
+---
+title: "SINDy"
+subtitle: "Sparse Identification of Nonlinear Dynamics"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+---
+
+Descoberta de equações diferenciais a partir de dados, assumindo que poucos
+termos de uma biblioteca de funções candidatas bastam para descrever a
+dinâmica.
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="SINDyNota.qmd">
+  <h3>Nota</h3>
+  <p>Artigo de referência sobre SINDy</p>
+</a>
+<a class="categoria-card" href="SINDy01Introducao.qmd">
+  <h3>Slides 1</h3>
+  <p>Introdução: formulação, STLSQ e extensões</p>
+</a>
+<a class="categoria-card" href="SINDy02STLSQPratica.qmd">
+  <h3>Slides 2</h3>
+  <p>STLSQ na prática: Lotka–Volterra em Python</p>
+</a>
+</div>
+```

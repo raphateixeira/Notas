@@ -1,0 +1,145 @@
+---
+title: "Controle Guiado por Dados"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+## Um Panorama
+
+**DeePC**, **Koopman/DMD**, **SINDy** e **Aprendizagem por Reforço**
+respondem à mesma pergunta de formas diferentes:
+
+::: {.callout-question}
+Como controlar sem depender de um modelo matemático completo da planta?
+:::
+
+Nenhuma é "melhor" de forma absoluta — cada uma aposta diferente sobre o
+que se sabe e o que se tem disponível.
+
+---
+
+## O Que Têm em Comum
+
+::: {.incremental}
+- Partem de **dados**, não de um modelo de primeiros princípios;
+- Trocam modelagem física por **regressão**: mínimos quadrados (Koopman,
+  SINDy, DeePC) ou tentativa e erro (RL);
+- Nenhuma elimina a necessidade de **dados bons**.
+:::
+
+---
+
+## Dois Eixos
+
+::: {.incremental}
+1. **Direto vs. indireto**: controla direto dos dados, ou identifica um
+   modelo antes?
+2. **Linear vs. não linear**: a representação interna captura não
+   linearidades ou não?
+:::
+
+Posicionando as quatro técnicas nesses eixos, aparece um quadrante que
+explica as diferenças entre elas.
+
+---
+
+## O Quadrante
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 12
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaPanorama.tikz}
+```
+
+---
+
+## Koopman / DMD — Indireto, Linear
+
+Identifica um operador **linear** $K$ para observáveis $\phi(x)$ de um
+sistema não linear [@williams2015data; @korda2018linear].
+
+O preço da não linearidade é pago uma vez, na escolha de $\phi(x)$ — depois
+LQR/MPC linear se aplicam direto. Ver [Koopman](../Koopman/index.qmd).
+
+---
+
+## SINDy — Indireto, Não Linear
+
+Identifica as **equações diferenciais** do sistema por regressão esparsa
+[@brunton2016discovering].
+
+Modelo continua não linear (sem lifting) — exige controlador não linear
+depois. Ver [SINDy](../SINDy/index.qmd).
+
+---
+
+## DeePC — Direto, Linear
+
+Controla direto sobre a matriz de Hankel dos dados, via Lema de Willems
+[@willems2005persistency; @coulson2019shallows].
+
+Pula a identificação; a forma clássica vale para sistemas LTI. Ver
+[DeePC](../DeePC/index.qmd).
+
+---
+
+## Aprendizagem por Reforço — Direto, Não Linear
+
+Aprende $\pi(a|s)$ direto por tentativa e erro, sem modelo explícito
+[@sutton2018reinforcement].
+
+Lida com qualquer dinâmica, ao custo de mais dados [@recht2019tour]. Ver
+[RL](../RL/index.qmd).
+
+---
+
+## Pontes Entre os Quadrantes
+
+::: {.incremental}
+- **DeePC ↔ RL**: ambos diretos — @dorfler2022bridging_rl formaliza a ponte;
+- **Koopman ↔ SINDy**: ambos indiretos, mesma pergunta — biblioteca de
+  funções **linear** (Koopman) ou **esparsa** (SINDy);
+- **SINDy → RL**: o modelo descoberto vira simulador para treinar RL com
+  menos dados reais [@kaiser2018sparse];
+- **Koopman → MPC linear**: o preditor linear alimenta MPC direto
+  [@korda2018linear].
+:::
+
+---
+
+## Como Escolher
+
+| Situação | Considere |
+|:--|:--|
+| Linear, dados limpos | **DeePC** |
+| Não linear, poucos termos (física conhecida) | **SINDy** |
+| Não linear, quer LQR/MPC linear | **Koopman/DMD** |
+| Dinâmica complexa, muita interação possível | **RL** |
+| Interpretabilidade essencial | **SINDy** |
+| Só uma trajetória, sem novos experimentos | **DeePC** / **Koopman** |
+
+---
+
+## Referências
+
+::: {#refs}
+:::

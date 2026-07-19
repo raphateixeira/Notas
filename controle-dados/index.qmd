@@ -1,0 +1,39 @@
+---
+title: "Controle Baseado em Dados"
+subtitle: "Data-Driven Control"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+---
+
+Notas de pesquisa sobre controle baseado em dados: projeto de controladores
+e identificação de dinâmicas diretamente a partir de dados experimentais,
+sem depender de um modelo matemático completo da planta.
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="DataGuidedControl/ControleGuiadoPorDados.qmd">
+  <h3>Panorama</h3>
+  <p>Controle Guiado por Dados — como as quatro técnicas se interconectam</p>
+</a>
+<a class="categoria-card" href="DeePC/index.qmd">
+  <h3>DeePC</h3>
+  <p>Data-Enabled Predictive Control — controle preditivo direto sobre dados</p>
+</a>
+<a class="categoria-card" href="Koopman/index.qmd">
+  <h3>Koopman</h3>
+  <p>Operador de Koopman — linearização de dinâmicas não lineares</p>
+</a>
+<a class="categoria-card" href="SINDy/index.qmd">
+  <h3>SINDy</h3>
+  <p>Identificação esparsa de dinâmicas não lineares</p>
+</a>
+<a class="categoria-card" href="RL/index.qmd">
+  <h3>Aprendizagem por Reforço</h3>
+  <p>Controle por tentativa e erro — a contraparte orientada a dados do controle ótimo</p>
+</a>
+</div>
+```

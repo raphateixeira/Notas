@@ -1,0 +1,154 @@
+---
+title: "Q-Learning vs. LQR"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+engine: knitr
+---
+
+```{r setup, include=FALSE}
+reticulate::use_python(Sys.which("python3"), required = TRUE)
+```
+
+## Recapitulando
+
+Q-learning aprende $Q^\ast(s,a)$ por tentativa e erro. Aqui, um LQR
+escalar — solução ótima conhecida em forma fechada. Q-learning tabular
+encontra a mesma resposta?
+
+$$
+x_{k+1} = a x_k + b u_k \qquad \text{custo: } x_k^2 + \rho\, u_k^2
+$$
+
+---
+
+## Solução Ótima: Riccati
+
+Custo ótimo $V^\ast(x)=Px^2$, política ótima **linear** $u^\ast(x)=-Kx$:
+
+$$
+P = 1 + \gamma a^2 P - \frac{(\gamma a b P)^2}{\rho + \gamma b^2 P}
+\qquad
+K = \frac{\gamma a b P}{\rho + \gamma b^2 P}
+$$
+
+Resolvemos $P$ por ponto fixo — o que a programação dinâmica faria.
+
+---
+
+## Python — Riccati
+
+```{python}
+#| echo: true
+import numpy as np
+a, b, rho, gamma = 1.05, 1.0, 0.1, 0.95  # planta instável em malha aberta
+
+P = 1.0
+for _ in range(500):
+    P = 1.0 + gamma*a**2*P - (gamma*a*b*P)**2/(rho + gamma*b**2*P)
+K_opt = gamma*a*b*P/(rho + gamma*b**2*P)
+print(f"K ótimo: {K_opt:.4f}")
+```
+
+---
+
+## Python — Ambiente Discretizado
+
+```{python}
+#| echo: true
+rng = np.random.default_rng(0)
+x_grid = np.linspace(-5, 5, 41)
+u_grid = np.linspace(-5, 5, 21)
+Q = np.zeros((len(x_grid), len(u_grid)))
+
+def disc(val, grid): return np.argmin(np.abs(grid - val))
+```
+
+---
+
+## Python — Laço de Q-Learning {.small-slide}
+
+```{python}
+#| echo: true
+alpha, n_ep, steps = 0.1, 4000, 30
+for ep in range(n_ep):
+    x = rng.uniform(-5, 5)
+    eps = max(0.1, 1 - ep/2000)
+    for t in range(steps):
+        si = disc(x, x_grid)
+        ai = rng.integers(len(u_grid)) if rng.random() < eps else np.argmax(Q[si])
+        u = u_grid[ai]
+        custo = x**2 + rho*u**2
+        x2 = np.clip(a*x + b*u, -5, 5)
+        Q[si,ai] += alpha*(-custo + gamma*np.max(Q[disc(x2,x_grid)]) - Q[si,ai])
+        x = x2
+```
+
+Recompensa $=-\text{custo}$.
+
+---
+
+## Resultado — Política vs. Ótima
+
+```{python}
+#| echo: true
+politica = u_grid[np.argmax(Q, axis=1)]
+m = np.abs(x_grid) < 4
+K_aprendido = np.linalg.lstsq(x_grid[m].reshape(-1,1), -politica[m], rcond=None)[0][0]
+print(f"K aprendido: {K_aprendido:.4f}  |  K ótimo: {K_opt:.4f}")
+```
+
+::: {.callout-insight}
+Diferença menor que 1% entre o ganho aprendido e o ótimo analítico.
+:::
+
+---
+
+## Resultado — Gráfico
+
+```{python}
+#| echo: true
+#| fig-align: center
+#| fig-width: 10
+#| fig-height: 6.3
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+_ = ax.plot(x_grid, -K_opt*x_grid, "-", lw=2, label="LQR ótimo")
+_ = ax.plot(x_grid, politica, ".", label="Q-learning")
+_ = ax.legend()
+plt.tight_layout(); plt.show()
+```
+
+---
+
+## Discussão
+
+::: {.incremental}
+- Q-learning **redescobre** a política ótima sem conhecer $a,b,\rho$;
+- A tabela cresce exponencialmente com a dimensão do estado;
+- Alta dimensão: redes neurais (DDPG, PPO) [@lillicrap2016continuous; @schulman2017proximal];
+- Estrutura conhecida (linear-quadrático): a solução analítica é mais
+  barata — RL vale mais sem modelo [@recht2019tour].
+:::
+
+---
+
+## Referências
+
+::: {#refs}
+:::
