@@ -113,6 +113,7 @@ drasticamente o custo computacional de resolver a otimização em tempo real
 
 - [Koopman — Introdução](Koopman01Introducao.qmd) (apresentação)
 - [EDMD na Prática](Koopman02EDMDPratica.qmd) (apresentação)
+- [Identificação de Modelos ARX por Mínimos Quadrados](https://raphateixeira.github.io/Identificacao/Identificacao/Ident03ARXMinimosQuadrados.html) (Identificacao) — a mesma estimação por mínimos quadrados sobre pares de dados, aqui sem o levantamento (*lifting*) para observáveis: o caso linear já-linear.
 
 ## Referências
 

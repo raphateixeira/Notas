@@ -135,6 +135,8 @@ plantas não lineares via redes neurais [@lazar2024neural_deepc].
 
 - [DeePC — Introdução](DeePC01Introducao.qmd) (apresentação)
 - [DeePC com Ruído — Regularização na Prática](DeePC02Regularizacao.qmd) (apresentação)
+- [Simulação de Sistemas e Sinais PRBS](https://raphateixeira.github.io/Identificacao/Identificacao/Ident02SimulacaoPRBS.html) (Identificacao) — persistência de excitação e projeto de PRBS, a versão pedagógica da condição de posto do Lema de Willems usada aqui.
+- [Controle MPC-FCS de gerador DFIG](https://raphateixeira.github.io/ControleDFIG/Presents/03ControleDFIGpFCS.html) (ControleDFIG) — MPC baseado num modelo ARX identificado previamente; o DeePC é a contraparte que dispensa esse passo de identificação.
 
 ## Referências
 

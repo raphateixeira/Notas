@@ -107,6 +107,8 @@ identificação baseada em dados e controle [@kaiser2018sparse].
 
 - [SINDy — Introdução](SINDy01Introducao.qmd) (apresentação)
 - [STLSQ na Prática](SINDy02STLSQPratica.qmd) (apresentação)
+- [Identificação de Modelos ARX por Mínimos Quadrados](https://raphateixeira.github.io/Identificacao/Identificacao/Ident03ARXMinimosQuadrados.html) (Identificacao) — o mesmo solver de mínimos quadrados do STLSQ, aqui no caso paramétrico linear mais simples (sem biblioteca de funções candidatas).
+- [Controle MPC-FCS de gerador DFIG](https://raphateixeira.github.io/ControleDFIG/Presents/03ControleDFIGpFCS.html) (ControleDFIG) — identificação ARX por mínimos quadrados aplicada a um sistema trifásico real.
 
 ## Referências
 
