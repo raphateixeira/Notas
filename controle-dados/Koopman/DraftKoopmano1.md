@@ -1,0 +1,1 @@
+# Anotacoes de estudo Koopman.

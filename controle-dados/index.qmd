@@ -15,9 +15,9 @@ sem depender de um modelo matemático completo da planta.
 
 ```{=html}
 <div class="categoria-grid">
-<a class="categoria-card" href="DataGuidedControl/ControleGuiadoPorDados.qmd">
+<a class="categoria-card" href="ControleBaseadoEmDados/ControleBaseadoEmDados.qmd">
   <h3>Panorama</h3>
-  <p>Controle Guiado por Dados — como as quatro técnicas se interconectam</p>
+  <p>Controle Baseado em Dados — como as quatro técnicas se interconectam</p>
 </a>
 <a class="categoria-card" href="DeePC/index.qmd">
   <h3>DeePC</h3>

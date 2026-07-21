@@ -12,7 +12,7 @@ project:
     - Koopman/*.qmd
     - SINDy/*.qmd
     - RL/*.qmd
-    - DataGuidedControl/*.qmd
+    - ControleBaseadoEmDados/*.qmd
 
 # Bibliografia compartilhada por todas as páginas do site. Cite com
 # @chave no texto; veja Referencias.bib.
@@ -30,7 +30,7 @@ website:
       - text: "Início"
         href: index.qmd
       - text: "Panorama"
-        href: DataGuidedControl/ControleGuiadoPorDados.qmd
+        href: ControleBaseadoEmDados/ControleBaseadoEmDados.qmd
       - text: "Métodos"
         menu:
           - text: "DeePC"

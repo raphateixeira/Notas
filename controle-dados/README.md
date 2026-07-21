@@ -40,8 +40,8 @@ DataDrivenControl/
 │   ├── RLNota.qmd
 │   ├── RL01Introducao.qmd           apresentação: MDPs, Bellman, Q-learning
 │   └── RL02QLearningControle.qmd    apresentação: Q-learning vs. LQR (Python)
-└── DataGuidedControl/
-    └── ControleGuiadoPorDados.qmd   apresentação-síntese: como as quatro técnicas se conectam
+└── ControleBaseadoEmDados/
+    └── ControleBaseadoEmDados.qmd   apresentação-síntese: como as quatro técnicas se conectam
 ```
 
 Cada subtema segue o mesmo padrão: um sub-portal (`index.qmd`) que lista a
@@ -49,7 +49,7 @@ Cada subtema segue o mesmo padrão: um sub-portal (`index.qmd`) que lista a
 **apresentações** (slides Reveal.js). O portal raiz (`index.qmd`) linka para
 os sub-portais, não diretamente para uma apresentação.
 
-`DataGuidedControl/` foge um pouco desse padrão: é uma única apresentação de
+`ControleBaseadoEmDados/` foge um pouco desse padrão: é uma única apresentação de
 panorama (sem Nota nem sub-portal, por ora), que soma as quatro técnicas num
 mesmo quadrante (direto/indireto × linear/não linear) e liga de volta para
 cada uma. Acessível pelo item "Panorama" da navbar.

@@ -1,5 +1,5 @@
 ---
-title: "Controle Guiado por Dados"
+title: "Controle de Sistemas Dinâmicos: E se os Dados Substituíssem os Modelos?"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
@@ -21,46 +21,328 @@ format:
 engine: knitr
 ---
 
-## Um Panorama
+<!-- ===================== BLOCO 1 — O QUE SIGNIFICA "CONTROLAR" HOJE ===================== -->
 
-**DeePC**, **Koopman/DMD**, **SINDy** e **Aprendizagem por Reforço**
-respondem à mesma pergunta de formas diferentes:
+## Todo Controlador Clássico Parte de um Modelo
+
+Para projetar um controlador — PID, LQR, MPC — o primeiro passo quase
+sempre é o mesmo: escrever as equações que descrevem como o sistema se
+comporta, e só depois desenhar a malha de controle sobre elas.
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 9
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaLacoClassico.tikz}
+```
+
+---
+
+## Modelar Exige Conhecer a Física a Fundo
+
+::: {.incremental}
+- Escrever as **equações diferenciais** que regem o sistema;
+- Medir ou estimar **parâmetros físicos** (resistências, indutâncias,
+  massas, momentos de inércia...);
+- Decidir o que **simplificar** — todo modelo deixa algo de fora.
+:::
+
+Cada simplificação é uma aposta sobre o que pode ser ignorado.
+
+---
+
+## O Modelo Nunca É o Sistema Real
+
+::: {.incremental}
+- **Não linearidades** que o modelo simplificado não captura;
+- **Parâmetros que mudam**: temperatura, desgaste, ponto de operação;
+- **Perturbações e ruído** que ninguém escreveu na equação.
+:::
 
 ::: {.callout-question}
-Como controlar sem depender de um modelo matemático completo da planta?
+O que fazer quando o sistema real se recusa a seguir o roteiro do
+modelo?
 :::
-
-Nenhuma é "melhor" de forma absoluta — cada uma aposta diferente sobre o
-que se sabe e o que se tem disponível.
 
 ---
 
-## O Que Têm em Comum
+## E se o Sistema se Descrevesse Sozinho?
+
+Quanto mais complexo o sistema — uma rede elétrica com geração
+distribuída, um conversor multinível, um gerador eólico — mais caro e
+mais impreciso fica escrever esse modelo à mão.
+
+::: {.callout-insight}
+E se, em vez de descrever o sistema, deixássemos ele se descrever
+através dos próprios dados?
+:::
+
+<!-- ===================== BLOCO 2 — A IDEIA COMUM ===================== -->
+
+---
+
+## A Troca Comum aos Quatro Caminhos
+
+:::: {.columns}
+::: {.column width="50%"}
+**Abordagem clássica**
+
+"Eu sei como o sistema funciona"
+
+Física → equações → controlador
+:::
+::: {.column width="50%"}
+**Abordagem baseada em dados**
+
+"Eu vi como o sistema se comportou"
+
+Dados medidos → padrão observado → controlador
+:::
+::::
+
+Não é uma troca de ferramentas — é uma troca do que conta como
+conhecimento sobre o sistema.
+
+---
+
+## Quatro Perguntas, Uma Mesma Troca
+
+Os quatro temas a seguir partem exatamente dessa troca. Nenhum deles
+disputa **se** vale a pena usar dados — todos já decidiram que sim.
+Divergem em **como** usam o que foi observado:
 
 ::: {.incremental}
-- Partem de **dados**, não de um modelo de primeiros princípios;
-- Trocam modelagem física por **regressão**: mínimos quadrados (Koopman,
-  SINDy, DeePC) ou tentativa e erro (RL);
-- Nenhuma elimina a necessidade de **dados bons**.
+1. **Koopman** — existe uma versão linear escondida desse sistema?
+2. **SINDy** — qual é a equação mais simples que explica os dados?
+3. **DeePC** — preciso mesmo de uma equação, ou os dados já bastam?
+4. **RL** — e se o controlador aprendesse por tentativa e recompensa?
+:::
+
+Vamos por esse caminho, uma pergunta de cada vez.
+
+<!-- ===================== BLOCO 3 — OS QUATRO CAMINHOS ===================== -->
+
+---
+
+## Koopman: Existe uma Versão Linear Escondida?
+
+::: {.callout-insight}
+Alguns sistemas não lineares só parecem complicados porque estamos
+olhando do ângulo errado.
 :::
 
 ---
 
-## Dois Eixos
+## O Ângulo Certo Revela a Simplicidade
 
-::: {.incremental}
-1. **Direto vs. indireto**: controla direto dos dados, ou identifica um
-   modelo antes?
-2. **Linear vs. não linear**: a representação interna captura não
-   linearidades ou não?
-:::
+Pense numa trajetória em espiral, tipo um saca-rolhas. Vista de lado,
+parece um movimento complicado, cheio de curvas. Vista de cima —
+projetada no ângulo certo —, é só um círculo girando a velocidade
+constante: perfeitamente previsível.
 
-Posicionando as quatro técnicas nesses eixos, aparece um quadrante que
-explica as diferenças entre elas.
+Koopman procura esse "de cima" certo para o seu sistema: uma nova
+maneira de observá-lo em que o comportamento vira **linear**.
 
 ---
 
-## O Quadrante
+## Como Funciona, em Poucas Palavras
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 8
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaKoopman.tikz}
+```
+
+$$
+\phi(x_{k+1}) \approx K\,\phi(x_k)
+$$
+
+$\phi(x)$ é a "nova maneira de observar" o estado $x$ (os
+**observáveis**); $K$ é um operador **linear** que evolui essas novas
+coordenadas no tempo.
+
+---
+
+## Na Prática: Conversores e Redes Elétricas
+
+Um conversor CC-CC ou um gerador eólico tem dinâmica genuinamente não
+linear. Encontrando observáveis $\phi$ adequados, o comportamento nessas
+novas coordenadas fica linear — e técnicas maduras e baratas, como MPC
+linear, voltam a se aplicar direto.
+
+Mas de onde vêm essas coordenadas "certas"? Às vezes a resposta mais
+simples nem tenta lineariza — ela busca a equação mais enxuta possível
+que explica os dados. É o que SINDy faz.
+
+---
+
+## SINDy: Qual é a Equação Mais Simples?
+
+::: {.callout-insight}
+Entre todas as equações que se ajustam aos dados observados, a mais
+simples costuma ser a certa.
+:::
+
+---
+
+## O Editor Rigoroso das Equações
+
+Imagine um cientista testando muitas hipóteses para explicar um
+fenômeno — como Kepler procurando a curva certa para a órbita de um
+planeta. Em vez de aceitar a explicação mais completa, ele escolhe a
+mais **enxuta** que ainda bate com as observações.
+
+SINDy faz o mesmo com equações: entre uma biblioteca enorme de termos
+candidatos, corta tudo que for supérfluo, como um editor rigoroso que
+elimina toda palavra desnecessária de um texto.
+
+---
+
+## Como Funciona, em Poucas Palavras
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 10
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaSINDy.tikz}
+```
+
+$$
+\dot x = \Theta(x)\,\Xi
+$$
+
+$\Theta(x)$ é a biblioteca de termos candidatos (polinômios,
+trigonométricas...); $\Xi$ são os coeficientes — a maioria é **zero**,
+sobrando só os poucos termos que realmente importam.
+
+---
+
+## Na Prática: Descobrindo a Equação de um Circuito
+
+A partir de tensão e corrente medidas num conversor ou motor, SINDy
+pode recuperar a equação diferencial que rege esse comportamento — sem
+abrir o datasheet do fabricante nem deduzir a física do zero.
+
+SINDy ainda entrega uma equação para o engenheiro usar depois. Mas será
+que precisamos mesmo de uma equação? DeePC aposta que, em muitos casos,
+não.
+
+---
+
+## DeePC: Preciso Mesmo de uma Equação?
+
+::: {.callout-insight}
+Se uma trajetória de dados captura tudo que o sistema pode fazer, ela
+pode substituir o modelo inteiro.
+:::
+
+---
+
+## O Motorista que Nunca Estudou Mecânica
+
+Um motorista experiente sabe, na prática, o que o carro vai fazer numa
+curva molhada — não porque resolveu as equações do veículo, mas porque
+já viveu situações parecidas o bastante para reconhecer o padrão.
+
+DeePC funciona assim: em vez de aprender as leis físicas do sistema,
+compara a situação atual com um catálogo de trajetórias já registradas
+e escolhe a ação que já deu certo antes.
+
+---
+
+## Como Funciona, em Poucas Palavras
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 10
+\usetikzlibrary{arrows.meta, positioning}
+\input{../imgs/tikz/EsquemaDeePC.tikz}
+```
+
+$$
+\begin{bmatrix} u_f \\ y_f \end{bmatrix} = H\,g
+$$
+
+$H$ é uma tabela montada empilhando pedaços de um único experimento
+gravado (a **matriz de Hankel**); combinando essas colunas com os pesos
+certos ($g$), reproduz-se qualquer trajetória futura válida do sistema
+— sem nunca escrever a equação dele.
+
+---
+
+## Na Prática: Controle Direto de Conversores e Geradores
+
+A partir de um único experimento bem excitado num conversor de potência
+ou num gerador eólico (DFIG), DeePC controla diretamente sobre os dados
+gravados — sem identificar parâmetros do circuito nem ajustar um
+modelo físico antes.
+
+Koopman, SINDy e DeePC ainda partem de dados coletados **de antemão**.
+E se o controlador aprendesse **enquanto age**, por tentativa e erro?
+É o terreno da Aprendizagem por Reforço.
+
+---
+
+## RL: E se o Controlador Aprendesse por Tentativa e Recompensa?
+
+::: {.callout-insight}
+Nem sempre é preciso entender o sistema — às vezes basta aprender a
+agir bem nele.
+:::
+
+---
+
+## O Cachorro que Aprende o Truque
+
+Um cachorro aprende a sentar por recompensa — um petisco a cada
+tentativa certa — sem entender uma palavra de anatomia ou fisiologia.
+Ele só precisa de tentativa, erro, e um sinal de "isso funcionou".
+
+Um agente de Aprendizagem por Reforço (RL) faz o mesmo com um sistema
+dinâmico: age, observa o resultado, e ajusta o comportamento para
+repetir o que deu certo.
+
+---
+
+## Como Funciona, em Poucas Palavras
+
+```{tikz}
+%| echo: false
+%| fig-align: center
+%| fig-width: 10
+\usetikzlibrary{arrows.meta, positioning, calc}
+\input{../imgs/tikz/EsquemaRL.tikz}
+```
+
+$$
+Q(s,a) \leftarrow Q(s,a) + \alpha\Big(r + \gamma\max_{a'}Q(s',a') - Q(s,a)\Big)
+$$
+
+$Q(s,a)$ é o "quão bom é agir assim nesse estado"; a cada tentativa,
+essa estimativa é ajustada ($\alpha$) em direção ao que realmente
+aconteceu (recompensa $r$ mais o valor esperado do próximo passo).
+
+---
+
+## Na Prática: Aprendendo a Chavear um Conversor
+
+Um agente de RL pode aprender, em simulação, a chavear um conversor ou
+regular a tensão de um gerador — por tentativa e recompensa — antes de
+qualquer ajuste ser levado ao hardware real.
+
+Chegamos às quatro respostas para a mesma pergunta. Mas elas não vivem
+isoladas umas das outras.
+
+<!-- ===================== BLOCO 4 — ONDE AS IDEIAS SE ENCONTRAM ===================== -->
+
+---
+
+## Quatro Respostas, Não Quatro Silos
 
 ```{tikz}
 %| echo: false
@@ -70,76 +352,72 @@ explica as diferenças entre elas.
 \input{../imgs/tikz/EsquemaPanorama.tikz}
 ```
 
----
-
-## Koopman / DMD — Indireto, Linear
-
-Identifica um operador **linear** $K$ para observáveis $\phi(x)$ de um
-sistema não linear [@williams2015data; @korda2018linear].
-
-O preço da não linearidade é pago uma vez, na escolha de $\phi(x)$ — depois
-LQR/MPC linear se aplicam direto. Ver [Koopman](../Koopman/index.qmd).
+Os quatro caminhos se organizam em dois eixos: direto ou indireto (como
+o controle é obtido), linear ou não linear (a representação usada por
+dentro).
 
 ---
 
-## SINDy — Indireto, Não Linear
-
-Identifica as **equações diferenciais** do sistema por regressão esparsa
-[@brunton2016discovering].
-
-Modelo continua não linear (sem lifting) — exige controlador não linear
-depois. Ver [SINDy](../SINDy/index.qmd).
-
----
-
-## DeePC — Direto, Linear
-
-Controla direto sobre a matriz de Hankel dos dados, via Lema de Willems
-[@willems2005persistency; @coulson2019shallows].
-
-Pula a identificação; a forma clássica vale para sistemas LTI. Ver
-[DeePC](../DeePC/index.qmd).
-
----
-
-## Aprendizagem por Reforço — Direto, Não Linear
-
-Aprende $\pi(a|s)$ direto por tentativa e erro, sem modelo explícito
-[@sutton2018reinforcement].
-
-Lida com qualquer dinâmica, ao custo de mais dados [@recht2019tour]. Ver
-[RL](../RL/index.qmd).
-
----
-
-## Pontes Entre os Quadrantes
+## Onde as Fronteiras se Tocam
 
 ::: {.incremental}
-- **DeePC ↔ RL**: ambos diretos — @dorfler2022bridging_rl formaliza a ponte;
-- **Koopman ↔ SINDy**: ambos indiretos, mesma pergunta — biblioteca de
-  funções **linear** (Koopman) ou **esparsa** (SINDy);
-- **SINDy → RL**: o modelo descoberto vira simulador para treinar RL com
-  menos dados reais [@kaiser2018sparse];
-- **Koopman → MPC linear**: o preditor linear alimenta MPC direto
-  [@korda2018linear].
+- **Koopman ↔ SINDy**: competem pela mesma pergunta — existe estrutura
+  escondida nos dados? — mas apostam em respostas diferentes: uma
+  biblioteca **linear** de observáveis, ou uma equação **esparsa**;
+- **DeePC ↔ métodos indiretos**: sob certas condições matemáticas
+  (dados "ricos" o bastante), controlar direto sobre os dados e
+  identificar um modelo antes convergem para o mesmo resultado;
+- **RL ajusta os outros três**: pode aprender a sintonizar o MPC sobre
+  observáveis de Koopman, corrigir o que o modelo de SINDy deixou de
+  fora, ou calibrar o horizonte do DeePC.
 :::
 
 ---
 
-## Como Escolher
+## Uma Área Viva
 
-| Situação | Considere |
-|:--|:--|
-| Linear, dados limpos | **DeePC** |
-| Não linear, poucos termos (física conhecida) | **SINDy** |
-| Não linear, quer LQR/MPC linear | **Koopman/DMD** |
-| Dinâmica complexa, muita interação possível | **RL** |
-| Interpretabilidade essencial | **SINDy** |
-| Só uma trajetória, sem novos experimentos | **DeePC** / **Koopman** |
+Não é um catálogo fechado de quatro técnicas — é uma pergunta em
+aberto sobre até onde os dados podem substituir o conhecimento físico.
+Novas pontes entre esses caminhos continuam a aparecer.
+
+<!-- ===================== BLOCO 5 — POR QUE ISSO IMPORTA / FECHAMENTO ===================== -->
 
 ---
 
-## Referências
+## Por que Isso Importa
 
-::: {#refs}
+Redes elétricas com geração distribuída, conversores multiníveis,
+geradores eólicos (DFIG): sistemas reais cada vez mais complexos tornam
+a modelagem física cada vez mais cara e imprecisa. Controle baseado em
+dados oferece um caminho direto a partir do que já foi medido.
+
+Para aprofundar em cada caminho:
+[DeePC](../DeePC/index.qmd) ·
+[Koopman](../Koopman/index.qmd) ·
+[SINDy](../SINDy/index.qmd) ·
+[Aprendizagem por Reforço](../RL/index.qmd)
+
+---
+
+## E se os Dados Substituíssem os Modelos?
+
+::: {.callout-insight}
+Sim — em muitos casos, os dados já bastam.
+:::
+
+A pergunta que resta é: em qual desses quatro caminhos o **seu**
+sistema se encaixa melhor?
+
+---
+
+## Para Saber Mais
+
+::: {.incremental}
+- Williams, Kevrekidis & Rowley (2015) — *A Data-Driven Approximation
+  of the Koopman Operator* — base do EDMD (Koopman);
+- Brunton, Proctor & Kutz (2016) — *Discovering Governing Equations
+  from Data* — SINDy;
+- Coulson, Lygeros & Dörfler (2019) — *Data-Enabled Predictive Control:
+  In the Shallows of the DeePC*;
+- Sutton & Barto (2018) — *Reinforcement Learning: An Introduction*.
 :::
