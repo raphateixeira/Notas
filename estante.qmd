@@ -1,0 +1,15 @@
+---
+title: "Estante"
+description: "Livros em leitura ou já lidos, com status e link para as notas de cada um."
+---
+
+<!-- TODO: manter esta tabela atualizada manualmente conforme o progresso de leitura. -->
+
+| Livro | Autores | Ano | Status de leitura | Nº de notas | Link |
+|---|---|---|---|---|---|
+| Introduction to Probability for Data Science | Stanley H. Chan | 2026 | rascunho | 1 | [Notas](chan-probabilidade/index.qmd) |
+| Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control | Steven L. Brunton | 2026 | rascunho | 1 | [Notas](brunton-otimizacao/index.qmd) |
+| Data-Driven Science and Engineering | Steven L. Brunton, J. Nathan Kutz | 2022 | rascunho | 1 | [Notas](brunton-kutz-data-driven/index.qmd) |
+| Deep Learning: Foundations and Concepts | Christopher M. Bishop, Hugh Bishop | 2024 | rascunho | 1 | [Notas](bishop-deep-learning/index.qmd) |
+
+**Status possíveis:** `rascunho` · `revisão` · `consolidada`.

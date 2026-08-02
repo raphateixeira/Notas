@@ -1,0 +1,12 @@
+{
+  "hash": "db14f87e46e5b236fefbc695d26cd016",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Título da nota\"\nsubtitle: \"Capítulo 1 — Assunto\"\ndescription: \"Uma frase sobre o que a nota cobre.\"\nauthor: \"Raphael Teixeira\"\ndate: \"2026-08-02\"\ndate-modified: last-modified\ncategories: [\"Identificação de Sistemas\", \"Redução de Ordem\", Brunton, Python]\nlivro: \"Brunton & Kutz — Data-Driven Science and Engineering\"\nautor-livro: \"Steven L. Brunton, J. Nathan Kutz\"\ncapitulo: 1\nstatus: rascunho\nlang: pt-BR\n---\n\n## Contexto\n\n<!-- TODO: onde este capítulo se encaixa no livro e por que interessa. -->\n\n## Ideias centrais\n\n<!-- TODO: enunciados principais em português, com notação própria. -->\n\n## Derivações\n\n<!-- TODO: passagens que exigiram trabalho para entender, escritas por extenso. -->\n\n## Implementação\n\n::: {#cf95d457 .cell execution_count=1}\n``` {.python .cell-code}\n# TODO: código executável que ilustra as ideias centrais desta nota,\n# incluindo a geração de ao menos uma figura.\n```\n:::\n\n\n## Conexões\n\n<!-- TODO: links para outras notas deste repositório e para as linhas de\npesquisa (controle preditivo, DeePC, Koopman, eletrônica de potência). -->\n\n## Exercícios selecionados\n\n<!-- TODO: resolução dos exercícios do capítulo que valeram a pena registrar. -->\n\n## Referências\n\n<!-- TODO: citar via `.bib` e citeproc, ex.: [@brunton2022datadriven]. -->\n\n",
+    "supporting": [
+      "01-exemplo_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

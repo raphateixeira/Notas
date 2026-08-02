@@ -1,0 +1,16 @@
+---
+title: "Avulsas"
+description: "Notas que não pertencem a um livro específico deste repositório."
+listing:
+  id: notas-avulsas
+  type: default
+  contents: "*.qmd"
+  sort: "date desc"
+  categories: numbered
+  fields: [date, title, description, categories]
+page-layout: full
+---
+
+Notas de leitura ou de estudo que não seguem um livro-texto específico da lista de
+[Livros](../estante.qmd) — por exemplo, artigos, materiais avulsos ou fundamentações
+pontuais que surgiram de outras leituras.

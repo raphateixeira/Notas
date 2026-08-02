@@ -1,0 +1,25 @@
+---
+title: "Bishop — Deep Learning: Foundations and Concepts"
+description: "Notas de leitura conceituais do livro de Christopher M. Bishop e Hugh Bishop."
+listing:
+  id: notas-bishop
+  type: default
+  contents: "*.qmd"
+  sort: "capitulo asc"
+  categories: numbered
+  fields: [date, title, description, capitulo]
+page-layout: full
+---
+
+**Livro:** *Deep Learning: Foundations and Concepts*
+**Autores:** Christopher M. Bishop, Hugh Bishop
+**Edição:** Springer, 2024
+**Página oficial / material aberto:** <!-- TODO: link, se houver -->
+
+<!-- TODO: parágrafo do Raphael sobre por que está lendo este livro. -->
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais e derivações** deste livro. Implementações de
+código e experimentos substanciais em Deep Learning têm repositório próprio: veja o satélite
+[DeepLearning](https://raphateixeira.github.io/DeepLearning/).
+:::

@@ -1,0 +1,19 @@
+---
+title: "Notas de Leitura"
+description: "Todas as notas, das mais recentes às mais antigas."
+listing:
+  id: todas-as-notas
+  type: default
+  contents:
+    - "*/*.qmd"
+    - "!*/index.qmd"
+  sort: "date desc"
+  categories: numbered
+  feed: true
+  fields: [date, title, description, categories]
+page-layout: full
+---
+
+Notas de leitura organizadas por livro. Veja a [Estante](estante.qmd) para o status de
+leitura de cada livro, ou o menu **Livros** na barra de navegação para acessar diretamente
+as notas de um livro específico.

@@ -1,0 +1,9 @@
+/.quarto/
+/_site/
+__pycache__/
+.ipynb_checkpoints/
+**/*.quarto_ipynb
+.DS_Store
+
+# PDFs dos livros (material com direitos autorais, uso pessoal apenas)
+/Livros/

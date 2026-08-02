@@ -1,0 +1,46 @@
+---
+title: "Título da nota"
+subtitle: "Capítulo 1 — Assunto"
+description: "Uma frase sobre o que a nota cobre."
+author: "Raphael Teixeira"
+date: "2026-08-02"
+date-modified: last-modified
+categories: [Probabilidade, Estatística, Chan, Python]
+livro: "Chan — Introduction to Probability for Data Science"
+autor-livro: "Stanley H. Chan"
+capitulo: 1
+status: rascunho
+lang: pt-BR
+---
+
+## Contexto
+
+<!-- TODO: onde este capítulo se encaixa no livro e por que interessa. -->
+
+## Ideias centrais
+
+<!-- TODO: enunciados principais em português, com notação própria. -->
+
+## Derivações
+
+<!-- TODO: passagens que exigiram trabalho para entender, escritas por extenso. -->
+
+## Implementação
+
+```{python}
+# TODO: código executável que ilustra as ideias centrais desta nota,
+# incluindo a geração de ao menos uma figura.
+```
+
+## Conexões
+
+<!-- TODO: links para outras notas deste repositório e para as linhas de
+pesquisa (controle preditivo, DeePC, Koopman, eletrônica de potência). -->
+
+## Exercícios selecionados
+
+<!-- TODO: resolução dos exercícios do capítulo que valeram a pena registrar. -->
+
+## Referências
+
+<!-- TODO: citar via `.bib` e citeproc, ex.: [@chan2026probability]. -->

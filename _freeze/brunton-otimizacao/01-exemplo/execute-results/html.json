@@ -1,0 +1,12 @@
+{
+  "hash": "2305492115802931a29f46cc3534a61d",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Título da nota\"\nsubtitle: \"Capítulo 1 — Assunto\"\ndescription: \"Uma frase sobre o que a nota cobre.\"\nauthor: \"Raphael Teixeira\"\ndate: \"2026-08-02\"\ndate-modified: last-modified\ncategories: [Otimização, \"Problemas Inversos\", Brunton, Python]\nlivro: \"Brunton — Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control\"\nautor-livro: \"Steven L. Brunton\"\ncapitulo: 1\nstatus: rascunho\nlang: pt-BR\n---\n\n## Contexto\n\n<!-- TODO: onde este capítulo se encaixa no livro e por que interessa. -->\n\n## Ideias centrais\n\n<!-- TODO: enunciados principais em português, com notação própria. -->\n\n## Derivações\n\n<!-- TODO: passagens que exigiram trabalho para entender, escritas por extenso. -->\n\n## Implementação\n\n::: {#53b2006b .cell execution_count=1}\n``` {.python .cell-code}\n# TODO: código executável que ilustra as ideias centrais desta nota,\n# incluindo a geração de ao menos uma figura.\n```\n:::\n\n\n## Conexões\n\n<!-- TODO: links para outras notas deste repositório e para as linhas de\npesquisa (controle preditivo, DeePC, Koopman, eletrônica de potência). -->\n\n## Exercícios selecionados\n\n<!-- TODO: resolução dos exercícios do capítulo que valeram a pena registrar. -->\n\n## Referências\n\n<!-- TODO: citar via `.bib` e citeproc, ex.: [@brunton2026optimization]. -->\n\n",
+    "supporting": [
+      "01-exemplo_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

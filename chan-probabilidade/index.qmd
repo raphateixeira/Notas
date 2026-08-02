@@ -1,0 +1,19 @@
+---
+title: "Chan — Introduction to Probability for Data Science"
+description: "Notas de leitura do livro de Stanley H. Chan."
+listing:
+  id: notas-chan
+  type: default
+  contents: "*.qmd"
+  sort: "capitulo asc"
+  categories: numbered
+  fields: [date, title, description, capitulo]
+page-layout: full
+---
+
+**Livro:** *Introduction to Probability for Data Science*
+**Autor:** Stanley H. Chan
+**Edição:** 2ª ed., Michigan Publishing, 2026
+**Página oficial / material aberto:** <!-- TODO: link, se houver -->
+
+<!-- TODO: parágrafo do Raphael sobre por que está lendo este livro. -->

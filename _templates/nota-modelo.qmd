@@ -1,0 +1,46 @@
+---
+title: "Título da nota"
+subtitle: "Capítulo N — Assunto"
+description: "Uma frase sobre o que a nota cobre."
+author: "Raphael Teixeira"
+date: "AAAA-MM-DD"
+date-modified: last-modified
+categories: [Categoria1, Categoria2, Python]
+livro: "Autor — Título do livro"
+autor-livro: "Nome do Autor"
+capitulo: 1
+status: rascunho
+lang: pt-BR
+---
+
+## Contexto
+
+<!-- TODO: onde este capítulo se encaixa no livro e por que interessa. -->
+
+## Ideias centrais
+
+<!-- TODO: enunciados principais em português, com notação própria. -->
+
+## Derivações
+
+<!-- TODO: passagens que exigiram trabalho para entender, escritas por extenso. -->
+
+## Implementação
+
+```{python}
+# TODO: código executável que ilustra as ideias centrais desta nota,
+# incluindo a geração de ao menos uma figura.
+```
+
+## Conexões
+
+<!-- TODO: links para outras notas deste repositório e para as linhas de
+pesquisa (controle preditivo, DeePC, Koopman, eletrônica de potência). -->
+
+## Exercícios selecionados
+
+<!-- TODO: resolução dos exercícios do capítulo que valeram a pena registrar. -->
+
+## Referências
+
+<!-- TODO: citar via `.bib` e citeproc, ex.: [@chave-da-referencia]. -->
