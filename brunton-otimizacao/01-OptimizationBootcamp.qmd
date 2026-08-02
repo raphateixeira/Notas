@@ -13,9 +13,11 @@ status: rascunho
 lang: pt-BR
 ---
 
-## Contexto
+## Otimização
 
 <!-- TODO: onde este capítulo se encaixa no livro e por que interessa. -->
+
+
 
 ## Ideias centrais
 
