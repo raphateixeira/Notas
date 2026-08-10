@@ -1,0 +1,28 @@
+---
+title: "Larson — Cálculo Multivariável"
+description: "Notas de leitura do volume de cálculo multivariável de Ron Larson."
+listing:
+  id: notas-calculo-multivariavel
+  type: default
+  contents: "*.qmd"
+  sort: "capitulo asc"
+  categories: numbered
+  fields: [date, title, description, capitulo]
+page-layout: full
+---
+
+**Livro:** *Multivariable Calculus*
+**Autores:** Ron Larson, Bruce H. Edwards
+**Edição:** 9ª ed., Brooks/Cole, Cengage Learning, 2010
+**Página oficial / material aberto:** <!-- TODO: link, se houver -->
+
+::: {.callout-note}
+Este volume reúne os capítulos 11–16 do *Calculus* completo de Larson & Edwards (Vetores e
+Geometria do Espaço, Funções Vetoriais, Funções de Várias Variáveis, Integração Múltipla,
+Análise Vetorial, Tópicos Adicionais em Equações Diferenciais) e mantém a numeração de
+página do texto original — por isso a numeração de seção começa em 11.1, não em 1.1.
+:::
+
+<!-- TODO: parágrafo do Raphael sobre por que está lendo este livro. -->
+
+Veja a [Estante](../estante.qmd) para o status de leitura deste e dos demais livros.

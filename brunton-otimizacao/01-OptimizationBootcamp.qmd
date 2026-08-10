@@ -1,5 +1,5 @@
 ---
-title: "Título da nota"
+title: "Optimization Bootcamp"
 subtitle: "Capítulo 1 — Assunto"
 description: "Uma frase sobre o que a nota cobre."
 author: "Raphael Teixeira"
@@ -13,36 +13,14 @@ status: rascunho
 lang: pt-BR
 ---
 
-## Otimização
+### 1.1 O problema de otimização
 
-<!-- TODO: onde este capítulo se encaixa no livro e por que interessa. -->
+Maximizar ou minimizar uma função objetivo \[f(x)\], com relação a um conjunto de variáveis \[x\]:
 
+$$\min_{x} f(x) \quad \text{ou} \quad \max_{x} f(x)$$
 
+Este é um problema de otimização irrestrito, uma vez que não há restrições sobre as variáveis \[x\].
 
-## Ideias centrais
+Contudo, muitos problemas de otimização do mundo real envolvem restrições, que podem ser expressas como:
 
-<!-- TODO: enunciados principais em português, com notação própria. -->
-
-## Derivações
-
-<!-- TODO: passagens que exigiram trabalho para entender, escritas por extenso. -->
-
-## Implementação
-
-```{python}
-# TODO: código executável que ilustra as ideias centrais desta nota,
-# incluindo a geração de ao menos uma figura.
-```
-
-## Conexões
-
-<!-- TODO: links para outras notas deste repositório e para as linhas de
-pesquisa (controle preditivo, DeePC, Koopman, eletrônica de potência). -->
-
-## Exercícios selecionados
-
-<!-- TODO: resolução dos exercícios do capítulo que valeram a pena registrar. -->
-
-## Referências
-
-<!-- TODO: citar via `.bib` e citeproc, ex.: [@brunton2026optimization]. -->
+$$g_i(x) \leq 0 \quad \text{e} \quad h_j(x) = 0$$

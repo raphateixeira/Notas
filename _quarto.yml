@@ -30,6 +30,8 @@ website:
         href: index.qmd
       - text: "Estante"
         href: estante.qmd
+      - text: "Recomendações"
+        href: Recomendacoes.qmd
       - text: "Livros"
         menu:
           - text: "Chan — Introduction to Probability for Data Science"
@@ -40,6 +42,10 @@ website:
             href: brunton-kutz-data-driven/index.qmd
           - text: "Bishop — Deep Learning: Foundations and Concepts"
             href: bishop-deep-learning/index.qmd
+          - text: "Ventura Araújo — Differential Geometry"
+            href: ventura-geometria-diferencial/index.qmd
+          - text: "Larson — Cálculo Multivariável"
+            href: larson-calculo-multivariavel/index.qmd
   page-footer:
     border: false
     center: "©2026 Prof. Dr. Raphael Teixeira — UFPA-CAMTUC-FEE"

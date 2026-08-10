@@ -64,6 +64,8 @@ Notas em `avulsas/` (sem livro associado) omitem `livro`, `autor-livro` e `capit
 | `brunton-otimizacao` | Optimization: A Bootcamp for ML, Inverse Problems, and Control (2026) | Steven L. Brunton |
 | `brunton-kutz-data-driven` | Data-Driven Science and Engineering (2ª ed., 2022) | Steven L. Brunton, J. Nathan Kutz |
 | `bishop-deep-learning` | Deep Learning: Foundations and Concepts (2024) | Christopher M. Bishop, Hugh Bishop |
+| `ventura-geometria-diferencial` | Differential Geometry (Springer, 2024; trad. de *Geometria Diferencial*, IMPA, 1998) | Paulo Ventura Araújo |
+| `larson-calculo-multivariavel` | Calculus: Multivariable (Cengage Learning) | Ron Larson |
 
 Ao adicionar um livro novo: criar a pasta, o `index.qmd` filtrado, atualizar o menu
 "Livros" em `_quarto.yml`, a tabela em `estante.qmd` e esta lista.

@@ -11,5 +11,7 @@ description: "Livros em leitura ou já lidos, com status e link para as notas de
 | Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control | Steven L. Brunton | 2026 | rascunho | 1 | [Notas](brunton-otimizacao/index.qmd) |
 | Data-Driven Science and Engineering | Steven L. Brunton, J. Nathan Kutz | 2022 | rascunho | 1 | [Notas](brunton-kutz-data-driven/index.qmd) |
 | Deep Learning: Foundations and Concepts | Christopher M. Bishop, Hugh Bishop | 2024 | rascunho | 1 | [Notas](bishop-deep-learning/index.qmd) |
+| Differential Geometry | Paulo Ventura Araújo | 2024 (trad. de *Geometria Diferencial*, IMPA, 1998) | rascunho | 1 | [Notas](ventura-geometria-diferencial/index.qmd) |
+| Multivariable Calculus | Ron Larson, Bruce H. Edwards | 9ª ed., 2010 | rascunho | 1 | [Notas](larson-calculo-multivariavel/index.qmd) |
 
 **Status possíveis:** `rascunho` · `revisão` · `consolidada`.

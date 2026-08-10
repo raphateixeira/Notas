@@ -1,0 +1,12 @@
+{
+  "hash": "baa5862ca5845efa36890539b84f52ed",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Séries Infinitas\"\nsubtitle: \"Capítulo 1 — Background Matemático\"\ndescription: \"Uma frase sobre o que a nota cobre.\"\nauthor: \"Prof. Dr. Raphael Teixeira\"\ndate: \"2026-08-02\"\ndate-modified: last-modified\ncategories: [Probabilidade, Estatística, Chan, Python]\nlivro: \"Chan — Introduction to Probability for Data Science\"\nautor-livro: \"Stanley H. Chan\"\ncapitulo: 1\nstatus: rascunho\nlang: pt-BR\n---\n\n## Séries infinitas\n\nA probabilidade de dar cara em uma moeda justa é de 1/2. A probabilidade de dar cara duas vezes seguidas é de 1/4, e a probabilidade de dar cara três vezes seguidas é de 1/8. Em geral, a probabilidade de dar cara \\[n\\] vezes seguidas é dada por:\n\n$\\frac{1}{2^n}$\n\n::: {#1f12b72c .cell execution_count=1}\n``` {.python .cell-code}\n# Python code to generate a geometric sequence\nimport numpy as np\nimport matplotlib.pyplot as plt\np = 1/2\nn = np.arange(0,10)\nX = np.power(p,n)\nplt.bar(n,X, color = 'r')\nplt.grid()\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](Cap01MathBack_files/figure-html/cell-2-output-1.png){width=571 height=411}\n:::\n:::\n\n\nQuantas vezes você precisa jogar para que a probabilidade de dar cara seja maior que $90\\%$? A probabilidade de dar cara \\[n\\] vezes seguidas é dada por:\n\n$$\\sum_{n = 1}^{\\infty} \\frac{1}{2^n} = \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + ...$$\n\n",
+    "supporting": [
+      "Cap01MathBack_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

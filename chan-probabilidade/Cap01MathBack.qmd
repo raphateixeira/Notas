@@ -1,0 +1,40 @@
+---
+title: "Séries Infinitas"
+subtitle: "Capítulo 1 — Background Matemático"
+description: "Uma frase sobre o que a nota cobre."
+author: "Prof. Dr. Raphael Teixeira"
+date: "2026-08-02"
+date-modified: last-modified
+categories: [Probabilidade, Estatística, Chan, Python]
+livro: "Chan — Introduction to Probability for Data Science"
+autor-livro: "Stanley H. Chan"
+capitulo: 1
+status: rascunho
+lang: pt-BR
+---
+
+## Séries infinitas
+
+A probabilidade de dar cara em uma moeda justa é de 1/2. A probabilidade de dar cara duas vezes seguidas é de 1/4, e a probabilidade de dar cara três vezes seguidas é de 1/8. Em geral, a probabilidade de dar cara \[n\] vezes seguidas é dada por:
+
+$\frac{1}{2^n}$
+
+
+
+
+```{python}
+# Python code to generate a geometric sequence
+import numpy as np
+import matplotlib.pyplot as plt
+p = 1/2
+n = np.arange(0,10)
+X = np.power(p,n)
+plt.bar(n,X, color = 'r')
+plt.grid()
+plt.show()
+```
+
+Quantas vezes você precisa jogar para que a probabilidade de dar cara seja maior que $90\%$? A probabilidade de dar cara \[n\] vezes seguidas é dada por:
+
+$$\sum_{n = 1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ...$$
+
