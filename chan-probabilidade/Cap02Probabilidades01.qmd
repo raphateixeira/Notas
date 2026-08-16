@@ -1,0 +1,17 @@
+---
+title: "Probabilidades"
+subtitle: "Capítulo 2"
+description: "..."
+author: "Prof. Dr. Raphael Teixeira"
+date: "2026-08-02"
+date-modified: last-modified
+categories: [Probabilidade, Estatística, Chan, Python]
+livro: "Chan — Introduction to Probability for Data Science"
+autor-livro: "Stanley H. Chan"
+capitulo: 2
+status: rascunho
+lang: pt-BR
+---
+
+## Probabilidades
+
