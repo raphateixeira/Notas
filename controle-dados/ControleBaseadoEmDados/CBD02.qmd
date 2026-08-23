@@ -1,5 +1,5 @@
 ---
-title: "Controle de Sistemas Dinâmicos: E se os Dados Substituíssem os Modelos?"
+title: "Sistemas Dinâmicos - A Renascença do Controle Baseado em Dados"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
@@ -17,7 +17,7 @@ format:
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 45px center"
+      data-background-position: "top 110px center"
 engine: knitr
 ---
 

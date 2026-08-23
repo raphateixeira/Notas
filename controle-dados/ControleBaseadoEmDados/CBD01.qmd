@@ -1,0 +1,290 @@
+---
+title: "Sistemas Dinâmicos: A Renascença dos Dados"
+subtitle: "Controle Baseado em Dados"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    center: false
+    width: 1600
+    height: 900
+    footer: " "
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "90px"
+      data-background-position: "top 45px center"
+    include-in-header:
+      text: |
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          TeX: { Macros: { bm: ["\\boldsymbol{#1}", 1] } }
+        });
+        </script>
+engine: knitr
+---
+
+
+## Sistemas dinâmicos
+
+- Formulação matemática para a descrição de sistemas físicos, biológicos, econômicos, sociais, etc... onde as variáveis evoluem no tempo.
+
+-  Sistemas dinâmicos modernos foram introduzidas por Henri Poincaré (1854-1912) e Andrey Kolmogorov (1903-1987), apos um longo período de desenvolvimento da mecânica clássica, que começou com Isaac Newton (1642-1727) e Leonhard Euler (1707-1783).
+
+- Sistemas dinâmicos compreendem um dos campos mais importantes da matemática, reunindo conceitos de álgebra linear, cálculo diferencial, análise numérica e geometria. 
+
+- A abordagem moderna está experimentando uma renascença, com aborgagens baseadas em dados tomando o lugar dos princípios analíticos clássicos. 
+
+- A disponibilidade de dados e o aumento do poder computacional estão permitindo que os sistemas dinâmicos sejam estudados de maneiras que não eram possíveis antes.
+
+- Áreas da ciência, engenharia, computação e da própria matemática estão se beneficiando dessa abordagem baseada em dados. É o caso da aprendizagem de máquina, da predição climática, da neurociência, da biologia de sistemas, da economia e da engenharia de controle.
+
+---
+
+## Sistemas dinâmicos
+
+- Uma perspectiva que se destaca é a baseada em operadores, que passam a ser formulados com estratégias de dados reais medidos, ao invés de modelos matemáticos derivados de princípios físicos. Como é o caso do Koopman operator, que é um operador linear que atua em funções de observáveis de sistemas dinâmicos não lineares.
+
+- Obter representações lineares de sistemas não lineares é um dos principais objetivos do controle baseado em dados, pois permite a aplicação de técnicas de controle linear para sistemas complexos.
+
+---
+
+## Sistemas dinâmicos
+
+Representação de estados:
+
+$$
+\frac{d}{dt}\bm{x}(t) = f(\bm{x}(t), \bm{u}(t), t; \theta)
+$$
+onde: $\bm{x}(t) \in \mathbb{R}^n$ - estados, $\bm{u}(t) \in \mathbb{R}^m$ - entradas, $t$ - tempo e $\theta$ - parâmetros.
+
+Exemplo clássico - sistema de Lorenz:
+
+$$ \begin{align}
+\frac{dx}{dt} &= \sigma (y - x) \\
+\frac{dy}{dt} &= x (\rho - z) - y \\
+\frac{dz}{dt} &= xy - \beta z
+\end{align} $$
+
+---
+
+## Sistemas dinâmicos
+
+Sem perda de generalidade serão considerados sistemas autônomos na forma:
+
+$$
+\frac{d}{dt}\bm{x}(t) = \bm{f}(\bm{x}(t))
+$$
+
+Como $t \in \mathbb{R}$ é contínuo;
+
+O caso discreto é obtido por amostragem, com $t \in \mathbb{Z}$, e a equação de estado é dada por:
+
+$$
+\bm{x}_{k+1} = F(\bm{x}_k)
+$$
+
+Exemplo clássico - mapa logístico:
+
+$$
+x_{k+1} = r x_k (1 - x_k)
+$$
+
+---
+
+## Sistemas lineares e decomposição espectral
+
+Um sistema linear pode ser representado na forma:
+
+$$
+\frac{d}{dt}\bm{x}(t) = \bm{A} \bm{x}(t)
+$$
+
+Cuja solução é dada por:
+$$
+\bm{x}(t) = e^{\bm{A}t} \bm{x}(t_0)
+$$
+
+Esta dinâmica é inteiramente caracterizada pelos autovalores e autovetores da matriz $\bm{A}$, que podem ser obtidos através da decomposição espectral:
+
+$$\bm{A}\bm{T} = \bm{T} \Lambda$$
+
+
+
+---
+
+## Sistemas lineares e decomposição espectral
+
+Quando $\bm{A}$ é diagonalizável, a matriz $\bm{T}$ é composta pelos autovetores e $\Lambda$ pelos autovalores de $\bm{A}$. Neste caso, a solução pode ser expressa como:
+
+$$
+\bm{x}(t) = \bm{T} e^{\Lambda t} \bm{T}^{-1} \bm{x}(t_0)
+$$
+
+Para o caso discreto, a solução é dada por:
+$$
+\bm{x}_k = \bm{A}^k \bm{x}_0 = \bm{T} \Lambda^k \bm{T}^{-1} \bm{x}_0
+$$
+
+## Sistemas lineares e decomposição espectral
+
+A matríz $\bm{T}ˆ{-1}$ define a transformação $z = \bm{T}^{-1} \bm{x}$, em autovetores instrinsecos onde a dinâmica é diagonalizada, e a solução é dada por:
+
+$$
+\dfrac{dz(t)}{dt} = \Lambda z(t) \longleftrightarrow z(t) = e^{\Lambda t} z(t_0)
+$$
+
+Cada coordenada $z_i(t)$ evolui de forma independente, com taxa de crescimento ou decaimento determinada pelo autovalor $\lambda_i$ correspondente. 
+
+$$
+z_i(t) = e^{\lambda_i t} z_i(t_0)
+$$
+
+---
+
+## Desafios dos sistemas dinâmicos modernos
+
+- Predição de estados futuros;
+
+- Projeto e otimização;
+
+- Estimação e controle;
+
+- Interpretabilidade física;
+
+Desafios fundamentais:
+
+- Não-linearidade;
+
+- Dinâmica desconhecida;
+
+- Alta dimensionalidade;
+
+---
+
+## Decomposição em modos dinâmicos (DMD)
+
+DMD é uma técnica de análise de dados que permite decompor um sistema dinâmico em modos dinâmicos, cada um associado a uma frequência e taxa de crescimento/decadência. A DMD é particularmente útil para sistemas não lineares, pois permite aproximar a dinâmica do sistema por uma combinação linear de modos.
+
+DMD é inerentemente baseada em dados, e não requer conhecimento prévio da equação de estado do sistema. Ela pode ser aplicada a dados experimentais ou simulados, tornando-a uma ferramenta poderosa para análise de sistemas complexos.
+
+Os dados medidos dos estados do sistema são organizados em duas matrizes de amostras, uma representando os estados no instante $t_k$ e a outra representando os estados no instante $t_{k+1}$. A partir dessas matrizes, é possível estimar a matriz de transição que descreve a evolução do sistema.
+
+---
+
+## Decomposição em modos dinâmicos (DMD)
+
+Tomando medidas $$ {(x_k, x_{k+1})}_{k=1}^m$$ pode-se organizar os dados em duas matrizes:
+
+$$
+X = \begin{bmatrix}
+| & | & & |\\
+x_1 & x_2 & \cdots & x_m\\
+| & | & & |\\
+\end{bmatrix}
+$$
+
+$$
+X' = \begin{bmatrix}
+| & | & & |\\
+x_2 & x_3 & \cdots & x_{m+1}\\
+| & | & & |
+\end{bmatrix}
+$$
+
+---
+
+## Decomposição em modos dinâmicos (DMD)
+
+O algoritmo DMD busca determinar a matriz $\bm{A}$ que melhor aproxime as duas matrizes de dados, de forma que:
+
+$$
+X' \approx \bm{A} X
+$$
+
+O operador $\bm{A}$ é estimado através da minimização do erro quadrático entre $X'$ e $\bm{A} X$, na forma:
+
+$$
+\bm{A} = argmin_{\bm{A}} \|X' - \bm{A} X\|_F^2 = \bm{X}' \bm{X}^\dagger
+$$
+
+Onde $\|\cdot\|_F$ denota a norma de Frobenius e $\bm{X}^\dagger$ é a pseudoinversa de Moore-Penrose da matriz $\bm{X}$.
+
+---
+
+## DMD e Koopman
+
+- A DMD pode ser vista como uma aproximação do operador de Koopman, que é um operador linear que atua em funções de observáveis de sistemas dinâmicos não lineares. A DMD fornece uma maneira prática de estimar o operador de Koopman a partir de dados medidos, permitindo a análise e controle de sistemas não lineares usando técnicas lineares.
+
+- Como $\bm{A}$ é uma aproximação do operador de Koopman, os autovalores e autovetores de $\bm{A}$ fornecem informações sobre a dinâmica do sistema, que são expressas em termos de modos dinâmicos, ou seja, os autovetores $\bm{\Psi}$ e os autovalores $\Lambda$ de $\bm{A}$.
+
+$$\bm{A} \bm{\Psi} = \bm{\Psi} \Lambda$$
+
+---
+
+## DMD e a maldição da dimensionalidade
+
+Para vetores de estado $\bm{x} \in \mathbb{R}^n$ com $n$ grande, a matriz $\bm{A}$ é de dimensão $n \times n$, o que pode tornar a análise computacionalmente inviável. Para contornar esse problema, a DMD utiliza uma decomposição em valores singulares (SVD) para reduzir a dimensionalidade dos 
+dados antes de estimar a matriz $\bm{A}$.
+
+A pseudoinversa $\bm{X}^\dagger$ é calculada através da SVD, que permite a redução da dimensionalidade dos dados, mantendo apenas os modos mais significativos.
+
+Como a matriz $\bm{X}$ possui dimensão $n \times m$, com $m$ o número de amostras, a SVD permite reduzir a dimensão da matriz $\bm{A}$ para $r \times r$, com $r$ o número de modos significativos, onde $r << n$, resultando em $\bm{\tilde{A}}$.
+
+A determinação de $\bm{\tilde{A}}$ é realizada sem a necessidade de calcular a matriz $\bm{A}$ completa, bastando calcular a SVD de $\bm{X}$ e projetar os dados em um subespaço de menor dimensão.
+
+---
+
+## Algoritmo DMD:
+
+*Passo 1:* Organizar os dados em duas matrizes de amostras, $X$ e $X'$.
+
+*Passo 2:* Calcular a SVD da matriz $\bm{X}$.
+
+$$\bm{X} \approx \bm{\tilde{U}} \tilde{\Sigma} \bm{\tilde{V}}^*$$
+
+onde $\bm{\tilde{U}} \in \mathbb{R}^{n \times r}$, $\tilde{\Sigma} \in \mathbb{R}^{r \times r}$ e $\bm{\tilde{V}} \in \mathbb{R}^{m \times r}$. Com $r\leq m$.
+
+Na prática, a escolha do rank $r$ é feita buscando manter apenas os modos mais significativos, que melhor capturam a dinâmica do sistema.
+
+As colunas de $\bm{\tilde{U}}$ são os modos dinâmicos, conhecidos como POD (Proper Orthogonal Decomposition), enquanto as colunas de $\bm{\tilde{V}}$ são os modos de entrada. Essas matrizes satisfazem a relação: $\bm{\tilde{U}}^* \bm{\tilde{U}} = \bm{I}_r$ e $\bm{\tilde{V}}^* \bm{\tilde{V}} = \bm{I}_r$.
+
+---
+
+## Algoritmo DMD:
+
+*Passo 3:* Determinar a matriz $\bm{\tilde{A}}$ a partir da SVD.
+
+$$\bm{A} = \bm{X}'\bm{\tilde{V}} \bm{\tilde{\Sigma}}^{-1}\bm{\tilde{U}}^* $$
+
+Contudo, o interesse é apenas nor $r$ modos mais significativos, e portanto, a matriz $\bm{\tilde{A}}$ é definida como:
+
+$$
+\bm{\tilde{A}} = \bm{\tilde{U}}^* \bm{A} \bm{\tilde{U}} = \bm{\tilde{U}}^* \bm{X}'\bm{\tilde{V}} \bm{\tilde{\Sigma}}^{-1}
+$$
+
+*Passo 4:* Calcular os autovalores e autovetores de $\bm{\tilde{A}}$.
+
+*Passo 5:* Utilizar $\bm{\tilde{A}}$ como o modelo reduzido do sistema, e os autovalores e autovetores para análise da dinâmica do sistema.
+
+$$\tilde{x}_{k+1} = \bm{\tilde{A}} \tilde{x}_k$$
+
+Descarte que $\tilde{x}_k = \bm{\tilde{U}}^* x_k$ é a projeção do estado $x_k$ no subespaço de menor dimensão.
+
+---
+
+## Algoritmo DMD:
+
+- Calcular a decomposição espectral de $\bm{\tilde{A}}$:
+
+$$
+\bm{\tilde{A}} \bm{W} = \bm{W}\Lambda
+$$
+
+A diagonal de $\Lambda$ contém os autovalores de $\bm{\tilde{A}}$ (DMDs), enquanto as colunas de $\bm{W}$ são os autovetores correspondentes.
+
+
