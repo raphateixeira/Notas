@@ -26,5 +26,9 @@ identificar um modelo de estado explícito da planta.
   <h3>Slides 2</h3>
   <p>DeePC com ruído: regularização na prática</p>
 </a>
+<a class="categoria-card" href="DeePC03ExemplosComentados.qmd">
+  <h3>Slides 3</h3>
+  <p>Três exemplos comentados: do QP canônico ao QP reduzido</p>
+</a>
 </div>
 ```
