@@ -1,0 +1,45 @@
+---
+title: "Recomendações"
+description: "Livros, sites e canais recomendados para aprofundamento em Python, Julia, R e MATLAB."
+---
+
+Livros, sites e canais do YouTube recomendados para aprofundamento nas linguagens
+estudadas neste repositório.
+
+## Python
+
+- [Python Documentation](https://docs.python.org/3/): documentação oficial.
+- [NumPy](https://numpy.org/doc/stable/), [SciPy](https://docs.scipy.org/doc/scipy/),
+  [Matplotlib](https://matplotlib.org/stable/), [pandas](https://pandas.pydata.org/docs/):
+  documentação dos pacotes de computação científica de uso mais frequente.
+
+## Julia
+
+- [Julia Documentation](https://docs.julialang.org/): documentação oficial.
+- [Julia for Optimization and Learning](https://juliateachingctu.github.io/Julia-for-Optimization-and-Learning/stable/):
+  curso introdutório com foco em otimização e aprendizado.
+- [DifferentialEquations.jl](https://docs.sciml.ai/DiffEqDocs/stable/) e
+  [ControlSystems.jl](https://juliacontrol.github.io/ControlSystems.jl/stable/):
+  pacotes relevantes para controle e simulação de sistemas dinâmicos.
+
+## R
+
+- [R for Data Science](https://r4ds.hadley.nz/): livro introdutório de referência.
+- [The R Manuals](https://cran.r-project.org/manuals.html): documentação oficial do CRAN.
+
+## MATLAB
+
+- [MATLAB Documentation](https://www.mathworks.com/help/matlab/): documentação oficial.
+- [Control System Toolbox](https://www.mathworks.com/help/control/): referência para
+  projeto e análise de sistemas de controle.
+
+## Quarto
+
+- [Dicas de markdown para Quarto](https://quarto.org/docs/guide/): guia oficial do
+  Quarto destacando as diferenças e extensões do Markdown padrão.
+
+**Quarto** é uma ferramenta de código aberto para criação de documentos dinâmicos, sites,
+blogs e apresentações, com suporte a múltiplos formatos de saída e integração com Python,
+R e Julia — o que o torna adequado para registrar notas de estudo com código executável.
+
+Para publicar direto do VS Code: `quarto publish gh-pages`.

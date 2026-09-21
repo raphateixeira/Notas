@@ -1,0 +1,15 @@
+---
+title: "Progresso"
+description: "Linguagens em estudo, com status e link para as notas de cada uma."
+---
+
+<!-- TODO: manter esta tabela atualizada manualmente conforme o progresso de estudo. -->
+
+| Linguagem | Uso típico | Status de estudo | Nº de notas | Link |
+|---|---|---|---|---|
+| Python | Computação científica geral (numpy, scipy, matplotlib, pandas) | rascunho | 1 | [Notas](python/index.qmd) |
+| Julia | Computação numérica de alta performance, EDOs, controle | rascunho | 1 | [Notas](julia/index.qmd) |
+| R | Estatística, visualização | rascunho | 1 | [Notas](r/index.qmd) |
+| MATLAB | Controle, processamento de sinais, Simulink | rascunho | 1 | [Notas](matlab/index.qmd) |
+
+**Status possíveis:** `rascunho` · `revisão` · `consolidada`.

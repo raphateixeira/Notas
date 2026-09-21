@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------
+#  Configuração do projeto Quarto — Estudo de linguagens de programação.
+#  Repositório único, organizado por pasta de linguagem; a separação lógica
+#  é feita por "categories" no front matter e pelos listings abaixo.
+# ---------------------------------------------------------------------
+
+project:
+  type: website
+  output-dir: _site
+
+execute:
+  freeze: auto
+
+bibliography: referencias.bib
+csl: abnt.csl
+
+website:
+  title: "Code"
+  description: "Estudo de linguagens de programação e seus pacotes — Prof. Dr. Raphael Teixeira (UFPA-CAMTUC-FEE)"
+  site-url: "https://raphateixeira.github.io/Code/"
+  reader-mode: true
+  navbar:
+    background: "#1F3A5F"
+    foreground: "#FFFFFF"
+    title: "Code"
+    left:
+      - text: "Início"
+        href: https://raphateixeira.github.io/index.html
+      - text: "Notas"
+        href: index.qmd
+      - text: "Progresso"
+        href: progresso.qmd
+      - text: "Recomendações"
+        href: Recomendacoes.qmd
+      - text: "Linguagens"
+        menu:
+          - text: "Python"
+            href: python/index.qmd
+          - text: "Julia"
+            href: julia/index.qmd
+          - text: "R"
+            href: r/index.qmd
+          - text: "MATLAB"
+            href: matlab/index.qmd
+  page-footer:
+    border: false
+    center: "©2026 Prof. Dr. Raphael Teixeira — UFPA-CAMTUC-FEE"
+
+format:
+  html:
+    theme: [cosmo, TemaRTx.scss]
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-copy: true
+    code-tools: true
+    fig-align: center
+    lang: pt-BR

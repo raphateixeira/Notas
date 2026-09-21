@@ -1,0 +1,17 @@
+/.quarto/
+/_site/
+__pycache__/
+.ipynb_checkpoints/
+**/*.quarto_ipynb
+.DS_Store
+
+# Julia
+Manifest.toml
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Ambientes virtuais Python
+.venv/

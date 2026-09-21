@@ -1,0 +1,14 @@
+---
+title: "R"
+description: "Notas de estudo de R e seus pacotes de estatística e visualização."
+listing:
+  id: notas-r
+  type: default
+  contents: "*.qmd"
+  sort: "ordem asc"
+  categories: numbered
+  fields: [date, title, description, ordem]
+page-layout: full
+---
+
+**Foco:** estatística e visualização de dados.

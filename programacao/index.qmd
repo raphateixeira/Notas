@@ -1,0 +1,21 @@
+---
+title: "Notas de Estudo"
+description: "Todas as notas, das mais recentes às mais antigas."
+listing:
+  id: todas-as-notas
+  type: default
+  contents:
+    - "*/*.qmd"
+    - "!*/index.qmd"
+  sort: "date desc"
+  categories: numbered
+  feed: true
+  fields: [date, title, description, categories]
+page-layout: full
+---
+
+Notas de estudo organizadas por linguagem de programação. Veja o [Progresso](progresso.qmd)
+para o status de estudo de cada linguagem, o menu **Linguagens** na barra de navegação
+para acessar diretamente as notas de uma linguagem específica, ou
+[Recomendações](Recomendacoes.qmd) para livros, sites e canais sugeridos para
+aprofundamento.

@@ -1,0 +1,12 @@
+---
+title: "Avulsas"
+description: "Notas que não pertencem a uma linguagem específica: comparações, ferramentas de ambiente, Git, etc."
+listing:
+  id: notas-avulsas
+  type: default
+  contents: "*.qmd"
+  sort: "date desc"
+  categories: numbered
+  fields: [date, title, description, categories]
+page-layout: full
+---
