@@ -9,6 +9,8 @@ format:
     page-layout: article
 ---
 
+[⬅ Site principal](https://raphateixeira.github.io)
+
 Notas de pesquisa sobre controle baseado em dados: projeto de controladores
 e identificação de dinâmicas diretamente a partir de dados experimentais,
 sem depender de um modelo matemático completo da planta.
