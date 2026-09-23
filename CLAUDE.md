@@ -70,6 +70,24 @@ Notas em `avulsas/` (sem livro associado) omitem `livro`, `autor-livro` e `capit
 Ao adicionar um livro novo: criar a pasta, o `index.qmd` filtrado, atualizar o menu
 "Livros" em `_quarto.yml`, a tabela em `estante.qmd` e esta lista.
 
+## Fundamentos (temas, não livros)
+
+Além das notas por livro, `index.qmd` tem uma seção **Fundamentos**: notas teóricas
+gerais por tema de estudo (não ligadas a um livro específico). Diferente da regra central
+acima, cada tema aqui **é** um repositório próprio desde o início — o critério de
+"promoção a satélite" já vale de saída, porque esses temas são reusados diretamente em
+várias disciplinas/projetos de pesquisa (ex.: `Identificacao` é referenciado por
+ControleCC2CC, ControleDFIG, DataDrivenControl, Projeto-Aeropendulo, MScOseias).
+
+Temas definidos (ver `index.qmd` para o estado atual de cada um):
+
+- Identificação de Sistemas → [Identificacao](https://raphateixeira.github.io/Identificacao/)
+- Controle Linear → repositório ainda não criado
+- Controle MPC → repositório ainda não criado
+- Conversores de Energia → repositório ainda não criado
+
+Ao criar o repositório de um novo tema, atualizar o link correspondente em `index.qmd`.
+
 ## Não versionar
 
 `_site/`, `.quarto/`, `__pycache__/`, `.ipynb_checkpoints/`, e `Livros/` (PDFs dos livros —

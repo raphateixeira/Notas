@@ -20,3 +20,13 @@ Notas de leitura organizadas por livro. Veja a [Estante](estante.qmd) para o sta
 leitura de cada livro, o menu **Livros** na barra de navegação para acessar diretamente
 as notas de um livro específico, ou [Recomendações](Recomendacoes.qmd) para livros, sites
 e canais sugeridos para aprofundamento.
+
+## Fundamentos
+
+Notas de fundamentação teórica geral, organizadas por tema — não ligadas a um livro
+específico. Cada tema com material suficiente ganha um repositório próprio:
+
+- **Identificação de Sistemas** — [Identificacao](https://raphateixeira.github.io/Identificacao/): ajuste de reta, projeto de sinais PRBS, modelos ARX e identificação de um modelo Linear Invariante no Tempo (LIT), por mínimos quadrados.
+- **Controle Linear** — em construção.
+- **Controle MPC** — em construção.
+- **Conversores de Energia** — em construção.
