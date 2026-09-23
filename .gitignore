@@ -5,5 +5,9 @@ __pycache__/
 **/*.quarto_ipynb
 .DS_Store
 
-# PDFs dos livros (material com direitos autorais, uso pessoal apenas)
+# PDFs/ebooks dos livros: NUNCA versionar (direitos autorais, uso pessoal apenas).
+# Os PDFs ficam só localmente em /Livros/.
 /Livros/
+*.pdf
+*.epub
+*.djvu

@@ -1,0 +1,205 @@
+---
+title: "Vetores no Espaço"
+subtitle: "Capítulo 11 — Vectors and the Geometry of Space (§11.2)"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "UFPA - CAMTUC - FEE"
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Sumário {.smaller}
+
+- **11.2.1** Coordenadas no espaço
+- **11.2.2** Distância e a equação de uma esfera
+- **11.2.3** Vetores no espaço
+- **11.2.4** Vetores paralelos e pontos colineares
+- **11.2.5** Notação padrão e uma aplicação: força
+- **Derivações** da fórmula da distância e do Exemplo 7
+
+# 11.2.1 — Coordenadas no Espaço
+
+## O sistema de coordenadas tridimensional
+
+O sistema de coordenadas tridimensional é construído passando um eixo $z$ perpendicular aos eixos $x$ e $y$ pela origem. Tomados aos pares, os eixos determinam três **planos coordenados** — o plano $xy$, o plano $xz$ e o plano $yz$ — que separam o espaço em oito **octantes**; o primeiro octante é aquele em que as três coordenadas são positivas.
+
+![Figura 11.14 — O sistema de coordenadas tridimensional.](imgs/Fig11p14.png){width="42%" fig-align="center"}
+
+## Pontos como triplas ordenadas
+
+Um ponto $P$ no espaço é determinado por uma tripla ordenada $(x,y,z)$, onde
+$$x = \text{dist. direcionada do plano } yz \text{ a } P, \quad y = \text{dist. direcionada do plano } xz \text{ a } P, \quad z = \text{dist. direcionada do plano } xy \text{ a } P.$$
+
+![Figura 11.15 — Pontos no sistema de coordenadas tridimensional são representados por triplas ordenadas.](imgs/Fig11p15.png)
+
+## Orientação destrógira e levógira
+
+Um sistema de coordenadas tridimensional pode ter orientação **destrógira** (*right-handed*) ou **levógira** (*left-handed*). Para determinar a orientação, imagine-se na origem, com os braços apontando nas direções positivas de $x$ e $y$ e o eixo $z$ apontando para cima: o sistema é destrógiro ou levógiro dependendo de qual mão aponta ao longo do eixo $x$. Este livro trabalha exclusivamente com o sistema destrógiro.
+
+![Figura 11.16 — Sistemas destrógiro e levógiro.](imgs/Fig11p16.png){width="55%" fig-align="center"}
+
+# 11.2.2 — Distância e a Equação de uma Esfera
+
+## A fórmula da distância no espaço
+
+Muitas fórmulas de $\mathbb{R}^2$ se estendem a três dimensões. Para a distância entre dois pontos no espaço, aplica-se o Teorema de Pitágoras duas vezes: uma vez no plano $xy$ para obter a distância horizontal $\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$, e outra vez combinando essa distância horizontal com a diferença vertical $|z_2-z_1|$:
+
+$$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}. \qquad \text{(Fórmula da distância)}$$
+
+## Exemplo 1 — distância entre dois pontos no espaço
+
+A distância entre $(2,-1,3)$ e $(1,0,-2)$ é
+$$d = \sqrt{(1-2)^2+(0+1)^2+(-2-3)^2} = \sqrt{1+1+25} = \sqrt{27} = 3\sqrt{3}.$$
+
+## A equação de uma esfera
+
+Uma **esfera** de centro $(x_0,y_0,z_0)$ e raio $r$ é o conjunto de todos os pontos $(x,y,z)$ cuja distância a $(x_0,y_0,z_0)$ é $r$, o que dá a equação padrão
+$$(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2 = r^2. \qquad \text{(Equação da esfera)}$$
+O ponto médio do segmento entre $(x_1,y_1,z_1)$ e $(x_2,y_2,z_2)$ tem coordenadas
+$$\left(\frac{x_1+x_2}{2},\, \frac{y_1+y_2}{2},\, \frac{z_1+z_2}{2}\right). \qquad \text{(Fórmula do ponto médio)}$$
+
+::: {layout-ncol=2}
+![Figura 11.17 — A distância entre dois pontos no espaço.](imgs/Fig11p17.png)
+
+![Figura 11.18 — A esfera de centro $(x_0,y_0,z_0)$ e raio $r$.](imgs/Fig11p18.png)
+:::
+
+## Exemplo 2 — equação de uma esfera
+
+Encontre a equação padrão da esfera que tem $(5,-2,3)$ e $(0,4,-3)$ como extremidades de um diâmetro. Pelo ponto médio, o centro é
+$$\left(\frac{5+0}{2}, \frac{-2+4}{2}, \frac{3-3}{2}\right) = \left(\frac{5}{2}, 1, 0\right).$$
+Pela fórmula da distância, o raio é
+$$r = \sqrt{\left(0-\tfrac{5}{2}\right)^2 + (4-1)^2 + (-3-0)^2} = \sqrt{\tfrac{25}{4}+18} = \sqrt{\tfrac{97}{4}} = \frac{\sqrt{97}}{2}.$$
+
+$$\boxed{\left(x-\tfrac{5}{2}\right)^2 + (y-1)^2 + z^2 = \tfrac{97}{4}}$$
+
+# 11.2.3 — Vetores no Espaço
+
+## Componentes e vetores unitários padrão
+
+No espaço, vetores são denotados por triplas ordenadas $\mathbf{v} = \langle v_1,v_2,v_3\rangle$, o vetor nulo é $\mathbf{0} = \langle 0,0,0\rangle$, e os vetores unitários padrão são $\mathbf{i}=\langle1,0,0\rangle$, $\mathbf{j}=\langle0,1,0\rangle$, $\mathbf{k}=\langle0,0,1\rangle$ na direção do eixo $z$ positivo, com
+$$\mathbf{v} = v_1\mathbf{i} + v_2\mathbf{j} + v_3\mathbf{k}.$$
+
+![Figura 11.19 — Os vetores unitários padrão no espaço.](imgs/Fig11p19.png)
+
+## Forma de componentes no espaço
+
+Se $\mathbf{v}$ é representado pelo segmento orientado de $P(p_1,p_2,p_3)$ a $Q(q_1,q_2,q_3)$, sua forma de componentes é obtida subtraindo as coordenadas do ponto inicial das do ponto terminal:
+$$\mathbf{v} = \langle v_1,v_2,v_3\rangle = \langle q_1-p_1,\, q_2-p_2,\, q_3-p_3\rangle.$$
+
+![Figura 11.20 — $\mathbf v = \langle q_1-p_1, q_2-p_2, q_3-p_3\rangle$.](imgs/Fig11p20.png)
+
+## Definição: vetores no espaço
+
+::: {.callout-note title="Definição"}
+Sejam $\mathbf{u}=\langle u_1,u_2,u_3\rangle$ e $\mathbf{v}=\langle v_1,v_2,v_3\rangle$ vetores no espaço e $c$ um escalar.
+
+1. Igualdade: $\mathbf{u}=\mathbf{v}$ sse $u_1=v_1$, $u_2=v_2$ e $u_3=v_3$.
+2. Forma de componentes: se $\mathbf{v}$ vai de $P(p_1,p_2,p_3)$ a $Q(q_1,q_2,q_3)$, então $\mathbf{v} = \langle q_1-p_1,\, q_2-p_2,\, q_3-p_3\rangle$.
+3. Comprimento: $\|\mathbf{v}\| = \sqrt{v_1^2+v_2^2+v_3^2}$.
+4. Vetor unitário na direção de $\mathbf{v}$: $\dfrac{\mathbf{v}}{\|\mathbf{v}\|} = \dfrac{1}{\|\mathbf{v}\|}\langle v_1,v_2,v_3\rangle$, $\mathbf{v}\neq\mathbf{0}$.
+5. Soma: $\mathbf{v}+\mathbf{u} = \langle v_1+u_1,\, v_2+u_2,\, v_3+u_3\rangle$.
+6. Múltiplo escalar: $c\mathbf{v} = \langle cv_1, cv_2, cv_3\rangle$.
+:::
+
+As propriedades de adição vetorial e multiplicação por escalar do Teorema 11.1 (§11.1) continuam válidas para vetores no espaço — a álgebra é idêntica, só com uma coordenada a mais.
+
+## Exemplo 3 — forma de componentes de um vetor no espaço
+
+Encontre a forma de componentes e a magnitude do vetor $\mathbf{v}$ com ponto inicial $(-2,3,1)$ e terminal $(0,-4,4)$; depois encontre um vetor unitário na direção de $\mathbf{v}$.
+
+$$\mathbf{v} = \langle 0-(-2),\, -4-3,\, 4-1\rangle = \langle 2,-7,3\rangle, \qquad \|\mathbf{v}\| = \sqrt{2^2+(-7)^2+3^2} = \sqrt{62},$$
+$$\mathbf{u} = \frac{\mathbf{v}}{\|\mathbf{v}\|} = \frac{1}{\sqrt{62}}\langle 2,-7,3\rangle = \left\langle \frac{2}{\sqrt{62}}, \frac{-7}{\sqrt{62}}, \frac{3}{\sqrt{62}} \right\rangle.$$
+
+# 11.2.4 — Vetores Paralelos e Pontos Colineares
+
+## Definição: vetores paralelos
+
+::: {.callout-note title="Definição"}
+Dois vetores não nulos $\mathbf{u}$ e $\mathbf{v}$ são **paralelos** se existe um escalar $c$ tal que $\mathbf{u} = c\mathbf{v}$.
+:::
+
+Na Figura 11.21, $\mathbf{u}$, $\mathbf{v}$ e $\mathbf{w}$ são paralelos porque $\mathbf{u}=2\mathbf{v}$ e $\mathbf{w}=-\mathbf{v}$.
+
+![Figura 11.21 — Vetores paralelos.](imgs/Fig11p21.png){width="45%" fig-align="center"}
+
+## Exemplo 4 — vetores paralelos
+
+O vetor $\mathbf{w}$ tem ponto inicial $(2,-1,3)$ e terminal $(-4,7,5)$, logo $\mathbf{w} = \langle -4-2,\, 7-(-1),\, 5-3\rangle = \langle -6,8,2\rangle$. Qual dos vetores a seguir é paralelo a $\mathbf{w}$?
+
+a. $\mathbf{u}=\langle3,-4,-1\rangle$: como $\mathbf{u} = -\tfrac12\langle-6,8,2\rangle = -\tfrac12\mathbf{w}$, $\mathbf{u}$ é paralelo a $\mathbf{w}$.
+b. $\mathbf{v}=\langle12,-16,4\rangle$: procurando $c$ tal que $\langle12,-16,4\rangle = c\langle-6,8,2\rangle$, obtém-se $c=-2$ (1ª componente), $c=-2$ (2ª) e $c=2$ (3ª) — inconsistente, logo $\mathbf{v}$ **não** é paralelo a $\mathbf{w}$.
+
+## Exemplo 5 — pontos colineares
+
+Determine se $P(1,-2,3)$, $Q(2,1,0)$ e $R(4,7,-6)$ são colineares. Os vetores com ponto inicial comum $P$ são
+$$\overrightarrow{PQ} = \langle 2-1,\, 1-(-2),\, 0-3\rangle = \langle1,3,-3\rangle, \qquad \overrightarrow{PR} = \langle 4-1,\, 7-(-2),\, -6-3\rangle = \langle3,9,-9\rangle.$$
+Como $\overrightarrow{PR} = 3\,\overrightarrow{PQ}$, os dois vetores são paralelos e, tendo ponto inicial comum, $P$, $Q$ e $R$ estão sobre a mesma reta.
+
+![Figura 11.22 — Os pontos $P$, $Q$ e $R$ estão sobre a mesma reta.](imgs/Fig11p22.png){width="50%" fig-align="center"}
+
+# 11.2.5 — Notação Padrão e uma Aplicação: Força
+
+## Exemplo 6 — notação de vetores unitários padrão
+
+a. $\mathbf{v} = 4\mathbf{i}-5\mathbf{k} = \langle4,0,-5\rangle$ (a componente em $\mathbf{j}$ é $0$, pois está ausente).
+b. Para $\mathbf{v}=7\mathbf{i}-\mathbf{j}+3\mathbf{k}$ com ponto inicial $P(-2,3,5)$, procura-se $Q(q_1,q_2,q_3)$ tal que $q_1-(-2)=7$, $q_2-3=-1$, $q_3-5=3$ — donde $Q=(5,2,8)$.
+
+Vetores também representam **força**, por terem magnitude e direção; se várias forças atuam sobre um objeto, a força resultante é a soma vetorial das forças.
+
+## Exemplo 7 — medindo força
+
+Uma câmera de TV de $120$ libras é sustentada por um tripé. As pernas tocam o chão em $Q_1(0,-1,0)$, $Q_2\!\left(\tfrac{\sqrt3}{2},\tfrac12,0\right)$ e $Q_3\!\left(-\tfrac{\sqrt3}{2},\tfrac12,0\right)$, com o topo em $P(0,0,4)$. As direções das forças $\mathbf{F}_1,\mathbf{F}_2,\mathbf{F}_3$ em cada perna são
+$$\overrightarrow{PQ_1} = \langle0,-1,-4\rangle, \quad \overrightarrow{PQ_2} = \left\langle\tfrac{\sqrt3}{2},\tfrac12,-4\right\rangle, \quad \overrightarrow{PQ_3} = \left\langle-\tfrac{\sqrt3}{2},\tfrac12,-4\right\rangle.$$
+
+## Exemplo 7 — medindo força (continuação)
+
+Como as três pernas têm o mesmo comprimento e suportam a carga igualmente, $\|\mathbf{F}_1\|=\|\mathbf{F}_2\|=\|\mathbf{F}_3\|$, logo existe uma constante $c$ com $\mathbf{F}_1=c\langle0,-1,-4\rangle$ etc. A força total é $\mathbf{F}=\langle0,0,-120\rangle$ e $\mathbf{F}=\mathbf{F}_1+\mathbf{F}_2+\mathbf{F}_3$ implica que cada força tem componente vertical $-40$, ou seja $c(-4)=-40$ e $c=10$. Portanto
+
+$$\boxed{\mathbf{F}_1 = \langle0,-10,-40\rangle, \qquad \mathbf{F}_2 = \langle5\sqrt3,5,-40\rangle, \qquad \mathbf{F}_3 = \langle-5\sqrt3,5,-40\rangle.}$$
+
+![Figura 11.23 — Tripé sustentando uma câmera de TV.](imgs/Fig11p23.png){width="55%" fig-align="center"}
+
+# Derivações
+
+## Fórmula da distância no espaço
+
+Sejam $(x_1,y_1,z_1)$ e $(x_2,y_2,z_2)$. No plano $xy$, o ponto $(x_2,y_2,z_1)$ está à distância $\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$ de $(x_1,y_1,z_1)$ pelo Teorema de Pitágoras em duas dimensões. O segmento de $(x_1,y_1,z_1)$ a $(x_2,y_2,z_2)$ é a hipotenusa de um segundo triângulo retângulo, cujos catetos são esse valor e $|z_2-z_1|$ (o cateto vertical, perpendicular ao plano $xy$).
+
+## Fórmula da distância no espaço (continuação)
+
+Aplicando o Teorema de Pitágoras outra vez,
+$$d^2 = \left(\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\right)^2 + (z_2-z_1)^2 = (x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2,$$
+donde a fórmula da distância. A equação da esfera segue diretamente: $(x,y,z)$ está na esfera de centro $(x_0,y_0,z_0)$ e raio $r$ exatamente quando sua distância ao centro é $r$, isto é, quando $d^2=r^2$ na fórmula acima com $(x_1,y_1,z_1)=(x_0,y_0,z_0)$.
+
+## Consistência do Exemplo 7
+
+As três pernas têm o mesmo comprimento
+$$\|\overrightarrow{PQ_i}\| = \sqrt{(\pm\sqrt3/2)^2+(1/2)^2+16} = \sqrt{3/4+1/4+16}=\sqrt{17}$$
+(a mesma para $i=1,2,3$, confirmando $\|\mathbf{F}_1\|=\|\mathbf{F}_2\|=\|\mathbf{F}_3\|$ independentemente de $c$). Somando as três forças encontradas,
+$$\mathbf{F}_1+\mathbf{F}_2+\mathbf{F}_3 = \langle 0+5\sqrt3-5\sqrt3,\; -10+5+5,\; -40-40-40\rangle = \langle0,0,-120\rangle = \mathbf{F},$$
+confirmando a solução.
+
+## Resumo da aula {.smaller}
+
+- **11.2.1** — Sistema de coordenadas $(x,y,z)$, planos coordenados, oito octantes, orientação destrógira.
+- **11.2.2** — Fórmula da distância e equação da esfera no espaço (Pitágoras aplicado duas vezes).
+- **11.2.3** — Vetores $\mathbf v=\langle v_1,v_2,v_3\rangle$ no espaço; mesmas operações e propriedades de §11.1, com uma coordenada a mais.
+- **11.2.4** — Vetores paralelos ($\mathbf u=c\mathbf v$) e teste de colinearidade de três pontos.
+- **11.2.5** — Notação $\mathbf i,\mathbf j,\mathbf k$; aplicação: decomposição da força de um tripé.
+- Próximas notas — §11.3 (produto escalar) dá o ângulo entre vetores no espaço; §11.5 (retas e planos) reusa a forma de componentes e os pontos colineares desta nota.
+
+## Referências
+
+[@larson2010multivariablecalculus], capítulo 11, §11.2.

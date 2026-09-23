@@ -1,0 +1,62 @@
+---
+title: "Controle de Conversores de Potência"
+subtitle: "Capítulo 1 — Introdução"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Onipresença dos conversores de potência
+
+:::: {.columns}
+
+::: {.column width="55%"}
+> Os conversores eletrônicos de potência são amplamente utilizados em
+> praticamente todos os aspectos do mundo moderno atual, incluindo
+> computadores, sistemas residenciais inteligentes, veículos elétricos (VEs),
+> trens, embarcações, aeronaves, microrredes, robôs, conversão e integração de
+> energias renováveis, e diversas aplicações industriais.
+>
+> — Komurcugil et al. [@komurcugil2023advancedcontrol]
+:::
+
+::: {.column width="45%"}
+::: {.callout-note title="Figura"}
+*Espaço reservado para figura/imagem ilustrando as aplicações de conversores de
+potência (computadores, casas inteligentes, VEs, trens, embarcações,
+aeronaves, microrredes, robôs, energias renováveis, indústria).*
+
+<!-- ![](../imgs/NOME_DA_IMAGEM.png) -->
+:::
+:::
+
+::::
+
+## Função e classificação dos conversores
+
+Segundo Komurcugil et al. [@komurcugil2023advancedcontrol], a função principal
+de um conversor de potência é converter a energia elétrica de uma forma para
+outra. De modo geral, existem quatro categorias de conversores de potência:
+
+- **CC–CC** (DC–DC)
+- **CA–CC** (AC–DC)
+- **CC–CA** (DC–AC)
+- **CA–CA** (AC–AC)
+
+## Referências
+
+- Komurcugil, H., Bayhan, S., Guzman, R., Malinowski, M., Abu-Rub, H. *Advanced Control of
+  Power Converters: Techniques and Matlab/Simulink Implementation*. Wiley-IEEE Press, 2023.
+  [@komurcugil2023advancedcontrol]

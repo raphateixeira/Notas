@@ -1,0 +1,271 @@
+---
+title: "Curvas Diferenciáveis"
+subtitle: "Geometria Diferencial — Capítulo 1 (§1.1–1.6)"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "UFPA - NDAE - PPCA "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Sumário {.smaller}
+
+- **1.1** Curva regular e comprimento de arco
+- **1.2** Curvatura e triedro de Frenet
+- **1.3** Curvas planas
+- **1.5** Curvas convexas
+- **1.6** Curvas de largura constante (início)
+
+## Contexto
+
+- O Capítulo 1 revisa curvas parametrizadas em $\mathbb{R}^n$ antes de restringir a atenção a $\mathbb{R}^3$.
+- Segundo o prefácio, §1.1–1.3 cobrem material que o leitor provavelmente já conhece (comprimento de arco, curvatura, triedro de Frenet).
+- §1.4–1.8 são tópicos opcionais para o curso: contato de curvas, curvas convexas, curvas de largura constante, teorema dos quatro vértices e desigualdade isoperimétrica.
+- Esta nota cobre §1.1 a §1.6 (até o início de curvas de largura constante). §1.7 (Teorema dos Quatro Vértices) e §1.8 (Desigualdade Isoperimétrica) ficam para uma nota posterior.
+
+# 1.1 — Curva regular e comprimento de arco
+
+## Curva regular
+
+::: {.callout-note title="Definição"}
+Uma curva parametrizada $\alpha: I \to \mathbb{R}^n$ é **regular** quando $\alpha'(t) \neq 0$ para todo $t$.
+:::
+
+- A **velocidade escalar** é $v(t) = |\alpha'(t)|$.
+- A **função comprimento de arco** é
+$$
+S(t) = \int_a^t v(r)\,dr.
+$$
+
+## Proposição 1.1.1 — o segmento de reta é o caminho mais curto
+
+- Entre dois pontos, o segmento de reta é o caminho mais curto — o resultado se demonstra via a **desigualdade de Cauchy-Schwarz**.
+
+## Reparametrização por comprimento de arco
+
+::: {.callout-note title="Definição"}
+Toda curva regular admite uma reparametrização $\tilde\alpha = \alpha \circ h$ por comprimento de arco, isto é, com $|\tilde\alpha'(s)| \equiv 1$, tomando $h = S^{-1}$.
+:::
+
+**Derivação.** Como $S'(t) = v(t) > 0$, $S$ é um difeomorfismo crescente de $[a,b]$ sobre $[0, l(\alpha)]$. Definindo $h = S^{-1}$ e $\tilde\alpha(s) = \alpha(h(s))$, a regra da cadeia dá
+$$
+\tilde\alpha'(s) = h'(s)\,\alpha'(h(s)) = \alpha'(t)/v(t) \quad \text{com } t = h(s),
+$$
+logo
+$$
+\boxed{|\tilde\alpha'(s)| = 1 \ \ \text{para todo } s}
+$$
+— a curva reparametrizada tem velocidade escalar unitária.
+
+# 1.2 — Curvatura e triedro de Frenet
+
+## Vetor tangente e curvatura
+
+Para $\alpha: I \to \mathbb{R}^3$:
+
+::: {.callout-note title="Definição"}
+- O **vetor tangente unitário** é $\tau(t) = \alpha'(t)/v(t)$.
+- A **curvatura** é
+$$
+k(t) = \frac{|\tau'(t)|}{v(t)}.
+$$
+:::
+
+- A curvatura é uma quantidade independente da parametrização — só depende do ponto $\alpha(t)$, não do sentido de percurso.
+
+## Triedro de Frenet
+
+Quando $k(t) \neq 0$:
+
+::: {.callout-note title="Definição"}
+- A **normal principal** é $\mathbf{n}(t) = \tau'(t)/|\tau'(t)|$.
+- A **binormal** é $\mathbf{b}(t) = \tau(t) \times \mathbf{n}(t)$.
+- A tripla $(\tau, \mathbf{n}, \mathbf{b})$ é o **triedro de Frenet**.
+:::
+
+## Torção
+
+::: {.callout-note title="Definição"}
+A **torção** $\nu(t)$ mede a variação do plano osculador (gerado por $\tau$ e $\mathbf{n}$) e é definida por
+$$
+\mathbf{b}'(t) = -\nu(t)\,v(t)\,\mathbf{n}(t).
+$$
+:::
+
+## Fórmulas de Frenet
+
+Parametrizando por comprimento de arco, valem as **fórmulas de Frenet**:
+
+$$
+\boxed{\tau' = k\,\mathbf{n}, \qquad \mathbf{n}' = -k\,\tau - \nu\,\mathbf{b}, \qquad \mathbf{b}' = \nu\,\mathbf{n}}
+$$
+
+- Uma curva é planar sse tem torção constante nula (Proposição 1.2.1).
+
+## Teorema fundamental das curvas
+
+::: {.callout-important title="Teorema 1.2.2 + Nota 1.2.3"}
+Dadas funções $k, \nu$ (com $k > 0$), existe uma curva parametrizada por comprimento de arco com essas curvatura e torção, **única a menos de movimento rígido de $\mathbb{R}^3$**.
+:::
+
+- O Teorema 1.2.2 dá a **unicidade**.
+- A Nota 1.2.3 dá a **existência**.
+- Juntos, formam o *teorema fundamental das curvas*.
+
+## Exemplo — curvatura constante da hélice
+
+O texto afirma que a hélice $\alpha(t) = (\cos t, \sin t, t)$ tem curvatura constante, sem dar o valor. Refazendo a conta:
+
+$$
+\alpha'(t) = (-\sin t, \cos t, 1) \quad\Rightarrow\quad v(t) = |\alpha'(t)| = \sqrt{2} \ \ \text{(constante)}.
+$$
+
+Logo $\tau(t) = \alpha'(t)/\sqrt{2}$ e, como $v$ é constante,
+$$
+\tau'(t) = \alpha''(t)/\sqrt{2} = (-\cos t, -\sin t, 0)/\sqrt{2}, \qquad |\tau'(t)| = 1/\sqrt{2}.
+$$
+
+## Exemplo — curvatura constante da hélice (continuação)
+
+Portanto
+$$
+k(t) = \frac{|\tau'(t)|}{v(t)} = \frac{1/\sqrt2}{\sqrt2} = \frac{1}{2},
+$$
+
+$$
+\boxed{k \equiv \tfrac{1}{2} \ \ \text{— constante}}
+$$
+
+confirmando a afirmação do texto (Fig. 1.1: exemplo de curva de curvatura constante que **não** é planar).
+
+# 1.3 — Curvas planas
+
+## Curvatura com sinal
+
+Em $\mathbb{R}^2$ a curvatura ganha sinal:
+
+::: {.callout-note title="Definição"}
+Com $\tau(s) = (\cos\varphi(s), \sin\varphi(s))$ o ângulo orientado do tangente com o eixo $x$, tem-se
+$$
+k(s) = \varphi'(s).
+$$
+:::
+
+- O sinal indica se a curva vira à esquerda ou à direita.
+
+## Teorema fundamental — versão planar
+
+::: {.callout-important title="Teorema 1.3.2"}
+Toda função $k(s)$ é a curvatura (com sinal) de alguma curva plana, **única a menos de movimento rígido do plano**.
+:::
+
+- É o análogo planar do teorema fundamental das curvas (§1.2).
+
+# 1.5 — Curvas convexas
+
+## Índice de rotação
+
+Para uma curva fechada e regular:
+
+::: {.callout-note title="Definição"}
+O **índice de rotação** é
+$$
+\Re(\alpha) = \frac{1}{2\pi}\int_a^b k(s)\,ds.
+$$
+:::
+
+- Conta quantas voltas o vetor tangente dá.
+
+## Teorema 1.5.1 — caracterização de convexidade
+
+$$
+\boxed{\text{curva fechada convexa} \iff k \text{ não muda de sinal e } \Re(\alpha) = \pm 1}
+$$
+
+- Toda curva convexa é **simples**.
+
+# 1.6 — Curvas de largura constante (início)
+
+## Largura de uma curva fechada
+
+::: {.callout-note title="Definição"}
+A **largura** de uma curva fechada na direção $\mathbf{v}$ é
+$$
+\mathcal{L}(\mathbf{v}) = h(\mathbf{v}) + h(-\mathbf{v}), \qquad h(\mathbf{v}) = \max_s \langle \alpha(s), \mathbf{v}\rangle.
+$$
+:::
+
+## Proposição 1.6.1
+
+- Para qualquer curva fechada, o **diâmetro coincide com a largura máxima**.
+
+## Implementação — curvatura numérica
+
+Curvatura da elipse $\alpha(t) = (a\cos t, b\sin t)$ (Exercício 6(b), §1.3) e verificação numérica da curvatura constante da hélice:
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Curvatura da elipse alpha(t) = (a cos t, b sin t), Exercício 6(b), §1.3:
+# k(t) = ab / (a^2 sin^2 t + b^2 cos^2 t)^{3/2}
+a, b = 2.0, 1.0
+t = np.linspace(0, 2 * np.pi, 400)
+k_ellipse = a * b / (a**2 * np.sin(t) ** 2 + b**2 * np.cos(t) ** 2) ** 1.5
+
+# Curvatura da hélice (cos t, sin t, t): constante 1/2 (derivação acima),
+# verificada numericamente por diferenças finitas.
+def helix(t):
+    return np.column_stack([np.cos(t), np.sin(t), t])
+
+th = np.linspace(0, 4 * np.pi, 2000)
+dt = th[1] - th[0]
+c = helix(th)
+v1 = np.gradient(c, dt, axis=0)
+v2 = np.gradient(v1, dt, axis=0)
+speed = np.linalg.norm(v1, axis=1)
+tangent = v1 / speed[:, None]
+dtangent = np.gradient(tangent, dt, axis=0)
+k_helix = np.linalg.norm(dtangent, axis=1) / speed
+
+fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+axes[0].plot(t, k_ellipse, color="C1")
+axes[0].set_title("Curvatura da elipse (a=2, b=1)")
+axes[0].set_xlabel("t")
+axes[0].set_ylabel("k(t)")
+axes[0].grid()
+
+axes[1].plot(th, k_helix, color="C0")
+axes[1].axhline(0.5, color="k", linestyle="--", linewidth=1, label="k=1/2 (analítico)")
+axes[1].set_title("Curvatura da hélice (cos t, sin t, t)")
+axes[1].set_xlabel("t")
+axes[1].set_ylabel("k(t)")
+axes[1].legend()
+axes[1].grid()
+
+plt.tight_layout()
+plt.show()
+```
+
+## Resumo da aula {.smaller}
+
+- **1.1** — Curva regular, velocidade escalar $v(t)$, comprimento de arco $S(t)$; reparametrização por comprimento de arco.
+- **1.2** — Vetor tangente $\tau$, curvatura $k$, triedro de Frenet $(\tau,\mathbf{n},\mathbf{b})$, torção $\nu$, fórmulas de Frenet e teorema fundamental das curvas.
+- **1.3** — Curvatura com sinal em $\mathbb{R}^2$: $k(s) = \varphi'(s)$; teorema fundamental planar.
+- **1.5** — Índice de rotação $\Re(\alpha)$; caracterização de curvas fechadas convexas (Teorema 1.5.1).
+- **1.6** — Largura $\mathcal{L}(\mathbf{v})$ de uma curva fechada; diâmetro = largura máxima (Proposição 1.6.1).
+
+## Referências
+
+[@ventura2024differentialgeometry], capítulo 1, §1.1–1.6.

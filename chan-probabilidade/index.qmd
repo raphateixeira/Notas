@@ -1,0 +1,18 @@
+---
+title: "Probabilidade — Chan"
+subtitle: "Notas de leitura em slides"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Introduction to Probability for Data Science*
+**Autor:** Stanley H. Chan
+**Edição:** 2ª ed., Michigan Publishing, 2026
+
+Notas de Aula:
+
+* Capítulo 1: [Séries Infinitas — Background Matemático](Cap01MathBack.qmd)
+* Capítulo 2: [Probabilidades](Cap02Probabilidades01.qmd)

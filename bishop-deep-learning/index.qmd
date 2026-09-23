@@ -1,0 +1,21 @@
+---
+title: "Deep Learning"
+subtitle: "Foundations and Concepts"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Deep Learning: Foundations and Concepts*
+**Autores:** Christopher M. Bishop, Hugh Bishop
+**Edição:** Springer, 2024
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides. Implementações de código e experimentos substanciais em Deep Learning têm repositório próprio: veja o satélite [DeepLearning](https://raphateixeira.github.io/DeepLearning/).
+:::
+
+Notas de Leitura:
+
+* Capítulo 1: [Notas de leitura (rascunho)](BDL01Exemplo.qmd)

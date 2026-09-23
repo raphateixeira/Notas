@@ -1,0 +1,17 @@
+---
+title: "Otimização — Brunton"
+subtitle: "Notas de leitura em slides"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control*
+**Autor:** Steven L. Brunton
+**Edição:** Cambridge University Press, 2026
+
+Notas de leitura em formato de slides (Quarto revealjs):
+
+* Capítulo 1: [Optimization Bootcamp](01-OptimizationBootcamp.qmd)

@@ -1,0 +1,21 @@
+---
+title: "Controle de Conversores de Potência"
+subtitle: "Notas de leitura"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Advanced Control of Power Converters: Techniques and Matlab/Simulink Implementation*
+**Autores:** Hasan Komurcugil, Sertac Bayhan, Ramon Guzman, Mariusz Malinowski, Haitham Abu-Rub
+**Edição:** Wiley-IEEE Press, 2023
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+Notas de Leitura:
+
+* Capítulo 1: [Controle de Conversores de Potência](ACPC01Exemplo.qmd)

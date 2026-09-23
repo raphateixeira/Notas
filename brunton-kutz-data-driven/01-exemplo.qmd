@@ -1,0 +1,91 @@
+---
+title: "Título da nota"
+subtitle: "Capítulo 1 — Assunto"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "UFPA - NDAE - PPCA "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Sumário {.smaller}
+
+- **Contexto** — onde este capítulo se encaixa no livro e por que interessa
+- **Ideias centrais** — enunciados principais, em português, com notação própria
+- **Derivações** — passagens que exigiram trabalho para entender, por extenso
+- **Implementação** — código executável que ilustra as ideias centrais
+- **Conexões** — outras notas do repositório e linhas de pesquisa relacionadas
+- **Exercícios selecionados** — resolução dos exercícios do capítulo que valeram a pena registrar
+- **Referências**
+
+# Contexto
+
+## Contexto
+
+::: {.callout-tip title="Nota"}
+Onde este capítulo se encaixa no livro e por que interessa — conteúdo ainda não redigido para esta nota.
+:::
+
+# Ideias centrais
+
+## Ideias centrais
+
+::: {.callout-tip title="Nota"}
+Enunciados principais deste capítulo, em português e com notação própria — conteúdo ainda não redigido para esta nota.
+:::
+
+# Derivações
+
+## Derivações
+
+::: {.callout-tip title="Nota"}
+Passagens que exigiram trabalho para entender, escritas por extenso — conteúdo ainda não redigido para esta nota.
+:::
+
+# Implementação
+
+## Implementação
+
+Código executável que ilustra as ideias centrais desta nota, incluindo a geração de ao menos uma figura:
+
+```{python}
+# TODO: código executável que ilustra as ideias centrais desta nota,
+# incluindo a geração de ao menos uma figura.
+```
+
+# Conexões
+
+## Conexões
+
+::: {.callout-tip title="Nota"}
+Links para outras notas deste repositório e para as linhas de pesquisa (controle preditivo, DeePC, Koopman, eletrônica de potência) — conteúdo ainda não redigido para esta nota.
+:::
+
+# Exercícios selecionados
+
+## Exercícios selecionados
+
+::: {.callout-tip title="Nota"}
+Resolução dos exercícios do capítulo que valeram a pena registrar — conteúdo ainda não redigido para esta nota.
+:::
+
+## Resumo da aula {.smaller}
+
+::: {.callout-tip title="Nota"}
+Esta nota está em estágio de rascunho: o capítulo ainda não foi lido/redigido em detalhe. O resumo será escrito quando as seções acima forem preenchidas.
+:::
+
+## Referências
+
+- Brunton, S. L. & Kutz, J. N. — *Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control*, 2ª ed., Cambridge University Press, 2022. [@brunton2022datadriven]

@@ -1,0 +1,21 @@
+---
+title: "Linear Algebra and Learning from Data"
+subtitle: "Notas de leitura"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Linear Algebra and Learning from Data*
+**Autor:** Gilbert Strang
+**Edição:** Wellesley-Cambridge Press, 2019
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+Notas de Leitura:
+
+* Capítulo 1: [Notas de leitura (rascunho)](SLA01Exemplo.qmd)

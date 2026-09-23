@@ -1,0 +1,107 @@
+---
+title: "Deep Learning — Notas de Leitura"
+subtitle: "Capítulo 1 (rascunho)"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "UFPA - NDAE - PPCA "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Sumário {.smaller}
+
+- **Contexto** — onde este capítulo se encaixa no livro e por que interessa
+- **Ideias centrais** — enunciados principais do capítulo
+- **Derivações** — passagens que exigiram trabalho para entender
+- **Implementação** — código ilustrativo das ideias centrais
+- **Conexões** — relação com outras notas e linhas de pesquisa
+- **Exercícios selecionados** — exercícios do capítulo que valeram a pena registrar
+
+# Contexto
+
+## Contexto
+
+::: {.callout-note title="Nota"}
+Rascunho — leitura do capítulo ainda em andamento. Onde este capítulo se encaixa no livro
+e por que interessa será preenchido após a leitura completa.
+:::
+
+# Ideias centrais
+
+## Ideias centrais
+
+::: {.callout-note title="Nota"}
+Rascunho — enunciados principais em português, com notação própria, serão adicionados
+aqui após a leitura do capítulo.
+:::
+
+# Derivações
+
+## Derivações
+
+::: {.callout-note title="Nota"}
+Rascunho — passagens que exigiram trabalho para entender serão escritas por extenso
+aqui.
+:::
+
+# Implementação
+
+## Implementação
+
+::: {.callout-note title="Nota"}
+Rascunho — código executável que ilustra as ideias centrais desta nota, incluindo a
+geração de ao menos uma figura, será incluído aqui.
+:::
+
+```python
+# TODO: código executável que ilustra as ideias centrais desta nota,
+# incluindo a geração de ao menos uma figura.
+```
+
+# Conexões
+
+## Conexões
+
+::: {.callout-note title="Nota"}
+Rascunho — links para outras notas deste repositório e para as linhas de pesquisa
+(controle preditivo, DeePC, Koopman, eletrônica de potência) serão adicionados aqui.
+:::
+
+::: {.callout-tip title="Observação"}
+Implementações de código substanciais devem ir para o satélite
+[DeepLearning](https://raphateixeira.github.io/DeepLearning/), não neste repositório.
+:::
+
+# Exercícios selecionados
+
+## Exercícios selecionados
+
+::: {.callout-note title="Nota"}
+Rascunho — resolução dos exercícios do capítulo que valeram a pena registrar será
+adicionada aqui.
+:::
+
+## Resumo da aula {.smaller}
+
+- Este capítulo ainda está em fase de leitura — nenhum conteúdo substantivo do livro foi
+  extraído até o momento; este deck registra apenas a estrutura da nota.
+- A estrutura segue o padrão dos demais slides de leitura do grupo: Sumário, seções por
+  tópico, Resumo, Referências.
+- Próximos passos: preencher Contexto, Ideias centrais, Derivações, Implementação,
+  Conexões e Exercícios após a leitura do capítulo.
+
+## Referências
+
+- Bishop, C. M. & Bishop, H. *Deep Learning: Foundations and Concepts*. Springer, 2024.
+  [@bishop2024deeplearning]

@@ -1,14 +1,13 @@
 ---
 title: "Notas"
-description: "Fundamentação teórica por tema de estudo."
+description: "Fundamentação teórica por tema de estudo e notas de leitura de livros-texto."
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io)
 
-Notas de fundamentação teórica geral, organizadas por tema de estudo — não ligadas a um
-livro específico. Veja também [Avulsas](avulsas/index.qmd) para notas pontuais que não
-pertencem a nenhum tema consolidado, e [Referências](https://raphateixeira.github.io/Referencias/)
-no site principal para a bibliografia dos livros-texto.
+Notas de fundamentação teórica por tema de estudo e notas de leitura de livros-texto, em
+slides. Veja também [Avulsas](avulsas/index.qmd) para notas pontuais que não pertencem a
+nenhum tema ou livro.
 
 ## Fundamentos
 
@@ -18,3 +17,19 @@ Cada tema com material suficiente ganha um repositório próprio:
 - **Controle Linear** — em construção.
 - **Controle MPC** — em construção.
 - **Conversores de Energia** — em construção.
+
+## Livros
+
+Notas de leitura em slides (Quarto revealjs), uma pasta por livro-texto. Os PDFs dos livros
+não fazem parte deste repositório.
+
+| Livro | Autor(es) |
+|---|---|
+| [Introduction to Probability for Data Science](chan-probabilidade/index.qmd) | Stanley H. Chan |
+| [Optimization: A Bootcamp for ML, Inverse Problems, and Control](brunton-otimizacao/index.qmd) | Steven L. Brunton |
+| [Data-Driven Science and Engineering](brunton-kutz-data-driven/index.qmd) | Steven L. Brunton, J. Nathan Kutz |
+| [Deep Learning: Foundations and Concepts](bishop-deep-learning/index.qmd) | Christopher M. Bishop, Hugh Bishop |
+| [Linear Algebra and Learning from Data](strang-linear-algebra/index.qmd) | Gilbert Strang |
+| [Differential Geometry](ventura-geometria-diferencial/index.qmd) | Paulo Ventura Araújo |
+| [Multivariable Calculus](larson-calculo-multivariavel/index.qmd) | Ron Larson, Bruce H. Edwards |
+| [Advanced Control of Power Converters](hasan-advanced-control-power-converters/index.qmd) | Hasan Komurcugil, Sertac Bayhan, Ramon Guzman, Mariusz Malinowski, Haitham Abu-Rub |

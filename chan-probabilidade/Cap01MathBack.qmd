@@ -1,0 +1,71 @@
+---
+title: "Séries Infinitas"
+subtitle: "Capítulo 1 — Background Matemático"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "UFPA - NDAE - PPCA "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+# 1.1 — Sequências de caras e séries geométricas
+
+## Probabilidade de sequências de caras
+
+- A probabilidade de dar cara em uma moeda justa é de $\dfrac{1}{2}$.
+- A probabilidade de dar cara **duas** vezes seguidas é de $\dfrac{1}{4}$.
+- A probabilidade de dar cara **três** vezes seguidas é de $\dfrac{1}{8}$.
+
+::: {.callout-note title="Definição"}
+Em geral, a probabilidade de dar cara $n$ vezes seguidas é dada por
+$$
+\frac{1}{2^n}.
+$$
+:::
+
+## Visualizando a sequência geométrica
+
+O termo $\dfrac{1}{2^n}$ decresce geometricamente à medida que $n$ cresce. O código abaixo gera e plota os primeiros termos dessa sequência.
+
+```{python}
+# Python code to generate a geometric sequence
+import numpy as np
+import matplotlib.pyplot as plt
+p = 1/2
+n = np.arange(0,10)
+X = np.power(p,n)
+plt.bar(n,X, color = 'r')
+plt.grid()
+plt.show()
+```
+
+## Somando a série — quantas jogadas bastam?
+
+Quantas vezes você precisa jogar para que a probabilidade de dar cara seja maior que $90\%$?
+
+A probabilidade de dar cara $n$ vezes seguidas é dada pela série
+
+$$
+\sum_{n = 1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots
+$$
+
+## Resumo da aula {.smaller}
+
+- **1.1** — Probabilidade de $n$ caras seguidas em uma moeda justa: $\dfrac{1}{2^n}$.
+- Essa sequência de probabilidades é uma **progressão geométrica** de razão $\dfrac{1}{2}$.
+- A soma $\displaystyle\sum_{n=1}^{\infty}\frac{1}{2^n}$ conecta essa sequência a uma **série infinita** — base matemática usada ao longo do livro.
+
+## Referências
+
+- Chan, S. H. *Introduction to Probability for Data Science*, 2ª ed., Michigan Publishing, 2026 [@chan2026probability] — Cap. 1.

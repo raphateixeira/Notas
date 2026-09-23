@@ -1,21 +1,31 @@
 # Notas
 
-Hub de notas de fundamentação teórica por tema de estudo, publicado em
+Notas de fundamentação teórica e de leitura de livros-texto, publicadas em
 <https://raphateixeira.github.io/Notas/>. Satélite do hub acadêmico
 [raphateixeira.github.io](https://raphateixeira.github.io), linkado a partir da barra de
 navegação principal (aba **Notas**).
 
-Cada tema com material suficiente ganha um **repositório próprio** (ex.: identificação de
-sistemas → [Identificacao](https://raphateixeira.github.io/Identificacao/)); este
-repositório apenas organiza os links, na seção "Fundamentos" de `index.qmd`. Notas de
-leitura de livros-texto vivem em repositórios próprios (`LivroXXX`), listados em
-[Referências](https://raphateixeira.github.io/Referencias/) no site principal — não aqui.
+- **Fundamentos:** um tema de estudo por repositório próprio (ex.: identificação de
+  sistemas → [Identificacao](https://raphateixeira.github.io/Identificacao/)); `index.qmd`
+  apenas reúne os links.
+- **Livros:** notas de leitura em slides, **uma pasta por livro** neste repositório.
+- **Avulsas:** notas pontuais que não pertencem a nenhum tema ou livro.
+
+> **Este repositório é público. Nunca versione PDFs/ebooks dos livros** (direitos autorais).
+> Eles ficam apenas localmente em `Livros/`, que está no `.gitignore` junto com `*.pdf`,
+> `*.epub` e `*.djvu`. Veja [CLAUDE.md](CLAUDE.md).
 
 ## Estrutura
 
-- `index.qmd` — seção "Fundamentos": um link por tema de estudo.
-- `avulsas/` — notas pontuais que não pertencem a nenhum tema consolidado.
-- `_templates/nota-modelo.qmd` — template para iniciar uma nova nota avulsa.
+- `index.qmd` — Fundamentos (links) e tabela de livros.
+- `<autor>-<assunto>/` — um livro: `index.qmd` (página do livro) e um `.qmd` revealjs por
+  capítulo/aula (`chan-probabilidade/`, `brunton-otimizacao/`, `brunton-kutz-data-driven/`,
+  `bishop-deep-learning/`, `strang-linear-algebra/`, `ventura-geometria-diferencial/`,
+  `larson-calculo-multivariavel/`, `hasan-advanced-control-power-converters/`).
+- `avulsas/` — notas avulsas.
+- `imgs/` — logos da UFPA usados nos slides.
+- `referencias.bib`, `abnt.csl` — bibliografia (uma entrada por livro) e estilo.
+- `_templates/nota-modelo.qmd` — template para uma nota avulsa.
 
 ## Uso local
 

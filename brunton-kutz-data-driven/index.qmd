@@ -1,0 +1,17 @@
+---
+title: "Data-Driven Science — Brunton & Kutz"
+subtitle: "Notas de leitura em slides"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control*
+**Autores:** Steven L. Brunton, J. Nathan Kutz
+**Edição:** 2ª ed., Cambridge University Press, 2022
+
+Notas de Aula:
+
+* Capítulo 1: [Título da nota](01-exemplo.qmd)

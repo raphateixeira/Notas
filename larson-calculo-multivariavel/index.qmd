@@ -1,0 +1,25 @@
+---
+title: "Cálculo Multivariável — Larson"
+subtitle: "Engenharia Elétrica"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Multivariable Calculus*
+**Autores:** Ron Larson, Bruce H. Edwards
+**Edição:** 9ª ed., Brooks/Cole, Cengage Learning, 2010
+
+::: {.callout-note}
+Este volume reúne os capítulos 11–16 do *Calculus* completo de Larson & Edwards (Vetores e
+Geometria do Espaço, Funções Vetoriais, Funções de Várias Variáveis, Integração Múltipla,
+Análise Vetorial, Tópicos Adicionais em Equações Diferenciais) e mantém a numeração de
+página do texto original — por isso a numeração de seção começa em 11.1, não em 1.1.
+:::
+
+Notas de Aula:
+
+* Aula 01: [Vetores no Plano (§11.1)](01-vetores-no-plano.qmd)
+* Aula 02: [Vetores no Espaço (§11.2)](02-vetores-no-espaco.qmd)

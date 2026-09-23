@@ -1,0 +1,95 @@
+---
+title: "Probabilidades"
+subtitle: "Capítulo 2"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "UFPA - NDAE - PPCA "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Sumário {.smaller}
+
+- **2.1** Dados, probabilidade e estatística — três perspectivas
+- **2.2** Interpretações de probabilidade: frequencista e bayesiana
+- **2.3** A axiomatização de Kolmogorov (1933)
+- **2.4** Probabilidade de um evento — exemplo: jogar um dado
+
+# 2.1 — Três perspectivas
+
+## Dados, probabilidade e estatística
+
+::: {.callout-note title="Definição"}
+- **Dados:** perspectiva **computacional**.
+- **Probabilidade:** perspectiva **matemática/teórica**.
+- **Estatística:** perspectiva **empírica**.
+:::
+
+# 2.2 — Interpretações de probabilidade
+
+## Frequencista vs. bayesiano
+
+::: {.callout-note title="Definição"}
+- **Frequencista:** probabilidade como **frequência relativa** de um evento em experimentos repetidos.
+- **Bayesiano:** probabilidade como **grau de crença** em um evento, dado o conhecimento disponível.
+:::
+
+# 2.3 — A axiomatização de Kolmogorov
+
+## A. Kolmogorov (1933)
+
+::: {.callout-note title="Definição"}
+Probabilidade como **medida** de um espaço amostral.
+:::
+
+# 2.4 — Probabilidade de um evento: jogar um dado
+
+## Espaço amostral e evento
+
+Seja um dado com 6 faces, numeradas de 1 a 6. O espaço amostral é
+
+$$\Omega = \{1, 2, 3, 4, 5, 6\}$$
+
+Qual a probabilidade de sair um número par? O evento é
+
+$$A = \{2, 4, 6\}$$
+
+## Calculando a probabilidade
+
+::: {.callout-note title="Definição"}
+A probabilidade de um evento é definida como
+$$
+P(A) = \frac{|A|}{|\Omega|}
+$$
+:::
+
+Aplicando ao evento $A = \{2,4,6\}$ e ao espaço amostral $\Omega = \{1,\dots,6\}$:
+
+$$\boxed{P(A) = \dfrac{3}{6} = 0.5}$$
+
+## Por que o denominador é 6?
+
+- Porque o dado é **justo**, ou seja, todas as faces têm a mesma probabilidade de sair.
+- Se o dado fosse **viciado**, teríamos que usar outro método para determinar a probabilidade.
+
+## Resumo da aula {.smaller}
+
+- **2.1** — Dados (computacional), probabilidade (matemática/teórica) e estatística (empírica).
+- **2.2** — Frequencista: frequência relativa em experimentos repetidos. Bayesiano: grau de crença.
+- **2.3** — Kolmogorov (1933): probabilidade como medida de um espaço amostral.
+- **2.4** — Exemplo do dado: $P(A) = |A|/|\Omega| = 3/6 = 0.5$, válido pois o dado é justo.
+
+## Referências
+
+- Chan, S. H. *Introduction to Probability for Data Science*, 2ª ed., Michigan Publishing, 2026 [@chan2026probability] — Cap. 2.

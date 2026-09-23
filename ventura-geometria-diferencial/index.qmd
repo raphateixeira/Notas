@@ -1,0 +1,18 @@
+---
+title: "Geometria Diferencial"
+subtitle: "Notas de leitura — Ventura Araújo"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../index.qmd)
+
+**Livro:** *Differential Geometry*
+**Autor:** Paulo Ventura Araújo
+**Edição:** Springer, 2024 — tradução inglesa de *Geometria Diferencial* (IMPA, Projeto
+Euclides, 1998)
+
+Notas de leitura:
+
+* Capítulo 1: [Curvas Diferenciáveis](01-curvas-diferenciaveis.qmd)
