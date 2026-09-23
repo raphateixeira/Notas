@@ -1,30 +1,18 @@
 ---
-title: "Notas de Leitura"
-description: "Todas as notas, das mais recentes às mais antigas."
-listing:
-  id: todas-as-notas
-  type: default
-  contents:
-    - "*/*.qmd"
-    - "!*/index.qmd"
-  sort: "date desc"
-  categories: numbered
-  feed: true
-  fields: [date, title, description, categories]
-page-layout: full
+title: "Notas"
+description: "Fundamentação teórica por tema de estudo."
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io)
 
-Notas de leitura organizadas por livro. Veja a [Estante](estante.qmd) para o status de
-leitura de cada livro, o menu **Livros** na barra de navegação para acessar diretamente
-as notas de um livro específico, ou [Recomendações](Recomendacoes.qmd) para livros, sites
-e canais sugeridos para aprofundamento.
+Notas de fundamentação teórica geral, organizadas por tema de estudo — não ligadas a um
+livro específico. Veja também [Avulsas](avulsas/index.qmd) para notas pontuais que não
+pertencem a nenhum tema consolidado, e [Referências](https://raphateixeira.github.io/Referencias/)
+no site principal para a bibliografia dos livros-texto.
 
 ## Fundamentos
 
-Notas de fundamentação teórica geral, organizadas por tema — não ligadas a um livro
-específico. Cada tema com material suficiente ganha um repositório próprio:
+Cada tema com material suficiente ganha um repositório próprio:
 
 - **Identificação de Sistemas** — [Identificacao](https://raphateixeira.github.io/Identificacao/): ajuste de reta, projeto de sinais PRBS, modelos ARX e identificação de um modelo Linear Invariante no Tempo (LIT), por mínimos quadrados.
 - **Controle Linear** — em construção.

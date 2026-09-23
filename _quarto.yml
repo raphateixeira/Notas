@@ -1,7 +1,8 @@
 # ---------------------------------------------------------------------
-#  Configuração do projeto Quarto — Notas de leitura.
-#  Repositório único, organizado por pasta de livro; a separação lógica
-#  é feita por "categories" no front matter e pelos listings abaixo.
+#  Configuração do projeto Quarto — Notas de fundamentação teórica.
+#  Hub que aponta para o repositório de cada tema de estudo (ver
+#  index.qmd); notas avulsas que não pertencem a um tema consolidado
+#  ficam em avulsas/.
 # ---------------------------------------------------------------------
 
 project:
@@ -16,7 +17,7 @@ csl: abnt.csl
 
 website:
   title: "Notas"
-  description: "Notas de leitura de livros-texto — Prof. Dr. Raphael Teixeira (UFPA-CAMTUC-FEE)"
+  description: "Notas de fundamentação teórica por tema de estudo — Prof. Dr. Raphael Teixeira (UFPA-CAMTUC-FEE)"
   site-url: "https://raphateixeira.github.io/Notas/"
   reader-mode: true
   navbar:
@@ -26,26 +27,10 @@ website:
     left:
       - text: "Início"
         href: https://raphateixeira.github.io/index.html
-      - text: "Notas"
+      - text: "Fundamentos"
         href: index.qmd
-      - text: "Estante"
-        href: estante.qmd
-      - text: "Recomendações"
-        href: Recomendacoes.qmd
-      - text: "Livros"
-        menu:
-          - text: "Chan — Introduction to Probability for Data Science"
-            href: chan-probabilidade/index.qmd
-          - text: "Brunton — Optimization"
-            href: brunton-otimizacao/index.qmd
-          - text: "Brunton & Kutz — Data-Driven Science and Engineering"
-            href: brunton-kutz-data-driven/index.qmd
-          - text: "Bishop — Deep Learning: Foundations and Concepts"
-            href: bishop-deep-learning/index.qmd
-          - text: "Ventura Araújo — Differential Geometry"
-            href: ventura-geometria-diferencial/index.qmd
-          - text: "Larson — Cálculo Multivariável"
-            href: larson-calculo-multivariavel/index.qmd
+      - text: "Avulsas"
+        href: avulsas/index.qmd
   page-footer:
     border: false
     center: "©2026 Prof. Dr. Raphael Teixeira — UFPA-CAMTUC-FEE"

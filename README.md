@@ -1,22 +1,21 @@
 # Notas
 
-Repositório único de notas de leitura, organizado por livro, publicado em
+Hub de notas de fundamentação teórica por tema de estudo, publicado em
 <https://raphateixeira.github.io/Notas/>. Satélite do hub acadêmico
-[raphateixeira.github.io](https://raphateixeira.github.io), linkado a partir da home
-(seção "Coleções") e da aba **Estudos**.
+[raphateixeira.github.io](https://raphateixeira.github.io), linkado a partir da barra de
+navegação principal (aba **Notas**).
 
-Cada livro é uma **pasta** (não um repositório separado); a separação lógica entre
-livros é feita por metadados (`categories`, `livro`) e pelos *listings* do Quarto — veja
-[CLAUDE.md](CLAUDE.md) para a convenção completa.
+Cada tema com material suficiente ganha um **repositório próprio** (ex.: identificação de
+sistemas → [Identificacao](https://raphateixeira.github.io/Identificacao/)); este
+repositório apenas organiza os links, na seção "Fundamentos" de `index.qmd`. Notas de
+leitura de livros-texto vivem em repositórios próprios (`LivroXXX`), listados em
+[Referências](https://raphateixeira.github.io/Referencias/) no site principal — não aqui.
 
 ## Estrutura
 
-- `index.qmd` — todas as notas, mais recentes primeiro.
-- `estante.qmd` — tabela de livros com status de leitura.
-- `chan-probabilidade/`, `brunton-otimizacao/`, `brunton-kutz-data-driven/`,
-  `bishop-deep-learning/` — uma pasta por livro ativo.
-- `avulsas/` — notas que não pertencem a um livro específico.
-- `_templates/nota-modelo.qmd` — template para iniciar uma nova nota.
+- `index.qmd` — seção "Fundamentos": um link por tema de estudo.
+- `avulsas/` — notas pontuais que não pertencem a nenhum tema consolidado.
+- `_templates/nota-modelo.qmd` — template para iniciar uma nova nota avulsa.
 
 ## Uso local
 

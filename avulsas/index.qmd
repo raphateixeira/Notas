@@ -11,6 +11,6 @@ listing:
 page-layout: full
 ---
 
-Notas de leitura ou de estudo que não seguem um livro-texto específico da lista de
-[Livros](../estante.qmd) — por exemplo, artigos, materiais avulsos ou fundamentações
-pontuais que surgiram de outras leituras.
+Notas de leitura ou de estudo que não pertencem a nenhum dos [temas de fundamentação](../index.qmd)
+deste repositório — por exemplo, artigos, materiais avulsos ou fundamentações pontuais
+que surgiram de outras leituras.
