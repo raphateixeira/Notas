@@ -14,6 +14,8 @@ listing:
 page-layout: full
 ---
 
+[⬅ Site principal](https://raphateixeira.github.io)
+
 Notas de leitura organizadas por livro. Veja a [Estante](estante.qmd) para o status de
 leitura de cada livro, o menu **Livros** na barra de navegação para acessar diretamente
 as notas de um livro específico, ou [Recomendações](Recomendacoes.qmd) para livros, sites
