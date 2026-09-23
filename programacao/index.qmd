@@ -14,6 +14,8 @@ listing:
 page-layout: full
 ---
 
+[⬅ Site principal](https://raphateixeira.github.io)
+
 Notas de estudo organizadas por linguagem de programação. Veja o [Progresso](progresso.qmd)
 para o status de estudo de cada linguagem, o menu **Linguagens** na barra de navegação
 para acessar diretamente as notas de uma linguagem específica, ou
