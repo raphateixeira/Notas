@@ -6,8 +6,7 @@ description: "Fundamentação teórica por tema de estudo e notas de leitura de 
 [⬅ Site principal](https://raphateixeira.github.io)
 
 Notas de fundamentação teórica por tema de estudo e notas de leitura de livros-texto, em
-slides. Veja também [Avulsas](avulsas/index.qmd) para notas pontuais que não pertencem a
-nenhum tema ou livro.
+slides.
 
 ## Fundamentos
 
@@ -15,7 +14,7 @@ Cada tema com material suficiente ganha um repositório próprio:
 
 - **Identificação de Sistemas** — [Identificacao](https://raphateixeira.github.io/Identificacao/): ajuste de reta, projeto de sinais PRBS, modelos ARX e identificação de um modelo Linear Invariante no Tempo (LIT), por mínimos quadrados.
 - **Controle Linear** — em construção.
-- **Controle MPC** — em construção.
+- **Controle MPC** — em construção. Sementes já existentes: a nota de [MPC de um sistema massa-mola-amortecedor](brunton-otimizacao/MPCMassaMolaAmortecedor.qmd) e o tema DeePC (MPC direto sobre dados) em [DataDrivenControl](https://raphateixeira.github.io/DataDrivenControl/).
 - **Conversores de Energia** — em construção.
 
 ## Livros

@@ -8,8 +8,8 @@ navegação principal (aba **Notas**).
 - **Fundamentos:** um tema de estudo por repositório próprio (ex.: identificação de
   sistemas → [Identificacao](https://raphateixeira.github.io/Identificacao/)); `index.qmd`
   apenas reúne os links.
-- **Livros:** notas de leitura em slides, **uma pasta por livro** neste repositório.
-- **Avulsas:** notas pontuais que não pertencem a nenhum tema ou livro.
+- **Livros:** notas de leitura em slides, **uma pasta por livro** neste repositório; notas
+  complementares sobre um tema do livro (ex.: MPC em `brunton-otimizacao/`) ficam na mesma pasta.
 
 > **Este repositório é público. Nunca versione PDFs/ebooks dos livros** (direitos autorais).
 > Eles ficam apenas localmente em `Livros/`, que está no `.gitignore` junto com `*.pdf`,
@@ -22,10 +22,9 @@ navegação principal (aba **Notas**).
   capítulo/aula (`chan-probabilidade/`, `brunton-otimizacao/`, `brunton-kutz-data-driven/`,
   `bishop-deep-learning/`, `strang-linear-algebra/`, `ventura-geometria-diferencial/`,
   `larson-calculo-multivariavel/`, `hasan-advanced-control-power-converters/`).
-- `avulsas/` — notas avulsas.
 - `imgs/` — logos da UFPA usados nos slides.
 - `referencias.bib`, `abnt.csl` — bibliografia (uma entrada por livro) e estilo.
-- `_templates/nota-modelo.qmd` — template para uma nota avulsa.
+- `_templates/nota-modelo.qmd` — modelo de nota complementar de um livro (artigo HTML).
 
 ## Uso local
 

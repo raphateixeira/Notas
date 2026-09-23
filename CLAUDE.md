@@ -11,8 +11,8 @@ navegação principal. Formato canônico: Quarto (`quarto render`, `execute.free
 Tema visual: `TemaRTx.scss` (idêntico ao usado por TikZ, Manim, DeepLearning,
 MetodosNumericos, ControleEstados, DataDrivenControl — não inventar paleta própria).
 
-Tem três tipos de conteúdo: **Fundamentos** (links para um repositório por tema),
-**Livros** (uma pasta por livro, neste repositório) e **Avulsas**.
+Tem dois tipos de conteúdo: **Fundamentos** (links para um repositório por tema),
+**Livros** (uma pasta por livro, neste repositório, com slides e notas complementares).
 
 ## REGRA INEGOCIÁVEL: nunca versionar PDFs/ebooks
 
@@ -73,9 +73,13 @@ DataDrivenControl, Projeto-Aeropendulo, MScOseias).
 Ao criar o repositório de um novo tema, atualizar o link em `index.qmd` (e tirar o "em
 construção").
 
-## Avulsas
+## Notas complementares (dentro da pasta do livro)
 
-`avulsas/` guarda notas pontuais que não pertencem a nenhum tema ou livro. Front matter:
+Uma nota que aprofunda um tema ligado a um livro (não um capítulo dele) fica **na pasta do
+livro**, como artigo HTML, listada em "Notas complementares" no `index.qmd` do livro. Não
+existe pasta genérica de notas soltas: toda nota se associa a um livro (por tema) ou vira
+tema de Fundamentos. Ex.: `brunton-otimizacao/MPCMassaMolaAmortecedor.qmd`,
+`bishop-deep-learning/RedesNeuraisAproximador.qmd`. Front matter:
 
 ```yaml
 ---
@@ -85,14 +89,15 @@ author: "Raphael Teixeira"
 date: "AAAA-MM-DD"
 date-modified: last-modified
 categories: [Categoria1, Categoria2, Python]
+livro: "Autor — Título do livro"
+autor-livro: "Nome do Autor"
 status: rascunho        # rascunho | revisão | consolidada — exatamente um destes três
 lang: pt-BR
 ---
 ```
 
-Para criar uma nova nota avulsa: copie `_templates/nota-modelo.qmd` para `avulsas/`,
-preencha o front matter e nomeie o arquivo `assunto.qmd`. Rode `quarto preview` antes de
-publicar.
+Para criar: copie `_templates/nota-modelo.qmd` para a pasta do livro, preencha o front
+matter e nomeie o arquivo `Assunto.qmd`. Rode `quarto preview` antes de publicar.
 
 ## Não versionar
 

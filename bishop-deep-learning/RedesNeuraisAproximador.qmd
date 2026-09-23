@@ -5,6 +5,8 @@ author: "Raphael Teixeira"
 date: "2026-07-10"
 date-modified: last-modified
 categories: ["Aprendizado de Máquina", "Redes Neurais"]
+livro: "Bishop — Deep Learning: Foundations and Concepts"
+autor-livro: "Christopher M. Bishop, Hugh Bishop"
 status: consolidada
 lang: pt-BR
 ---

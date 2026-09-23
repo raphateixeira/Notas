@@ -19,3 +19,7 @@ Esta pasta contém apenas **notas conceituais** de leitura deste livro, em forma
 Notas de Leitura:
 
 * Capítulo 1: [Notas de leitura (rascunho)](BDL01Exemplo.qmd)
+
+Notas complementares:
+
+* [Redes Neurais como Aproximadores Universais de Função](RedesNeuraisAproximador.qmd) — Teorema da Aproximação Universal e rede rasa treinada por retropropagação, em NumPy.

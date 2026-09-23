@@ -15,3 +15,7 @@ lang: pt-BR
 Notas de leitura em formato de slides (Quarto revealjs):
 
 * Capítulo 1: [Optimization Bootcamp](01-OptimizationBootcamp.qmd)
+
+Notas complementares:
+
+* [Controle Preditivo (MPC) de um Sistema Massa-Mola-Amortecedor](MPCMassaMolaAmortecedor.qmd) — formulação matricial do MPC de horizonte finito (um problema de otimização) e simulação em Python.

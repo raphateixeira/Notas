@@ -5,6 +5,8 @@ author: "Raphael Teixeira"
 date: "2026-07-10"
 date-modified: last-modified
 categories: ["Controle", "MPC"]
+livro: "Brunton — Optimization: A Bootcamp for ML, Inverse Problems, and Control"
+autor-livro: "Steven L. Brunton"
 status: consolidada
 lang: pt-BR
 ---

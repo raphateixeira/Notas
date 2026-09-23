@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------
 #  Configuração do projeto Quarto — Notas.
-#  Fundamentos (links para o repositório de cada tema de estudo), notas
-#  de leitura em slides (uma pasta por livro) e notas avulsas (avulsas/).
+#  Fundamentos (links para o repositório de cada tema de estudo) e notas
+#  de leitura de livros-texto (uma pasta por livro, com slides e notas complementares).
 #  PDFs de livros NUNCA entram no repositório (ver .gitignore e CLAUDE.md).
 # ---------------------------------------------------------------------
 
@@ -47,8 +47,6 @@ website:
             href: larson-calculo-multivariavel/index.qmd
           - text: "Komurcugil et al. — Advanced Control of Power Converters"
             href: hasan-advanced-control-power-converters/index.qmd
-      - text: "Avulsas"
-        href: avulsas/index.qmd
   page-footer:
     border: false
     center: "©2026 Prof. Dr. Raphael Teixeira — UFPA-CAMTUC-FEE"
