@@ -1,0 +1,350 @@
+---
+title: "Ajuste de Reta"
+subtitle: "Identificação de Sistemas"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+editor:
+  render-on-save: false
+format:
+  revealjs:
+    theme: [simple, ../../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    scrollable: true
+    width: 1600
+    height: 900
+    footer: " "
+    center: false
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: monokai
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Introdução ao Ajuste de Curvas
+
+**Calibração:** - Sensor de temperatura:  $n$ amostras e gráfico de dispersão:
+
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fontes maiores para os gráficos, legíveis no telão (vale para o documento todo)
+plt.rcParams.update({
+    'font.size': 16,
+    'axes.titlesize': 20,
+    'axes.labelsize': 18,
+    'xtick.labelsize': 14,
+    'ytick.labelsize': 14,
+    'legend.fontsize': 14,
+})
+
+# 1. Geração dos dados
+np.random.seed(12)
+temp = np.array([15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70])
+tensao = 0.05 * temp + 0.5 + np.random.normal(0, 0.15, len(temp))
+
+df = pd.DataFrame({
+    'Amostra': range(1, len(temp) + 1), 
+    'Temp (°C)': temp, 
+    'Tensão (V)': np.round(tensao, 2)
+})
+
+# 2. Criando a estrutura lado a lado (1 linha, 2 colunas)
+fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+
+# --- Lado Esquerdo: Tabela ---
+ax[0].axis('off')  # Esconde os eixos para a tabela
+tabela = ax[0].table(
+    cellText=df.values,
+    colLabels=df.columns,
+    loc='center',
+    cellLoc='center'
+)
+tabela.auto_set_font_size(False)
+tabela.set_fontsize(13)
+tabela.scale(1.15, 1.7) # Ajusta o respiro das linhas
+
+# --- Lado Direito: Gráfico ---
+ax[1].scatter(temp, tensao, color='blue', label='Dados Medidos')
+ax[1].plot(temp, 0.05 * temp + 0.5, '--', color='gray', label='Modelo Real')
+ax[1].set_xlabel('Temperatura (°C)')
+ax[1].set_ylabel('Tensão (V)')
+ax[1].legend()
+ax[1].grid(True, linestyle=':', alpha=0.7)
+
+# Ajuste final de layout
+plt.tight_layout()
+plt.show()
+```
+
+Padrão sugere que uma reta (modelo) pode ser adequada para a relação:
+
+$$V = \theta_1 T + \theta_0 + e$$
+
+$V$: Tensão medida; $T$: Temperatura; $\theta_i$: Parâmetros do modelo; $e$: Erro aleatório.
+
+---
+
+## Modelo - Sistema de equações
+
+Equação do modelo linear: $y = V$ (variável dependente) e $x = T$ (variável independente).
+
+$$y =  \theta_1 x + \theta_0 + e$$
+
+
+Aplicando os dados ao modelo:
+
+::: {.columns}
+::: {.column width="58%"}
+$$\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n
+\end{bmatrix} =
+\begin{bmatrix}
+x_1 & 1 \\
+x_2 & 1 \\
+\vdots & \vdots \\
+x_n & 1
+\end{bmatrix}
+\begin{bmatrix}
+\theta_1 \\
+\theta_0
+\end{bmatrix} +
+\begin{bmatrix}
+e_1 \\
+e_2 \\
+\vdots \\
+e_n
+\end{bmatrix}$$
+:::
+::: {.column width="12%"}
+$$\huge\longrightarrow$$
+:::
+::: {.column width="30%"}
+$$\mathbf{y} = \mathbf{A} \boldsymbol{\theta} + \mathbf{e}$$
+:::
+:::
+
+
+---
+
+## Forma Vetorial-matricial
+
+Nesta notação vetorial-matricial, o modelo pode ser interpretado da seguinte forma:
+
+$$\mathbf{y} = \mathbf{A} \boldsymbol{\theta} + \mathbf{e}$$
+
+- $\mathbf{y} \in \mathbb{R}^{n \times 1}$: vetor de saídas observadas: $\mathbf{y} = [y_1, y_2, \dots, y_n]^T$.
+
+- $\mathbf{A} \in \mathbb{R}^{n \times 2}$: matriz de regressores, cada coluna é um termo do modelo.
+
+$$\mathbf{A} = \begin{bmatrix}
+x_1 & 1 \\
+x_2 & 1 \\
+\vdots & \vdots \\
+x_n & 1
+\end{bmatrix}$$
+
+- $\boldsymbol{\theta} \in \mathbb{R}^{2 \times 1}$: vetor de parâmetros $\boldsymbol{\theta} = [\theta_1, \theta_0]^T$ a serem estimados.
+
+- $\mathbf{e} \in \mathbb{R}^{n \times 1}$: vetor de erros aleatórios. $\mathbf{e} = [e_1, e_2, \dots, e_n]^T$
+
+---
+
+## Estimar parâmetros que minimizam o erro
+
+A partir de $\mathbf{y} = \mathbf{A} \boldsymbol{\theta} + \mathbf{e}$, o erro é:
+$$\mathbf{e} = \mathbf{y} - \mathbf{A} \boldsymbol{\theta}$$
+
+Cada escolha de $\boldsymbol{\theta}$ gera um vetor de erros diferente:
+
+```{python}
+# Dados x e y (mesmos reutilizados nos slides seguintes)
+np.random.seed(12)
+x = np.array([15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70])
+y = 0.05 * x + 0.5 + np.random.normal(0, 0.1, len(x))
+
+# 1. Ajuste da reta ótima (MMQ)
+p_otimo = np.polyfit(x, y, 1)
+y_otimo = np.polyval(p_otimo, x)
+
+# 2. Definindo algumas retas "alternativas" para comparação
+# Reta 1: Deslocada verticalmente (theta_0 diferente)
+y_ruim_1 = p_otimo[0] * x + (p_otimo[1] + 1.0) # Inclinação igual, offset maior
+
+# Reta 2: Inclinação diferente (theta_1 diferente)
+y_ruim_2 = (p_otimo[0] * 1.5) * x + p_otimo[1] # Inclinação maior, offset igual
+
+# Reta 3: Deslocada e com inclinação um pouco diferente
+y_ruim_3 = (p_otimo[0] * 0.8) * x + (p_otimo[1] - 0.5) # Inclinação menor, offset menor
+
+# 3. Gerando o gráfico
+plt.figure(figsize=(10, 6))
+
+plt.scatter(x, y, color='blue', label='Dados Medidos ($y$)', zorder=3, s=50)
+
+# Plotando as retas
+plt.plot(x, y_otimo, color='green', linewidth=2.5, label='Reta Ótima (MMQ)', zorder=2)
+plt.plot(x, y_ruim_1, color='orange', linestyle='--', linewidth=1.5, label='Reta 1', alpha=0.7, zorder=1)
+plt.plot(x, y_ruim_2, color='purple', linestyle=':', linewidth=1.5, label='Reta 2 ', alpha=0.7, zorder=1)
+plt.plot(x, y_ruim_3, color='brown', linestyle='-.', linewidth=1.5, label='Reta 3 ', alpha=0.7, zorder=1)
+
+plt.title('Comparação de Ajustes: Minimizando o Erro', fontsize=14)
+plt.xlabel('Variável de Entrada ($x$)')
+plt.ylabel('Variável de Saída ($y$)')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+plt.show()
+```
+
+Para comparar escolhas, agregamos $\mathbf{e}$ em um único número: a função de custo $J(\boldsymbol{\theta})$.
+
+Problema de otimização:
+$$\min_{\boldsymbol{\theta}} J(\boldsymbol{\theta})$$
+
+---
+ 
+## Erro Residual
+
+Erros são a distância vertical entre os pontos medidos e a reta do modelo.
+
+```{python}
+# Reutilizando x, y definidos no slide anterior
+
+# Modelo predito (Reta de referência/dada)
+y_pred = 0.05 * x + 0.5
+
+plt.figure(figsize=(8, 6))
+plt.plot(x, y_pred, '--', color='gray', label='Modelo $\hat{y}$', zorder=1)
+plt.scatter(x, y, color='blue', label='Dados Medidos $y$', zorder=2)
+
+# Desenha os segmentos de erro (resíduos) em vermelho
+for i in range(len(x)):
+    plt.plot([x[i], x[i]], [y[i], y_pred[i]], 
+             color='red', linestyle='-', linewidth=1.5)
+
+# Legenda para o erro
+plt.plot([], [], color='red', label='Erro (Resíduo $e$)')
+
+plt.xlabel('Variável de Entrada ($x$)')
+plt.ylabel('Variável de Saída ($y$)')
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.6)
+plt.show()
+```
+
+O erro residual para cada amostra $i$ é a diferença entre o valor medido e o predito $\hat{y}_i$ pelo modelo:
+
+$$e_i = y_i - \hat{y}_i$$
+
+---
+
+## Função de Custo
+
+É necessário agregar os erros individuais $e_i$ em um único valor. A soma simples
+
+$$J(\boldsymbol{\theta}) = \sum_{i=1}^{n} e_i$$
+
+não serve — erros positivos e negativos se cancelam. Por isso, usamos a soma dos quadrados:
+
+$$J(\boldsymbol{\theta}) = \sum_{i=1}^{n} e_i^2 = \sum_{i=1}^{n} [y_i - \hat{y}_i]^2 = \sum_{i=1}^{n} [y_i - (\theta_1 x_i + \theta_0)]^2$$
+
+---
+
+## Abordagem matricial
+
+Minimizar $J(\boldsymbol{\theta}) = \mathbf{e}^T \mathbf{e} = (\mathbf{y} - \mathbf{A} \boldsymbol{\theta})^T(\mathbf{y} - \mathbf{A} \boldsymbol{\theta})$ equivale a zerar o gradiente em relação a $\boldsymbol{\theta}$:
+
+$$\frac{\partial J}{\partial \boldsymbol{\theta}} = -2\mathbf{A}^T(\mathbf{y} - \mathbf{A}\boldsymbol{\theta}) = \mathbf{0}$$
+
+O que resulta nas **equações normais**:
+
+$$\mathbf{A}^T \mathbf{A}\, \boldsymbol{\theta} = \mathbf{A}^T \mathbf{y}$$
+
+Se o produto $\mathbf{A}^T \mathbf{A}$ for inversível:
+
+$$\boldsymbol{\theta} = (\mathbf{A}^T \mathbf{A})^{-1} \mathbf{A}^T \mathbf{y}$$
+
+---
+
+## Solução Python dos Mínimos Quadrados
+
+Em python os dados podem ser gerados como:
+
+```{python}
+#| echo: true
+import numpy as np
+
+# Dados Gerados:
+np.random.seed(12)
+x = np.array([15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70])
+y = 0.05 * x + 0.5 + np.random.normal(0, 0.1, len(x))
+n = len(x)
+```
+
+---
+
+A matriz de regressores $\mathbf{A}$ é construída como:
+
+```{python}
+#| echo: true
+# Matriz de regressão: n linhas e 2 colunas
+A = np.column_stack((np.ones(n), x))
+print(A)
+```
+
+---
+
+Estimação de parâmetros por mínimos quadrados:
+
+```{python}
+#| echo: true
+# Estimativa via Equação Normal: theta = (A'A)^-1 A'y
+theta = np.linalg.inv(A.T @ A) @ A.T @ y
+
+print(f"Intercepto (theta0): {theta[0]:.4f}")
+print(f"Inclinação (theta1): {theta[1]:.4f}")
+```
+
+---
+
+O grafico comparativo:
+```{python}
+#| echo: false
+import matplotlib.pyplot as plt
+y_pred = A @ theta
+plt.figure(figsize=(8, 6))
+plt.scatter(x, y, color='blue', label='Dados Medidos ($y$)', zorder=2)
+plt.plot(x, y_pred, color='red', label='Reta Ajustada (MMQ)', zorder=1)
+plt.xlabel('Variável de Entrada ($x$)')
+plt.ylabel('Variável de Saída ($y$)')
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.6)
+plt.show()
+```
+
+---
+
+## {background-color="#1B365D" text-align="center"}
+
+::: {style="margin-top: 15%; text-align: center; color: #ffffff;"}
+
+![](../../imgs/ufpa-branco.png){width="180px"}
+
+<br>
+
+### **Prof. Dr. Raphael Teixeira**
+Universidade Federal do Pará
+
+:::

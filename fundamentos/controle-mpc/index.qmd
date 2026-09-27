@@ -1,0 +1,24 @@
+---
+title: "Controle Preditivo (MPC)"
+subtitle: "Fundamentos — em construção"
+description: "MPC baseado em modelo e MPC direto sobre dados (DeePC), com o exemplo do sistema massa-mola-amortecedor."
+author: "Raphael Teixeira"
+lang: pt-BR
+status: rascunho
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+::: {.callout-note}
+Tema em gestação: as notas são feitas primeiro nos slides de leitura dos livros e depois
+sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
+:::
+
+## Fontes (notas de leitura)
+
+* [Brunton — Optimization (nota de MPC massa-mola-amortecedor)](../../leituras/brunton-otimizacao/index.qmd)
+* [Brunton & Kutz — Data-Driven Science and Engineering](../../leituras/brunton-kutz-data-driven/index.qmd)
+
+## Material relacionado
+
+* [DataDrivenControl](https://raphateixeira.github.io/DataDrivenControl/) — DeePC e demais técnicas de controle baseado em dados

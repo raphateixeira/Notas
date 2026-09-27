@@ -1,0 +1,19 @@
+{
+  "hash": "e6dffc0f66a08448f8f80b8994f09d29",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: 'Controle Digital: Transformada Z'\nsubtitle: \"Sistema de Controle II\"\ninstitute: \"Universidade Federal do Pará\"\nauthor: \"Prof. Dr. Raphael Teixeira\"\nformat: \n  revealjs:\n    theme: [simple, ../../TemaRTx.scss]\n    self-contained: true\n    transition: fade\n    slide-number: true\n    width: 1600\n    height: 900\n    footer: \" \"\n    center: true\n    title-slide-attributes:\n      data-background-image: \"../../imgs/ufpa-colorido.png\"\n      data-background-size: \"84px\"\n      data-background-position: \"top 45px center\"\nengine: knitr\n---\n\n## Controle de Sistemas Amostrados\n\n![](imgs/Amostrador.png){fig-align=\"center\" width=\"30%\"}\n\n\n---\n\n## Introdução\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

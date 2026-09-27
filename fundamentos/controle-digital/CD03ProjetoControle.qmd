@@ -1,0 +1,51 @@
+---
+title: 'Projeto de Controle Digital por Emulação'
+subtitle: "Sistema de Controle II"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+format: 
+  revealjs:
+    theme: [simple, ../../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: " "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+execute:
+  echo: false
+engine: knitr
+
+---
+
+## Projeto de Controle Digital por Emulação
+
+O projeto de controle digital por emulação consiste em projetar um controlador digital a partir de um controlador contínuo, utilizando técnicas de discretização. A ideia é que o comportamento do sistema discreto seja o mais próximo possível do sistema contínuo original.
+
+Considerando um sistema contínuo representado pela função de transferência \(G(s)\) e um controlador contínuo \(C(s)\), o objetivo é encontrar um controlador discreto \(C(z)\) que emule o comportamento do sistema contínuo.
+
+A discretização do controlador contínuo pode ser realizada utilizando métodos como a Transformada Z, Tustin (bilinear), ou outros métodos de discretização. A escolha do método depende das características do sistema e dos requisitos de desempenho.
+
+---
+
+## Exemplo de Projeto
+
+Seja o sistema contínuo representado pela função de transferência:
+
+$G(s) = 0.8\frac{s+1}{s+2}$
+
+* Requisito: O sistema deve ter um tempo de acomodação de 2 segundos e um sobre-sinal máximo de 10%.
+
+* Controlador contínuo projetado do tipo PI: $C(s) = Kp\frac{s+z_c}{s})$, onde $K_p$ é o ganho do controlador e $z_c$ é o zero do controlador, dado por $z_c = K_i/K_p$.
+
+---
+
+## Controlador por LGR:
+
+- rltool do Matlab para projetar o controlador contínuo $C(s)$ com os requisitos especificados.
+

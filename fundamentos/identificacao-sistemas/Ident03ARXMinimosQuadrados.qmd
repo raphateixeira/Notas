@@ -1,0 +1,401 @@
+---
+title: "Identificação de Modelos ARX por Mínimos Quadrados"
+subtitle: "Identificação de Sistemas"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+editor:
+  render-on-save: false
+filters:
+  - quarto-tikz
+format:
+  revealjs:
+    theme: [simple, ../../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    scrollable: true
+    width: 1600
+    height: 900
+    footer: " "
+    center: false
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: monokai
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Da Reta ao ARX
+
+Na aula 01, ajustamos $y = \theta_1 x + \theta_0 + e$ a dados **estáticos**, via mínimos quadrados:
+
+$$\boldsymbol{\theta} = (\mathbf{A}^T \mathbf{A})^{-1} \mathbf{A}^T \mathbf{y}$$
+
+Na aula 02, simulamos um sistema **dinâmico** ARX e coletamos dados $(u[k], y[k])$ excitando-o com um sinal PRBS.
+
+Hoje: mostrar que o mesmo aparato de mínimos quadrados — só que com uma matriz de regressores diferente — permite estimar os parâmetros de um modelo **dinâmico**.
+
+---
+
+## Modelo ARX
+
+O modelo *AutoRegressive with eXogenous input*, com $n_a$ termos autorregressivos e $n_b$ termos de entrada:
+
+$$y[k] + a_1 y[k-1] + \dots + a_{n_a} y[k-n_a] = b_1 u[k-1] + \dots + b_{n_b} u[k-n_b] + e[k]$$
+
+Ou, na forma polinomial em $q^{-1}$:
+
+$$A(q)\, y[k] = B(q)\, u[k] + e[k]$$
+
+$$A(q) = 1 + a_1 q^{-1} + \dots + a_{n_a} q^{-n_a}, \qquad B(q) = b_1 q^{-1} + \dots + b_{n_b} q^{-n_b}$$
+
+No nosso exemplo (aula 02): $n_a = n_b = 1$, com $a_1=-0{,}7$ e $b_1=1{,}5$.
+
+---
+
+## Diagrama de Blocos (caso geral)
+
+```{tikz}
+%%| fig-width: 8.5
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[
+  block/.style={draw=ufpablue, thick, minimum width=1.3cm, minimum height=0.8cm, align=center, fill=ufpablue!5},
+  sum/.style={draw=ufpablue, thick, circle, minimum size=0.6cm},
+  >=stealth
+]
+\node[sum] (add) at (4.5,0) {$+$};
+\node (y) at (6.6,0) {$y[k]$};
+\node[draw=ufparred, dashed, minimum width=1cm, minimum height=0.8cm] (noise) at (4.5,1.6) {$e[k]$};
+
+\node[block] (B) at (0.5,0) {$B(q)$};
+\node (u) at (-1.7,0) {$u[k]$};
+
+\node[block] (mA) at (2.7,-1.8) {$-[A(q)-1]$};
+\node[block] (delay) at (6.6,-1.8) {$q^{-1}$};
+
+\draw[->, thick] (u) -- (B);
+\draw[->, thick] (B) -- (add);
+\draw[->, thick, ufparred] (noise) -- (add);
+\draw[->, thick] (add) -- (y);
+\draw[->, thick] (y.south) |- (delay.east);
+\draw[->, thick] (delay.west) -| node[pos=0.3, right]{$y[k-1..n_a]$} (mA);
+\draw[->, thick] (mA) -- (add);
+\end{tikzpicture}
+```
+
+$B(q)$ realimenta a entrada; o bloco $-[A(q)-1]$ realimenta a própria saída — a estrutura recursiva que caracteriza um modelo dinâmico.
+
+---
+
+## Reescrevendo como Regressão Linear
+
+Isolando $y[k]$:
+
+$$y[k] = \underbrace{-a_1 y[k-1] - \dots - a_{n_a} y[k-n_a] + b_1 u[k-1] + \dots + b_{n_b} u[k-n_b]}_{\boldsymbol{\varphi}[k]^T \boldsymbol{\theta}} + e[k]$$
+
+Definindo o **vetor de regressores** e o **vetor de parâmetros**:
+
+$$\boldsymbol{\varphi}[k] = \begin{bmatrix} -y[k-1] \\ \vdots \\ -y[k-n_a] \\ u[k-1] \\ \vdots \\ u[k-n_b] \end{bmatrix}, \qquad
+\boldsymbol{\theta} = \begin{bmatrix} a_1 \\ \vdots \\ a_{n_a} \\ b_1 \\ \vdots \\ b_{n_b} \end{bmatrix}$$
+
+chega-se à mesma forma da aula 01:
+
+$$y[k] = \boldsymbol{\varphi}[k]^T \boldsymbol{\theta} + e[k]$$
+
+---
+
+## Montando a Matriz de Regressores $\boldsymbol{\Phi}$
+
+Empilhando $\boldsymbol{\varphi}[k]^T$ para $k = n+1, \dots, N$ (onde $n=\max(n_a,n_b)$), obtém-se o mesmo formato matricial da aula 01:
+
+$$\begin{bmatrix} y[n+1] \\ y[n+2] \\ \vdots \\ y[N] \end{bmatrix} =
+\begin{bmatrix} \boldsymbol{\varphi}[n+1]^T \\ \boldsymbol{\varphi}[n+2]^T \\ \vdots \\ \boldsymbol{\varphi}[N]^T \end{bmatrix} \boldsymbol{\theta} +
+\begin{bmatrix} e[n+1] \\ e[n+2] \\ \vdots \\ e[N] \end{bmatrix}$$
+
+$$\mathbf{Y} = \boldsymbol{\Phi}\, \boldsymbol{\theta} + \mathbf{E}$$
+
+A diferença para a aula 01 é **só o conteúdo** de $\boldsymbol{\Phi}$: antes eram colunas $[x_i, 1]$; agora são saídas e entradas passadas.
+
+---
+
+## Reconstruindo os Dados da Aula 02
+
+```{python}
+#| echo: true
+import numpy as np
+from scipy.signal import max_len_seq
+
+a1_true, b1_true = -0.7, 1.5
+sigma_e = 0.3
+
+def simula_arx(u, a1, b1, sigma_e, seed=None):
+    rng = np.random.default_rng(seed)
+    N = len(u)
+    y = np.zeros(N)
+    e = rng.normal(0, sigma_e, N)
+    for k in range(1, N):
+        y[k] = -a1 * y[k-1] + b1 * u[k-1] + e[k]
+    return y
+
+n_bits, Ts_bit, A = 7, 2, 1.5
+bits, _ = max_len_seq(n_bits)
+u_prbs = A * np.repeat(2*bits - 1, Ts_bit)
+
+y_prbs = simula_arx(u_prbs, a1_true, b1_true, sigma_e, seed=42)
+N = len(u_prbs)
+print(f"N = {N} amostras coletadas")
+```
+
+Mesma semente (`seed=42`) e mesmos parâmetros da aula 02 — reprodutibilidade garantida.
+
+---
+
+## Construindo $\boldsymbol{\Phi}$ e $\mathbf{Y}$ (caso $n_a=n_b=1$)
+
+```{python}
+#| echo: true
+# phi[k] = [-y[k-1], u[k-1]]  para k = 1, ..., N-1
+Phi = np.column_stack((-y_prbs[:-1], u_prbs[:-1]))
+Y = y_prbs[1:]
+
+print("Phi (5 primeiras linhas):")
+print(Phi[:5])
+print("Shape de Phi:", Phi.shape)
+```
+
+Cada linha de $\boldsymbol{\Phi}$ contém $[-y[k-1],\ u[k-1]]$; cada elemento de $\mathbf{Y}$ é o correspondente $y[k]$.
+
+---
+
+## Estimador de Mínimos Quadrados
+
+Exatamente a mesma equação normal da aula 01, agora aplicada a $\boldsymbol{\Phi}$:
+
+$$\boldsymbol{\theta} = \arg\min_{\boldsymbol{\theta}} \|\mathbf{Y} - \boldsymbol{\Phi}\boldsymbol{\theta}\|^2 \quad\Longrightarrow\quad \boldsymbol{\theta} = (\boldsymbol{\Phi}^T \boldsymbol{\Phi})^{-1} \boldsymbol{\Phi}^T \mathbf{Y}$$
+
+```{python}
+#| echo: true
+theta_hat = np.linalg.inv(Phi.T @ Phi) @ Phi.T @ Y
+a1_hat, b1_hat = theta_hat
+
+print(f"a1: verdadeiro={a1_true:.4f}  estimado={a1_hat:.4f}")
+print(f"b1: verdadeiro={b1_true:.4f}  estimado={b1_hat:.4f}")
+```
+
+Com dados gerados por PRBS, a estimativa fica muito próxima dos valores verdadeiros usados na simulação.
+
+---
+
+## Predição Um Passo à Frente
+
+O modelo estimado prevê $y[k]$ usando o **valor real** de $y[k-1]$ (disponível no conjunto de dados):
+
+```{python}
+#| echo: true
+y_pred_1passo = Phi @ theta_hat
+```
+
+```{python}
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.plot(Y, color='blue', label='Medido $y[k]$', marker='.', markersize=4)
+ax.plot(y_pred_1passo, color='red', label='Predito (1 passo)', linestyle='--')
+ax.set_xlabel('k'); ax.legend(); ax.grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+---
+
+## Predição vs. Simulação Livre
+
+Duas formas de usar o modelo estimado são bem diferentes:
+
+- **Predição um passo à frente**: usa o $y$ **real** do instante anterior — sempre disponível durante a estimação, mas "trapaceia" ao validar o modelo;
+- **Simulação livre**: realimenta a própria **saída predita**, sem nunca olhar o $y$ real — é o teste mais rigoroso, pois é assim que o modelo seria usado para prever o futuro sem medições.
+
+```{tikz}
+%%| fig-width: 7.5
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[font=\small]
+\node[align=center] at (0,1) {\textbf{Predição 1 passo}};
+\node[draw=ufpablue, thick, minimum width=2cm, minimum height=0.8cm] (m1) at (0,0) {Modelo};
+\node[align=center] at (-2.2,0) {$y[k-1]$\\(real)};
+\draw[->, thick] (-1.4,0) -- (m1);
+\draw[->, thick] (m1) -- ++(2,0) node[right]{$\hat y[k]$};
+
+\node[align=center] at (7,1) {\textbf{Simulação livre}};
+\node[draw=ufparred, thick, minimum width=2cm, minimum height=0.8cm] (m2) at (7,0) {Modelo};
+\draw[->, thick, ufparred] (m2.east) -- ++(1.6,0) node[right]{$\hat y[k]$} |- ++(0,-1.2) -| (m2.south);
+\node[align=center] at (4.8,0) {$\hat y[k-1]$\\(predita)};
+\draw[->, thick] (5.6,0) -- (m2);
+\end{tikzpicture}
+```
+
+---
+
+## Simulando em Malha Livre
+
+```{python}
+#| echo: true
+def simula_livre(u, theta):
+    a1, b1 = theta
+    N = len(u)
+    yhat = np.zeros(N)
+    for k in range(1, N):
+        yhat[k] = -a1 * yhat[k-1] + b1 * u[k-1]
+    return yhat
+
+y_livre = simula_livre(u_prbs, theta_hat)
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.plot(y_prbs, color='blue', label='Medido $y[k]$')
+ax.plot(y_livre, color='red', label='Simulação livre', linestyle='--')
+ax.set_xlabel('k'); ax.legend(); ax.grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+Mesmo em malha livre — sem nenhuma realimentação de dados reais — o modelo acompanha bem a saída medida: sinal de que $a_1, b_1$ foram bem estimados.
+
+---
+
+## Qualidade do Ajuste: métrica FIT%
+
+Uma métrica comum em identificação de sistemas normaliza o erro pela variação do próprio sinal:
+
+$$\text{FIT}\% = 100 \left(1 - \frac{\|\mathbf{y} - \hat{\mathbf{y}}\|}{\|\mathbf{y} - \bar{y}\|}\right)$$
+
+```{python}
+#| echo: true
+def fit_pct(y, y_hat):
+    return 100 * (1 - np.linalg.norm(y - y_hat) / np.linalg.norm(y - np.mean(y)))
+
+print(f"FIT% (predição 1 passo): {fit_pct(Y, y_pred_1passo):.2f}%")
+print(f"FIT% (simulação livre):  {fit_pct(y_prbs, y_livre):.2f}%")
+```
+
+FIT% = 100% seria ajuste perfeito; FIT% = 0% equivale a prever apenas a média do sinal.
+
+---
+
+## Resíduos
+
+O resíduo é a parte de $y[k]$ que o modelo **não** conseguiu explicar:
+
+$$\hat{e}[k] = y[k] - \boldsymbol{\varphi}[k]^T \hat{\boldsymbol{\theta}}$$
+
+```{python}
+#| echo: true
+residuos = Y - y_pred_1passo
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 3.5))
+ax.plot(residuos, color='purple', marker='.', markersize=4)
+ax.axhline(0, color='gray', linestyle=':')
+ax.set_xlabel('k'); ax.set_ylabel('$\\hat{e}[k]$'); ax.grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+Se o modelo captura bem a dinâmica, o resíduo deve parecer **ruído branco** — sem padrão temporal.
+
+---
+
+## Checando a "Brancura" dos Resíduos
+
+A **autocorrelação** mede se o resíduo em $k$ tem relação com o resíduo em $k-\ell$. Para ruído branco, ela deve ficar próxima de zero para $\ell \neq 0$:
+
+```{python}
+#| echo: true
+def acf(x, max_lag):
+    x = x - np.mean(x)
+    N = len(x)
+    c0 = np.sum(x * x) / N
+    return np.array([np.sum(x[:N-lag] * x[lag:]) / N / c0 for lag in range(max_lag + 1)])
+
+r = acf(residuos, max_lag=20)
+limite = 1.96 / np.sqrt(len(residuos))   # faixa de confiança ~95% para ruído branco
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 3.5))
+ax.stem(range(len(r)), r)
+ax.axhline(limite, color='red', linestyle='--'); ax.axhline(-limite, color='red', linestyle='--')
+ax.set_xlabel('atraso ($\\ell$)'); ax.set_ylabel('ACF'); ax.grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+Os valores permanecem dentro da faixa de 95% (linhas vermelhas) — consistente com resíduo branco, indicando que a estrutura $n_a=n_b=1$ foi suficiente.
+
+---
+
+## Efeito da Ordem do Modelo
+
+- **Ordem baixa demais** ($n_a, n_b$ pequenos): o modelo não tem "graus de liberdade" para capturar a dinâmica → resíduos correlacionados (viés);
+- **Ordem alta demais**: o modelo passa a ajustar o próprio ruído (*overfitting*) → parâmetros extras com pouco significado físico, sensíveis a novos dados;
+- Critérios formais de escolha de ordem (ex.: **AIC**, **critério de informação**) penalizam modelos com parâmetros em excesso — tema de aulas futuras.
+
+Na prática: aumente a ordem apenas enquanto o FIT% melhorar de forma expressiva e os resíduos permanecerem não-brancos.
+
+---
+
+## Voltando ao PRBS: e se fosse um Degrau?
+
+```{python}
+#| echo: true
+u_step = np.concatenate([np.zeros(10), A*np.ones(N-10)])
+y_step = simula_arx(u_step, a1_true, b1_true, sigma_e, seed=42)
+
+Phi_step = np.column_stack((-y_step[:-1], u_step[:-1]))
+theta_step = np.linalg.inv(Phi_step.T @ Phi_step) @ Phi_step.T @ y_step[1:]
+
+print(f"cond(Phi) com PRBS:  {np.linalg.cond(Phi):.1f}")
+print(f"cond(Phi) com degrau: {np.linalg.cond(Phi_step):.1f}")
+print(f"theta_hat (degrau): a1={theta_step[0]:.3f}, b1={theta_step[1]:.3f}  |  verdadeiro: a1={a1_true}, b1={b1_true}")
+```
+
+O número de condição de $\boldsymbol{\Phi}$ é muito maior com o degrau, e a estimativa de $b_1$ fica visivelmente pior — a **falta de persistência de excitação** compromete a identificação, mesmo usando o mesmo estimador de mínimos quadrados.
+
+---
+
+## Resumo
+
+- O modelo **ARX** vira uma regressão linear ao definir $\boldsymbol{\varphi}[k]$ com saídas e entradas passadas;
+- A mesma equação normal $\boldsymbol{\theta}=(\boldsymbol{\Phi}^T\boldsymbol{\Phi})^{-1}\boldsymbol{\Phi}^T\mathbf{Y}$ da aula 01 se aplica diretamente;
+- **Predição 1 passo** vs. **simulação livre** avaliam o modelo de formas diferentes — a simulação livre é o teste mais exigente;
+- **FIT%** e **autocorrelação dos resíduos** ajudam a julgar a qualidade e a ordem do modelo;
+- A qualidade da estimativa depende diretamente da **persistência de excitação** do sinal de entrada (aula 02).
+
+**Próximos temas:** modelos com ruído colorido (ARMAX), mínimos quadrados recursivo, seleção de ordem.
+
+---
+
+## Ver também
+
+Este mesmo estimador (ARX por mínimos quadrados) aplicado a sistemas reais e generalizado a dinâmicas mais complexas:
+
+- [ControleCC2CC](https://raphateixeira.github.io/ControleCC2CC/) — ARX de uma bancada motor-gerador real.
+- [Projeto-Aeropendulo](https://raphateixeira.github.io/Projeto-Aeropendulo/) — mesmo estimador aplicado ao aeropêndulo.
+- [Controle MPC-FCS de gerador DFIG](https://raphateixeira.github.io/ControleDFIG/Presents/03ControleDFIGpFCS.html) (ControleDFIG) — ARX multivariável num sistema trifásico, usado como modelo de predição num MPC.
+- [SINDy](https://raphateixeira.github.io/DataDrivenControl/SINDy/SINDyNota.html) e [Koopman](https://raphateixeira.github.io/DataDrivenControl/Koopman/KoopmanNota.html) (DataDrivenControl) — o mesmo estimador de mínimos quadrados, generalizado para dinâmicas não lineares.
+
+---
+
+## {text-align="center"}
+
+::: {style="margin-top: 15%; text-align: center;"}
+
+![](../../imgs/LogoUFPA.jpg){width="180px"}
+
+<br>
+
+### **Prof. Dr. Raphael Teixeira**
+Universidade Federal do Pará
+
+:::

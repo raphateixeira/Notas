@@ -1,0 +1,32 @@
+---
+title: "Identificação de Sistemas"
+subtitle: "Fundamentos — em construção"
+description: "Modelagem a partir de dados: mínimos quadrados, sinais PRBS, modelos ARX e LIT; extensão para métodos regularizados."
+author: "Raphael Teixeira"
+lang: pt-BR
+status: rascunho
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+::: {.callout-note}
+Tema em gestação: as notas são feitas primeiro nos slides de leitura dos livros e depois
+sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
+:::
+
+## Fontes (notas de leitura)
+
+* [Ljung — System Identification](../../leituras/ljung-system-identification/index.qmd)
+* [Pillonetto et al. — Regularized System Identification](../../leituras/pillonetto-regularized-system-identification/index.qmd)
+* [Brunton & Kutz — Data-Driven Science and Engineering](../../leituras/brunton-kutz-data-driven/index.qmd)
+
+## Notas
+
+* [Ajuste de reta](Ident01AjusteReta.qmd)
+* [Simulação de sistemas e sinais PRBS](Ident02SimulacaoPRBS.qmd)
+* [Modelos ARX por mínimos quadrados](Ident03ARXMinimosQuadrados.qmd)
+* [Identificação de um modelo LIT (notebook)](Ident04IdentificacaoLIT.ipynb)
+
+## Material relacionado
+
+* [DataDrivenControl](https://raphateixeira.github.io/DataDrivenControl/) — DeePC, Koopman e SINDy usam estas notas como base

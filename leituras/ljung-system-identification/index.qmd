@@ -1,0 +1,21 @@
+---
+title: "System Identification"
+subtitle: "Theory for the User"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+**Livro:** *System Identification: Theory for the User*
+**Autor(es):** Lennart Ljung
+**Edição:** 2ª ed., Prentice Hall PTR, 1999
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+Notas de Leitura:
+
+* Capítulo 1: [Notas de leitura (rascunho)](LSI01Exemplo.qmd)

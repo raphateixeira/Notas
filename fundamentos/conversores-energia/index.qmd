@@ -1,0 +1,29 @@
+---
+title: "Conversores de Energia"
+subtitle: "Fundamentos — em construção"
+description: "Conversores estáticos CC-CC e CC-CA: modelagem, dispositivos e controle."
+author: "Raphael Teixeira"
+lang: pt-BR
+status: rascunho
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+::: {.callout-note}
+Tema em gestação: as notas são feitas primeiro nos slides de leitura dos livros e depois
+sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
+:::
+
+## Fontes (notas de leitura)
+
+* [Komurcugil et al. — Advanced Control of Power Converters](../../leituras/hasan-advanced-control-power-converters/index.qmd)
+
+## Notas
+
+* [Cap. 1 — Introdução](Cap01Introducao.qmd)
+* [Cap. 5 — Conversores CC-CC](Cap05ConversoresCCCC.qmd)
+* [Cap. 6 — Inversores](Cap06Inversores.qmd)
+
+## Material relacionado
+
+* [ControleBuck](https://raphateixeira.github.io/ControleBuck/) — modelagem e controle do conversor Buck

@@ -1,0 +1,452 @@
+---
+title: 'Equivalentes Discretos'
+subtitle: "Sistema de Controle II"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+format: 
+  revealjs:
+    theme: [simple, ../../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: " "
+    center: true
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+execute:
+  echo: false
+engine: knitr
+---
+
+## Equivalentes Discretos
+
+
+---
+
+## Discretização por zoh
+
+Considere o sistema contínuo:
+
+$$ G(s) = \frac{Y(s)}{U(s)} = \frac{s+2}{s + 1} $$
+
+O equivalente discreto por zoh é obtido por:
+
+$$ G(z) = (1 - z^{-1}) \mathcal{Z}\left\{\frac{G(s)}{s}\right\} $$
+
+Fazendo a transformada Z da função de transferência contínua, temos:
+
+$$ G(z) = \frac{0.6321 z + 0.3679}{z - 0.3679} $$
+
+
+---
+
+## Discretização por mapeamento de polos e zeros
+
+Considerando um controlador contínuo com função de transferência:
+
+$$ C(s) = \frac{U(s)}{E(s)} = \frac{1}{s + 1} $$
+
+---
+
+## Discretização por Euler - Atraso
+
+---
+
+## Discretização por Euler - Avanço
+
+---
+
+
+## Equivalentes Discretos
+
+**Sumário**
+
+- Motivação: por que discretizar um controlador contínuo?
+- Revisão do mapeamento $s \to z$
+- Sistema de estudo: planta $G(s)$ e controlador $C(s)$
+- Discretização da planta por **ZOH** (equivalente exato)
+- Discretização do controlador por:
+  - Mapeamento de Polos e Zeros (*Matched*)
+  - Euler — Atraso (*Backward Difference*)
+  - Euler — Avanço (*Forward Difference*)
+  - Tustin (*Bilinear*)
+- Simulação da malha fechada com cada equivalente
+- Vantagens, desvantagens e recomendações práticas
+
+---
+
+## Motivação
+
+Em um sistema de controle digital, o controlador é implementado em um microcontrolador/DSP, mas o projeto é frequentemente feito no domínio contínuo $s$.
+
+Existem duas estratégias possíveis:
+
+1. **Projetar em $s$ e depois discretizar** o controlador resultante $C(s) \to C(z)$ — abordagem tratada nesta aula.
+2. Projetar diretamente em $z$ (controle digital direto) — assunto de aula futura.
+
+**Pergunta central:** dado um mesmo $C(s)$, diferentes métodos de discretização produzem diferentes $C(z)$. Isso impacta:
+
+- a localização dos polos/zeros discretos;
+- a estabilidade da malha fechada;
+- o desempenho transitório (overshoot, tempo de acomodação);
+- a complexidade de implementação no hardware.
+
+---
+
+## Revisão: o mapeamento $s \to z$
+
+A relação exata entre os planos $s$ e $z$ é dada pela amostragem ideal:
+
+$$ z = e^{sT} $$
+
+onde $T$ é o período de amostragem. Cada método de discretização é uma **aproximação** (ou aplicação exata, no caso do ZOH) dessa relação:
+
+- **ZOH:** usa $z=e^{sT}$ de forma exata sobre a resposta ao segurador de ordem zero.
+- **Mapeamento de Polos e Zeros:** aplica $z=e^{sT}$ diretamente a cada polo/zero finito de $C(s)$.
+- **Euler Atraso:** aproxima $s \approx \dfrac{1-z^{-1}}{T}$. Mapeia o SPE *(semiplano esquerdo)* para o **interior de um círculo de raio $1/2$ centrado em $z=1/2$** — sempre estável, porém conservador.
+- **Euler Avanço:** aproxima $s \approx \dfrac{z-1}{T}$. Mapeia o SPE para o semiplano $\text{Re}(z) < 1$, que **não está contido** no círculo unitário — pode gerar **instabilidade numérica** mesmo quando $C(s)$ é estável.
+- **Tustin (bilinear):** aproxima $s \approx \dfrac{2}{T}\dfrac{z-1}{z+1}$. Mapeia **todo** o SPE para o interior do círculo unitário — sempre estável, com distorção (*warping*) de frequência.
+
+---
+
+## Sistema de estudo
+
+Planta contínua:
+
+$$ G(s) = \frac{Y(s)}{U(s)} = \frac{s+2}{s+1} $$
+
+Controlador contínuo (já projetado, por exemplo via alocação de polos ou lugar das raízes):
+
+$$ C(s) = \frac{U(s)}{E(s)} = \frac{1}{s+1} $$
+
+Período de amostragem adotado para os exemplos algébricos:
+
+$$ T = 1 \ \text{s} $$
+
+de modo que $e^{-T} = e^{-1} = 0{,}3679$, o que mantém os cálculos limpos e fáceis de verificar.
+
+**Estratégia:** a planta é discretizada de forma **exata** por ZOH (é o que realmente ocorre fisicamente entre o DAC e o processo). O controlador, por outro lado, será discretizado pelos **quatro métodos aproximados**, permitindo comparar o impacto de cada escolha na malha fechada.
+
+---
+
+## Discretização por ZOH — definição
+
+O equivalente discreto por segurador de ordem zero é obtido por:
+
+$$ G(z) = (1 - z^{-1}) \, \mathcal{Z}\left\{\frac{G(s)}{s}\right\} $$
+
+Esse é o equivalente **exato** para uma entrada $u(t)$ constante entre amostras (segurador de ordem zero), e por isso é usado aqui para representar a planta real amostrada.
+
+---
+
+## Discretização por ZOH — aplicação a $G(s)$
+
+Passo 1 — expandir $\dfrac{G(s)}{s}$ em frações parciais:
+
+$$ \frac{G(s)}{s} = \frac{s+2}{s(s+1)} = \frac{A}{s} + \frac{B}{s+1} $$
+
+$$ A = \left.\frac{s+2}{s+1}\right|_{s=0} = 2 \qquad B = \left.\frac{s+2}{s}\right|_{s=-1} = -1 $$
+
+$$ \frac{G(s)}{s} = \frac{2}{s} - \frac{1}{s+1} $$
+
+Passo 2 — aplicar a transformada Z (tabela):
+
+$$ \mathcal{Z}\left\{\frac{2}{s}\right\} = \frac{2z}{z-1} \qquad \mathcal{Z}\left\{\frac{1}{s+1}\right\} = \frac{z}{z-e^{-T}} $$
+
+$$ \mathcal{Z}\left\{\frac{G(s)}{s}\right\} = \frac{2z}{z-1} - \frac{z}{z-e^{-T}} $$
+
+---
+
+## Discretização por ZOH — finalizando a álgebra
+
+Passo 3 — multiplicar por $(1-z^{-1}) = \dfrac{z-1}{z}$:
+
+$$ G(z) = \frac{z-1}{z}\left[\frac{2z}{z-1} - \frac{z}{z-e^{-T}}\right] = 2 - \frac{z-1}{z-e^{-T}} $$
+
+Passo 4 — colocar em fração única:
+
+$$ G(z) = \frac{2(z-e^{-T}) - (z-1)}{z - e^{-T}} = \frac{z + (1-2e^{-T})}{z - e^{-T}} $$
+
+Passo 5 — substituir $T=1$ ($e^{-1}=0{,}3679$):
+
+$$ \boxed{G(z) = \frac{z + 0{,}2642}{z - 0{,}3679}} $$
+
+**Verificação (ganho DC):** em $z=1$: $\dfrac{1{,}2642}{0{,}6321} = 2{,}000$, igual a $G(0)=\dfrac{0+2}{0+1}=2$. ✔
+
+---
+
+## Mapeamento de Polos e Zeros — definição
+
+Também chamado **Matched z-Transform**. Regra:
+
+1. Cada polo/zero finito $s=p_i$ é mapeado por $z_i = e^{p_i T}$.
+2. Se o número de polos exceder o de zeros em $m$, adiciona-se o fator $(z+1)^m$ ao numerador (associa um zero em $z=-1$, na frequência de Nyquist, para cada polo "excedente").
+3. O ganho é ajustado para casar o ganho estático (DC): $C(z)\big|_{z=1} = C(s)\big|_{s=0}$.
+
+---
+
+## Mapeamento de Polos e Zeros — aplicação a $C(s)$
+
+$$ C(s) = \frac{1}{s+1} \qquad \text{(1 polo em } s=-1\text{, 0 zeros, excesso } m=1\text{)} $$
+
+Passo 1 — mapear o polo:
+
+$$ z_{polo} = e^{-1\cdot T} = e^{-T} $$
+
+Passo 2 — incluir o fator $(z+1)^1$ no numerador (excesso de 1 polo):
+
+$$ C(z) = K\,\frac{z+1}{z - e^{-T}} $$
+
+Passo 3 — casar o ganho DC, $C(s=0)=1$:
+
+$$ K\,\frac{1+1}{1-e^{-T}} = 1 \quad\Rightarrow\quad K = \frac{1-e^{-T}}{2} $$
+
+Passo 4 — substituir $T=1$:
+
+$$ K = \frac{1-0{,}3679}{2} = 0{,}3161 $$
+
+$$ \boxed{C(z) = \frac{0{,}3161\,(z+1)}{z - 0{,}3679} = \frac{0{,}3161\,z + 0{,}3161}{z - 0{,}3679}} $$
+
+---
+
+## Euler — Atraso (Backward Difference) — definição
+
+Aproxima a derivada por diferença atrasada:
+
+$$ \dot{x}(k) \approx \frac{x(k)-x(k-1)}{T} \quad\Longrightarrow\quad s \approx \frac{1-z^{-1}}{T} = \frac{z-1}{Tz} $$
+
+Essa substituição é feita **diretamente** na função de transferência $C(s)$, sem passar por fração parcial — é a forma mais simples de obter $C(z)$ "na mão".
+
+---
+
+## Euler — Atraso — aplicação a $C(s)$
+
+Substituindo $s = \dfrac{z-1}{Tz}$ em $C(s) = \dfrac{1}{s+1}$:
+
+$$ C(z) = \cfrac{1}{\dfrac{z-1}{Tz}+1} = \frac{Tz}{(z-1) + Tz} = \frac{Tz}{(1+T)z - 1} $$
+
+Dividindo numerador e denominador por $(1+T)$:
+
+$$ C(z) = \frac{\frac{T}{1+T}\,z}{z - \frac{1}{1+T}} $$
+
+Substituindo $T=1$:
+
+$$ \frac{T}{1+T} = \frac{1}{2} = 0{,}5 \qquad \frac{1}{1+T} = \frac{1}{2} = 0{,}5 $$
+
+$$ \boxed{C(z) = \frac{0{,}5\,z}{z - 0{,}5}} $$
+
+**Polo discreto:** $z = 0{,}5$ — sempre dentro do círculo unitário para $T>0$ (consistente com o mapeamento no círculo $|z-0{,}5|<0{,}5$).
+
+---
+
+## Euler — Avanço (Forward Difference) — definição
+
+Aproxima a derivada por diferença avançada:
+
+$$ \dot{x}(k) \approx \frac{x(k+1)-x(k)}{T} \quad\Longrightarrow\quad s \approx \frac{z-1}{T} $$
+
+**Atenção:** essa aproximação mapeia o semiplano esquerdo de $s$ para a região $\text{Re}(z)<1$, que não coincide com o círculo unitário. Polos rápidos (próximos da origem deslocada) ou $T$ grande podem produzir **polos discretos instáveis**.
+
+---
+
+## Euler — Avanço — aplicação a $C(s)$
+
+Substituindo $s = \dfrac{z-1}{T}$ em $C(s) = \dfrac{1}{s+1}$:
+
+$$ C(z) = \cfrac{1}{\dfrac{z-1}{T}+1} = \frac{T}{(z-1)+T} = \frac{T}{z - (1-T)} $$
+
+Substituindo $T=1$:
+
+$$ \boxed{C(z) = \frac{1}{z}} $$
+
+**Polo discreto:** $z = 1-T = 0$. Observe que, de forma geral, o polo é $z=1-T$:
+
+- $T<2 \Rightarrow$ polo dentro do círculo unitário (estável);
+- $T=2 \Rightarrow$ polo em $z=-1$ (marginalmente estável);
+- $T>2 \Rightarrow$ polo fora do círculo unitário (**instável!**), mesmo com $C(s)$ estável.
+
+Esse é o principal risco prático do método de Euler Avanço.
+
+---
+
+## Tustin (Bilinear) — definição
+
+Aproxima a integração trapezoidal, resultando em:
+
+$$ s \approx \frac{2}{T}\cdot\frac{z-1}{z+1} $$
+
+É a única aproximação, entre as discutidas, que mapeia **todo** o semiplano esquerdo de $s$ para o **interior** do círculo unitário em $z$ — preserva estabilidade para qualquer $T>0$. Em compensação, introduz distorção de frequência (*frequency warping*), mais perceptível perto da frequência de Nyquist.
+
+---
+
+## Tustin — aplicação a $C(s)$
+
+Substituindo $s = \dfrac{2}{T}\cdot\dfrac{z-1}{z+1}$ em $C(s) = \dfrac{1}{s+1}$:
+
+$$ C(z) = \cfrac{1}{\dfrac{2}{T}\cdot\dfrac{z-1}{z+1}+1} = \frac{T(z+1)}{2(z-1)+T(z+1)} $$
+
+Agrupando termos em $z$:
+
+$$ C(z) = \frac{T(z+1)}{(2+T)z + (T-2)} $$
+
+Substituindo $T=1$:
+
+$$ \boxed{C(z) = \frac{z+1}{3z - 1}} $$
+
+**Polo discreto:** $z = 1/3 = 0{,}3333$.
+
+---
+
+## Quadro comparativo — $C(z)$ para $T=1$ s
+
+| Método | $C(z)$ | Polo | Ganho DC ($z=1$) |
+|---|---|---|---|
+| Polo-Zero (*matched*) | $\dfrac{0{,}3161(z+1)}{z-0{,}3679}$ | $0{,}3679$ | $1{,}000$ |
+| Euler Atraso | $\dfrac{0{,}5\,z}{z-0{,}5}$ | $0{,}5$ | $1{,}000$ |
+| Euler Avanço | $\dfrac{1}{z}$ | $0$ | $1{,}000$ |
+| Tustin | $\dfrac{z+1}{3z-1}$ | $0{,}3333$ | $1{,}000$ |
+
+**Observações:**
+
+- Todos os métodos preservam o ganho estático (conferido em $z=1$), como esperado de uma boa aproximação de $C(s=0)=1$.
+- Todos resultam estáveis para $T=1$ s, mas com **polos em posições bem diferentes** — o que afeta diretamente a dinâmica da malha fechada.
+- Para $T>2$ s, o Euler Avanço se tornaria instável; os demais permaneceriam estáveis.
+
+---
+
+## Estrutura da malha fechada
+
+Realimentação unitária negativa, com a planta amostrada (ZOH, exata) e o controlador discretizado por cada um dos métodos:
+
+$$ T_{mf}(z) = \frac{C(z)\,G(z)}{1 + C(z)\,G(z)} $$
+
+com
+
+$$ G(z) = \frac{z+0{,}2642}{z-0{,}3679} \qquad \text{(fixo, equivalente exato da planta)} $$
+
+variando apenas $C(z)$ conforme a tabela anterior. Isso isola o efeito de **cada método de discretização do controlador** sobre o desempenho da malha fechada.
+
+---
+
+## Simulação — MATLAB
+
+```matlab
+% Sistema continuo
+s  = tf('s');
+Gs = (s + 2)/(s + 1);
+Cs = 1/(s + 1);
+
+T = 1;  % periodo de amostragem (s)
+
+% Planta: equivalente ZOH (representa a amostragem real do processo)
+Gz = c2d(Gs, T, 'zoh');
+
+% Controlador discretizado por 4 metodos distintos
+Cz_pz     = c2d(Cs, T, 'matched');   % mapeamento de polos e zeros
+Cz_atraso = c2d(Cs, T, 'backward');  % Euler atraso (backward difference)
+Cz_avanco = c2d(Cs, T, 'forward');   % Euler avanco (forward difference)
+Cz_tustin = c2d(Cs, T, 'tustin');    % Tustin (bilinear)
+
+metodos = {'Polo-Zero', 'Euler Atraso', 'Euler Avanco', 'Tustin'};
+Cz_all  = {Cz_pz, Cz_atraso, Cz_avanco, Cz_tustin};
+
+figure; hold on;
+for k = 1:numel(Cz_all)
+    Tmf = feedback(Cz_all{k}*Gz, 1);
+    step(Tmf, 0:T:10);
+end
+legend(metodos);
+title('Malha fechada: resposta ao salto para cada equivalente do controlador');
+xlabel('Tempo (s)'); ylabel('Saida'); grid on;
+```
+
+---
+
+## Simulação — Python
+
+```python
+import control as ct
+import numpy as np
+import matplotlib.pyplot as plt
+
+s = ct.tf('s')
+Gs = (s + 2) / (s + 1)
+Cs = 1 / (s + 1)
+
+T = 1.0  # periodo de amostragem (s)
+
+# Planta: equivalente ZOH
+Gz = ct.sample_system(Gs, T, method='zoh')
+
+# Controlador discretizado por 4 metodos distintos
+metodos = {
+    'Polo-Zero':    ct.sample_system(Cs, T, method='matched'),
+    'Euler Atraso':  ct.sample_system(Cs, T, method='backward_diff'),
+    'Euler Avanco':  ct.sample_system(Cs, T, method='euler'),
+    'Tustin':        ct.sample_system(Cs, T, method='tustin'),
+}
+
+plt.figure()
+for nome, Cz in metodos.items():
+    Tmf = ct.feedback(Cz * Gz, 1)
+    t, y = ct.step_response(Tmf, T=np.arange(0, 10, T))
+    plt.step(t, y, where='post', label=nome)
+
+plt.legend()
+plt.xlabel('Tempo (s)')
+plt.ylabel('Saída')
+plt.title('Malha fechada: resposta ao salto para cada equivalente do controlador')
+plt.grid(True)
+plt.show()
+```
+
+*Observação: os nomes exatos dos métodos podem variar entre versões da biblioteca `control`; consulte `help(ct.sample_system)` para confirmar as opções disponíveis na sua instalação.*
+
+---
+
+## Interpretação dos resultados esperados
+
+Com a planta fixa em $G(z)$ (ZOH exato) e variando apenas $C(z)$:
+
+- **Polo-Zero e ZOH (referência):** tendem a reproduzir mais fielmente a dinâmica do projeto contínuo original, pois preservam exatamente a posição do polo de $C(s)$ mapeado por $e^{sT}$.
+- **Tustin:** desempenho muito próximo do contínuo para $T$ pequeno; à medida que $T$ cresce, a distorção de frequência desloca a dinâmica efetiva, podendo alterar margens de fase/ganho.
+- **Euler Atraso:** tende a ser mais lento/conservador — o polo discreto fica mais próximo de $z=0$ do que o "correto" ($0{,}5$ vs. $0{,}3679$), reduzindo a banda passante efetiva do controlador.
+- **Euler Avanço:** para $T=1$ s ainda é estável, mas é o método mais sensível — pequenos aumentos de $T$ (ou polos mais rápidos no controlador) podem levar a instabilidade na malha fechada, mesmo que $C(s)$ e $G(s)$ sejam ambos estáveis.
+
+**Recomendação prática:** repetir a simulação aumentando $T$ progressivamente (por exemplo, $T=0{,}5$, $1$, $2$, $3$ s) deixa visualmente claro o ponto em que o Euler Avanço se torna instável, enquanto Tustin e Polo-Zero permanecem estáveis.
+
+---
+
+## Vantagens e desvantagens — quadro-resumo
+
+| Método | Vantagens | Desvantagens |
+|---|---|---|
+| **ZOH** | Exato para entrada constante entre amostras; referência "padrão-ouro" | Exige fatoração em fração parcial; mais trabalho algébrico |
+| **Polo-Zero (*matched*)| Preserva exatamente a posição dos polos/zeros mapeados; simples para sistemas de baixa ordem | Regra de adição de zeros pode ser ambígua em sistemas complexos; não é exato entre amostras |
+| **Euler Atraso** | Implementação trivialíssima; sempre estável se $C(s)$ é estável | Impreciso para $T$ grande; tende a "atrasar"/suavizar demais a dinâmica |
+| **Euler Avanço** | Implementação trivialíssima; forma recursiva direta (sem solução implícita) | Pode instabilizar a malha mesmo com $C(s)$ estável; exige $T$ pequeno |
+| **Tustin** | Sempre estável; boa fidelidade em baixas frequências; muito usado na prática (ex.: `c2d` padrão em muitas ferramentas) | Distorção de frequência (*warping*) perto de Nyquist; pode exigir pré-distorção (*prewarping*) em projetos críticos |
+
+---
+
+## Conclusões
+
+- Não existe um único "melhor" método de discretização — a escolha depende de $T$, da ordem do sistema e da criticidade da aplicação.
+- **ZOH** é o equivalente correto para a planta (reflete a física do segurador de ordem zero).
+- Para o **controlador**, Tustin e mapeamento de Polos e Zeros costumam ser as escolhas mais robustas em projetos reais.
+- Euler Avanço deve ser usado com cautela — verificar sempre a posição dos polos discretos resultantes antes de implementar em hardware.
+- Sempre simular a malha fechada completa (controlador + planta) antes de concluir qual discretização é adequada — a estabilidade do controlador isolado não garante o desempenho da malha fechada.
+
+---
+
+## Referências
+
+- OGATA, K. *Discrete-Time Control Systems*. 2ª ed. Prentice Hall.
+- FRANKLIN, G. F.; POWELL, J. D.; WORKMAN, M. L. *Digital Control of Dynamic Systems*. 3ª ed. Addison-Wesley.
+- ÅSTRÖM, K. J.; WITTENMARK, B. *Computer-Controlled Systems: Theory and Design*. 3ª ed. Prentice Hall.
+
+

@@ -1,0 +1,21 @@
+---
+title: "Regularized System Identification"
+subtitle: "Learning Dynamic Models from Data"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+lang: pt-BR
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+**Livro:** *Regularized System Identification: Learning Dynamic Models from Data*
+**Autor(es):** Gianluigi Pillonetto, Tianshi Chen, Alessandro Chiuso, Giuseppe De Nicolao, Lennart Ljung
+**Edição:** Springer, 2022 (open access)
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+Notas de Leitura:
+
+* Capítulo 1: [Notas de leitura (rascunho)](RSI01Exemplo.qmd)

@@ -29,24 +29,38 @@ website:
         href: https://raphateixeira.github.io/index.html
       - text: "Notas"
         href: index.qmd
+      - text: "Fundamentos"
+        menu:
+          - text: "Identificação de Sistemas"
+            href: fundamentos/identificacao-sistemas/index.qmd
+          - text: "Controle Preditivo (MPC)"
+            href: fundamentos/controle-mpc/index.qmd
+          - text: "Controle Digital"
+            href: fundamentos/controle-digital/index.qmd
+          - text: "Conversores de Energia"
+            href: fundamentos/conversores-energia/index.qmd
       - text: "Livros"
         menu:
           - text: "Chan — Introduction to Probability for Data Science"
-            href: chan-probabilidade/index.qmd
+            href: leituras/chan-probabilidade/index.qmd
           - text: "Brunton — Optimization"
-            href: brunton-otimizacao/index.qmd
+            href: leituras/brunton-otimizacao/index.qmd
           - text: "Brunton & Kutz — Data-Driven Science and Engineering"
-            href: brunton-kutz-data-driven/index.qmd
+            href: leituras/brunton-kutz-data-driven/index.qmd
           - text: "Bishop — Deep Learning: Foundations and Concepts"
-            href: bishop-deep-learning/index.qmd
+            href: leituras/bishop-deep-learning/index.qmd
           - text: "Strang — Linear Algebra and Learning from Data"
-            href: strang-linear-algebra/index.qmd
+            href: leituras/strang-linear-algebra/index.qmd
           - text: "Ventura Araújo — Differential Geometry"
-            href: ventura-geometria-diferencial/index.qmd
+            href: leituras/ventura-geometria-diferencial/index.qmd
           - text: "Larson — Multivariable Calculus"
-            href: larson-calculo-multivariavel/index.qmd
+            href: leituras/larson-calculo-multivariavel/index.qmd
           - text: "Komurcugil et al. — Advanced Control of Power Converters"
-            href: hasan-advanced-control-power-converters/index.qmd
+            href: leituras/hasan-advanced-control-power-converters/index.qmd
+          - text: "Ljung — System Identification: Theory for the User"
+            href: leituras/ljung-system-identification/index.qmd
+          - text: "Pillonetto et al. — Regularized System Identification"
+            href: leituras/pillonetto-regularized-system-identification/index.qmd
   page-footer:
     border: false
     center: "©2026 Prof. Dr. Raphael Teixeira — UFPA-CAMTUC-FEE"

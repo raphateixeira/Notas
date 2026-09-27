@@ -1,0 +1,441 @@
+---
+title: "Simulação de Sistemas e Sinais PRBS"
+subtitle: "Identificação de Sistemas"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+editor:
+  render-on-save: false
+filters:
+  - quarto-tikz
+format:
+  revealjs:
+    theme: [simple, ../../TemaRTx.scss]
+    self-contained: true
+    transition: fade
+    slide-number: true
+    scrollable: true
+    width: 1600
+    height: 900
+    footer: " "
+    center: false
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: monokai
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Da Estática à Dinâmica
+
+Na aula anterior, ajustamos uma reta a dados **estáticos**: cada saída $y_i$ dependia apenas da entrada $x_i$ correspondente, no mesmo instante.
+
+Sistemas **dinâmicos** têm memória: a saída no instante $k$ depende de entradas e saídas **passadas**.
+
+- Nível de um tanque depende da vazão de entrada acumulada;
+- Velocidade de um motor DC depende da tensão aplicada e da inércia;
+- Temperatura de um forno responde de forma gradual à potência aplicada.
+
+Para identificar esses sistemas, precisamos de dados que capturem essa dinâmica — e de um **sinal de entrada bem projetado** para excitá-la.
+
+---
+
+## Representação Entrada-Saída
+
+Um sistema dinâmico discreto pode ser visto como um operador que transforma uma entrada $u[k]$ em uma saída $y[k]$, sujeito a uma perturbação $e[k]$:
+
+```{tikz}
+%%| fig-width: 7
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[
+  block/.style={draw=ufpablue, thick, minimum width=2.6cm, minimum height=1.2cm, align=center, fill=ufpablue!5},
+  sum/.style={draw=ufpablue, thick, circle, minimum size=0.7cm},
+  >=stealth
+]
+\node[block] (sys) at (3,0) {Sistema\\Dinâmico};
+\node[sum] (add) at (6.3,0) {$+$};
+\node (out) at (8.6,0) {$y[k]$};
+\node[draw=ufparred, dashed, minimum width=1.1cm, minimum height=1cm] (noise) at (6.3,1.7) {$e[k]$};
+
+\draw[->, thick] (0,0) -- node[above]{$u[k]$} (sys);
+\draw[->, thick] (sys) -- (add);
+\draw[->, thick, ufparred] (noise) -- (add);
+\draw[->, thick] (add) -- (out);
+\end{tikzpicture}
+```
+
+$u[k]$: entrada (conhecida/controlada); $y[k]$: saída medida; $e[k]$: ruído/perturbação não medida.
+
+---
+
+## Por que Simular?
+
+Antes de aplicar identificação a um sistema real, é valioso **simular** um sistema com parâmetros conhecidos:
+
+- Permite gerar dados de forma controlada e repetível;
+- O "gabarito" (parâmetros verdadeiros) é conhecido, então dá para **validar** se o método de identificação funciona;
+- Facilita testar o efeito de diferentes sinais de entrada, ruídos e quantidades de dados — sem custo nem risco de um experimento real.
+
+Vamos simular um sistema simples, coletar dados de entrada e saída, e (na próxima aula) estimar seus parâmetros a partir desses dados.
+
+---
+
+## Modelo ARX de Referência
+
+Um modelo discreto muito usado para representar a dinâmica é o **ARX** (*AutoRegressive with eXogenous input*):
+
+$$A(q)\,y[k] = B(q)\,u[k] + e[k]$$
+
+Com $A(q) = 1 + a_1 q^{-1}$ e $B(q) = b_1 q^{-1}$ ($q^{-1}$ é o operador atraso: $q^{-1}y[k] = y[k-1]$), o modelo se escreve:
+
+$$y[k] + a_1\, y[k-1] = b_1\, u[k-1] + e[k]$$
+
+Isolando $y[k]$:
+
+$$y[k] = -a_1\, y[k-1] + b_1\, u[k-1] + e[k]$$
+
+Vamos adotar os valores verdadeiros $a_1 = -0{,}7$ e $b_1 = 1{,}5$ para gerar os dados simulados.
+
+---
+
+## Diagrama de Blocos do ARX
+
+```{tikz}
+%%| fig-width: 8.5
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[
+  block/.style={draw=ufpablue, thick, minimum width=1.4cm, minimum height=0.9cm, align=center},
+  gain/.style={draw=ufpablue, thick, minimum width=1.4cm, minimum height=0.8cm, align=center, fill=ufpablue!5},
+  sum/.style={draw=ufpablue, thick, circle, minimum size=0.6cm},
+  >=stealth
+]
+\node[sum] (add) at (4,0) {$+$};
+\node (y) at (6,0) {$y[k]$};
+
+\node[gain] (b1) at (0,0) {$b_1$};
+\node (u) at (-2.3,0) {$u[k-1]$};
+
+\node[gain] (a1) at (2,-1.6) {$-a_1$};
+\node[block] (delay) at (5.2,-1.6) {$q^{-1}$};
+
+\node[draw=ufparred, dashed, minimum width=1cm, minimum height=0.8cm] (noise) at (4,1.6) {$e[k]$};
+
+\draw[->, thick] (u) -- (b1);
+\draw[->, thick] (b1) -- (add);
+\draw[->, thick, ufparred] (noise) -- (add);
+\draw[->, thick] (add) -- (y);
+\draw[->, thick] (y.south) |- (delay.east);
+\draw[->, thick] (delay.west) -| node[pos=0.25, right]{$y[k-1]$} (a1);
+\draw[->, thick] (a1) -- (add);
+\end{tikzpicture}
+```
+
+A saída realimenta a própria entrada do sistema (laço com atraso $q^{-1}$) — essa é a diferença estrutural em relação ao ajuste de reta, que não tinha realimentação.
+
+---
+
+## Simulando o ARX em Python
+
+```{python}
+#| echo: true
+import numpy as np
+
+a1_true, b1_true = -0.7, 1.5
+sigma_e = 0.3
+
+def simula_arx(u, a1, b1, sigma_e, seed=None):
+    rng = np.random.default_rng(seed)
+    N = len(u)
+    y = np.zeros(N)
+    e = rng.normal(0, sigma_e, N)
+    for k in range(1, N):
+        y[k] = -a1 * y[k-1] + b1 * u[k-1] + e[k]
+    return y
+```
+
+A função reproduz, amostra a amostra, a equação de diferenças do modelo ARX — este será nosso "sistema real" a ser identificado.
+
+---
+
+## Qual Sinal de Entrada Usar?
+
+Testando o sistema com um simples degrau:
+
+```{python}
+np.random.seed(7)
+N = 60
+u_degrau = np.concatenate([np.zeros(10), np.ones(N-10)])
+y_degrau = simula_arx(u_degrau, a1_true, b1_true, sigma_e, seed=1)
+
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(1, 2, figsize=(11, 3.5))
+ax[0].step(range(N), u_degrau, color='darkorange', where='post')
+ax[0].set_title('Entrada $u[k]$ (degrau)'); ax[0].set_xlabel('k'); ax[0].grid(alpha=0.4)
+ax[1].plot(y_degrau, color='blue', marker='.')
+ax[1].set_title('Saída $y[k]$'); ax[1].set_xlabel('k'); ax[1].grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+Após o transitório, $u$ e $y$ ficam **constantes**: poucas amostras carregam informação nova sobre a dinâmica. Um único degrau **não excita** o sistema o suficiente para estimar bem $a_1$ e $b_1$.
+
+---
+
+## Persistência de Excitação
+
+Para estimar os parâmetros com confiança, o sinal de entrada precisa ser **persistentemente excitante**: variar de forma rica o bastante para que a dinâmica do sistema se manifeste em várias condições.
+
+Sinais de excitação comuns:
+
+- **Degrau / sequência de degraus** — simples, mas pobre em conteúdo espectral;
+- **Ruído branco** — rico, mas amplitude difícil de limitar (picos podem saturar atuadores);
+- **PRBS** (*Pseudo-Random Binary Sequence*) — alterna entre dois níveis fixos, combina riqueza espectral com amplitude limitada;
+- **Chirp / multissenoidal** — varredura controlada de frequências.
+
+Vamos explorar o **PRBS**, um dos sinais mais usados na prática de identificação de sistemas.
+
+---
+
+## Sequência Binária Pseudoaleatória (PRBS)
+
+Um PRBS é um sinal que alterna **deterministicamente** entre dois níveis (ex.: $-A$ e $+A$), mas com um padrão que **se comporta estatisticamente como ruído branco**.
+
+Propriedades:
+
+- **Periódico e determinístico** — reprodutível, ao contrário de ruído real;
+- **Espectro aproximadamente plano** (banda larga) até uma frequência de corte;
+- **Autocorrelação próxima de um impulso** — característica de ruído branco;
+- **Amplitude limitada** a dois níveis — protege atuadores e sensores contra excessos.
+
+Por isso é um sinal muito usado para excitar sistemas antes de um experimento de identificação.
+
+---
+
+## Gerando PRBS: Registrador de Deslocamento (LFSR)
+
+A forma clássica de gerar um PRBS é um **LFSR** (*Linear Feedback Shift Register*): um registrador de $n$ bits cujo bit de entrada é a soma (XOR) de bits específicos ("taps") do próprio registrador.
+
+```{tikz}
+%%| fig-width: 8
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[
+  cell/.style={draw=ufpablue, thick, minimum width=0.9cm, minimum height=0.9cm},
+  xorgate/.style={draw=ufparred, thick, circle, minimum size=0.5cm},
+  >=stealth
+]
+\foreach \i/\lbl in {0/b_4, 1/b_3, 2/b_2, 3/b_1} {
+  \node[cell] (r\i) at (\i*1.2,0) {$\lbl$};
+}
+\node[xorgate] (x) at (5.4,-1.3) {XOR};
+\node (out) at (7.2,0) {saída};
+
+\draw[->, thick] (r0.south) |- (x.west);
+\draw[->, thick] (r3.south) |- (x.east);
+\draw[->, thick, ufparred] (x.north) -- ++(0,1.9) -| (r0.north);
+\draw[->, thick] (r3) -- (out);
+\end{tikzpicture}
+```
+
+Com uma escolha adequada de taps (polinômio primitivo), o LFSR percorre **todos** os $2^n - 1$ estados não nulos antes de repetir — gerando a sequência de **comprimento máximo**.
+
+---
+
+## PRBS "na Mão" (n = 4 bits)
+
+```{python}
+#| echo: true
+def lfsr(seed, taps, n_bits):
+    reg = list(seed)
+    out = []
+    for _ in range(n_bits):
+        out.append(reg[-1])
+        fb = reg[0] ^ reg[taps]      # XOR entre dois bits do registrador
+        reg = [fb] + reg[:-1]        # desloca e insere o novo bit
+    return out
+
+seq = lfsr(seed=[1,1,1,1], taps=3, n_bits=20)
+print(seq)
+print("Período =", 2**4 - 1, "(comprimento máximo para n=4)")
+```
+
+A sequência de 15 bits se repete a partir da 16ª amostra — comprimento máximo $2^4-1=15$, como esperado.
+
+---
+
+## PRBS na Prática: `scipy.signal`
+
+Para uso real, geramos sequências mais longas com `scipy.signal.max_len_seq`:
+
+```{python}
+#| echo: true
+from scipy.signal import max_len_seq
+
+n_bits = 7                          # período = 2^7 - 1 = 127
+bits, _ = max_len_seq(n_bits)
+prbs_unit = 2 * bits - 1             # converte {0,1} -> {-1,+1}
+
+Ts_bit = 2                           # amostras por bit (segura o nível por Ts_bit passos)
+A = 1.5                              # amplitude
+u_prbs = A * np.repeat(prbs_unit, Ts_bit)
+
+print(f"Comprimento do PRBS: {len(u_prbs)} amostras")
+```
+
+`Ts_bit` (duração de cada bit) controla a **faixa de frequências** excitada — veremos isso na análise espectral.
+
+---
+
+## Degrau vs. PRBS
+
+```{python}
+N = len(u_prbs)
+u_step = np.concatenate([np.zeros(10), A*np.ones(N-10)])
+
+fig, ax = plt.subplots(figsize=(10, 3.5))
+ax.step(range(N), u_step, color='darkorange', where='post', label='Degrau')
+ax.step(range(N), u_prbs, color='blue', where='post', label='PRBS', alpha=0.8)
+ax.set_xlabel('k'); ax.set_ylabel('u[k]'); ax.legend(); ax.grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+O degrau visita poucos "regimes"; o PRBS chaveia continuamente, revisitando transições em instantes variados.
+
+---
+
+## Parâmetros de Projeto do PRBS
+
+Duas escolhas de projeto determinam a qualidade do experimento:
+
+- **Duração do bit $T_{bit}$** (em amostras): deve ser **menor ou da ordem da constante de tempo dominante** do sistema, para excitar sua dinâmica rápida.
+  $$T_{bit} \lesssim \tau_{sistema}$$
+
+- **Duração total do experimento**: deve cobrir **vários períodos** do PRBS e ser bem maior que o tempo de acomodação do sistema, para que a dinâmica de regime permanente também seja capturada.
+
+Para o nosso sistema, o polo é $-a_1 = 0{,}7$, o que dá uma constante de tempo (em amostras):
+
+$$\tau = \frac{-1}{\ln(0{,}7)} \approx 2{,}8 \text{ amostras}$$
+
+Compatível com o $T_{bit}=2$ amostras escolhido.
+
+---
+
+## Coletando os Dados
+
+```{python}
+#| echo: true
+import pandas as pd
+
+y_prbs = simula_arx(u_prbs, a1_true, b1_true, sigma_e, seed=42)
+
+dados = pd.DataFrame({'k': range(N), 'u': u_prbs, 'y': np.round(y_prbs, 3)})
+dados.head()
+```
+
+```{python}
+fig, ax = plt.subplots(2, 1, figsize=(10, 5), sharex=True)
+ax[0].step(dados['k'], dados['u'], color='blue', where='post')
+ax[0].set_ylabel('u[k]'); ax[0].grid(alpha=0.4)
+ax[1].plot(dados['k'], dados['y'], color='darkgreen', marker='.', markersize=3)
+ax[1].set_ylabel('y[k]'); ax[1].set_xlabel('k'); ax[1].grid(alpha=0.4)
+plt.tight_layout(); plt.show()
+```
+
+Esses dados $(u[k], y[k])$ serão usados na próxima aula para **estimar** o modelo ARX.
+
+---
+
+## Por que Olhar no Domínio da Frequência?
+
+O sinal de entrada precisa "cobrir" as frequências que o sistema pode manifestar. Antes de rodar o experimento, é útil verificar **quanto do espectro** um sinal candidato realmente excita.
+
+A ferramenta para isso é a **Transformada de Fourier**, que decompõe um sinal temporal em suas componentes de frequência.
+
+---
+
+## Transformada de Fourier Discreta (DFT)
+
+Para um sinal amostrado $x[k]$, $k=0,\dots,N-1$, a DFT é:
+
+$$X[m] = \sum_{k=0}^{N-1} x[k]\, e^{-j 2\pi m k / N}, \qquad m = 0, \dots, N-1$$
+
+- $|X[m]|$: quanto da energia do sinal está na frequência $f_m = m/(N T_s)$;
+- Frequência máxima representável (Nyquist): $f_{Nyq} = 1/(2T_s)$;
+- Calculada de forma eficiente via **FFT** (*Fast Fourier Transform*).
+
+---
+
+## Espectro: Degrau vs. PRBS
+
+```{python}
+#| echo: true
+from numpy.fft import rfft, rfftfreq
+
+def espectro(x):
+    X = np.abs(rfft(x - np.mean(x)))
+    f = rfftfreq(len(x), d=1)     # frequência normalizada (ciclos/amostra)
+    return f, X
+
+f_step, X_step = espectro(u_step)
+f_prbs, X_prbs = espectro(u_prbs)
+
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.semilogy(f_step, X_step + 1e-3, color='darkorange', label='Degrau')
+ax.semilogy(f_prbs, X_prbs + 1e-3, color='blue', label='PRBS', alpha=0.8)
+ax.set_xlabel('Frequência (ciclos/amostra)'); ax.set_ylabel('|X[m]| (escala log)')
+ax.legend(); ax.grid(alpha=0.4, which='both')
+plt.tight_layout(); plt.show()
+```
+
+O degrau concentra energia em baixas frequências; o PRBS distribui energia em **banda larga**, testando o sistema em muito mais frequências.
+
+---
+
+## Leitura do Espectro do PRBS
+
+- O espectro do PRBS é aproximadamente **plano** até uma frequência relacionada a $1/T_{bit}$, e decai depois disso;
+- Isso significa que $T_{bit}$ define **até que frequência** o sinal realmente excita o sistema;
+- $T_{bit}$ pequeno → excita frequências mais altas (dinâmicas rápidas); $T_{bit}$ grande → energia concentrada em baixas frequências.
+
+Por isso a regra prática $T_{bit} \lesssim \tau_{sistema}$: garante energia suficiente na faixa de frequências onde a dinâmica do sistema realmente responde.
+
+---
+
+## Resumo
+
+- Sistemas dinâmicos têm memória: $y[k]$ depende do passado de $u$ e $y$;
+- Simulamos um sistema ARX de referência com parâmetros conhecidos;
+- Um degrau não excita o sistema o suficiente — é preciso um sinal **persistentemente excitante**;
+- O **PRBS** é gerado por um LFSR, tem espectro de banda larga e amplitude limitada;
+- Projetamos o PRBS ($T_{bit}$, duração) e coletamos os dados $(u[k], y[k])$;
+- A análise de Fourier confirma o conteúdo espectral do sinal de excitação.
+
+**Próxima aula:** usar esses dados para **estimar** os parâmetros do modelo ARX por mínimos quadrados.
+
+---
+
+## Ver também
+
+Esta mesma lógica de projeto de PRBS e persistência de excitação aparece em:
+
+- [ControleCC2CC](https://raphateixeira.github.io/ControleCC2CC/) — PRBS aplicado à identificação de uma bancada motor-gerador real.
+- [Projeto-Aeropendulo](https://raphateixeira.github.io/Projeto-Aeropendulo/) — PRBS aplicado à identificação do aeropêndulo.
+- [DeePC — Data-Enabled Predictive Control](https://raphateixeira.github.io/DataDrivenControl/DeePC/DeePCNota.html) (DataDrivenControl) — a persistência de excitação reaparece como condição de posto no Lema de Willems, base do controle preditivo direto sobre dados.
+
+---
+
+## {text-align="center"}
+
+::: {style="margin-top: 15%; text-align: center;"}
+
+![](../../imgs/LogoUFPA.jpg){width="180px"}
+
+<br>
+
+### **Prof. Dr. Raphael Teixeira**
+Universidade Federal do Pará
+
+:::

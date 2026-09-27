@@ -1,0 +1,26 @@
+---
+title: "Controle Digital"
+subtitle: "Fundamentos — em construção"
+description: "Discretização, estabilidade e projeto de controladores digitais."
+author: "Raphael Teixeira"
+lang: pt-BR
+status: rascunho
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+::: {.callout-note}
+Tema em gestação: as notas são feitas primeiro nos slides de leitura dos livros e depois
+sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
+:::
+
+## Fontes (notas de leitura)
+
+* _Ainda sem notas de livro associadas._
+
+## Notas
+
+* [1 — Transformada Z](CD01TransformadaZ.qmd)
+* [2 — Equivalentes discretos](CD02Discretizacao.qmd)
+* [3 — Projeto de controle digital](CD03ProjetoControle.qmd)
+* [4 — Projeto direto de controladores digitais (PI, PI Tipo 2, PID)](CD04ProjetoDireto.qmd)

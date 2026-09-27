@@ -11,8 +11,11 @@ navegação principal. Formato canônico: Quarto (`quarto render`, `execute.free
 Tema visual: `TemaRTx.scss` (idêntico ao usado por TikZ, Manim, DeepLearning,
 MetodosNumericos, ControleEstados, DataDrivenControl — não inventar paleta própria).
 
-Tem dois tipos de conteúdo: **Fundamentos** (links para um repositório por tema),
-**Livros** (uma pasta por livro, neste repositório, com slides e notas complementares).
+Tem dois tipos de conteúdo: **Fundamentos** (`fundamentos/<tema>/`, temas gestados aqui e
+promovidos a repositório próprio quando ganharem volume) e **Livros** (`leituras/<livro>/`,
+uma pasta por livro, com slides e notas complementares). A pasta pública dos livros chama-se
+`leituras/` (e não `livros/`) porque `Livros/` guarda os PDFs locais e, no macOS, os dois
+nomes colidiriam.
 
 ## REGRA INEGOCIÁVEL: nunca versionar PDFs/ebooks
 
@@ -42,12 +45,13 @@ Cada pasta (`<autor>-<assunto>/`, kebab-case) contém:
   decks na mesma pasta; sem bloco `format:` — herda o tema do projeto).
 - um `.qmd` **revealjs** por capítulo/aula, com o front matter dos decks existentes (tema
   `[simple, ../TemaRTx.scss]`, logo `../imgs/ufpa-colorido.png`, 1600x900, transição
-  `fade`). Modelo completo: `chan-probabilidade/Cap01MathBack.qmd`.
+  `fade`). Modelo completo: `leituras/chan-probabilidade/Cap01MathBack.qmd`.
 - `imgs/` (opcional) — figuras do livro usadas nos slides (referenciadas como `imgs/…`).
 
-Livros atuais: `chan-probabilidade`, `brunton-otimizacao`, `brunton-kutz-data-driven`,
+Livros atuais (em `leituras/`): `chan-probabilidade`, `brunton-otimizacao`, `brunton-kutz-data-driven`,
 `bishop-deep-learning`, `strang-linear-algebra`, `ventura-geometria-diferencial`,
-`larson-calculo-multivariavel`, `hasan-advanced-control-power-converters`.
+`larson-calculo-multivariavel`, `hasan-advanced-control-power-converters`,
+`ljung-system-identification`, `pillonetto-regularized-system-identification`.
 
 Ao adicionar um livro novo: criar a pasta e o `index.qmd`; adicionar a entrada em
 `referencias.bib`; adicionar o item no menu **Livros** de `_quarto.yml` e a linha na tabela
@@ -60,46 +64,12 @@ código substanciais vão para o satélite
 
 ## Fundamentos (temas, não livros)
 
-A seção **Fundamentos** de `index.qmd` lista temas de estudo (não livros), cada um
-apontando para um repositório dedicado com o material (esse material é reusado em várias
-disciplinas/projetos: `Identificacao` é referenciado por ControleCC2CC, ControleDFIG,
-DataDrivenControl, Projeto-Aeropendulo, MScOseias).
+A seção **Fundamentos** de `index.qmd` mostra cards de tema (sem capa, com selo de estado e
+fontes). Cada tema é uma pasta em `fundamentos/<tema>/` com `index.qmd`, nascida a partir das
+notas de leitura dos livros; quando ganhar volume, é promovida a repositório próprio (e o card
+passa a apontar para ele). Temas atuais: `identificacao-sistemas`, `controle-mpc`,
+`controle-digital`, `conversores-energia`.
 
-- Identificação de Sistemas → [Identificacao](https://raphateixeira.github.io/Identificacao/)
-- Controle Linear → repositório ainda não criado
-- Controle MPC → repositório ainda não criado
-- Conversores de Energia → repositório ainda não criado
-
-Ao criar o repositório de um novo tema, atualizar o link em `index.qmd` (e tirar o "em
-construção").
-
-## Notas complementares (dentro da pasta do livro)
-
-Uma nota que aprofunda um tema ligado a um livro (não um capítulo dele) fica **na pasta do
-livro**, como artigo HTML, listada em "Notas complementares" no `index.qmd` do livro. Não
-existe pasta genérica de notas soltas: toda nota se associa a um livro (por tema) ou vira
-tema de Fundamentos. Ex.: `brunton-otimizacao/MPCMassaMolaAmortecedor.qmd`,
-`bishop-deep-learning/RedesNeuraisAproximador.qmd`. Front matter:
-
-```yaml
----
-title: "Título da nota"
-description: "Uma frase sobre o que a nota cobre."
-author: "Raphael Teixeira"
-date: "AAAA-MM-DD"
-date-modified: last-modified
-categories: [Categoria1, Categoria2, Python]
-livro: "Autor — Título do livro"
-autor-livro: "Nome do Autor"
-status: rascunho        # rascunho | revisão | consolidada — exatamente um destes três
-lang: pt-BR
----
-```
-
-Para criar: copie `_templates/nota-modelo.qmd` para a pasta do livro, preencha o front
-matter e nomeie o arquivo `Assunto.qmd`. Rode `quarto preview` antes de publicar.
-
-## Não versionar
-
-`_site/`, `.quarto/`, `__pycache__/`, `.ipynb_checkpoints/`, `Livros/` e qualquer
-`*.pdf`/`*.epub`/`*.djvu`.
+Ao criar um tema: pasta + `index.qmd` (com `status:`), card em `index.qmd`, item no menu
+**Fundamentos** de `_quarto.yml`. Cite as fontes (pastas de livros) e não escreva conteúdo que
+não foi lido.
