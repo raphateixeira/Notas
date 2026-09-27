@@ -12,15 +12,15 @@
 - **Exemplos:** o livro puxa muito para dinâmica dos fluidos (área do Brunton). Nos slides,
   trocar por exemplos de sistemas LIT: controle, identificação de sistemas, resposta em
   frequência, sinais medidos em plantas.
-- **Códigos:** o livro traz cada código em MATLAB e Python; nos slides, só Python, executável
-  no render. Vários exemplos usam dados do repositório do livro (`DATA/…`), que não estão aqui:
+- **Códigos:** como no livro, cada slide de código tem abas **Python** (executa no render) e
+  **MATLAB** (só exibido; testado no MATLAB R2025a local antes de entrar no slide). Vários exemplos usam dados do repositório do livro (`DATA/…`), que não estão aqui:
   para cada um, decidir entre obter os dados ou trocar por um exemplo equivalente.
 
 ## Visão geral
 
 | Nota | Seções | Páginas | Arquivo | Estado |
 |---|---|---|---|---|
-| 1 | 1.1–1.2 | 3–14 | `01-SVDAproximacaoMatrizes.qmd` | escrita (18 slides) |
+| 1 | 1.1–1.2 | 3–14 | `01-SVDAproximacaoMatrizes.qmd` | escrita (17 slides) |
 | 2 | 1.3 | 14–19 | — | prevista |
 | 3 | 1.4 | 19–27 | — | prevista |
 | 4 | 1.5–1.6 | 27–41 | — | prevista (ver observação) |
@@ -50,30 +50,30 @@ Código 1.1.
 
 **Slides feitos:**
 
-1. Dados de alta dimensão, padrões de baixa dimensão (motivação), ilustrado com a foto de uma
+1. Alta dimensão, poucos padrões (motivação), ilustrado com a foto de uma
    revoada (`imgs/RevoadaEstorninhos.jpg`, Stockcake; não é do livro)
 2. A mesma ideia em identificação de sistemas (**não está no livro**): PRBS → G(z) → y com
    500 amostras; Ho–Kalman/ERA (resposta ao impulso por MQ → Hankel 25×25 → SVD) mostra 2
    valores singulares dominantes = ordem 2 = 2 polos; figura gerada em Python no próprio deck
 3. Por que a SVD (estável, hierárquica, existe sempre; SVD × FFT; usos no livro)
-4. A matriz de dados — Eq. (1.1), *snapshots*, *tall-skinny*
+4. A matriz de dados — Eq. (1.1) com a 1ª parte da Fig. 1.17 (rostos como colunas), *snapshots*, *tall-skinny*
 5. Definição da SVD — quadro de Definição, Eq. (1.2)
 6. SVD completa e SVD econômica — Eq. (1.3) e Fig. 1.1
-7. Computando a SVD — bidiagonalização + Golub–Kahan; `np.linalg.svd` executando
-8. Onde a SVD aparece — histórico; PCA, KLT, EOF, POD, CCA; modelos balanceados
-9. Soma diádica — Eq. (1.4)
-10. SVD truncada — Eq. (1.5) e Fig. 1.2
-11. Teorema de Eckart–Young — quadro de Teorema, Eq. (1.6), norma de Frobenius
-12. Erro na norma de Frobenius — Eqs. (1.7)–(1.8) e interpretações (energia, variância)
-13. Aproximação ótima na norma 2 — Eqs. (1.9)–(1.11)
-14. Verificação numérica das expressões de erro (**não está no livro**: confere (1.7) e (1.10))
-15. Exemplo: compressão de imagem — código
-16. Imagem reconstruída para r = 5, 20, 100 (equivalente à Fig. 1.3)
-17. Valores singulares e soma acumulada (equivalente à Fig. 1.4) + erro relativo (1.8)
+7. Computando a SVD — bidiagonalização + Golub–Kahan; `np.linalg.svd` / `svd` (abas Python e MATLAB)
+8. Soma diádica — Eq. (1.4) com a Fig. 1.29(a) (soma de produtos externos)
+9. SVD truncada — Eq. (1.5) e Fig. 1.2
+10. Teorema de Eckart–Young — quadro de Teorema, Eq. (1.6), norma de Frobenius
+11. Erro na norma de Frobenius — Eqs. (1.7)–(1.8) e interpretações (energia, variância)
+12. Aproximação ótima na norma 2 — Eqs. (1.9)–(1.11)
+13. Verificação numérica das expressões de erro (**não está no livro**: confere (1.7) e (1.10))
+14. Exemplo: compressão de imagem — código
+15. Imagem reconstruída para r = 5, 20, 100 (equivalente à Fig. 1.3)
+16. Valores singulares e soma acumulada (equivalente à Fig. 1.4) + erro relativo (1.8)
 
 **Decisões.** A foto do livro (Mordecai, 2000 × 1500, de `DATA/dog.jpg`) foi trocada pela foto
 de Grace Hopper que acompanha o matplotlib (600 × 512), para rodar sem baixar dados. Figs. 1.1
-e 1.2 recortadas do PDF para `imgs/`.
+e 1.2 recortadas do PDF para `imgs/`; também a 1ª parte da Fig. 1.17 (§1.6) e a Fig. 1.29(a)
+(§1.9), antecipadas porque ilustram bem a matriz de dados e a soma diádica.
 
 ### Nota 2 — 1.3 Propriedades matemáticas e manipulações
 

@@ -18,15 +18,14 @@ format:
       data-background-position: "top 45px center"
 ---
 
-## Dados de alta dimensão, padrões de baixa dimensão
+## Alta dimensão, poucos padrões
 
 :::: {.columns}
-::: {.column width="58%"}
+::: {.column width="50%"}
 - Sistemas complexos geram dados naturalmente organizaveis em **matrizes grandes**: séries temporais, imagens, vídeos, ...
 - Apesar da dimensão elevada, esses dados costumam poucos padrões dominantes (posto).
-- Em sistemas LIT isso é a regra: milhares de amostras de entrada e saída, ou uma resposta em frequência medida em centenas de frequências, são explicadas por uma função de transferência com **poucos polos e zeros**.
 :::
-::: {.column width="42%"}
+::: {.column width="50%"}
 ![](imgs/RevoadaEstorninhos.jpg){width="360px" fig-align="center"}
 :::
 ::::
@@ -140,14 +139,11 @@ Centenas de amostras de entrada e saída, mas apenas **dois padrões dominantes*
 - Pode ser vista como uma generalização *orientada a dados* da FFT: a FFT fornece uma base genérica; a SVD, uma base **ajustada aos dados**.
 - Usos ao longo do livro: aproximações de posto baixo, pseudoinversa para $\mathbf{A}\mathbf{x} = \mathbf{b}$, redução de ruído, PCA, DMD, POD.
 
-## A matriz de dados
+## A matriz de dados {.small-slide}
 
-Os dados são organizados em uma matriz cujas colunas são medições:
+Os dados são organizados em uma matriz $\mathbf{X} = [\mathbf{x}_1 \ \mathbf{x}_2 \ \cdots \ \mathbf{x}_m] \in \mathbb{C}^{n \times m}$ cujas colunas são medições (1.1). Por exemplo, cada foto de rosto vira uma coluna:
 
-$$
-\mathbf{X} = \begin{bmatrix} | & | & & | \\ \mathbf{x}_1 & \mathbf{x}_2 & \cdots & \mathbf{x}_m \\ | & | & & | \end{bmatrix} \in \mathbb{C}^{n \times m}.
-\qquad (1.1)
-$$
+![](imgs/Fig1p17_RostosComoColunas.png){width="52%" fig-align="center"}
 
 - Cada coluna $\mathbf{x}_k \in \mathbb{C}^n$ é um conjunto de medições: as leituras dos sensores de uma planta no instante $k$, uma imagem reorganizada em vetor (um elemento por pixel) etc.
 - Em séries temporais, $\mathbf{x}_k = \mathbf{x}(k\Delta t)$; as colunas são chamadas de ***snapshots*** e $m$ é o número de *snapshots*.
@@ -188,38 +184,36 @@ As colunas de $\hat{\mathbf{U}}^{\perp}$ geram o complemento ortogonal do espaç
 :::
 ::::
 
-## Computando a SVD
+## Computando a SVD {.small-slide}
 
-- Na prática, usamos implementações maduras e estáveis; o algoritmo clássico tem duas etapas:
-  1. reduzir $\mathbf{X}$ a uma matriz **bidiagonal** (para $n \gg m$, primeiro uma fatoração QR e depois reflexões de Householder);
-  2. calcular a SVD da matriz bidiagonal com o algoritmo QR modificado de **Golub & Kahan**.
-- A maioria das implementações se apoia no LAPACK (rotina `DGESVD`); para matrizes muito grandes, algoritmos **randomizados** (§1.8).
+- Algoritmo clássico: reduzir $\mathbf{X}$ a uma matriz **bidiagonal** (QR e reflexões de Householder, se $n \gg m$) e calcular a SVD dela com o QR modificado de **Golub & Kahan**. A maioria das implementações usa o LAPACK (`DGESVD`); para matrizes muito grandes, algoritmos **randomizados** (§1.8).
+
+::: {.panel-tabset}
+
+### Python
 
 ```{python}
 #| echo: true
 import numpy as np
-
 X = np.random.rand(5, 3)                                   # matriz de dados 5 x 3
 U, S, VT = np.linalg.svd(X, full_matrices=True)            # SVD completa
 Uhat, Shat, VThat = np.linalg.svd(X, full_matrices=False)  # SVD econômica
-print("completa:  U", U.shape, " S", S.shape, " VT", VT.shape)
-print("econômica: U", Uhat.shape, " S", Shat.shape, " VT", VThat.shape)
+print(U.shape, S.shape, VT.shape, "|", Uhat.shape, Shat.shape, VThat.shape)
 ```
 
-Atenção: o NumPy devolve os valores singulares como **vetor** e $\mathbf{V}^T$ (não $\mathbf{V}$).
+### MATLAB
 
-## Onde a SVD aparece
+```matlab
+X = randn(5,3);                    % matriz de dados 5 x 3
+[U,S,V] = svd(X);                  % SVD completa
+[Uhat,Shat,V] = svd(X,'econ');     % SVD econômica
+```
 
-- **Histórico**: fundamentos teóricos com Beltrami e Jordan (1873), Sylvester (1889), Schmidt (1907) e Weyl (1912); estabilidade e eficiência computacional com Golub e colaboradores.
-- É a base de várias técnicas de **redução de dimensionalidade**, desenvolvidas de forma independente em áreas diferentes e que diferem, em muitos casos, apenas na coleta e no pré-processamento dos dados:
-  - análise de componentes principais (**PCA**), em estatística;
-  - transformada de Karhunen–Loève (**KLT**);
-  - funções ortogonais empíricas (**EOFs**), em climatologia;
-  - decomposição ortogonal própria (**POD**), em dinâmica dos fluidos;
-  - análise de correlação canônica (**CCA**).
-- Em **identificação de sistemas e controle**, é usada para obter modelos de ordem reduzida **balanceados**: estados ordenados pela capacidade de serem observados pelas medições e controlados pela atuação.
+:::
 
-## Soma diádica
+Atenção: o NumPy devolve os valores singulares como **vetor** e $\mathbf{V}^T$; o MATLAB devolve $\boldsymbol{\Sigma}$ como **matriz** e $\mathbf{V}$.
+
+## Soma diádica {.small-slide}
 
 A propriedade mais útil da SVD: ela fornece uma **hierarquia de aproximações de posto baixo**. Como $\boldsymbol{\Sigma}$ é diagonal, $\mathbf{X}$ é uma soma de matrizes de posto 1:
 
@@ -227,7 +221,9 @@ $$
 \mathbf{X} = \sum_{k=1}^{m} \sigma_k \mathbf{u}_k \mathbf{v}_k^* = \sigma_1 \mathbf{u}_1 \mathbf{v}_1^* + \sigma_2 \mathbf{u}_2 \mathbf{v}_2^* + \cdots + \sigma_m \mathbf{u}_m \mathbf{v}_m^*, \qquad (1.4)
 $$
 
-com $\mathbf{u}_k$ e $\mathbf{v}_k$ as $k$-ésimas colunas de $\mathbf{U}$ e $\mathbf{V}$.
+com $\mathbf{u}_k$ e $\mathbf{v}_k$ as $k$-ésimas colunas de $\mathbf{U}$ e $\mathbf{V}$:
+
+![](imgs/Fig1p29a_SVDSomaProdutosExternos.png){width="62%" fig-align="center"}
 
 - Como $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_m \ge 0$, cada termo $\sigma_k \mathbf{u}_k \mathbf{v}_k^*$ é **menos importante** que o anterior para capturar a informação de $\mathbf{X}$.
 - Em muitos sistemas os $\sigma_k$ decaem rapidamente, e basta **truncar** a soma em um posto $r$.
@@ -301,7 +297,11 @@ $$
 $$
 e usar a ortonormalidade dos $\mathbf{v}_k$: o máximo de $\|(\mathbf{X} - \tilde{\mathbf{X}})\mathbf{v}\|_2$ sobre vetores unitários é $\sigma_{r+1}$, atingido em $\mathbf{v} = \mathbf{v}_{r+1}$.
 
-## Verificação numérica das expressões de erro
+## Verificação numérica das expressões de erro {.small-slide}
+
+::: {.panel-tabset}
+
+### Python
 
 ```{python}
 #| echo: true
@@ -316,7 +316,23 @@ print(np.linalg.norm(X - Xr, 'fro')**2, np.sum(S[r:]**2))   # (1.7)
 print(np.linalg.norm(X - Xr, 2), S[r])                      # (1.10)
 ```
 
-Os índices em Python começam em 0: `S[r]` é $\sigma_{r+1}$ e `S[r:]` são $\sigma_{r+1}, \dots, \sigma_m$.
+### MATLAB
+
+```matlab
+rng(0); X = randn(200,50);
+[U,S,V] = svd(X,'econ');
+s = diag(S);                                % valores singulares (vetor)
+
+r = 10;
+Xr = U(:,1:r)*S(1:r,1:r)*V(:,1:r)';         % SVD truncada de posto r (1.5)
+
+disp([norm(X - Xr,'fro')^2, sum(s(r+1:end).^2)])   % (1.7)
+disp([norm(X - Xr, 2), s(r+1)])                    % (1.10)
+```
+
+:::
+
+Os índices em Python começam em 0: `S[r]` é $\sigma_{r+1}$ e `S[r:]` são $\sigma_{r+1}, \dots, \sigma_m$; no MATLAB, `s(r+1)` e `s(r+1:end)`.
 
 ## Exemplo: compressão de imagem {.small-slide}
 
@@ -327,6 +343,10 @@ Uma imagem em tons de cinza é uma matriz real $\mathbf{X} \in \mathbb{R}^{n \ti
 import matplotlib.pyplot as plt
 plt.rcParams.update({"font.size": 15})
 ```
+
+::: {.panel-tabset}
+
+### Python
 
 ```{python}
 #| echo: true
@@ -340,6 +360,24 @@ U, S, VT = np.linalg.svd(X, full_matrices=False)  # SVD econômica
 aproxima = lambda r: U[:, :r] @ np.diag(S[:r]) @ VT[:r, :]  # SVD truncada (1.5)
 armazenamento = lambda r: r * (n + m + 1) / (n * m)        # fração guardada
 ```
+
+### MATLAB
+
+```matlab
+A = imread('grace_hopper.jpg');          % a mesma foto (vem com o matplotlib)
+X = mean(double(A), 3);                  % RGB -> tons de cinza
+[n,m] = size(X);
+[U,S,V] = svd(X,'econ');  s = diag(S);   % SVD econômica
+for r = [5 20 100]                       % SVD truncada (1.5) para vários postos
+    Xapprox = U(:,1:r)*S(1:r,1:r)*V(:,1:r)';
+    figure, imagesc(Xapprox), axis off, colormap gray
+    title(sprintf('r = %d  (%.1f%% dos dados)', r, 100*r*(n+m+1)/(n*m)))
+end
+figure, subplot(1,2,1), semilogy(s,'k')     % valores singulares
+subplot(1,2,2), plot(cumsum(s)/sum(s),'k')  % soma acumulada
+```
+
+:::
 
 Guardar $\tilde{\mathbf{U}}$, $\tilde{\boldsymbol{\Sigma}}$ e $\tilde{\mathbf{V}}$ exige $r(n + m + 1)$ números, contra $nm$ da imagem original: a truncação é uma **compressão**.
 
