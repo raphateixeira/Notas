@@ -18,7 +18,7 @@ format:
       data-background-position: "top 45px center"
 ---
 
-## Dados de alta dimensão, padrões de baixa dimensão {.smaller}
+## Dados de alta dimensão, padrões de baixa dimensão {.small-slide}
 
 - Sistemas complexos geram dados naturalmente organizados em **matrizes grandes**: séries temporais de experimentos e simulações, imagens, vídeos, registros neurais, campos de velocidade de escoamentos.
 - Apesar da dimensão elevada, esses dados costumam ter **posto baixo**: poucos padrões dominantes explicam a maior parte da informação (imagens são compressíveis; escoamentos turbulentos têm estruturas coerentes).
@@ -53,7 +53,7 @@ em que $\mathbf{U} \in \mathbb{C}^{n \times n}$ e $\mathbf{V} \in \mathbb{C}^{m 
 - Os elementos diagonais de $\boldsymbol{\Sigma}$ são os **valores singulares**, ordenados do maior para o menor: $\sigma_1 \ge \sigma_2 \ge \cdots \ge 0$.
 - O **posto** de $\mathbf{X}$ é igual ao número de valores singulares não nulos.
 
-## SVD completa e SVD econômica {.smaller}
+## SVD completa e SVD econômica {.small-slide}
 
 :::: {.columns}
 ::: {.column width="55%"}
@@ -118,7 +118,7 @@ com $\mathbf{u}_k$ e $\mathbf{v}_k$ as $k$-ésimas colunas de $\mathbf{U}$ e $\m
 - Como $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_m \ge 0$, cada termo $\sigma_k \mathbf{u}_k \mathbf{v}_k^*$ é **menos importante** que o anterior para capturar a informação de $\mathbf{X}$.
 - Em muitos sistemas os $\sigma_k$ decaem rapidamente, e basta **truncar** a soma em um posto $r$.
 
-## SVD truncada {.smaller}
+## SVD truncada {.small-slide}
 
 :::: {.columns}
 ::: {.column width="55%"}
@@ -136,7 +136,7 @@ $$
 :::
 ::::
 
-## Teorema de Eckart–Young {.smaller}
+## Teorema de Eckart–Young {.small-slide}
 
 Schmidt (o de Gram–Schmidt) generalizou a SVD para espaços de funções e estabeleceu a SVD truncada como aproximação ótima de posto baixo; o resultado foi redescoberto por Eckart e Young.
 
@@ -149,7 +149,7 @@ $$
 
 A norma de Frobenius, $\|\mathbf{X}\|_F = \big( \sum_{i=1}^{n} \sum_{j=1}^{m} |X_{ij}|^2 \big)^{1/2}$, é a norma 2 da matriz "vetorizada" $\mathbf{X}(:)$.
 
-## Erro da aproximação na norma de Frobenius {.smaller}
+## Erro da aproximação na norma de Frobenius {.small-slide}
 
 O erro da SVD truncada de posto $r$ é conhecido exatamente, e **nenhuma outra matriz de posto $r$ erra menos**:
 
@@ -166,7 +166,7 @@ $$
 - Se as colunas de $\mathbf{X}$ são campos de velocidade de um escoamento, (1.8) é a fração da **energia cinética** que falta na aproximação.
 - Para dados com média subtraída, é a fração da **variância** que falta (interpretação estatística explorada na §1.5, PCA).
 
-## Aproximação ótima na norma 2 {.smaller}
+## Aproximação ótima na norma 2 {.small-slide}
 
 A SVD truncada também é ótima na **norma 2** (norma espectral), induzida pela norma 2 de vetores:
 
@@ -204,7 +204,7 @@ print(np.linalg.norm(X - Xr, 2), S[r])                      # (1.10)
 
 Os índices em Python começam em 0: `S[r]` é $\sigma_{r+1}$ e `S[r:]` são $\sigma_{r+1}, \dots, \sigma_m$.
 
-## Exemplo: compressão de imagem {.smaller}
+## Exemplo: compressão de imagem {.small-slide}
 
 Uma imagem em tons de cinza é uma matriz real $\mathbf{X} \in \mathbb{R}^{n \times m}$ ($n$ pixels na vertical, $m$ na horizontal). O livro usa uma foto de $2000 \times 1500$ pixels; aqui, a foto de Grace Hopper que acompanha o matplotlib ($600 \times 512$).
 
