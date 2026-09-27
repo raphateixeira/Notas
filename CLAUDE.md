@@ -61,6 +61,10 @@ Convenção das notas (decks) de cada livro:
   as ainda não escritas aparecem sem link, com *(prevista)*. A divisão (uma nota por seção ou
   seções agrupadas) foi decidida pela extensão das seções no sumário do livro. Ao escrever uma
   nota prevista, crie o `.qmd` com o mesmo título e troque o item por um link.
+- `_roteiro.md` (um por livro; o `_` faz o Quarto não publicá-lo): roteiro de trabalho com a
+  tabela de notas (seções, páginas, arquivo, estado), os tópicos/figuras/códigos de cada seção
+  tirados do próprio livro, os slides já feitos e as decisões (ex.: dados trocados). Atualize-o
+  ao escrever cada nota. Modelo: `leituras/brunton-kutz-data-driven/_roteiro.md`.
 - O logo da UFPA na capa é desenhado pelo tema (`#title-slide::before`, imagem embutida); o
   `data-background-image` do `title-slide-attributes` é ignorado.
 

@@ -18,11 +18,125 @@ format:
       data-background-position: "top 45px center"
 ---
 
-## Dados de alta dimensão, padrões de baixa dimensão {.small-slide}
+## Dados de alta dimensão, padrões de baixa dimensão
 
-- Sistemas complexos geram dados naturalmente organizados em **matrizes grandes**: séries temporais de experimentos e simulações, imagens, vídeos, registros neurais, campos de velocidade de escoamentos.
-- Apesar da dimensão elevada, esses dados costumam ter **posto baixo**: poucos padrões dominantes explicam a maior parte da informação (imagens são compressíveis; escoamentos turbulentos têm estruturas coerentes).
-- A **decomposição em valores singulares** (SVD) extrai esses padrões diretamente dos dados, sem conhecimento especialista: é numericamente estável, fornece uma representação **hierárquica** e **existe para qualquer matriz** (ao contrário da autodecomposição).
+:::: {.columns}
+::: {.column width="58%"}
+- Sistemas complexos geram dados naturalmente organizaveis em **matrizes grandes**: séries temporais, imagens, vídeos, ...
+- Apesar da dimensão elevada, esses dados costumam poucos padrões dominantes (posto).
+- Em sistemas LIT isso é a regra: milhares de amostras de entrada e saída, ou uma resposta em frequência medida em centenas de frequências, são explicadas por uma função de transferência com **poucos polos e zeros**.
+:::
+::: {.column width="42%"}
+![](imgs/RevoadaEstorninhos.jpg){width="360px" fig-align="center"}
+:::
+::::
+
+## A mesma ideia em identificação de sistemas {.nostretch .small-slide}
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Circle
+from scipy import signal
+
+plt.rcParams.update({"font.size": 13})
+rng = np.random.default_rng(1)
+
+
+def prbs7(N):
+    """PRBS de 7 bits (LFSR, período 127), valores ±1."""
+    reg, out = [1] * 7, []
+    for _ in range(N):
+        out.append(reg[-1])
+        reg = [reg[-1] ^ reg[-2]] + reg[:-1]
+    return 2.0 * np.array(out) - 1.0
+
+
+# Sistema LIT "desconhecido": G(z) = (0.10 z + 0.08) / (z^2 - 1.6 z + 0.8)
+N = 500
+u = prbs7(N)
+b_real, a_real = [0, 0.10, 0.08], [1, -1.6, 0.8]
+y = signal.lfilter(b_real, a_real, u) + 0.01 * rng.standard_normal(N)
+
+# 1) resposta ao impulso por mínimos quadrados (modelo FIR de 60 coeficientes)
+M = 60
+Phi = np.column_stack([np.r_[np.zeros(i), u[:N - i]] for i in range(M)])
+h = np.linalg.lstsq(Phi, y, rcond=None)[0]
+
+# 2) matriz de Hankel e SVD  3) realização de ordem r (Ho–Kalman / ERA)
+L = 25
+H0 = np.array([[h[i + j + 1] for j in range(L)] for i in range(L)])
+H1 = np.array([[h[i + j + 2] for j in range(L)] for i in range(L)])
+U, S, VT = np.linalg.svd(H0)
+r = 2
+Sm, Sp = np.diag(S[:r] ** -0.5), np.diag(S[:r] ** 0.5)
+A = Sm @ U[:, :r].T @ H1 @ VT[:r].T @ Sm
+B = (Sp @ VT[:r])[:, :1]
+C = (U[:, :r] @ Sp)[:1, :]
+num, den = signal.ss2tf(A, B, C, np.zeros((1, 1)))
+polos = np.linalg.eigvals(A)
+
+# ---------------------------------------------------------------- figura
+fig = plt.figure(figsize=(14, 6.9))
+gs = fig.add_gridspec(2, 3, height_ratios=[1, 1.25], width_ratios=[1.25, 0.8, 1.25],
+                      hspace=0.55, wspace=0.28)
+
+k = np.arange(150)
+ax_u = fig.add_subplot(gs[0, 0])
+ax_u.step(k, u[:150], where="post", color="tab:blue", lw=1.4)
+ax_u.set_title(f"entrada $u[k]$: PRBS ({N} amostras)")
+ax_u.set_xlabel("$k$"); ax_u.set_ylim(-1.5, 1.5)
+
+ax_g = fig.add_subplot(gs[0, 1]); ax_g.axis("off")
+ax_g.add_patch(FancyBboxPatch((0.12, 0.25), 0.76, 0.5, boxstyle="round,pad=0.02",
+                              fc="#E8EEF7", ec="#1B365D", lw=2, transform=ax_g.transAxes))
+ax_g.text(0.5, 0.5, "sistema LIT\n$G(z)$ = ?", ha="center", va="center", fontsize=17,
+          color="#1B365D", transform=ax_g.transAxes)
+
+ax_y = fig.add_subplot(gs[0, 2])
+ax_y.plot(k, y[:150], color="tab:red", lw=1.4)
+ax_y.set_title(f"saída $y[k]$ ({N} amostras)")
+ax_y.set_xlabel("$k$")
+
+pu, pg, py = ax_u.get_position(), ax_g.get_position(), ax_y.get_position()
+ym = pu.y0 + pu.height / 2
+for x0, x1 in ((pu.x1 + 0.008, pg.x0 + 0.12 * pg.width - 0.006),
+               (pg.x0 + 0.88 * pg.width + 0.006, py.x0 - 0.045)):
+    fig.add_artist(FancyArrowPatch((x0, ym), (x1, ym), transform=fig.transFigure,
+                                   arrowstyle="-|>", mutation_scale=28, lw=2.5, color="#1B365D"))
+
+ax_s = fig.add_subplot(gs[1, 0])
+ax_s.semilogy(np.arange(1, 11), S[:10], "o-", color="k", ms=6)
+ax_s.semilogy([1, 2], S[:2], "o", color="tab:orange", ms=11)
+ax_s.set_xlabel("$k$"); ax_s.set_ylabel("$\\sigma_k$"); ax_s.set_xticks([1, 2, 4, 6, 8, 10])
+ax_s.annotate("2 padrões\ndominantes", xy=(2, S[1]), xytext=(4.2, 0.12),
+              arrowprops=dict(arrowstyle="->", color="tab:orange", lw=2), color="tab:orange")
+
+ax_tf = fig.add_subplot(gs[1, 1]); ax_tf.axis("off")
+ax_tf.text(0.5, 0.5,
+          "$\\hat G(z) = \\dfrac{%.3f\\,z + %.3f}{z^2 %+.3f\\,z %+.3f}$"
+          % (num[0][1], num[0][2], den[1], den[2]),
+          transform=ax_tf.transAxes, ha="center", va="center", fontsize=17)
+
+ax_p = fig.add_subplot(gs[1, 2])
+ax_p.add_patch(Circle((0, 0), 1, fill=False, ls="--", color="gray"))
+ax_p.plot(polos.real, polos.imag, "x", ms=14, mew=3, color="tab:orange")
+ax_p.set_aspect("equal"); ax_p.set_xlim(-1.2, 1.2); ax_p.set_ylim(-1.2, 1.2)
+ax_p.axhline(0, color="gray", lw=0.6); ax_p.axvline(0, color="gray", lw=0.6)
+ax_p.set_title("2 polos: $z = %.2f \\pm %.2fj$" % (polos[0].real, abs(polos[0].imag)))
+ax_p.set_xlabel("Re"); ax_p.set_ylabel("Im")
+
+plt.show()
+```
+
+Centenas de amostras de entrada e saída, mas apenas **dois padrões dominantes**: o posto revela a **ordem** do sistema, e os padrões são os seus **dois polos**.
+
+## Por que a SVD
+
+- A **decomposição em valores singulares** (SVD) extrai esses padrões diretamente dos dados, sem conhecimento especialista.
+- É numericamente estável, fornece uma representação **hierárquica** (em um novo sistema de coordenadas definido pelas correlações dominantes) e **existe para qualquer matriz**, ao contrário da autodecomposição.
 - Pode ser vista como uma generalização *orientada a dados* da FFT: a FFT fornece uma base genérica; a SVD, uma base **ajustada aos dados**.
 - Usos ao longo do livro: aproximações de posto baixo, pseudoinversa para $\mathbf{A}\mathbf{x} = \mathbf{b}$, redução de ruído, PCA, DMD, POD.
 
@@ -35,7 +149,7 @@ $$
 \qquad (1.1)
 $$
 
-- Cada coluna $\mathbf{x}_k \in \mathbb{C}^n$ é um conjunto de medições: uma imagem reorganizada em vetor (um elemento por pixel), o estado de um sistema físico em um instante etc.
+- Cada coluna $\mathbf{x}_k \in \mathbb{C}^n$ é um conjunto de medições: as leituras dos sensores de uma planta no instante $k$, uma imagem reorganizada em vetor (um elemento por pixel) etc.
 - Em séries temporais, $\mathbf{x}_k = \mathbf{x}(k\Delta t)$; as colunas são chamadas de ***snapshots*** e $m$ é o número de *snapshots*.
 - A dimensão de estado $n$ costuma ser enorme (milhões ou bilhões de graus de liberdade): em geral $n \gg m$, uma matriz **alta e estreita** (*tall-skinny*).
 
@@ -163,7 +277,7 @@ $$
 \frac{\big\| \mathbf{X} - \tilde{\mathbf{X}} \big\|_F^2}{\|\mathbf{X}\|_F^2}. \qquad (1.8)
 $$
 
-- Se as colunas de $\mathbf{X}$ são campos de velocidade de um escoamento, (1.8) é a fração da **energia cinética** que falta na aproximação.
+- Se as colunas de $\mathbf{X}$ são sinais medidos (tensões, correntes, respostas de uma planta), (1.8) é a fração da **energia dos sinais** que falta na aproximação ($\|\mathbf{X}\|_F^2$ é a soma dos quadrados de todas as amostras).
 - Para dados com média subtraída, é a fração da **variância** que falta (interpretação estatística explorada na §1.5, PCA).
 
 ## Aproximação ótima na norma 2 {.small-slide}
