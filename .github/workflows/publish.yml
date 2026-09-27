@@ -14,3 +14,8 @@ jobs:
     uses: raphateixeira/.github/.github/workflows/quarto-publish.yml@main
     with:
       needs_python: true
+      needs_r: true
+      r_packages: "knitr, rmarkdown"
+      needs_pdf2svg: true
+      needs_tinytex: true
+      tinytex_packages: "pgf standalone xcolor"
