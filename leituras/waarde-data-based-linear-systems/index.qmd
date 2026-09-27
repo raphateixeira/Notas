@@ -1,0 +1,33 @@
+---
+title: "Data-based Linear Systems and Control Theory"
+subtitle: "Henk J. van Waarde, M. Kanat Çamlıbel, Harry L. Trentelman"
+lang: pt-BR
+toc: false
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+**Edição:** 1ª ed., Kindle Direct Publishing, 2025
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+### Capítulo 1 — Introduction and historical perspective
+
+* Nota 1 — 1.1–1.2.1 [Introdução e o lema fundamental](DBL01Exemplo.qmd)
+* Nota 2 — 1.2.2–1.2.3 Identificação por subespaços, simulação e rastreamento baseados em dados *(prevista)*
+* Nota 3 — 1.2.4–1.2.6 Controle preditivo baseado em dados (DeePC) e fórmulas para controle baseado em dados *(prevista)*
+
+### Capítulo 2 — The data informativity framework
+
+* Nota 4 — 2.1–2.2 O arcabouço da informatividade dos dados *(prevista)*
+
+### Capítulo 3 — System properties from data
+
+* Nota 5 — 3.1–3.2 Informatividade para identificação; controlabilidade e estabilizabilidade a partir de dados *(prevista)*
+* Nota 6 — 3.3 Informatividade para estabilidade *(prevista)*
+* Nota 7 — 3.4–3.5 Sistemas com ruído: estabilidade e estabilizabilidade com dados ruidosos *(prevista)*
+* Nota 8 — 3.6–3.7 Testes de informatividade para estabilidade e estabilizabilidade quadráticas *(prevista)*
+* Nota 9 — 3.8–3.9 Estabilidade com dados de estado ruidosos e além das funções de Lyapunov comuns *(prevista)*
+* Nota 10 — 3.10 Controlabilidade a partir de dados ruidosos *(prevista)*

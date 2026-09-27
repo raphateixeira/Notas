@@ -1,6 +1,6 @@
 ---
-title: "Séries Infinitas"
-subtitle: "Capítulo 1 — Background Matemático"
+title: "Séries infinitas"
+subtitle: "1.1 - Chan: Probability for Data Science"
 author: "Prof. Dr. Raphael Teixeira"
 institute: "Universidade Federal do Pará"
 lang: pt-BR
@@ -11,15 +11,12 @@ format:
     slide-number: true
     width: 1600
     height: 900
-    footer: "UFPA - NDAE - PPCA "
     center: true
     title-slide-attributes:
       data-background-image: "../../imgs/ufpa-colorido.png"
       data-background-size: "84px"
       data-background-position: "top 45px center"
 ---
-
-# 1.1 — Sequências de caras e séries geométricas
 
 ## Probabilidade de sequências de caras
 
@@ -59,13 +56,3 @@ A probabilidade de dar cara $n$ vezes seguidas é dada pela série
 $$
 \sum_{n = 1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots
 $$
-
-## Resumo da aula {.smaller}
-
-- **1.1** — Probabilidade de $n$ caras seguidas em uma moeda justa: $\dfrac{1}{2^n}$.
-- Essa sequência de probabilidades é uma **progressão geométrica** de razão $\dfrac{1}{2}$.
-- A soma $\displaystyle\sum_{n=1}^{\infty}\frac{1}{2^n}$ conecta essa sequência a uma **série infinita** — base matemática usada ao longo do livro.
-
-## Referências
-
-- Chan, S. H. *Introduction to Probability for Data Science*, 2ª ed., Michigan Publishing, 2026 [@chan2026probability] — Cap. 1.

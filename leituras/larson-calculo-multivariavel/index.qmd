@@ -1,15 +1,12 @@
 ---
-title: "Cálculo Multivariável — Larson"
-subtitle: "Engenharia Elétrica"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Multivariable Calculus"
+subtitle: "Ron Larson, Bruce H. Edwards"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Multivariable Calculus*
-**Autores:** Ron Larson, Bruce H. Edwards
 **Edição:** 9ª ed., Brooks/Cole, Cengage Learning, 2010
 
 ::: {.callout-note}
@@ -19,7 +16,33 @@ Análise Vetorial, Tópicos Adicionais em Equações Diferenciais) e mantém a n
 página do texto original — por isso a numeração de seção começa em 11.1, não em 1.1.
 :::
 
-Notas de Aula:
+### Capítulo 11 — Vectors and the Geometry of Space
 
-* Aula 01: [Vetores no Plano (§11.1)](01-vetores-no-plano.qmd)
-* Aula 02: [Vetores no Espaço (§11.2)](02-vetores-no-espaco.qmd)
+* Nota 1 — 11.1 [Vetores no plano](01-vetores-no-plano.qmd)
+* Nota 2 — 11.2 [Vetores no espaço](02-vetores-no-espaco.qmd)
+* Nota 3 — 11.3 O produto escalar de dois vetores *(prevista)*
+* Nota 4 — 11.4 O produto vetorial de dois vetores no espaço *(prevista)*
+* Nota 5 — 11.5 Retas e planos no espaço *(prevista)*
+* Nota 6 — 11.6 Superfícies no espaço *(prevista)*
+* Nota 7 — 11.7 Coordenadas cilíndricas e esféricas *(prevista)*
+
+### Capítulo 12 — Vector-Valued Functions
+
+* Nota 8 — 12.1 Funções vetoriais *(prevista)*
+* Nota 9 — 12.2 Derivação e integração de funções vetoriais *(prevista)*
+* Nota 10 — 12.3 Velocidade e aceleração *(prevista)*
+* Nota 11 — 12.4 Vetores tangentes e vetores normais *(prevista)*
+* Nota 12 — 12.5 Comprimento de arco e curvatura *(prevista)*
+
+### Capítulo 13 — Functions of Several Variables
+
+* Nota 13 — 13.1 Introdução às funções de várias variáveis *(prevista)*
+* Nota 14 — 13.2 Limites e continuidade *(prevista)*
+* Nota 15 — 13.3 Derivadas parciais *(prevista)*
+* Nota 16 — 13.4 Diferenciais *(prevista)*
+* Nota 17 — 13.5 Regras da cadeia para funções de várias variáveis *(prevista)*
+* Nota 18 — 13.6 Derivadas direcionais e gradientes *(prevista)*
+* Nota 19 — 13.7 Planos tangentes e retas normais *(prevista)*
+* Nota 20 — 13.8 Extremos de funções de duas variáveis *(prevista)*
+* Nota 21 — 13.9 Aplicações de extremos de funções de duas variáveis *(prevista)*
+* Nota 22 — 13.10 Multiplicadores de Lagrange *(prevista)*

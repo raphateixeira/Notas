@@ -1,17 +1,35 @@
 ---
-title: "Data-Driven Science — Brunton & Kutz"
-subtitle: "Notas de leitura em slides"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control"
+subtitle: "Steven L. Brunton, J. Nathan Kutz"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Data-Driven Science and Engineering: Machine Learning, Dynamical Systems, and Control*
-**Autores:** Steven L. Brunton, J. Nathan Kutz
 **Edição:** 2ª ed., Cambridge University Press, 2022
 
-Notas de Aula:
+### Capítulo 1 — Singular Value Decomposition (SVD)
 
-* Capítulo 1: [Título da nota](01-exemplo.qmd)
+* Nota 1 — 1.1–1.2 [Visão geral da SVD e aproximação de matrizes](01-exemplo.qmd)
+* Nota 2 — 1.3 Propriedades matemáticas e manipulações *(prevista)*
+* Nota 3 — 1.4 Pseudoinversa, mínimos quadrados e regressão *(prevista)*
+* Nota 4 — 1.5–1.6 Análise de componentes principais (PCA) e o exemplo eigenfaces *(prevista)*
+* Nota 5 — 1.7 Truncamento e alinhamento *(prevista)*
+* Nota 6 — 1.8 SVD randomizada *(prevista)*
+* Nota 7 — 1.9 Decomposições tensoriais e arranjos de dados N-dimensionais *(prevista)*
+
+### Capítulo 2 — Fourier and Wavelet Transforms
+
+* Nota 8 — 2.1 Séries e transformadas de Fourier *(prevista)*
+* Nota 9 — 2.2 Transformada discreta de Fourier (DFT) e FFT *(prevista)*
+* Nota 10 — 2.3 Transformando equações diferenciais parciais *(prevista)*
+* Nota 11 — 2.4–2.5 Transformada de Gabor, espectrograma e transformada de Laplace *(prevista)*
+* Nota 12 — 2.6–2.7 Wavelets, análise multirresolução e transformadas bidimensionais *(prevista)*
+
+### Capítulo 3 — Sparsity and Compressed Sensing
+
+* Nota 13 — 3.1–3.2 Esparsidade, compressão e compressed sensing *(prevista)*
+* Nota 14 — 3.3–3.4 Exemplos de compressed sensing e a geometria da compressão *(prevista)*
+* Nota 15 — 3.5–3.6 Regressão esparsa e representação esparsa *(prevista)*
+* Nota 16 — 3.7–3.8 PCA robusta (RPCA) e posicionamento esparso de sensores *(prevista)*

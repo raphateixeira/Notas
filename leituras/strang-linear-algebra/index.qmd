@@ -1,21 +1,41 @@
 ---
 title: "Linear Algebra and Learning from Data"
-subtitle: "Notas de leitura"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+subtitle: "Gilbert Strang"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Linear Algebra and Learning from Data*
-**Autor:** Gilbert Strang
 **Edição:** Wellesley-Cambridge Press, 2019
 
 ::: {.callout-note}
 Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
 :::
 
-Notas de Leitura:
+### Parte I — Highlights of Linear Algebra
 
-* Capítulo 1: [Notas de leitura (rascunho)](SLA01Exemplo.qmd)
+* Nota 1 — I.1–I.2 [Multiplicação Ax pelas colunas de A e o produto AB](SLA01Exemplo.qmd)
+* Nota 2 — I.3–I.4 Os quatro subespaços fundamentais e A = LU *(prevista)*
+* Nota 3 — I.5 Matrizes e subespaços ortogonais *(prevista)*
+* Nota 4 — I.6 Autovalores e autovetores *(prevista)*
+* Nota 5 — I.7 Matrizes simétricas positivas definidas *(prevista)*
+* Nota 6 — I.8 Valores e vetores singulares na SVD *(prevista)*
+* Nota 7 — I.9 Componentes principais e a melhor aproximação de posto baixo *(prevista)*
+* Nota 8 — I.10 Quocientes de Rayleigh e autovalores generalizados *(prevista)*
+* Nota 9 — I.11 Normas de vetores, funções e matrizes *(prevista)*
+* Nota 10 — I.12 Fatoração de matrizes e tensores: positiva e esparsa *(prevista)*
+
+### Parte II — Computations with Large Matrices
+
+* Nota 11 — II.1 Álgebra linear numérica *(prevista)*
+* Nota 12 — II.2 Mínimos quadrados: quatro maneiras *(prevista)*
+* Nota 13 — II.3 Três bases para o espaço-coluna *(prevista)*
+* Nota 14 — II.4 Álgebra linear randomizada *(prevista)*
+
+### Parte III — Low Rank and Compressed Sensing
+
+* Nota 15 — III.1 Mudanças em A⁻¹ a partir de mudanças em A *(prevista)*
+* Nota 16 — III.2 Entrelaçamento de autovalores e sinais de posto baixo *(prevista)*
+* Nota 17 — III.3–III.4 Valores singulares com decaimento rápido e algoritmos de divisão para ℓ2 + ℓ1 *(prevista)*
+* Nota 18 — III.5 Compressed sensing e completamento de matrizes *(prevista)*

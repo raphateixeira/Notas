@@ -1,18 +1,29 @@
 ---
-title: "Geometria Diferencial"
-subtitle: "Notas de leitura — Ventura Araújo"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Differential Geometry"
+subtitle: "Paulo Ventura Araújo"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Differential Geometry*
-**Autor:** Paulo Ventura Araújo
 **Edição:** Springer, 2024 — tradução inglesa de *Geometria Diferencial* (IMPA, Projeto
 Euclides, 1998)
 
-Notas de leitura:
+### Capítulo 1 — Differentiable Curves
 
-* Capítulo 1: [Curvas Diferenciáveis](01-curvas-diferenciaveis.qmd)
+* Nota 1 — 1.1–1.6 [Curvas diferenciáveis](01-curvas-diferenciaveis.qmd)
+* Nota 2 — 1.7–1.8 Teorema dos quatro vértices e desigualdade isoperimétrica *(prevista)*
+
+### Capítulo 2 — Regular Surfaces
+
+* Nota 3 — 2.1 Superfícies regulares: definição e exemplos *(prevista)*
+* Nota 4 — 2.2 Mudança de parâmetros e superfícies de nível *(prevista)*
+* Nota 5 — 2.3–2.4 Funções diferenciáveis em superfícies, espaço tangente e orientabilidade *(prevista)*
+* Nota 6 — 2.5 Áreas, comprimentos e ângulos: a primeira forma fundamental *(prevista)*
+
+### Capítulo 3 — The Geometry of the Gauss Map
+
+* Nota 7 — 3.1 A aplicação de Gauss e sua derivada *(prevista)*
+* Nota 8 — 3.2 A segunda forma fundamental *(prevista)*
+* Nota 9 — 3.3 Campos de vetores *(prevista)*

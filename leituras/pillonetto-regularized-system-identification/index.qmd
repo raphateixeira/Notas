@@ -1,21 +1,34 @@
 ---
-title: "Regularized System Identification"
-subtitle: "Learning Dynamic Models from Data"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Regularized System Identification: Learning Dynamic Models from Data"
+subtitle: "Gianluigi Pillonetto, Tianshi Chen, Alessandro Chiuso, Giuseppe De Nicolao, Lennart Ljung"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Regularized System Identification: Learning Dynamic Models from Data*
-**Autor(es):** Gianluigi Pillonetto, Tianshi Chen, Alessandro Chiuso, Giuseppe De Nicolao, Lennart Ljung
 **Edição:** Springer, 2022 (open access)
 
 ::: {.callout-note}
 Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
 :::
 
-Notas de Leitura:
+### Capítulo 1 — Bias
 
-* Capítulo 1: [Notas de leitura (rascunho)](RSI01Exemplo.qmd)
+* Nota 1 — 1.1 [O efeito Stein e o estimador de James–Stein](RSI01Exemplo.qmd)
+* Nota 2 — 1.2 Regressão ridge *(prevista)*
+
+### Capítulo 2 — Classical System Identification
+
+* Nota 3 — 2.1–2.2 O cenário da identificação e estruturas de modelos *(prevista)*
+* Nota 4 — 2.3–2.4 Critérios de identificação e propriedades assintóticas *(prevista)*
+* Nota 5 — 2.5–2.6 Projeto de experimentos e validação de modelos *(prevista)*
+
+### Capítulo 3 — Regularization of Linear Regression Models
+
+* Nota 6 — 3.1–3.2 Regressão linear e o método dos mínimos quadrados *(prevista)*
+* Nota 7 — 3.3 Mal condicionamento *(prevista)*
+* Nota 8 — 3.4 Mínimos quadrados regularizados com penalidades quadráticas *(prevista)*
+* Nota 9 — 3.5 Ajuste da regularização para penalidades quadráticas *(prevista)*
+* Nota 10 — 3.6.1 Regularização com norma ℓ1 *(prevista)*
+* Nota 11 — 3.6.2 Regularização com norma nuclear *(prevista)*

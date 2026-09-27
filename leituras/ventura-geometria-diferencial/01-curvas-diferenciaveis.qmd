@@ -1,6 +1,6 @@
 ---
-title: "Curvas Diferenciáveis"
-subtitle: "Geometria Diferencial — Capítulo 1 (§1.1–1.6)"
+title: "Curvas diferenciáveis"
+subtitle: "1.1–1.6 - Araújo: Differential Geometry"
 author: "Prof. Dr. Raphael Teixeira"
 institute: "Universidade Federal do Pará"
 lang: pt-BR
@@ -11,7 +11,6 @@ format:
     slide-number: true
     width: 1600
     height: 900
-    footer: "UFPA - NDAE - PPCA "
     center: true
     title-slide-attributes:
       data-background-image: "../../imgs/ufpa-colorido.png"
@@ -19,22 +18,12 @@ format:
       data-background-position: "top 45px center"
 ---
 
-## Sumário {.smaller}
-
-- **1.1** Curva regular e comprimento de arco
-- **1.2** Curvatura e triedro de Frenet
-- **1.3** Curvas planas
-- **1.5** Curvas convexas
-- **1.6** Curvas de largura constante (início)
-
 ## Contexto
 
 - O Capítulo 1 revisa curvas parametrizadas em $\mathbb{R}^n$ antes de restringir a atenção a $\mathbb{R}^3$.
 - Segundo o prefácio, §1.1–1.3 cobrem material que o leitor provavelmente já conhece (comprimento de arco, curvatura, triedro de Frenet).
 - §1.4–1.8 são tópicos opcionais para o curso: contato de curvas, curvas convexas, curvas de largura constante, teorema dos quatro vértices e desigualdade isoperimétrica.
 - Esta nota cobre §1.1 a §1.6 (até o início de curvas de largura constante). §1.7 (Teorema dos Quatro Vértices) e §1.8 (Desigualdade Isoperimétrica) ficam para uma nota posterior.
-
-# 1.1 — Curva regular e comprimento de arco
 
 ## Curva regular
 
@@ -67,8 +56,6 @@ $$
 \boxed{|\tilde\alpha'(s)| = 1 \ \ \text{para todo } s}
 $$
 — a curva reparametrizada tem velocidade escalar unitária.
-
-# 1.2 — Curvatura e triedro de Frenet
 
 ## Vetor tangente e curvatura
 
@@ -149,8 +136,6 @@ $$
 
 confirmando a afirmação do texto (Fig. 1.1: exemplo de curva de curvatura constante que **não** é planar).
 
-# 1.3 — Curvas planas
-
 ## Curvatura com sinal
 
 Em $\mathbb{R}^2$ a curvatura ganha sinal:
@@ -172,8 +157,6 @@ Toda função $k(s)$ é a curvatura (com sinal) de alguma curva plana, **única 
 
 - É o análogo planar do teorema fundamental das curvas (§1.2).
 
-# 1.5 — Curvas convexas
-
 ## Índice de rotação
 
 Para uma curva fechada e regular:
@@ -194,8 +177,6 @@ $$
 $$
 
 - Toda curva convexa é **simples**.
-
-# 1.6 — Curvas de largura constante (início)
 
 ## Largura de uma curva fechada
 
@@ -257,15 +238,3 @@ axes[1].grid()
 plt.tight_layout()
 plt.show()
 ```
-
-## Resumo da aula {.smaller}
-
-- **1.1** — Curva regular, velocidade escalar $v(t)$, comprimento de arco $S(t)$; reparametrização por comprimento de arco.
-- **1.2** — Vetor tangente $\tau$, curvatura $k$, triedro de Frenet $(\tau,\mathbf{n},\mathbf{b})$, torção $\nu$, fórmulas de Frenet e teorema fundamental das curvas.
-- **1.3** — Curvatura com sinal em $\mathbb{R}^2$: $k(s) = \varphi'(s)$; teorema fundamental planar.
-- **1.5** — Índice de rotação $\Re(\alpha)$; caracterização de curvas fechadas convexas (Teorema 1.5.1).
-- **1.6** — Largura $\mathcal{L}(\mathbf{v})$ de uma curva fechada; diâmetro = largura máxima (Proposição 1.6.1).
-
-## Referências
-
-[@ventura2024differentialgeometry], capítulo 1, §1.1–1.6.

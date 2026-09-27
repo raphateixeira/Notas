@@ -1,6 +1,6 @@
 ---
-title: "Vetores no Espaço"
-subtitle: "Capítulo 11 — Vectors and the Geometry of Space (§11.2)"
+title: "Vetores no espaço"
+subtitle: "11.2 - Larson & Edwards: Multivariable Calculus"
 author: "Prof. Dr. Raphael Teixeira"
 institute: "Universidade Federal do Pará"
 lang: pt-BR
@@ -11,24 +11,12 @@ format:
     slide-number: true
     width: 1600
     height: 900
-    footer: "UFPA - CAMTUC - FEE"
     center: true
     title-slide-attributes:
       data-background-image: "../../imgs/ufpa-colorido.png"
       data-background-size: "84px"
       data-background-position: "top 45px center"
 ---
-
-## Sumário {.smaller}
-
-- **11.2.1** Coordenadas no espaço
-- **11.2.2** Distância e a equação de uma esfera
-- **11.2.3** Vetores no espaço
-- **11.2.4** Vetores paralelos e pontos colineares
-- **11.2.5** Notação padrão e uma aplicação: força
-- **Derivações** da fórmula da distância e do Exemplo 7
-
-# 11.2.1 — Coordenadas no Espaço
 
 ## O sistema de coordenadas tridimensional
 
@@ -48,8 +36,6 @@ $$x = \text{dist. direcionada do plano } yz \text{ a } P, \quad y = \text{dist. 
 Um sistema de coordenadas tridimensional pode ter orientação **destrógira** (*right-handed*) ou **levógira** (*left-handed*). Para determinar a orientação, imagine-se na origem, com os braços apontando nas direções positivas de $x$ e $y$ e o eixo $z$ apontando para cima: o sistema é destrógiro ou levógiro dependendo de qual mão aponta ao longo do eixo $x$. Este livro trabalha exclusivamente com o sistema destrógiro.
 
 ![Figura 11.16 — Sistemas destrógiro e levógiro.](imgs/Fig11p16.png){width="55%" fig-align="center"}
-
-# 11.2.2 — Distância e a Equação de uma Esfera
 
 ## A fórmula da distância no espaço
 
@@ -83,8 +69,6 @@ Pela fórmula da distância, o raio é
 $$r = \sqrt{\left(0-\tfrac{5}{2}\right)^2 + (4-1)^2 + (-3-0)^2} = \sqrt{\tfrac{25}{4}+18} = \sqrt{\tfrac{97}{4}} = \frac{\sqrt{97}}{2}.$$
 
 $$\boxed{\left(x-\tfrac{5}{2}\right)^2 + (y-1)^2 + z^2 = \tfrac{97}{4}}$$
-
-# 11.2.3 — Vetores no Espaço
 
 ## Componentes e vetores unitários padrão
 
@@ -122,8 +106,6 @@ Encontre a forma de componentes e a magnitude do vetor $\mathbf{v}$ com ponto in
 $$\mathbf{v} = \langle 0-(-2),\, -4-3,\, 4-1\rangle = \langle 2,-7,3\rangle, \qquad \|\mathbf{v}\| = \sqrt{2^2+(-7)^2+3^2} = \sqrt{62},$$
 $$\mathbf{u} = \frac{\mathbf{v}}{\|\mathbf{v}\|} = \frac{1}{\sqrt{62}}\langle 2,-7,3\rangle = \left\langle \frac{2}{\sqrt{62}}, \frac{-7}{\sqrt{62}}, \frac{3}{\sqrt{62}} \right\rangle.$$
 
-# 11.2.4 — Vetores Paralelos e Pontos Colineares
-
 ## Definição: vetores paralelos
 
 ::: {.callout-note title="Definição"}
@@ -149,8 +131,6 @@ Como $\overrightarrow{PR} = 3\,\overrightarrow{PQ}$, os dois vetores são parale
 
 ![Figura 11.22 — Os pontos $P$, $Q$ e $R$ estão sobre a mesma reta.](imgs/Fig11p22.png){width="50%" fig-align="center"}
 
-# 11.2.5 — Notação Padrão e uma Aplicação: Força
-
 ## Exemplo 6 — notação de vetores unitários padrão
 
 a. $\mathbf{v} = 4\mathbf{i}-5\mathbf{k} = \langle4,0,-5\rangle$ (a componente em $\mathbf{j}$ é $0$, pois está ausente).
@@ -171,8 +151,6 @@ $$\boxed{\mathbf{F}_1 = \langle0,-10,-40\rangle, \qquad \mathbf{F}_2 = \langle5\
 
 ![Figura 11.23 — Tripé sustentando uma câmera de TV.](imgs/Fig11p23.png){width="55%" fig-align="center"}
 
-# Derivações
-
 ## Fórmula da distância no espaço
 
 Sejam $(x_1,y_1,z_1)$ e $(x_2,y_2,z_2)$. No plano $xy$, o ponto $(x_2,y_2,z_1)$ está à distância $\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$ de $(x_1,y_1,z_1)$ pelo Teorema de Pitágoras em duas dimensões. O segmento de $(x_1,y_1,z_1)$ a $(x_2,y_2,z_2)$ é a hipotenusa de um segundo triângulo retângulo, cujos catetos são esse valor e $|z_2-z_1|$ (o cateto vertical, perpendicular ao plano $xy$).
@@ -190,16 +168,3 @@ $$\|\overrightarrow{PQ_i}\| = \sqrt{(\pm\sqrt3/2)^2+(1/2)^2+16} = \sqrt{3/4+1/4+
 (a mesma para $i=1,2,3$, confirmando $\|\mathbf{F}_1\|=\|\mathbf{F}_2\|=\|\mathbf{F}_3\|$ independentemente de $c$). Somando as três forças encontradas,
 $$\mathbf{F}_1+\mathbf{F}_2+\mathbf{F}_3 = \langle 0+5\sqrt3-5\sqrt3,\; -10+5+5,\; -40-40-40\rangle = \langle0,0,-120\rangle = \mathbf{F},$$
 confirmando a solução.
-
-## Resumo da aula {.smaller}
-
-- **11.2.1** — Sistema de coordenadas $(x,y,z)$, planos coordenados, oito octantes, orientação destrógira.
-- **11.2.2** — Fórmula da distância e equação da esfera no espaço (Pitágoras aplicado duas vezes).
-- **11.2.3** — Vetores $\mathbf v=\langle v_1,v_2,v_3\rangle$ no espaço; mesmas operações e propriedades de §11.1, com uma coordenada a mais.
-- **11.2.4** — Vetores paralelos ($\mathbf u=c\mathbf v$) e teste de colinearidade de três pontos.
-- **11.2.5** — Notação $\mathbf i,\mathbf j,\mathbf k$; aplicação: decomposição da força de um tripé.
-- Próximas notas — §11.3 (produto escalar) dá o ângulo entre vetores no espaço; §11.5 (retas e planos) reusa a forma de componentes e os pontos colineares desta nota.
-
-## Referências
-
-[@larson2010multivariablecalculus], capítulo 11, §11.2.

@@ -48,10 +48,27 @@ Cada pasta (`<autor>-<assunto>/`, kebab-case) contém:
   `fade`). Modelo completo: `leituras/chan-probabilidade/Cap01MathBack.qmd`.
 - `imgs/` (opcional) — figuras do livro usadas nos slides (referenciadas como `imgs/…`).
 
+Convenção das notas (decks) de cada livro:
+
+- `title:` = título da nota (nome da seção, em português); `subtitle:` = `"<seções> - <Autor>:
+  <Título curto>"`, p.ex. `"1.1 - Brunton: Optimization"` ou `"3.3–3.4 - Chan: Probability for
+  Data Science"`. Sem `footer:` (o rodapé "UFPA - NDAE - PPCA" foi removido).
+- Sem slide de Sumário, sem slides de seção (`# Título`), sem "Resumo da aula" e sem
+  slide de Referências (a nota é de um livro só). Se houver citação `[@chave]` no texto, use
+  `suppress-bibliography: true` no front matter. O texto dos slides é justificado pelo tema.
+- O `index.qmd` do livro lista as notas dos três primeiros capítulos, agrupadas por capítulo
+  (`### Capítulo N — <título original>`), numeradas `Nota N — <seções> [Título](arquivo.qmd)`;
+  as ainda não escritas aparecem sem link, com *(prevista)*. A divisão (uma nota por seção ou
+  seções agrupadas) foi decidida pela extensão das seções no sumário do livro. Ao escrever uma
+  nota prevista, crie o `.qmd` com o mesmo título e troque o item por um link.
+- O logo da UFPA na capa é desenhado pelo tema (`#title-slide::before`, imagem embutida); o
+  `data-background-image` do `title-slide-attributes` é ignorado.
+
 Livros atuais (em `leituras/`): `chan-probabilidade`, `brunton-otimizacao`, `brunton-kutz-data-driven`,
 `bishop-deep-learning`, `strang-linear-algebra`, `ventura-geometria-diferencial`,
 `larson-calculo-multivariavel`, `hasan-advanced-control-power-converters`,
-`ljung-system-identification`, `pillonetto-regularized-system-identification`.
+`ljung-system-identification`, `pillonetto-regularized-system-identification`,
+`waarde-data-based-linear-systems`.
 
 Ao adicionar um livro novo: criar a pasta e o `index.qmd`; adicionar a entrada em
 `referencias.bib`; adicionar o item no menu **Livros** de `_quarto.yml` e a linha na tabela

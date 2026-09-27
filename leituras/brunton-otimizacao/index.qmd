@@ -1,21 +1,30 @@
 ---
-title: "Otimização — Brunton"
-subtitle: "Notas de leitura em slides"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control"
+subtitle: "Steven L. Brunton"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control*
-**Autor:** Steven L. Brunton
 **Edição:** Cambridge University Press, 2026
 
-Notas de leitura em formato de slides (Quarto revealjs):
+### Capítulo 1 — Optimization Bootcamp
 
-* Capítulo 1: [Optimization Bootcamp](01-OptimizationBootcamp.qmd)
+* Nota 1 — 1.1 [Anatomia de um problema de otimização](01-OptimizationBootcamp.qmd)
+* Nota 2 — 1.2 Convexidade em otimização *(prevista)*
+* Nota 3 — 1.3 Gradientes e a geometria da otimização; 1.4 Restrições e multiplicadores de Lagrange *(prevista)*
+* Nota 4 — 1.5 Aplicações da otimização *(prevista)*
 
-Notas complementares:
+### Capítulo 2 — Gradient Based Optimization
 
-* [Controle Preditivo (MPC) de um Sistema Massa-Mola-Amortecedor](MPCMassaMolaAmortecedor.qmd) — formulação matricial do MPC de horizonte finito (um problema de otimização) e simulação em Python.
+* Nota 5 — 2.1 Gradiente descendente *(prevista)*
+* Nota 6 — 2.2 Métodos de momento; 2.3 Gradiente descendente estocástico e ADAM *(prevista)*
+* Nota 7 — 2.4 Método de Newton; 2.5 Busca em linha *(prevista)*
+* Nota 8 — 2.6 Métodos quasi-Newton e BFGS; 2.7 Identidades de cálculo vetorial para gradientes *(prevista)*
+
+### Capítulo 3 — Linear Programming
+
+* Nota 9 — 3.1 Formulação e exemplos; 3.2 Politopos, vértices e geometria em alta dimensão *(prevista)*
+* Nota 10 — 3.3 Método simplex de Dantzig; 3.4 Método do tableau simplex *(prevista)*
+* Nota 11 — 3.5 Dualidade em programação linear; 3.6 Programação inteira e problemas NP-difíceis *(prevista)*

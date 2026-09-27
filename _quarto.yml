@@ -61,6 +61,8 @@ website:
             href: leituras/ljung-system-identification/index.qmd
           - text: "Pillonetto et al. — Regularized System Identification"
             href: leituras/pillonetto-regularized-system-identification/index.qmd
+          - text: "van Waarde et al. — Data-based Linear Systems and Control Theory"
+            href: leituras/waarde-data-based-linear-systems/index.qmd
   page-footer:
     border: false
     center: "©2026 Prof. Dr. Raphael Teixeira — UFPA-CAMTUC-FEE"

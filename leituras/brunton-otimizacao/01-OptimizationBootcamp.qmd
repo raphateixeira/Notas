@@ -1,6 +1,6 @@
 ---
-title: "Otimização — Brunton"
-subtitle: "Capítulo 1 — O problema de otimização"
+title: "Anatomia de um problema de otimização"
+subtitle: "1.1 - Brunton: Optimization"
 author: "Prof. Dr. Raphael Teixeira"
 institute: "Universidade Federal do Pará"
 lang: pt-BR
@@ -11,21 +11,12 @@ format:
     slide-number: true
     width: 1600
     height: 900
-    footer: "UFPA - NDAE - PPCA "
     center: true
     title-slide-attributes:
       data-background-image: "../../imgs/ufpa-colorido.png"
       data-background-size: "84px"
       data-background-position: "top 45px center"
 ---
-
-## Sumário {.smaller}
-
-- **1.1** O problema de otimização — forma geral $\min_x f(x)$ / $\max_x f(x)$
-- **1.1** Otimização irrestrita
-- **1.1** Otimização restrita — restrições de desigualdade e igualdade
-
-# 1.1 — O problema de otimização
 
 ## Forma geral do problema
 
@@ -52,13 +43,3 @@ $$g_i(x) \leq 0 \quad \text{e} \quad h_j(x) = 0$$
 
 - $g_i(x) \leq 0$ — restrições de **desigualdade**.
 - $h_j(x) = 0$ — restrições de **igualdade**.
-
-## Resumo da aula {.smaller}
-
-- **1.1** — Problema de otimização: minimizar ou maximizar uma função objetivo $f(x)$ em relação às variáveis $x$.
-- **1.1** — Sem restrições sobre $x$, o problema é dito **irrestrito**.
-- **1.1** — Com restrições $g_i(x) \leq 0$ (desigualdade) e/ou $h_j(x) = 0$ (igualdade), o problema é dito **restrito**.
-
-## Referências
-
-- Brunton, S. L. [-@brunton2026optimization]. *Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control*. Cambridge University Press.

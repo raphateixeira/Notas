@@ -1,0 +1,66 @@
+---
+title: "Introdução e o lema fundamental"
+subtitle: "1.1–1.2.1 - van Waarde et al.: Data-based Linear Systems"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    theme: [simple, ../../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    center: true
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Contexto
+
+::: {.callout-note title="Nota"}
+Rascunho — leitura do capítulo ainda em andamento. Onde este capítulo se encaixa no livro
+e por que interessa será preenchido após a leitura completa.
+:::
+
+## Ideias centrais
+
+::: {.callout-note title="Nota"}
+Rascunho — enunciados principais em português, com notação própria, serão adicionados
+aqui após a leitura do capítulo.
+:::
+
+## Derivações
+
+::: {.callout-note title="Nota"}
+Rascunho — passagens que exigiram trabalho para entender serão escritas por extenso
+aqui.
+:::
+
+## Implementação
+
+::: {.callout-note title="Nota"}
+Rascunho — código executável que ilustra as ideias centrais desta nota, incluindo a
+geração de ao menos uma figura, será incluído aqui.
+:::
+
+```python
+# TODO: código executável que ilustra as ideias centrais desta nota,
+# incluindo a geração de ao menos uma figura.
+```
+
+## Conexões
+
+::: {.callout-note title="Nota"}
+Rascunho — links para outras notas deste repositório e para as linhas de pesquisa
+(controle preditivo, DeePC, Koopman, eletrônica de potência) serão adicionados aqui.
+:::
+
+## Exercícios selecionados
+
+::: {.callout-note title="Nota"}
+Rascunho — resolução dos exercícios do capítulo que valeram a pena registrar será
+adicionada aqui.
+:::

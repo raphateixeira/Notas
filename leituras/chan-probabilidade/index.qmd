@@ -1,18 +1,33 @@
 ---
-title: "Probabilidade — Chan"
-subtitle: "Notas de leitura em slides"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Introduction to Probability for Data Science"
+subtitle: "Stanley H. Chan"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Introduction to Probability for Data Science*
-**Autor:** Stanley H. Chan
 **Edição:** 2ª ed., Michigan Publishing, 2026
 
-Notas de Aula:
+### Capítulo 1 — Mathematical Background
 
-* Capítulo 1: [Séries Infinitas — Background Matemático](Cap01MathBack.qmd)
-* Capítulo 2: [Probabilidades](Cap02Probabilidades01.qmd)
+* Nota 1 — 1.1 [Séries infinitas](Cap01MathBack.qmd)
+* Nota 2 — 1.2 Aproximação: Taylor, série exponencial e aproximação logarítmica *(prevista)*
+* Nota 3 — 1.3 Integração *(prevista)*
+* Nota 4 — 1.4 Álgebra linear *(prevista)*
+* Nota 5 — 1.5 Combinatória básica *(prevista)*
+
+### Capítulo 2 — Probability
+
+* Nota 6 — 2 (abertura) [Probabilidades: o que é probabilidade?](Cap02Probabilidades01.qmd)
+* Nota 7 — 2.1 Teoria dos conjuntos *(prevista)*
+* Nota 8 — 2.2 Espaço de probabilidade *(prevista)*
+* Nota 9 — 2.3 Axiomas da probabilidade *(prevista)*
+* Nota 10 — 2.4 Probabilidade condicional, independência e teorema de Bayes *(prevista)*
+
+### Capítulo 3 — Discrete Random Variables
+
+* Nota 11 — 3.1–3.2 Variáveis aleatórias e função massa de probabilidade *(prevista)*
+* Nota 12 — 3.3–3.4 Função de distribuição acumulada e esperança *(prevista)*
+* Nota 13 — 3.5.1–3.5.2 Variáveis aleatórias de Bernoulli e binomial *(prevista)*
+* Nota 14 — 3.5.3–3.5.4 Variáveis aleatórias geométrica e de Poisson *(prevista)*

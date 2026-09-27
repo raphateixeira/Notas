@@ -14,9 +14,13 @@ Tema em gestação: as notas são feitas primeiro nos slides de leitura dos livr
 sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
 :::
 
+## Notas
+
+* [Controle Preditivo (MPC) de um Sistema Massa-Mola-Amortecedor](MPCMassaMolaAmortecedor.qmd) — formulação matricial do MPC de horizonte finito (um problema de otimização) e simulação em Python.
+
 ## Fontes (notas de leitura)
 
-* [Brunton — Optimization (nota de MPC massa-mola-amortecedor)](../../leituras/brunton-otimizacao/index.qmd)
+* [Brunton — Optimization: A Bootcamp for Machine Learning, Inverse Problems, and Control](../../leituras/brunton-otimizacao/index.qmd)
 * [Brunton & Kutz — Data-Driven Science and Engineering](../../leituras/brunton-kutz-data-driven/index.qmd)
 
 ## Material relacionado

@@ -1,9 +1,10 @@
 ---
-title: "Controle de Conversores de Potência"
-subtitle: "Capítulo 1 — Introdução"
+title: "Controle de conversores de potência: considerações gerais"
+subtitle: "1.1 - Komurcugil et al.: Advanced Control of Power Converters"
 author: "Prof. Dr. Raphael Teixeira"
 institute: "Universidade Federal do Pará"
 lang: pt-BR
+suppress-bibliography: true
 format:
   revealjs:
     theme: [simple, ../../TemaRTx.scss]
@@ -54,9 +55,3 @@ outra. De modo geral, existem quatro categorias de conversores de potência:
 - **CA–CC** (AC–DC)
 - **CC–CA** (DC–AC)
 - **CA–CA** (AC–AC)
-
-## Referências
-
-- Komurcugil, H., Bayhan, S., Guzman, R., Malinowski, M., Abu-Rub, H. *Advanced Control of
-  Power Converters: Techniques and Matlab/Simulink Implementation*. Wiley-IEEE Press, 2023.
-  [@komurcugil2023advancedcontrol]

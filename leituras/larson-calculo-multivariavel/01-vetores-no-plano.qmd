@@ -1,6 +1,6 @@
 ---
-title: "Vetores no Plano"
-subtitle: "Capítulo 11 — Vectors and the Geometry of Space (§11.1)"
+title: "Vetores no plano"
+subtitle: "11.1 - Larson & Edwards: Multivariable Calculus"
 author: "Prof. Dr. Raphael Teixeira"
 institute: "Universidade Federal do Pará"
 lang: pt-BR
@@ -11,23 +11,12 @@ format:
     slide-number: true
     width: 1600
     height: 900
-    footer: "UFPA - CAMTUC - FEE"
     center: true
     title-slide-attributes:
       data-background-image: "../../imgs/ufpa-colorido.png"
       data-background-size: "84px"
       data-background-position: "top 45px center"
 ---
-
-## Sumário {.smaller}
-
-- **11.1.1** Segmentos orientados e a definição de vetor
-- **11.1.2** Operações com vetores e suas propriedades
-- **11.1.3** Vetores unitários padrão
-- **11.1.4** Aplicações: força e velocidade
-- **Derivações** dos teoremas 11.1–11.3
-
-# 11.1.1 — Segmentos Orientados e a Definição de Vetor
 
 ## Grandezas escalares e vetoriais
 
@@ -81,8 +70,6 @@ Com ponto inicial $P(3,-7)$ e terminal $Q(-2,5)$, $v_1 = q_1-p_1 = -2-3 = -5$ e 
 $$\mathbf{v} = \langle -5, 12 \rangle \quad \text{e} \quad \|\mathbf{v}\| = \sqrt{(-5)^2+12^2} = \sqrt{169} = 13.$$
 
 ![Figura 11.5 — Forma de componentes de $\mathbf v = \langle -5, 12\rangle$.](imgs/Fig11p5.png){width="50%" fig-align="center"}
-
-# 11.1.2 — Operações com Vetores e suas Propriedades
 
 ## Definição: adição e multiplicação por escalar
 
@@ -164,8 +151,6 @@ Para $\mathbf{v} = \langle -2, 5 \rangle$, pelo Teorema 11.3,
 $$\frac{\mathbf{v}}{\|\mathbf{v}\|} = \frac{\langle -2,5\rangle}{\sqrt{(-2)^2+5^2}} = \frac{1}{\sqrt{29}}\langle -2,5\rangle = \left\langle \frac{-2}{\sqrt{29}}, \frac{5}{\sqrt{29}} \right\rangle,$$
 de comprimento $1$: $\sqrt{(-2/\sqrt{29})^2 + (5/\sqrt{29})^2} = \sqrt{4/29+25/29} = \sqrt{29/29} = 1$.
 
-# 11.1.3 — Vetores Unitários Padrão
-
 ## Os vetores $\mathbf i$ e $\mathbf j$
 
 Os vetores unitários $\mathbf{i} = \langle 1,0\rangle$ e $\mathbf{j} = \langle 0,1\rangle$ são os **vetores unitários padrão** do plano. Todo vetor se escreve unicamente como combinação deles:
@@ -194,8 +179,6 @@ $$\mathbf{v} = \|\mathbf{v}\|\langle\cos\theta,\sin\theta\rangle = \|\mathbf{v}\
 
 $\mathbf{v}$ tem magnitude $3$ e ângulo $30° = \pi/6$ com o eixo $x$ positivo:
 $$\mathbf{v} = 3\cos\frac{\pi}{6}\mathbf{i} + 3\sin\frac{\pi}{6}\mathbf{j} = \frac{3\sqrt{3}}{2}\mathbf{i} + \frac{3}{2}\mathbf{j}.$$
-
-# 11.1.4 — Aplicações: Força e Velocidade
 
 ## Força resultante
 
@@ -232,8 +215,6 @@ isto é, velocidade alterada para $\approx 522{,}5$ mph, em trajetória a $\appr
 
 ![Figura 11.13 — Velocidade do avião sem vento (a) e com vento (b).](imgs/Fig11p13.png){width="95%" fig-align="center"}
 
-# Derivações
-
 ## Teorema 11.1 — propriedade associativa
 
 Usa a associatividade da soma de reais:
@@ -256,15 +237,3 @@ Como $1/\|\mathbf v\|>0$, $\mathbf{u}=(1/\|\mathbf v\|)\mathbf{v}$ tem a mesma d
 $$\|\mathbf{u}\| = \left\|\frac{1}{\|\mathbf{v}\|}\mathbf{v}\right\| = \left|\frac{1}{\|\mathbf{v}\|}\right|\|\mathbf{v}\| = \frac{1}{\|\mathbf{v}\|}\|\mathbf{v}\| = 1.$$
 
 $$\boxed{\|\mathbf{u}\|=1} \quad \text{— } \mathbf{u} \text{ é unitário, na mesma direção de } \mathbf{v}.$$
-
-## Resumo da aula {.smaller}
-
-- **11.1.1** — Segmento orientado $\overrightarrow{PQ}$; vetor como classe de equivalência; forma de componentes $\mathbf v=\langle v_1,v_2\rangle$ e norma $\|\mathbf v\|$.
-- **11.1.2** — Soma, múltiplo escalar, negativo e diferença; Teorema 11.1 (vetores do plano formam um espaço vetorial); Teoremas 11.2–11.3 e desigualdade triangular.
-- **11.1.3** — Vetores unitários padrão $\mathbf i,\mathbf j$; todo vetor é combinação linear $v_1\mathbf i+v_2\mathbf j$; representação por ângulo $\theta$.
-- **11.1.4** — Aplicações a força resultante e velocidade resultante (rumo).
-- Próxima nota — [§11.2](02-vetores-no-espaco.qmd) estende esta forma de componentes e estas operações para $\mathbb{R}^3$; §11.3 (produto escalar) prova a desigualdade triangular.
-
-## Referências
-
-[@larson2010multivariablecalculus], capítulo 11, §11.1.

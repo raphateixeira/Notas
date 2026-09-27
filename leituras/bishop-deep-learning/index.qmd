@@ -1,24 +1,40 @@
 ---
-title: "Deep Learning"
-subtitle: "Foundations and Concepts"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Deep Learning: Foundations and Concepts"
+subtitle: "Christopher M. Bishop, Hugh Bishop"
 lang: pt-BR
+toc: false
 ---
 
 [⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
 
-**Livro:** *Deep Learning: Foundations and Concepts*
-**Autores:** Christopher M. Bishop, Hugh Bishop
 **Edição:** Springer, 2024
 
 ::: {.callout-note}
 Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides. Implementações de código e experimentos substanciais em Deep Learning têm repositório próprio: veja o satélite [DeepLearning](https://raphateixeira.github.io/DeepLearning/).
 :::
 
-Notas de Leitura:
+### Capítulo 1 — The Deep Learning Revolution
 
-* Capítulo 1: [Notas de leitura (rascunho)](BDL01Exemplo.qmd)
+* Nota 1 — 1.1 [O impacto do deep learning](BDL01Exemplo.qmd)
+* Nota 2 — 1.2 Um exemplo tutorial: ajuste de curvas, complexidade e regularização *(prevista)*
+* Nota 3 — 1.3 Uma breve história do aprendizado de máquina *(prevista)*
+
+### Capítulo 2 — Probabilities
+
+* Nota 4 — 2.1 As regras da probabilidade *(prevista)*
+* Nota 5 — 2.2–2.3 Densidades de probabilidade e a distribuição gaussiana *(prevista)*
+* Nota 6 — 2.4 Transformação de densidades *(prevista)*
+* Nota 7 — 2.5 Teoria da informação *(prevista)*
+* Nota 8 — 2.6 Probabilidades bayesianas *(prevista)*
+
+### Capítulo 3 — Standard Distributions
+
+* Nota 9 — 3.1 Variáveis discretas *(prevista)*
+* Nota 10 — 3.2.1–3.2.3 A gaussiana multivariada: geometria, momentos e limitações *(prevista)*
+* Nota 11 — 3.2.4–3.2.6 Gaussiana multivariada: distribuições condicional e marginal, teorema de Bayes *(prevista)*
+* Nota 12 — 3.2.7–3.2.9 Gaussiana multivariada: máxima verossimilhança, estimação sequencial e misturas *(prevista)*
+* Nota 13 — 3.3–3.4 Variáveis periódicas e a família exponencial *(prevista)*
+* Nota 14 — 3.5 Métodos não paramétricos *(prevista)*
 
 Notas complementares:
 
