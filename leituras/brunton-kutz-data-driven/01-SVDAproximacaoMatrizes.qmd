@@ -209,24 +209,22 @@ Os índices em Python começam em 0: `S[r]` é $\sigma_{r+1}$ e `S[r:]` são $\s
 Uma imagem em tons de cinza é uma matriz real $\mathbf{X} \in \mathbb{R}^{n \times m}$ ($n$ pixels na vertical, $m$ na horizontal). O livro usa uma foto de $2000 \times 1500$ pixels; aqui, a foto de Grace Hopper que acompanha o matplotlib ($600 \times 512$).
 
 ```{python}
-#| echo: true
+#| echo: false
 import matplotlib.pyplot as plt
-from matplotlib import cbook
-
 plt.rcParams.update({"font.size": 15})
+```
+
+```{python}
+#| echo: true
+from matplotlib import cbook
 
 A = plt.imread(cbook.get_sample_data("grace_hopper.jpg", asfileobj=False))
 X = np.mean(A, axis=-1)                           # RGB -> tons de cinza
 n, m = X.shape
 U, S, VT = np.linalg.svd(X, full_matrices=False)  # SVD econômica
 
-def aproxima(r):
-    """SVD truncada de posto r (1.5)."""
-    return U[:, :r] @ np.diag(S[:r]) @ VT[:r, :]
-
-def armazenamento(r):
-    """Fração de números guardados: r colunas de U e de V e r valores singulares."""
-    return r * (n + m + 1) / (n * m)
+aproxima = lambda r: U[:, :r] @ np.diag(S[:r]) @ VT[:r, :]  # SVD truncada (1.5)
+armazenamento = lambda r: r * (n + m + 1) / (n * m)        # fração guardada
 ```
 
 Guardar $\tilde{\mathbf{U}}$, $\tilde{\boldsymbol{\Sigma}}$ e $\tilde{\mathbf{V}}$ exige $r(n + m + 1)$ números, contra $nm$ da imagem original: a truncação é uma **compressão**.
