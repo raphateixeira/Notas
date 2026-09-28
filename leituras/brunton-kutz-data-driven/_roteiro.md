@@ -12,6 +12,8 @@
 - **Exemplos:** o livro puxa muito para dinâmica dos fluidos (área do Brunton). Nos slides,
   trocar por exemplos de sistemas LIT: controle, identificação de sistemas, resposta em
   frequência, sinais medidos em plantas.
+- **Acentos em negrito:** escrever `\mathbf{\hat{U}}` / `\boldsymbol{\tilde{\Sigma}}` (acento dentro
+  do negrito); `\hat{\mathbf{U}}` deixa o acento deslocado no MathJax.
 - **Códigos:** como no livro, cada slide de código tem abas **Python** (executa no render) e
   **MATLAB** (só exibido; testado no MATLAB R2025a local antes de entrar no slide). Vários exemplos usam dados do repositório do livro (`DATA/…`), que não estão aqui:
   para cada um, decidir entre obter os dados ou trocar por um exemplo equivalente.
@@ -20,7 +22,7 @@
 
 | Nota | Seções | Páginas | Arquivo | Estado |
 |---|---|---|---|---|
-| 1 | 1.1–1.2 | 3–14 | `01-SVDAproximacaoMatrizes.qmd` | escrita (17 slides) |
+| 1 | 1.1–1.2 | 3–14 | `01-SVDAproximacaoMatrizes.qmd` | escrita (18 slides) |
 | 2 | 1.3 | 14–19 | — | prevista |
 | 3 | 1.4 | 19–27 | — | prevista |
 | 4 | 1.5–1.6 | 27–41 | — | prevista (ver observação) |
@@ -50,30 +52,54 @@ Código 1.1.
 
 **Slides feitos:**
 
-1. Alta dimensão, poucos padrões (motivação), ilustrado com a foto de uma
-   revoada (`imgs/RevoadaEstorninhos.jpg`, Stockcake; não é do livro)
+1. Muitos dados - Poucos padrões (motivação), ilustrado com a foto de uma revoada
+   (`imgs/RevoadaEstorninhos.jpg`, Stockcake) e um sinal ruidoso com 3 senoides (50, 120,
+   300 Hz) ao lado do seu espectro, com os 3 picos dominantes (figura gerada no deck; nada disso
+   é do livro)
 2. A mesma ideia em identificação de sistemas (**não está no livro**): PRBS → G(z) → y com
    500 amostras; Ho–Kalman/ERA (resposta ao impulso por MQ → Hankel 25×25 → SVD) mostra 2
    valores singulares dominantes = ordem 2 = 2 polos; figura gerada em Python no próprio deck
-3. Por que a SVD (estável, hierárquica, existe sempre; SVD × FFT; usos no livro)
-4. A matriz de dados — Eq. (1.1) com a 1ª parte da Fig. 1.17 (rostos como colunas), *snapshots*, *tall-skinny*
-5. Definição da SVD — quadro de Definição, Eq. (1.2)
-6. SVD completa e SVD econômica — Eq. (1.3) e Fig. 1.1
-7. Computando a SVD — bidiagonalização + Golub–Kahan; `np.linalg.svd` / `svd` (abas Python e MATLAB)
-8. Soma diádica — Eq. (1.4) com a Fig. 1.29(a) (soma de produtos externos)
-9. SVD truncada — Eq. (1.5) e Fig. 1.2
-10. Teorema de Eckart–Young — quadro de Teorema, Eq. (1.6), norma de Frobenius
-11. Erro na norma de Frobenius — Eqs. (1.7)–(1.8) e interpretações (energia, variância)
-12. Aproximação ótima na norma 2 — Eqs. (1.9)–(1.11)
-13. Verificação numérica das expressões de erro (**não está no livro**: confere (1.7) e (1.10))
-14. Exemplo: compressão de imagem — código
-15. Imagem reconstruída para r = 5, 20, 100 (equivalente à Fig. 1.3)
-16. Valores singulares e soma acumulada (equivalente à Fig. 1.4) + erro relativo (1.8)
+3. A matriz de dados — Eq. (1.1): 1ª parte da Fig. 1.17 (rostos como colunas, sem os rótulos) ao
+   lado de uma figura no mesmo estilo, gerada no deck (não é do livro): gráficos de y[k−1], y[k−2],
+   u[k−1], u[k−2] descendo para as colunas x_1…x_4 de X (entradas simbólicas; linha k =
+   [y[k−1] y[k−2] u[k−1] u[k−2]]); n ≫ m
+4. Uma matriz como soma de padrões (**não está no livro**): bandeira da Noruega desenhada no deck
+   (vermelho #BA0C2F, azul #00205B, branco; 6:1:2:1:12 × 6:1:2:1:6). Com os canais [R G B] lado a
+   lado, tem posto 3 exato: X = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + σ₃u₃v₃ᵀ (σ = 134,6; 50,4; 12,3), cada termo
+   como coluna uₖ × linha vₖᵀ com o produto em cores; barras dos σₖ (só 3 não nulos). (Versões
+   descartadas: autodecomposição; bandeiras em P&B; Pará, menos regular; Suécia, posto 2.)
+5. Da soma de padrões à SVD — "X ∈ ℂⁿˣᵐ, n ≥ m, é soma de até m padrões"; figura no estilo da Fig. 1.29(a),
+   redesenhada no deck com os rótulos corretos v_k* (o livro rotula as barras como v_k); Eq. (1.4); X = UΣV* em destaque (cor e tamanho,
+   sem caixa); ranqueamento σ₁ ≥ ⋯ ≥ σₘ ≥ 0 por último
+6. A SVD completa: U, Σ e V — parte "Full SVD" da Fig. 1.1 com Σ escrita por extenso embaixo
+   (σ₁ … σₘ na diagonal m×m, bloco 0 de (n−m)×m); leitura intuitiva: colunas de U = padrões ao
+   longo das colunas de X; Σ = valores singulares σ₁ ≥ ⋯ ≥ σₘ ≥ 0 (os pesos); linhas de V* =
+   padrões ao longo das linhas; Û⊥ multiplica só zeros; fecha com o contraste FFT (base fixa, senoides) × SVD
+   (bases U, V extraídas dos dados) — herdado do antigo slide "Por que a SVD", excluído
+7. A decomposição SVD — quadro de Definição enxuto (Eq. 1.2 com as dimensões de U, Σ, V), posto =
+   nº de σₖ ≠ 0, SVD econômica X = ÛΣ̂V* (Eq. 1.3) e a parte "Economy SVD" da Fig. 1.1 ao lado
+8. Computando a SVD — uma frase (rotinas maduras; basta uma linha); abas Python/MATLAB com a mesma
+   matriz 5×3 de inteiros e a SVD econômica (full_matrices=False / 'econ'); embaixo, os números:
+   X (5×3) = Û (5×3) Σ̂ (3×3) Vᵀ (3×3), σ = 5,84; 3,29; 1,05 (exemplo não é do livro)
+9. Soma diádica — abertura enxuta, Eq. (1.4) sem número, tópicos de hierarquia/truncamento e,
+   embaixo, a mesma figura redesenhada da soma colunas × linhas (u_k, v_k*) do slide "Da soma de
+   padrões à SVD"
+10. SVD truncada: aproximação matricial — Eq. (1.5) e Fig. 1.2
+11. Teorema de Eckart–Young — quadro de Teorema, Eq. (1.6), norma de Frobenius
+12. Erro na norma de Frobenius — Eq. (1.7) com um quadro "Por quê?" (**não está no livro**: resíduo =
+   termos descartados; a norma de Frobenius é invariante por bases ortonormais, logo ‖X−X̃‖²_F =
+   ‖Σ_rem‖²_F); erro relativo (1.8) em linha e interpretações (energia, variância)
+13. Aproximação ótima na norma 2 — Eqs. (1.9)–(1.11)
+14. Verificação numérica das expressões de erro (**não está no livro**: confere (1.7) e (1.10))
+15. Exemplo: compressão de imagem — código
+16. Imagem reconstruída para r = 5, 20, 100 (equivalente à Fig. 1.3)
+17. Valores singulares e soma acumulada (equivalente à Fig. 1.4) + erro relativo (1.8)
 
-**Decisões.** A foto do livro (Mordecai, 2000 × 1500, de `DATA/dog.jpg`) foi trocada pela foto
-de Grace Hopper que acompanha o matplotlib (600 × 512), para rodar sem baixar dados. Figs. 1.1
-e 1.2 recortadas do PDF para `imgs/`; também a 1ª parte da Fig. 1.17 (§1.6) e a Fig. 1.29(a)
-(§1.9), antecipadas porque ilustram bem a matriz de dados e a soma diádica.
+**Decisões.** O exemplo de compressão usa a própria foto do livro (Mordecai, 2000 × 1500), copiada
+de `~/Pesquisa/DataSetCaoGato/dog.jpg` para `imgs/dog.jpg` e convertida para tons de cinza pela média
+dos canais RGB no código (antes era a foto de Grace Hopper do matplotlib). Figs. 1.1, 1.2, 1.17 e
+1.29(a) recortadas do PDF para `imgs/` (sem legenda); a 1.29(a) acabou redesenhada no deck com os
+rótulos v_k*.
 
 ### Nota 2 — 1.3 Propriedades matemáticas e manipulações
 
