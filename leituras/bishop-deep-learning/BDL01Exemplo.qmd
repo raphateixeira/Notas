@@ -69,3 +69,5 @@ Implementações de código substanciais devem ir para o satélite
 Rascunho — resolução dos exercícios do capítulo que valeram a pena registrar será
 adicionada aqui.
 :::
+
+{{< include ../../_encerramento.qmd >}}

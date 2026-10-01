@@ -33,3 +33,7 @@ toc: false
 * Nota 14 — 3.3–3.4 Exemplos de compressed sensing e a geometria da compressão *(prevista)*
 * Nota 15 — 3.5–3.6 Regressão esparsa e representação esparsa *(prevista)*
 * Nota 16 — 3.7–3.8 PCA robusta (RPCA) e posicionamento esparso de sensores *(prevista)*
+
+### Capítulo 7 — Data-Driven Dynamical Systems
+
+* Nota 17 — 7.4 [Teoria do operador de Koopman](17-TeoriaOperadorKoopman.qmd)

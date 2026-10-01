@@ -519,3 +519,5 @@ O `pidtune` serve como **linha de base**: se o projeto manual não supera essa r
 2. Projete o Tipo 2 da planta 2 com $\omega_c = 5$ rad/s. Compare $M_s$ e $t_s$ com o Caso 6.
 3. Acrescente um atraso computacional ($z^{-1}$) às duas plantas e repita todos os casos. Qual método "enxerga" o atraso sem modificação?
 4. Identifique $G_2(z)$ com `arx` a partir de uma PRBS com ruído (SNR = 20 dB) e avalie a degradação de $M_s$ do PID projetado.
+
+{{< include ../../_encerramento.qmd >}}

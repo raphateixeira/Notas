@@ -348,3 +348,5 @@ plt.show()
 Universidade Federal do Pará
 
 :::
+
+{{< include ../../_encerramento.qmd >}}

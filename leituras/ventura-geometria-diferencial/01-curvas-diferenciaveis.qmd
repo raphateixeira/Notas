@@ -238,3 +238,5 @@ axes[1].grid()
 plt.tight_layout()
 plt.show()
 ```
+
+{{< include ../../_encerramento.qmd >}}

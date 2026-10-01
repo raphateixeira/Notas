@@ -270,3 +270,5 @@ $$v_{ab} = \sum_{n=1,3,5,\dots} \frac{4V_s}{n\pi}\operatorname{sen}\!\left(\frac
 ## Referências
 
 - Rashid, M. H. *Power Electronics: Devices, Circuits, and Applications*, 4ª ed. (International Edition), Pearson, 2014 [@rashid2014power] — Cap. 6.
+
+{{< include ../../_encerramento.qmd >}}

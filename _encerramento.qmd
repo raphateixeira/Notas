@@ -1,0 +1,9 @@
+## Encerramento {.encerramento background-color="#E4E3E8"}
+
+![](../../imgs/ufpa-colorido.png){.encerramento-logo}
+
+[Prof. Dr. Raphael Teixeira]{.encerramento-nome}
+
+Universidade Federal do Pará
+
+[raphaelbt@ufpa.br](mailto:raphaelbt@ufpa.br){.encerramento-email}

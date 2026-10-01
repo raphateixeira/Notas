@@ -18,49 +18,555 @@ format:
       data-background-position: "top 45px center"
 ---
 
-## Contexto
+## Dos dados ao modelo {.small-slide .nostretch}
 
-::: {.callout-note title="Nota"}
-Rascunho — leitura do capítulo ainda em andamento. Onde este capítulo se encaixa no livro
-e por que interessa será preenchido após a leitura completa.
+Inferir modelos a partir de observações e estudar suas propriedades é, no fundo, o que a ciência faz: um modelo tenta ligar as observações em algum **padrão**.
+
+::: {.callout-note title="Identificação de sistemas"}
+Construir **modelos matemáticos** de **sistemas dinâmicos** a partir de **dados observados** do próprio sistema.
 :::
 
-## Ideias centrais
+```{python}
+#| echo: false
+#| fig-align: center
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch
 
-::: {.callout-note title="Nota"}
-Rascunho — enunciados principais em português, com notação própria, serão adicionados
-aqui após a leitura do capítulo.
-:::
-
-## Derivações
-
-::: {.callout-note title="Nota"}
-Rascunho — passagens que exigiram trabalho para entender serão escritas por extenso
-aqui.
-:::
-
-## Implementação
-
-::: {.callout-note title="Nota"}
-Rascunho — código executável que ilustra as ideias centrais desta nota, incluindo a
-geração de ao menos uma figura, será incluído aqui.
-:::
-
-```python
-# TODO: código executável que ilustra as ideias centrais desta nota,
-# incluindo a geração de ao menos uma figura.
+plt.rcParams.update({"mathtext.fontset": "cm", "font.family": "serif", "font.size": 26})
+fig, ax = plt.subplots(figsize=(8.0, 1.8))
+ax.set_xlim(0, 10); ax.set_ylim(0, 2.85); ax.axis("off")
+ax.add_patch(FancyBboxPatch((3.65, 0.25), 2.7, 2.1, boxstyle="round,pad=0.05",
+                            fc="#E8EEF7", ec="#1B365D", lw=2.5))
+ax.text(5.0, 1.3, r"$\mathcal{M}$", ha="center", va="center", fontsize=54, color="#1B365D")
+seta = dict(arrowstyle="-|>", color="#1B365D", lw=2.5, mutation_scale=26)
+ax.annotate("", xy=(3.65, 1.3), xytext=(1.6, 1.3), arrowprops=seta)
+ax.annotate("", xy=(8.4, 1.3), xytext=(6.35, 1.3), arrowprops=seta)
+ax.text(1.4, 1.3, "$u(t)$", ha="right", va="center", color="tab:blue")
+ax.text(8.6, 1.3, "$y(t)$", ha="left", va="center", color="tab:red")
+plt.show()
+plt.rcdefaults()
 ```
 
-## Conexões
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
 
-::: {.callout-note title="Nota"}
-Rascunho — links para outras notas deste repositório e para as linhas de pesquisa
-(controle preditivo, DeePC, Koopman, eletrônica de potência) serão adicionados aqui.
+plt.rcParams.update({"font.size": 14})
+rng = np.random.default_rng(1)
+
+# sistema LIT "desconhecido": G(z) = (0.10 z + 0.08) / (z^2 - 1.6 z + 0.8)
+N = 200
+u = np.repeat(np.sign(rng.standard_normal(N // 8)), 8)          # entrada binária
+y0 = signal.lfilter([0, 0.10, 0.08], [1, -1.6, 0.8], u)
+y = y0 + 0.05 * rng.standard_normal(N)                           # saída medida
+
+# modelo de 2ª ordem ajustado aos dados (o método é o tema da §1.3)
+k = np.arange(2, N)
+Phi = np.column_stack([-y[k - 1], -y[k - 2], u[k - 1], u[k - 2]])
+a1, a2, b1, b2 = np.linalg.lstsq(Phi, y[k], rcond=None)[0]
+ym = signal.lfilter([0, b1, b2], [1, a1, a2], u)                 # simulação do modelo
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 3.1))
+ax1.step(np.arange(N), u, where="post", color="tab:blue", lw=1.3)
+ax1.set_title("entrada $u(t)$"); ax1.set_xlabel("$t$"); ax1.set_ylim(-1.5, 1.5)
+ax2.plot(y, ".", color="tab:red", ms=4, label="saída medida $y(t)$")
+ax2.plot(ym, color="k", lw=1.6, label="saída do modelo")
+ax2.set_title("dados e modelo"); ax2.set_xlabel("$t$"); ax2.legend(loc="upper right", fontsize=12)
+plt.tight_layout()
+plt.show()
+```
+
+## Sistema: entradas, saídas e perturbações {.small-slide .nostretch}
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: false
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch
+
+plt.rcParams.update({"mathtext.fontset": "cm", "font.family": "serif", "font.size": 26})
+fig, ax = plt.subplots(figsize=(7.5, 5.4))
+ax.set_xlim(0, 10); ax.set_ylim(0, 7.2); ax.axis("off")
+ax.add_patch(FancyBboxPatch((3.2, 1.2), 3.6, 3.2, boxstyle="round,pad=0.05",
+                            fc="#E8EEF7", ec="#1B365D", lw=2.5))
+seta = dict(arrowstyle="-|>", color="#1B365D", lw=2.5, mutation_scale=28)
+ax.annotate("", xy=(3.2, 3.6), xytext=(0.6, 3.6), arrowprops=seta)       # w
+ax.annotate("", xy=(3.2, 2.0), xytext=(0.6, 2.0), arrowprops=seta)       # u
+ax.annotate("", xy=(5.0, 4.4), xytext=(5.0, 6.9), arrowprops=seta)       # v
+ax.annotate("", xy=(9.6, 2.8), xytext=(6.8, 2.8), arrowprops=seta)       # y
+ax.text(1.0, 3.85, "$w$", color="tab:green")
+ax.text(1.0, 2.25, "$u$", color="tab:blue")
+ax.text(5.25, 5.9, "$v$", color="gray")
+ax.text(8.6, 3.05, "$y$", color="tab:red")
+plt.show()
+plt.rcdefaults()
+```
 :::
+::: {.column width="50%"}
+Um **sistema** é um objeto em que variáveis de diferentes tipos interagem e produzem sinais observáveis.
 
-## Exercícios selecionados
-
-::: {.callout-note title="Nota"}
-Rascunho — resolução dos exercícios do capítulo que valeram a pena registrar será
-adicionada aqui.
+- [$y$]{style="color:#d62728"} — **saídas**: os sinais observáveis que nos interessam;
+- [$u$]{style="color:#1f77b4"} — **entradas**: estímulos externos que o observador **manipula**;
+- **perturbações**: estímulos externos que não se manipulam:
+    - [$w$]{style="color:#2ca02c"} — **medidas** diretamente;
+    - [$v$]{style="color:gray"} — **não medidas**, vistas só pelo efeito na saída.
 :::
+::::
+
+Na modelagem, a distinção entre entradas e perturbações medidas costuma ser menos importante. Ex.: num conversor buck, [$u$]{style="color:#1f77b4"} = razão cíclica, [$w$]{style="color:#2ca02c"} = tensão de entrada medida, [$v$]{style="color:gray"} = variações de carga, [$y$]{style="color:#d62728"} = tensão de saída.
+
+## Exemplo 1.1: casa aquecida por energia solar {.small-slide}
+
+:::: {.columns}
+::: {.column width="52%"}
+```{python}
+#| echo: false
+#| fig-align: center
+# Fig. 1.2 redesenhada (com as variáveis da Fig. 1.3)
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Polygon, Circle, FancyArrowPatch, Arc
+
+plt.rcParams.update({"font.size": 15})
+azul, cano = "#1B365D", "#4A6FA5"
+fig, ax = plt.subplots(figsize=(8.4, 6.6))
+ax.set_xlim(0, 10); ax.set_ylim(0, 7.6); ax.set_aspect("equal"); ax.axis("off")
+
+def tubo(pts):
+    x, y = zip(*pts); ax.plot(x, y, color=cano, lw=4, solid_capstyle="round", zorder=1)
+def seta(x, y, dx, dy):
+    ax.add_patch(FancyArrowPatch((x, y), (x + dx, y + dy), arrowstyle="-|>", mutation_scale=22,
+                                 color=azul, lw=0, zorder=4))
+def bomba(x, y, rot, cor=azul):
+    ax.add_patch(Circle((x, y), 0.32, fc="white", ec=cor, lw=2.5, zorder=3))
+    ax.text(x, y, "B", ha="center", va="center", fontsize=13, color=cor, weight="bold", zorder=4)
+
+# casa e telhado; a água direita do telhado é o painel solar
+ax.add_patch(Rectangle((0.5, 0.6), 3.9, 2.8, fc="#F4F1EA", ec="k", lw=2, zorder=2))
+ax.add_patch(Polygon([(0.1, 3.4), (2.45, 5.75), (4.8, 3.4)], closed=True, fc="#F4F1EA", ec="k", lw=2, zorder=2))
+ax.plot([2.55, 4.55], [5.55, 3.55], color="#2B2B2B", lw=9, solid_capstyle="butt", zorder=3)
+ax.text(3.8, 4.75, "painel solar", rotation=-45, ha="center", va="center", fontsize=13, zorder=4)
+ax.add_patch(Arc((2.3, 1.9), 1.5, 1.5, theta1=100, theta2=400, color=azul, lw=2.2, zorder=3))
+seta(2.1, 2.64, 0.35, 0.02)
+ax.text(2.45, 0.8, "casa", ha="center", fontsize=14, color="#555")
+
+# sol
+sx, sy = 6.9, 6.7
+ax.add_patch(Circle((sx, sy), 0.38, fc="#FFD54F", ec="#E6A100", lw=2, zorder=3))
+for a in np.linspace(0, 2 * np.pi, 9)[:-1]:
+    ax.plot([sx + 0.52 * np.cos(a), sx + 0.8 * np.cos(a)], [sy + 0.52 * np.sin(a), sy + 0.8 * np.sin(a)],
+            color="#E6A100", lw=2)
+ax.text(sx + 1.0, sy, "$I$: radiação solar", va="center", color="tab:green", fontsize=15)
+
+# reservatório de pedras
+ax.add_patch(Rectangle((6.2, 0.7), 2.1, 1.9, fc="#E0DED8", ec="k", lw=2, hatch="oo", zorder=2))
+ax.text(6.95, 2.8, "reservatório", ha="center", fontsize=13)
+ax.text(7.25, 0.2, "$y$: temperatura", ha="center", color="tab:red", fontsize=15)
+
+# circuito do painel: topo do painel -> bomba u -> reservatório -> volta ao pé do painel
+tubo([(2.55, 5.55), (2.55, 5.9), (9.3, 5.9), (9.3, 1.3), (8.3, 1.3)])
+tubo([(7.95, 2.6), (7.95, 3.25), (4.55, 3.25), (4.55, 3.55)])
+bomba(5.3, 5.9, 0, cor="tab:blue")
+ax.text(5.3, 6.4, "$u$: bomba", ha="center", color="tab:blue", fontsize=15)
+seta(7.6, 5.9, 0.5, 0); seta(9.3, 3.9, 0, -0.5); seta(6.2, 3.25, -0.5, 0)
+# circuito da casa: reservatório -> bomba -> casa -> volta
+tubo([(6.2, 1.1), (4.4, 1.1)]); tubo([(4.4, 2.2), (6.2, 2.2)])
+bomba(5.3, 1.1, 0)
+seta(4.75, 1.1, -0.3, 0); seta(5.4, 2.2, 0.4, 0)
+plt.show()
+```
+:::
+::: {.column width="48%"}
+O sol aquece o ar no painel solar; o ar é bombeado para um **reservatório térmico** (uma caixa cheia de pedras), cuja energia depois aquece a casa.
+
+**Pergunta:** como a radiação solar e a velocidade da bomba afetam a temperatura do reservatório?
+
+- [$u$]{style="color:#1f77b4"}: velocidade da bomba (entrada);
+- [$I$]{style="color:#2ca02c"}: radiação solar (perturbação medida);
+- [$v$]{style="color:gray"}: vento, temperatura externa etc. (não medidas);
+- [$y$]{style="color:#d62728"}: temperatura do reservatório (saída).
+:::
+::::
+
+## Exemplo 1.1: os dados medidos {.small-slide}
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({"font.size": 14})
+# curvas digitalizadas da Fig. 1.4 (300 amostras, Ts = 10 min)
+t, y, u, I = np.loadtxt("dados/casa_solar_fig1p4.csv", delimiter=",", skiprows=1, unpack=True)
+
+fig, axs = plt.subplots(1, 3, figsize=(16, 4.2), sharex=True)
+axs[0].plot(t, y, color="tab:red", lw=1.2)
+axs[0].set_title("$y$: temperatura do reservatório [°C]")
+axs[1].step(t, u, where="post", color="tab:blue", lw=1.0)
+axs[1].set_title("$u$: bomba (desligada/ligada)"); axs[1].set_yticks([0, 1]); axs[1].set_ylim(-0.3, 1.3)
+axs[2].plot(t, I, color="tab:green", lw=1.2)
+axs[2].set_title("$I$: intensidade solar")
+for ax in axs:
+    ax.set_xlabel("$t$ [h]"); ax.set_xlim(0, 50); ax.set_xticks(range(0, 51, 10)); ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+Temperatura do reservatório [$y$]{style="color:#d62728"}, bomba desligada/ligada [$u$]{style="color:#1f77b4"} e intensidade solar [$I$]{style="color:#2ca02c"} ao longo de **50 horas**, amostradas a cada **10 minutos** (curvas digitalizadas da Fig. 1.4).
+
+- A bomba é um sinal **binário** (liga/desliga); a radiação solar segue o ciclo dia/noite e não pode ser escolhida.
+
+## Exemplo 1.2: uma aeronave militar {.small-slide}
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Polygon, Arc, FancyArrowPatch
+
+plt.rcParams.update({"font.size": 15})
+corpo, borda = "#D9DEE5", "#1B365D"
+c1, c2, c3 = "tab:blue", "tab:purple", "tab:orange"   # profundor, canard, flape
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(16, 5.6), gridspec_kw={"width_ratios": [1, 1.25]})
+
+# ---------------- vista de cima (nariz para a direita)
+def espelho(pts):
+    return [(x, -y) for x, y in pts]
+fus = [(0, 0.55), (10.5, 0.62), (12.4, 0.35), (13.6, 0), (12.4, -0.35), (10.5, -0.62), (0, -0.55)]
+asa = [(1.0, 0.55), (7.6, 0.6), (2.6, 4.3), (1.6, 4.3)]
+can = [(8.3, 0.6), (9.9, 0.62), (8.7, 2.2), (8.1, 2.2)]
+lef = [(7.6, 0.6), (2.6, 4.3), (2.95, 4.3), (7.95, 0.6)]              # faixa no bordo de ataque
+ele = [(1.0, 0.55), (1.6, 4.3), (2.15, 4.3), (1.55, 0.55)]             # faixa no bordo de fuga
+for pts, fc in ((asa, corpo), (can, c2), (lef, c3), (ele, c1)):
+    for p in (pts, espelho(pts)):
+        a1.add_patch(Polygon(p, closed=True, fc=fc, ec=borda, lw=1.5, alpha=0.95 if fc != corpo else 1))
+a1.add_patch(Polygon(fus, closed=True, fc=corpo, ec=borda, lw=1.5, zorder=3))
+a1.add_patch(Polygon([(10.3, 0.3), (11.9, 0.22), (11.9, -0.22), (10.3, -0.3)], closed=True,
+                     fc="#8FA7C4", ec=borda, lw=1, zorder=4))                 # cabine
+a1.plot([0.3, 3.4], [0, 0], color=borda, lw=3, zorder=4)                      # deriva vista de cima
+a1.annotate("canard ($u_2$)", xy=(9.0, 1.5), xytext=(9.6, 3.4), color=c2,
+            arrowprops=dict(arrowstyle="-", color=c2, lw=1.5), ha="left")
+a1.annotate("flape de bordo\nde ataque ($u_3$)", xy=(5.4, -2.3), xytext=(7.4, -4.4), color=c3,
+            arrowprops=dict(arrowstyle="-", color=c3, lw=1.5), ha="left")
+a1.annotate("profundor ($u_1$)", xy=(1.6, 3.0), xytext=(3.4, 4.6), color=c1,
+            arrowprops=dict(arrowstyle="-", color=c1, lw=1.5), ha="left")
+a1.set_xlim(-0.5, 14.5); a1.set_ylim(-5.6, 5.4); a1.set_aspect("equal"); a1.axis("off")
+a1.set_title("vista de cima: superfícies de controle", fontsize=15)
+
+# ---------------- vista lateral, arfada de θ (nariz para a direita)
+th = np.deg2rad(14)
+R = np.array([[np.cos(th), -np.sin(th)], [np.sin(th), np.cos(th)]])
+cg = np.array([6.0, 0.0])
+def gira(pts):
+    P = np.array(pts, float) - cg
+    return (P @ R.T) + cg
+lat = [(0, 0.1), (0, 0.9), (10.5, 0.75), (12.4, 0.45), (13.6, 0.05), (12.4, -0.35), (10.5, -0.55), (0, -0.45)]
+der = [(0.2, 0.85), (1.4, 3.0), (2.4, 3.0), (3.6, 0.82)]                     # deriva
+cab = [(9.6, 0.76), (10.4, 1.35), (11.6, 1.05), (12.2, 0.6)]
+can_l = [(8.4, 0.35), (9.9, 0.4), (9.9, 0.2), (8.4, 0.2)]
+asa_l = [(1.0, -0.05), (7.6, 0.0), (7.6, -0.2), (1.0, -0.25)]
+for pts, fc in ((der, corpo), (lat, corpo), (cab, "#8FA7C4"), (asa_l, corpo), (can_l, c2)):
+    a2.add_patch(Polygon(gira(pts), closed=True, fc=fc, ec=borda, lw=1.5))
+a2.add_patch(Polygon(gira([(1.0, -0.05), (1.6, -0.05), (1.6, -0.25), (1.0, -0.25)]), fc=c1, ec=borda, lw=1))
+# horizonte e eixo do corpo
+a2.plot([-0.5, 15.5], [0, 0], "--", color="gray", lw=1.2)
+e = gira([(-0.5, 0), (15.5, 0)]); a2.plot(e[:, 0], e[:, 1], "--", color=borda, lw=1.2)
+a2.add_patch(Arc(cg, 12, 12, theta1=0, theta2=np.rad2deg(th), color="k", lw=1.5))
+a2.text(12.3, 0.8, r"$\theta$", fontsize=20)
+# rotação em torno do centro de gravidade: taxa de arfagem q = dθ/dt
+a2.add_patch(Arc(cg, 3.4, 3.4, theta1=30, theta2=140, color="tab:red", lw=2.5))
+a2.add_patch(FancyArrowPatch(cg + 1.7 * np.array([np.cos(np.deg2rad(132)), np.sin(np.deg2rad(132))]),
+                             cg + 1.7 * np.array([np.cos(np.deg2rad(146)), np.sin(np.deg2rad(146))]),
+                             arrowstyle="-|>", mutation_scale=24, color="tab:red", lw=0))
+a2.plot(*cg, "o", color="k", ms=6, zorder=5)
+a2.text(cg[0] - 5.5, cg[1] + 2.6, r"$y = q = \dot{\theta}$: taxa de arfagem", color="tab:red", fontsize=16)
+a2.set_xlim(-0.8, 16); a2.set_ylim(-2.2, 5.2); a2.set_aspect("equal"); a2.axis("off")
+a2.set_title("vista lateral: arfagem (rotação do nariz para cima/baixo)", fontsize=15)
+plt.tight_layout()
+plt.show()
+```
+
+Para desenvolver uma aeronave, boa parte do trabalho vai para um **modelo matemático** da sua dinâmica, usado em **simuladores**, no projeto de **pilotos automáticos** e na análise das suas propriedades. Entram conhecimento físico e ensaios em túnel de vento, mas a fonte de informação mais importante são os **voos de teste**.
+
+## Exemplo 1.2: os dados dos voos de teste {.small-slide .nostretch}
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({"font.size": 14})
+# curvas digitalizadas da Fig. 1.6
+t, q, de, dlef, dc = np.loadtxt("dados/gripen_fig1p6.csv", delimiter=",", skiprows=1, unpack=True)
+
+fig, axs = plt.subplots(2, 2, figsize=(15, 4.6), sharex=True)
+sinais = [(q, "$y$: taxa de arfagem", "tab:red"), (de, "$u_1$: profundor", "tab:blue"),
+          (dc, "$u_2$: canard", "tab:purple"), (dlef, "$u_3$: flape de bordo de ataque", "tab:orange")]
+for ax, (x, titulo, cor) in zip(axs.ravel(), sinais):
+    ax.plot(t, x, color=cor, lw=1.8)
+    ax.set_title(titulo); ax.set_xlim(0, 180); ax.grid(alpha=0.3)
+for ax in axs[1]:
+    ax.set_xlabel("$t$ [amostras]")
+plt.tight_layout()
+plt.show()
+```
+
+Canal de **arfagem**: como a taxa de arfagem (*pitch rate*) responde ao **profundor** (ailerons no bordo de fuga das asas), ao **canard** (à frente das asas) e ao **flape de bordo de ataque** [(curvas digitalizadas da Fig. 1.6)]{.small}. Nessa condição de voo a aeronave é **instável**: o experimento foi feito em **malha fechada** (o livro volta a estes dados na §17.3).
+
+## Exemplo 1.3: fala {.small-slide}
+
+:::: {.columns}
+::: {.column width="50%"}
+```{python}
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({"font.size": 15})
+# curva digitalizada da Fig. 1.9 (8 kHz: uma amostra a cada 0,125 ms)
+t, p = np.loadtxt("dados/fala_fig1p9.csv", delimiter=",", skiprows=1, unpack=True)
+fig, ax = plt.subplots(figsize=(8.0, 5.4))
+ax.plot(t, p, color="tab:red", lw=0.7)
+ax.set_xlim(0, 250); ax.set_ylim(-0.6, 0.4)
+ax.set_xlabel("$t$ [ms]"); ax.set_title("$y$: pressão do ar (sinal de fala)"); ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+[Amostrado a cada 0,125 ms (8 kHz); curva digitalizada da Fig. 1.9.]{.small}
+:::
+::: {.column width="50%"}
+A voz é gerada pela vibração das **cordas vocais** (ou, nos sons surdos, pelo fluxo de ar da garganta) e moldada pelo formato do **trato vocal**.
+
+- [$y$]{style="color:#d62728"}: a vibração sonora (pressão do ar), a saída;
+- [$v$]{style="color:gray"}: vibração das cordas e fluxo de ar — estímulos externos **não mensuráveis**.
+
+Não há entrada medida: só a saída é observada.
+:::
+::::
+
+## Sistemas dinâmicos {.small-slide .nostretch}
+
+Os sistemas dos exemplos são **dinâmicos**: a saída atual depende não só dos estímulos externos atuais, mas também dos seus **valores anteriores**.
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({"font.size": 14})
+N = 120
+t = np.arange(N)
+u = np.zeros(N); u[10:45] = 1; u[60:70] = 1; u[80:115] = -0.6    # mesma entrada nos dois
+y_est = 0.8 * u                                                     # estático: y(t) = K u(t)
+y_din = np.zeros(N)                                                 # dinâmico: circuito RC discretizado
+for k in range(1, N):
+    y_din[k] = 0.9 * y_din[k - 1] + 0.08 * u[k - 1]
+
+fig, axs = plt.subplots(1, 3, figsize=(15.5, 3.6), sharey=True)
+axs[0].step(t, u, where="post", color="tab:blue", lw=1.6); axs[0].set_title("entrada $u(t)$")
+axs[1].step(t, y_est, where="post", color="gray", lw=1.6)
+axs[1].set_title("estático: $y(t) = 0.8\\,u(t)$")
+axs[2].plot(t, y_din, color="tab:red", lw=1.8)
+axs[2].set_title("dinâmico: $y(t) = 0.9\\,y(t-1) + 0.08\\,u(t-1)$", fontsize=13)
+for ax in axs:
+    ax.set_xlabel("$t$"); ax.axhline(0, color="k", lw=0.5)
+plt.tight_layout()
+plt.show()
+```
+
+- No sistema estático, a saída só "vê" a entrada do instante atual; no dinâmico ela carrega uma **memória** de toda a entrada passada: $y(t) = 0.08 \sum_{k=1}^{\infty} 0.9^{\,k-1}\, u(t-k)$.
+
+## Séries temporais {.small-slide .nostretch}
+
+Quando os estímulos externos **não são observados** (como na fala, Ex. 1.3), as saídas do sistema dinâmico costumam ser chamadas de **séries temporais**, termo comum em aplicações de economia.
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+plt.rcParams.update({"font.size": 14})
+rng = np.random.default_rng(4)
+N = 300
+e = rng.standard_normal(N)                                     # estímulo não medido
+y = signal.lfilter([1], [1, -1.5, 0.9], e)                     # sistema LIT ressonante (polos |z| = 0.95)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15.5, 3.6))
+ax1.plot(e, color="gray", lw=1)
+ax1.set_title("estímulo $v(t)$: não medido"); ax1.set_xlabel("$t$")
+ax2.plot(y, color="tab:red", lw=1.3)
+ax2.set_title("série temporal $y(t)$: o único sinal observado"); ax2.set_xlabel("$t$")
+plt.tight_layout()
+plt.show()
+```
+
+Aqui, $v(t)$ é um ruído branco filtrado por um sistema LIT com um par de polos ressonantes: da série $y(t)$ ainda dá para inferir o sistema, mesmo sem ver $v(t)$.
+
+## Modelos: tipos e usos {.small-slide}
+
+Um **modelo** é uma relação **assumida** entre os sinais observados do sistema. A forma e o grau de formalismo variam; o **uso pretendido** determina o quanto de sofisticação é necessário.
+
+| Tipo | O que é | Exemplo |
+|---|---|---|
+| **Mental** | sem formalização matemática | dirigir: virar o volante à esquerda faz o carro virar à esquerda |
+| **Gráfico** | tabelas e gráficos numéricos | resposta ao impulso ou ao degrau, resposta em frequência; curva não linear de uma válvula |
+| **Matemático** (analítico) | equações de diferenças ou diferenciais | $\dot{y} = -y/RC + u/RC$ |
+| **Software** | um programa de simulação | sub-rotinas interligadas e tabelas de consulta; pode não ser resumível analiticamente |
+
+Os modelos de software têm papel cada vez maior na **tomada de decisão** em sistemas complicados.
+
+## Modelos gráficos de um sistema linear {.small-slide .nostretch}
+
+Um sistema linear é descrito de forma **única** pela sua resposta ao impulso, pela resposta ao degrau ou pela resposta em frequência:
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+plt.rcParams.update({"font.size": 14})
+G = signal.dlti([0.10, 0.08], [1, -1.6, 0.8], dt=1)              # G(z) = (0.10 z + 0.08) / (z^2 - 1.6 z + 0.8)
+k, (h,) = G.impulse(n=40)
+_, (s,) = G.step(n=40)
+w = np.logspace(-2, np.log10(np.pi), 400)
+w, H = G.freqresp(w=w)
+
+fig, axs = plt.subplots(1, 3, figsize=(15.5, 4.0))
+axs[0].stem(k, h.ravel(), basefmt="k-")
+axs[0].set_title("resposta ao impulso $g(k)$"); axs[0].set_xlabel("$k$")
+axs[1].step(k, s.ravel(), where="post", color="tab:red", lw=1.8)
+axs[1].set_title("resposta ao degrau"); axs[1].set_xlabel("$k$")
+axs[2].semilogx(w, 20 * np.log10(np.abs(H)), color="k", lw=1.8)
+axs[2].set_title("resposta em frequência $|G(e^{j\\omega})|$")
+axs[2].set_xlabel("$\\omega$ [rad/amostra]"); axs[2].set_ylabel("dB")
+for ax in axs:
+    ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+Os três gráficos descrevem o **mesmo** sistema, $G(z) = \dfrac{0.10\,z + 0.08}{z^2 - 1.6\,z + 0.8}$. Representações gráficas como essas são muito usadas em **projeto**.
+
+## Modelos matemáticos {.small-slide}
+
+Descrevem as relações entre as variáveis por **equações de diferenças ou diferenciais**, qualificadas por adjetivos que dizem o tipo de equação usada:
+
+| Adjetivos | Exemplo |
+|---|---|
+| tempo **contínuo** × tempo **discreto** | $RC\,\dot{y}(t) + y(t) = u(t)$ &nbsp;×&nbsp; $y(t) = a\,y(t-1) + (1-a)\,u(t-1)$, com $a = e^{-T/RC}$ |
+| **concentrado** × **distribuído** | circuito RLC (EDO) &nbsp;×&nbsp; linha de transmissão (EDP) |
+| **determinístico** × **estocástico** | $y = G\,u$ &nbsp;×&nbsp; $y = G\,u + H\,e$, com $e$ ruído |
+| **linear** × **não linear** | circuito RC &nbsp;×&nbsp; conversor com saturação da razão cíclica |
+
+- São a base de quase toda a engenharia (**projeto** a partir de modelos) e essenciais para **simulação** e **previsão**, inclusive em economia, ecologia e biologia.
+
+## Construindo modelos: modelagem × identificação {.small-slide .nostretch}
+
+:::: {.columns}
+::: {.column width="45%"}
+Todo modelo é construído a partir de dados observados. Modelos matemáticos seguem **duas rotas**, que podem ser combinadas:
+
+- **Modelagem:** dividir o sistema em subsistemas de propriedades conhecidas (leis físicas, experiência anterior) e juntá-los em diagramas de blocos. Não exige necessariamente experimentar no sistema real.
+- **Identificação de sistemas:** registrar sinais de entrada e saída (como nas Figs. 1.4, 1.6 e 1.9) e **inferir** o modelo por análise de dados.
+:::
+::: {.column width="55%"}
+```{python}
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams.update({"font.size": 15})
+rng = np.random.default_rng(7)
+T = 0.05
+t = np.arange(0, 6 + T, T)
+tau_nom = 10e3 * 100e-6                        # modelagem: R = 10 kΩ, C = 100 µF (nominais) -> 1.0 s
+tau_real = 10e3 * 120e-6                       # capacitor real 20% acima do nominal -> 1.2 s
+y = 1 - np.exp(-t / tau_real) + 0.02 * rng.standard_normal(t.size)   # degrau medido
+
+# identificação: tempo em que a resposta atinge 63,2% do valor final
+yf = y[t > 5].mean()
+tau_id = t[np.argmax(y >= 0.632 * yf)]
+
+fig, ax = plt.subplots(figsize=(8.4, 5.6))
+ax.plot(t, y, ".", color="tab:red", ms=5, label="dados medidos")
+ax.plot(t, 1 - np.exp(-t / tau_nom), "--", color="tab:blue", lw=2,
+        label=f"modelagem: $\\tau = RC = {tau_nom:.1f}$ s")
+ax.plot(t, yf * (1 - np.exp(-t / tau_id)), color="k", lw=2,
+        label=f"identificação: $\\hat\\tau = {tau_id:.2f}$ s")
+ax.axhline(0.632 * yf, color="gray", lw=0.8, ls=":")
+ax.set_xlabel("$t$ [s]"); ax.set_title("circuito RC: resposta ao degrau")
+ax.legend(loc="lower right", fontsize=13); ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+:::
+::::
+
+No circuito RC, a modelagem usa os valores **nominais** de $R$ e $C$; a identificação obtém $\tau$ **dos dados**, e por isso "enxerga" a tolerância do capacitor.
+
+## A ficção de um sistema verdadeiro {.small-slide .nostretch}
+
+:::: {.columns}
+::: {.column width="42%"}
+O sistema real é um objeto de **natureza diferente** dos modelos matemáticos: entre os dois há uma tela **impenetrável, mas transparente**. Podemos comparar certos aspectos, mas nunca estabelecer uma conexão exata.
+
+- Aceitamos um modelo pela sua **utilidade**, não pela sua "verdade".
+- Ainda assim, o livro usa às vezes um **"sistema verdadeiro"**: supor que os dados foram gerados por regras matemáticas bem definidas ajuda a criar métodos e a entender suas propriedades — é uma idealização.
+:::
+::: {.column width="58%"}
+```{python}
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+from scipy.optimize import curve_fit
+
+plt.rcParams.update({"font.size": 14})
+rng = np.random.default_rng(5)
+
+# "planta real" (desconhecida): 3 polos, em s = -1, -5 e -20
+P = signal.lti([100], np.polymul([1, 1], np.polymul([1, 5], [1, 20])))
+t = np.linspace(0, 6, 241)
+_, yp = P.step(T=t)
+y = yp + 0.01 * rng.standard_normal(t.size)
+
+# modelo: 1ª ordem com atraso, K e^{-θs} / (τ s + 1), ajustado ao degrau
+f = lambda t, K, tau, th: np.where(t > th, K * (1 - np.exp(-(t - th) / tau)), 0.0)
+K, tau, th = curve_fit(f, t, y, p0=[1, 1, 0.2])[0]
+
+w = np.logspace(-1, 2.3, 300)
+_, Hp = P.freqresp(w)
+Hm = K / (1j * w * tau + 1)                    # |e^{-jωθ}| = 1: o atraso não muda o módulo
+
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(9.8, 4.6))
+a1.plot(t, y, ".", color="tab:red", ms=4, label="dados")
+a1.plot(t, f(t, K, tau, th), color="k", lw=1.8, label="modelo")
+a1.set_title("resposta ao degrau"); a1.set_xlabel("$t$ [s]"); a1.legend(fontsize=12)
+a2.semilogx(w, 20 * np.log10(np.abs(Hp)), color="tab:red", lw=1.8, label="planta")
+a2.semilogx(w, 20 * np.log10(np.abs(Hm)), "k--", lw=1.8, label="modelo")
+a2.set_title("módulo da resp. em frequência"); a2.set_xlabel("$\\omega$ [rad/s]"); a2.set_ylabel("dB")
+a2.legend(fontsize=12)
+for ax in (a1, a2):
+    ax.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+Uma planta de 3ª ordem e um modelo de 1ª ordem com atraso: indistinguíveis no degrau, bem diferentes em alta frequência. O modelo é **útil** para uns fins, não para outros.
+:::
+::::
+
+{{< include ../../_encerramento.qmd >}}

@@ -66,3 +66,5 @@ $$\boxed{P(A) = \dfrac{3}{6} = 0.5}$$
 
 - Porque o dado é **justo**, ou seja, todas as faces têm a mesma probabilidade de sair.
 - Se o dado fosse **viciado**, teríamos que usar outro método para determinar a probabilidade.
+
+{{< include ../../_encerramento.qmd >}}

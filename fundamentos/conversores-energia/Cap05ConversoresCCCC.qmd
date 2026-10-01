@@ -347,3 +347,5 @@ Quatro topologias básicas:
 ## Referências
 
 - Rashid, M. H. *Power Electronics: Devices, Circuits, and Applications*, 4ª ed. (International Edition), Pearson, 2014 [@rashid2014power] — Cap. 5.
+
+{{< include ../../_encerramento.qmd >}}

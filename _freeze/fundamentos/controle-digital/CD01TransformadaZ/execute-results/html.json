@@ -1,9 +1,11 @@
 {
-  "hash": "e6dffc0f66a08448f8f80b8994f09d29",
+  "hash": "bca28eaefeea897f9c40bbb8fceaeee4",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: 'Controle Digital: Transformada Z'\nsubtitle: \"Sistema de Controle II\"\ninstitute: \"Universidade Federal do Pará\"\nauthor: \"Prof. Dr. Raphael Teixeira\"\nformat: \n  revealjs:\n    theme: [simple, ../../TemaRTx.scss]\n    self-contained: true\n    transition: fade\n    slide-number: true\n    width: 1600\n    height: 900\n    footer: \" \"\n    center: true\n    title-slide-attributes:\n      data-background-image: \"../../imgs/ufpa-colorido.png\"\n      data-background-size: \"84px\"\n      data-background-position: \"top 45px center\"\nengine: knitr\n---\n\n## Controle de Sistemas Amostrados\n\n![](imgs/Amostrador.png){fig-align=\"center\" width=\"30%\"}\n\n\n---\n\n## Introdução\n\n",
-    "supporting": [],
+    "markdown": "---\ntitle: 'Controle Digital: Transformada Z'\nsubtitle: \"Sistema de Controle II\"\ninstitute: \"Universidade Federal do Pará\"\nauthor: \"Prof. Dr. Raphael Teixeira\"\nformat: \n  revealjs:\n    theme: [simple, ../../TemaRTx.scss]\n    self-contained: true\n    transition: fade\n    slide-number: true\n    width: 1600\n    height: 900\n    footer: \" \"\n    center: true\n    title-slide-attributes:\n      data-background-image: \"../../imgs/ufpa-colorido.png\"\n      data-background-size: \"84px\"\n      data-background-position: \"top 45px center\"\nengine: knitr\n---\n\n## Controle de Sistemas Amostrados\n\n![](imgs/Amostrador.png){fig-align=\"center\" width=\"30%\"}\n\n\n---\n\n## Introdução\n\n## Encerramento {.encerramento background-color=\"#E4E3E8\"}\n\n![](../../imgs/ufpa-colorido.png){.encerramento-logo}\n\n[Prof. Dr. Raphael Teixeira]{.encerramento-nome}\n\nUniversidade Federal do Pará\n\n[raphaelbt@ufpa.br](mailto:raphaelbt@ufpa.br){.encerramento-email}\n\n",
+    "supporting": [
+      "CD01TransformadaZ_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

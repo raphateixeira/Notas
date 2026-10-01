@@ -168,3 +168,5 @@ $$\|\overrightarrow{PQ_i}\| = \sqrt{(\pm\sqrt3/2)^2+(1/2)^2+16} = \sqrt{3/4+1/4+
 (a mesma para $i=1,2,3$, confirmando $\|\mathbf{F}_1\|=\|\mathbf{F}_2\|=\|\mathbf{F}_3\|$ independentemente de $c$). Somando as três forças encontradas,
 $$\mathbf{F}_1+\mathbf{F}_2+\mathbf{F}_3 = \langle 0+5\sqrt3-5\sqrt3,\; -10+5+5,\; -40-40-40\rangle = \langle0,0,-120\rangle = \mathbf{F},$$
 confirmando a solução.
+
+{{< include ../../_encerramento.qmd >}}

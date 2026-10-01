@@ -237,3 +237,5 @@ Como $1/\|\mathbf v\|>0$, $\mathbf{u}=(1/\|\mathbf v\|)\mathbf{v}$ tem a mesma d
 $$\|\mathbf{u}\| = \left\|\frac{1}{\|\mathbf{v}\|}\mathbf{v}\right\| = \left|\frac{1}{\|\mathbf{v}\|}\right|\|\mathbf{v}\| = \frac{1}{\|\mathbf{v}\|}\|\mathbf{v}\| = 1.$$
 
 $$\boxed{\|\mathbf{u}\|=1} \quad \text{— } \mathbf{u} \text{ é unitário, na mesma direção de } \mathbf{v}.$$
+
+{{< include ../../_encerramento.qmd >}}

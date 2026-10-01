@@ -1,0 +1,40 @@
+\documentclass{standalone}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{calc,positioning}
+
+\graphicspath{{../../}}
+
+\begin{document}
+\nopagecolor
+%%| fig-width: 8.5
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[
+  block/.style={draw=ufpablue, thick, minimum width=1.3cm, minimum height=0.8cm, align=center, fill=ufpablue!5},
+  sum/.style={draw=ufpablue, thick, circle, minimum size=0.6cm},
+  >=stealth
+]
+\node[sum] (add) at (4.5,0) {$+$};
+\node (y) at (6.6,0) {$y[k]$};
+\node[draw=ufparred, dashed, minimum width=1cm, minimum height=0.8cm] (noise) at (4.5,1.6) {$e[k]$};
+
+\node[block] (B) at (0.5,0) {$B(q)$};
+\node (u) at (-1.7,0) {$u[k]$};
+
+\node[block] (mA) at (2.7,-1.8) {$-[A(q)-1]$};
+\node[block] (delay) at (6.6,-1.8) {$q^{-1}$};
+
+\draw[->, thick] (u) -- (B);
+\draw[->, thick] (B) -- (add);
+\draw[->, thick, ufparred] (noise) -- (add);
+\draw[->, thick] (add) -- (y);
+\draw[->, thick] (y.south) |- (delay.east);
+\draw[->, thick] (delay.west) -| node[pos=0.3, right]{$y[k-1..n_a]$} (mA);
+\draw[->, thick] (mA) -- (add);
+\end{tikzpicture}
+\end{document}

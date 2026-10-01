@@ -15,7 +15,7 @@ Esta pasta contém apenas **notas conceituais** de leitura deste livro, em forma
 
 ### Capítulo 1 — Introduction
 
-* Nota 1 — 1.1–1.2 [Sistemas dinâmicos e modelos](LSI01Exemplo.qmd)
+* Nota 1 — 1.1–1.2 [Sistemas dinâmicos e modelos](01-SistemasDinamicosModelos.qmd)
 * Nota 2 — 1.3 Um problema arquetípico: modelos ARX e mínimos quadrados lineares *(prevista)*
 * Nota 3 — 1.4–1.5 O procedimento de identificação de sistemas *(prevista)*
 

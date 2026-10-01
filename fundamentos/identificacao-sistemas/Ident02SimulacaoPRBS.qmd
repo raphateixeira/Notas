@@ -439,3 +439,5 @@ Esta mesma lógica de projeto de PRBS e persistência de excitação aparece em:
 Universidade Federal do Pará
 
 :::
+
+{{< include ../../_encerramento.qmd >}}

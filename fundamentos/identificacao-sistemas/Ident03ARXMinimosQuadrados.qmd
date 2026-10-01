@@ -399,3 +399,5 @@ Este mesmo estimador (ARX por mínimos quadrados) aplicado a sistemas reais e ge
 Universidade Federal do Pará
 
 :::
+
+{{< include ../../_encerramento.qmd >}}

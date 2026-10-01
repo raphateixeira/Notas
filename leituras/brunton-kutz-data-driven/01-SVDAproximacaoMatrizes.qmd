@@ -650,3 +650,5 @@ erro = lambda r: np.sum(S[r:]**2) / np.sum(S**2)       # erro relativo (1.8), vi
 for r in ranks:
     print(f"r = {r:3d}:  soma acumulada = {np.sum(S[:r]) / np.sum(S):5.1%},  erro relativo (1.8) = {erro(r):5.2%}")
 ```
+
+{{< include ../../_encerramento.qmd >}}

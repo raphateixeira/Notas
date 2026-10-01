@@ -49,3 +49,4 @@ $G(s) = 0.8\frac{s+1}{s+2}$
 
 - rltool do Matlab para projetar o controlador contínuo $C(s)$ com os requisitos especificados.
 
+{{< include ../../_encerramento.qmd >}}

@@ -56,3 +56,5 @@ A probabilidade de dar cara $n$ vezes seguidas é dada pela série
 $$
 \sum_{n = 1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots
 $$
+
+{{< include ../../_encerramento.qmd >}}

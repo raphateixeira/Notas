@@ -43,3 +43,5 @@ $$g_i(x) \leq 0 \quad \text{e} \quad h_j(x) = 0$$
 
 - $g_i(x) \leq 0$ — restrições de **desigualdade**.
 - $h_j(x) = 0$ — restrições de **igualdade**.
+
+{{< include ../../_encerramento.qmd >}}

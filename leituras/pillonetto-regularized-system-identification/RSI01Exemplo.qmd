@@ -64,3 +64,5 @@ Rascunho — links para outras notas deste repositório e para as linhas de pesq
 Rascunho — resolução dos exercícios do capítulo que valeram a pena registrar será
 adicionada aqui.
 :::
+
+{{< include ../../_encerramento.qmd >}}

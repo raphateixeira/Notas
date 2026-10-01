@@ -1,0 +1,8 @@
+<!-- MathJax 2 (plugin math do reveal.js): usa sempre as fontes web TeX.
+     Sem isso, no macOS o MathJax prefere as fontes STIX locais, que não têm
+     o alfabeto caligráfico, e \mathcal{K} aparece como um quadrado. -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  "HTML-CSS": { availableFonts: [], preferredFont: null, webFont: "TeX" }
+});
+</script>

@@ -55,3 +55,5 @@ outra. De modo geral, existem quatro categorias de conversores de potência:
 - **CA–CC** (AC–DC)
 - **CC–CA** (DC–AC)
 - **CA–CA** (AC–AC)
+
+{{< include ../../_encerramento.qmd >}}

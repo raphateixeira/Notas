@@ -449,4 +449,4 @@ Com a planta fixa em $G(z)$ (ZOH exato) e variando apenas $C(z)$:
 - FRANKLIN, G. F.; POWELL, J. D.; WORKMAN, M. L. *Digital Control of Dynamic Systems*. 3ª ed. Addison-Wesley.
 - ÅSTRÖM, K. J.; WITTENMARK, B. *Computer-Controlled Systems: Theory and Design*. 3ª ed. Prentice Hall.
 
-
+{{< include ../../_encerramento.qmd >}}
