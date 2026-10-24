@@ -1,5 +1,5 @@
 ---
-title: "Notas de Estudo"
+pagetitle: "Notas de Estudo"
 description: "Todas as notas, das mais recentes às mais antigas."
 listing:
   id: todas-as-notas
@@ -14,7 +14,19 @@ listing:
 page-layout: full
 ---
 
-[⬅ Site principal](https://raphateixeira.github.io)
+::: {.rtx-hero}
+[Coleção · Programação]{.rtx-eyebrow}
+
+# Notas de Estudo {.unnumbered .unlisted}
+
+Notas de estudo de linguagens de programação e pacotes (Python, Julia, MATLAB, R), organizadas por linguagem.
+
+[Prof. Dr. Raphael Teixeira]{.rtx-meta}
+
+::: {.rtx-acoes}
+[Progresso](progresso.qmd){.rtx-btn .rtx-btn-primario} [Recomendações](Recomendacoes.qmd){.rtx-btn} [GitHub](https://github.com/raphateixeira/Code){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+:::
+:::
 
 Notas de estudo organizadas por linguagem de programação. Veja o [Progresso](progresso.qmd)
 para o status de estudo de cada linguagem, o menu **Linguagens** na barra de navegação
