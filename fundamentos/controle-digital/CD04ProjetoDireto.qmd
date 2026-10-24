@@ -7,6 +7,7 @@ lang: pt-BR
 engine: knitr
 format:
   revealjs:
+    include-in-header: ../../_mathjax.html
     theme: [default, ../../TemaRTx.scss]
     slide-number: true
     code-overflow: scroll

@@ -1,0 +1,33 @@
+\documentclass{standalone}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{calc,positioning}
+
+\graphicspath{{../../}}
+
+\begin{document}
+\nopagecolor
+%%| fig-width: 8
+\definecolor{ufpablue}{HTML}{002C6F}
+\definecolor{ufparred}{HTML}{E4002B}
+\begin{tikzpicture}[
+  cell/.style={draw=ufpablue, thick, minimum width=0.9cm, minimum height=0.9cm},
+  xorgate/.style={draw=ufparred, thick, circle, minimum size=0.5cm},
+  >=stealth
+]
+\foreach \i/\lbl in {0/b_4, 1/b_3, 2/b_2, 3/b_1} {
+  \node[cell] (r\i) at (\i*1.2,0) {$\lbl$};
+}
+\node[xorgate] (x) at (5.4,-1.3) {XOR};
+\node (out) at (7.2,0) {saída};
+
+\draw[->, thick] (r0.south) |- (x.west);
+\draw[->, thick] (r3.south) |- (x.east);
+\draw[->, thick, ufparred] (x.north) -- ++(0,1.9) -| (r0.north);
+\draw[->, thick] (r3) -- (out);
+\end{tikzpicture}
+\end{document}

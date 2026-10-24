@@ -3,8 +3,9 @@ title: 'Projeto de Controle Digital por Emulação'
 subtitle: "Sistema de Controle II"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-format: 
+format:
   revealjs:
+    include-in-header: ../../_mathjax.html
     theme: [simple, ../../TemaRTx.scss]
     self-contained: true
     transition: fade

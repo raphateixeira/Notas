@@ -7,6 +7,7 @@ lang: pt-BR
 suppress-bibliography: true
 format:
   revealjs:
+    include-in-header: ../../_mathjax.html
     theme: [simple, ../../TemaRTx.scss]
     transition: fade
     slide-number: true

@@ -6,6 +6,7 @@ institute: "Universidade Federal do Pará"
 lang: pt-BR
 format:
   revealjs:
+    include-in-header: ../../_mathjax.html
     theme: [simple, ../../TemaRTx.scss]
     transition: fade
     slide-number: true

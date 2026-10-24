@@ -8,6 +8,7 @@ editor:
   render-on-save: false
 format:
   revealjs:
+    include-in-header: ../../_mathjax.html
     theme: [simple, ../../TemaRTx.scss]
     self-contained: true
     transition: fade
