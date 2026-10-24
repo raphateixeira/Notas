@@ -155,14 +155,26 @@ def write_index(counts: dict[str, int]) -> None:
 """
 
     content = f"""---
-title: "Coleção TikZ"
+pagetitle: "Coleção TikZ"
 ---
 
+::: {{.rtx-hero}}
+[Coleção · Figuras]{{.rtx-eyebrow}}
+
+# Coleção TikZ {{.unnumbered .unlisted}}
+
+Figuras TikZ reutilizáveis nas disciplinas e projetos de pesquisa. Cada figura pode ser
+baixada em PNG, SVG, EPS ou como fonte `.tikz` / `.tex` standalone.
+
+[Prof. Dr. Raphael Teixeira]{{.rtx-meta}}
+
+::: {{.rtx-acoes}}
+[GitHub](https://github.com/raphateixeira/TikZ){{.rtx-btn}} [Site do professor](https://raphateixeira.github.io){{.rtx-btn}}
+:::
+:::
+
 {hero_html}
-Coleção organizada de figuras TikZ reutilizáveis nas disciplinas e
-projetos de pesquisa. Cada figura pode ser baixada em PNG, SVG, EPS ou
-como fonte `.tikz` / `.tex` standalone. Veja `SCOPE.md` para o desenho
-completo e `README.md` para o fluxo de contribuição.
+Veja `SCOPE.md` para o desenho completo e `README.md` para o fluxo de contribuição.
 {banco_note}
 
 ````{{=html}}
