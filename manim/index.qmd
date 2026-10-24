@@ -1,14 +1,21 @@
 ---
-title: "Coleção Manim"
-subtitle: "Animações matemáticas/didáticas de sistemas dinâmicos"
-author: "Prof. Dr. Raphael Teixeira"
+pagetitle: "Coleção Manim"
+
 ---
 
-[⬅ Site principal](https://raphateixeira.github.io)
+::: {.rtx-hero}
+[Coleção · Animações]{.rtx-eyebrow}
 
-Coleção de animações produzidas com [Manim](https://www.manim.community/)
-para uso didático em disciplinas de sistemas dinâmicos, controle e circuitos.
-Cada card mostra a animação já renderizada e o script Python que a gera.
+# Coleção Manim {.unnumbered .unlisted}
+
+Animações matemáticas e didáticas de sistemas dinâmicos, controle e circuitos, produzidas com Manim. Cada cartão mostra a animação renderizada e o script Python que a gera.
+
+[Prof. Dr. Raphael Teixeira]{.rtx-meta}
+
+::: {.rtx-acoes}
+[GitHub](https://github.com/raphateixeira/Manim){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+:::
+:::
 
 ## Sistemas Dinâmicos
 
