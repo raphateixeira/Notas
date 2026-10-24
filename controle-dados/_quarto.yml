@@ -23,8 +23,8 @@ website:
   description: "Notas de pesquisa — identificação e controle a partir de dados experimentais"
   reader-mode: true
   navbar:
-    background: "#1F3A5F"
-    foreground: "#FFFFFF"
+    background: "#FFFFFF"   # navbar branca (camada "Site" do TemaRTx.scss)
+    foreground: "#0F1B33"
     title: "Controle Baseado em Dados"
     left:
       - text: "Início"

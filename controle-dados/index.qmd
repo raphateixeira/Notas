@@ -1,19 +1,25 @@
 ---
-title: "Controle Baseado em Dados"
-subtitle: "Data-Driven Control"
-institute: "Universidade Federal do Pará"
-author: "Prof. Dr. Raphael Teixeira"
-date: ""
+pagetitle: "Controle Baseado em Dados"
 format:
   html:
     page-layout: article
 ---
 
-[⬅ Site principal](https://raphateixeira.github.io)
+::: {.rtx-hero}
+[Pesquisa · Controle baseado em dados]{.rtx-eyebrow}
 
-Notas de pesquisa sobre controle baseado em dados: projeto de controladores
-e identificação de dinâmicas diretamente a partir de dados experimentais,
-sem depender de um modelo matemático completo da planta.
+# Controle Baseado em Dados {.unnumbered .unlisted}
+
+Projeto de controladores e identificação de dinâmicas diretamente a partir de dados experimentais, sem depender de um modelo matemático completo da planta.
+
+[Prof. Dr. Raphael Teixeira]{.rtx-meta}
+
+::: {.rtx-acoes}
+[GitHub](https://github.com/raphateixeira/DataDrivenControl){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+:::
+:::
+
+## Temas
 
 ```{=html}
 <div class="categoria-grid">
