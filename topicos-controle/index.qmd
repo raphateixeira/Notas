@@ -1,9 +1,29 @@
 ---
-title: "Tópicos Especiais em Controle"
-subtitle: "Templates"
+pagetitle: "Tópicos Especiais em Controle"
+
 ---
 
-[⬅ Site principal](https://raphateixeira.github.io)
+::: {.rtx-hero}
+[Disciplina · Tópicos Especiais]{.rtx-eyebrow}
 
+# Tópicos Especiais em Controle {.unnumbered .unlisted}
 
-- [Classificação](Apresentacao\Classificacao.qmd)
+Tópicos especiais em controle e aprendizagem de máquina: MPC, DeePC, MRAC, Koopman e aprendizado por reforço.
+
+[Prof. Dr. Raphael Teixeira]{.rtx-meta}
+
+::: {.rtx-acoes}
+[GitHub](https://github.com/raphateixeira/TEControle){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+:::
+:::
+
+## Apresentações
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="Apresentacao/Classificacao.qmd">
+  <h3>Apresentação</h3>
+  <p>Classificação</p>
+</a>
+</div>
+```
