@@ -3,21 +3,20 @@ title: "DeePC"
 subtitle: "Três Exemplos Comentados, do QP Canônico ao QP Reduzido"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 include-after-body:
   text: |
@@ -97,7 +96,7 @@ diferença está em **como** cada passo é feito.
 
 ---
 
-## Notação que Vai Aparecer no Código
+## Notação que Vai Aparecer no Código {.small-slide}
 
 | Símbolo | Significado | Papel no código |
 |---|---|---|
@@ -114,7 +113,7 @@ diferença está em **como** cada passo é feito.
 
 ---
 
-## Três Roteiros, um Fio Condutor
+## Três Roteiros, um Fio Condutor {.small-slide}
 
 | | `deepc_exemplo.m` | `deepc_exemplo2.m` | `deepc_exemplo_v3.m` |
 |---|---|---|---|
@@ -142,7 +141,7 @@ próximos, não idênticos, aos dos scripts originais.
 
 ---
 
-## A Planta que o Controlador Nunca Vê
+## A Planta que o Controlador Nunca Vê {.small-slide}
 
 Uma planta de 2ª ordem, discreta, com ganho DC unitário — **"desconhecida"**
 no sentido de que só serve para gerar dados e simular a malha fechada:
@@ -212,7 +211,7 @@ qualquer ordem razoável — na prática, um PRBS longo cumpre o mesmo papel.
 
 ---
 
-## Passo 2 — Matrizes de Hankel e a Partição Passado/Futuro
+## Passo 2 — Matrizes de Hankel e a Partição Passado/Futuro {.small-slide}
 
 $$
 H_L(w_d) = \begin{bmatrix} w_d(1) & \cdots & w_d(T-L+1) \\ \vdots & \ddots & \vdots \\ w_d(L) & \cdots & w_d(T) \end{bmatrix}
@@ -322,7 +321,7 @@ que o DeePC "sabe onde a planta está" sem nunca ter um modelo de estados.
 
 ---
 
-## Executando o Exemplo 1
+## Executando o Exemplo 1 {.nostretch}
 
 ```{python}
 #| echo: true
@@ -372,7 +371,7 @@ plt.tight_layout(); plt.show()
 
 ---
 
-## Discretizando a Planta (ZOH sem Control Toolbox)
+## Discretizando a Planta (ZOH sem Control Toolbox) {.small-slide}
 
 $$
 \begin{bmatrix} A & B \\ 0 & 0 \end{bmatrix} = \exp\!\left(\begin{bmatrix} A_c & B_c \\ 0 & 0 \end{bmatrix} T_s\right)
@@ -435,7 +434,7 @@ aplique [@willems2005persistency].
 
 ---
 
-## Montando o QP (idêntico em estrutura ao Exemplo 1)
+## Montando o QP (idêntico em estrutura ao Exemplo 1) {.small-slide}
 
 ```{python}
 #| echo: true
@@ -494,7 +493,7 @@ for k in range(Nsim):
 
 ---
 
-## Resultado do Exemplo 2
+## Resultado do Exemplo 2 {.small-slide .nostretch}
 
 ```{python}
 #| echo: true
@@ -557,7 +556,7 @@ $n_G=T-L+1$ variáveis, mas o subespaço que de fato importa é muito menor.
 
 ---
 
-## Reparametrizando $g$ por SVD
+## Reparametrizando $g$ por SVD {.small-slide}
 
 Seja $H_z^\top = W S V^\top$ (SVD). As colunas de $W$ associadas a valores
 singulares não-nulos formam uma base ortonormal do espaço-linha de $H_z$.
@@ -601,7 +600,7 @@ igualdade, menos $T_{\text{ini}}$ variáveis, de graça.
 
 ---
 
-## O QP Reduzido, em Código
+## O QP Reduzido, em Código {.small-slide}
 
 ```{python}
 #| echo: true
@@ -655,7 +654,7 @@ for k in range(Nsim):
 
 ---
 
-## Resultado do Exemplo 3
+## Resultado do Exemplo 3 {.small-slide .nostretch}
 
 ```{python}
 #| echo: true
@@ -680,7 +679,7 @@ print(f"RMS do erro: {np.sqrt(np.mean((y_log3-ref[:Nsim])**2)):.4f}  (Exemplo 2:
 
 ---
 
-## Antes vs. Depois, Lado a Lado
+## Antes vs. Depois, Lado a Lado {.small-slide .nostretch}
 
 ```{python}
 #| echo: true
@@ -763,14 +762,4 @@ plt.tight_layout(); plt.show()
 ::: {#refs}
 :::
 
-# Encerramento {.section-slide}
-
----
-
-## Encerramento {.encerramento}
-
-![](../imgs/ufpa-colorido.png){.encerramento-logo width="80px"}
-
-Prof. Dr. Raphael Teixeira
-
-Universidade Federal do Pará
+{{< include ../_encerramento.qmd >}}

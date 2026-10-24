@@ -3,27 +3,26 @@ title: "Sistemas Dinâmicos - A Renascença do Controle Baseado em Dados"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 ---
 
 <!-- ===================== BLOCO 1 — O QUE SIGNIFICA "CONTROLAR" HOJE ===================== -->
 
-## Todo Controlador Clássico Parte de um Modelo
+## Todo Controlador Clássico Parte de um Modelo {.nostretch}
 
 Para projetar um controlador — PID, LQR, MPC — o primeiro passo quase
 sempre é o mesmo: escrever as equações que descrevem como o sistema se
@@ -146,7 +145,7 @@ maneira de observá-lo em que o comportamento vira **linear**.
 
 ---
 
-## Como Funciona, em Poucas Palavras
+## Como Funciona, em Poucas Palavras {.nostretch}
 
 ```{tikz}
 %| echo: false
@@ -201,7 +200,7 @@ elimina toda palavra desnecessária de um texto.
 
 ---
 
-## Como Funciona, em Poucas Palavras
+## Como Funciona, em Poucas Palavras {.nostretch}
 
 ```{tikz}
 %| echo: false
@@ -254,7 +253,7 @@ e escolhe a ação que já deu certo antes.
 
 ---
 
-## Como Funciona, em Poucas Palavras
+## Como Funciona, em Poucas Palavras {.nostretch}
 
 ```{tikz}
 %| echo: false
@@ -309,7 +308,7 @@ repetir o que deu certo.
 
 ---
 
-## Como Funciona, em Poucas Palavras
+## Como Funciona, em Poucas Palavras {.nostretch}
 
 ```{tikz}
 %| echo: false
@@ -342,7 +341,7 @@ isoladas umas das outras.
 
 ---
 
-## Quatro Respostas, Não Quatro Silos
+## Quatro Respostas, Não Quatro Silos {.nostretch}
 
 ```{tikz}
 %| echo: false
@@ -421,3 +420,5 @@ sistema se encaixa melhor?
   In the Shallows of the DeePC*;
 - Sutton & Barto (2018) — *Reinforcement Learning: An Introduction*.
 :::
+
+{{< include ../_encerramento.qmd >}}

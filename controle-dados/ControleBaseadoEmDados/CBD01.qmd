@@ -3,33 +3,32 @@ title: "Sistemas Dinâmicos: A Renascença dos Dados"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
-      data-background-size: "90px"
+      data-background-size: "84px"
       data-background-position: "top 45px center"
     include-in-header:
-      text: |
-        <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          TeX: { Macros: { bm: ["\\boldsymbol{#1}", 1] } }
-        });
-        </script>
+      - ../_mathjax.html
+      - text: |
+          <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+            TeX: { Macros: { bm: ["\\boldsymbol{#1}", 1] } }
+          });
+          </script>
 engine: knitr
 ---
 
 
-## Sistemas dinâmicos
+## Sistemas dinâmicos {.small-slide}
 
 - Formulação matemática para a descrição de sistemas físicos, biológicos, econômicos, sociais, etc... onde as variáveis evoluem no tempo.
 
@@ -255,7 +254,7 @@ As colunas de $\bm{\tilde{U}}$ são os modos dinâmicos, conhecidos como POD (Pr
 
 ---
 
-## Algoritmo DMD:
+## Algoritmo DMD: {.small-slide}
 
 *Passo 3:* Determinar a matriz $\bm{\tilde{A}}$ a partir da SVD.
 
@@ -287,4 +286,4 @@ $$
 
 A diagonal de $\Lambda$ contém os autovalores de $\bm{\tilde{A}}$ (DMDs), enquanto as colunas de $\bm{W}$ são os autovetores correspondentes.
 
-
+{{< include ../_encerramento.qmd >}}

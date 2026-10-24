@@ -31,5 +31,9 @@ estado bruto.
   <h3>Slides 3</h3>
   <p>DMD exato: SVD, projeção do operador e modos, com exemplo em Python</p>
 </a>
+<a class="categoria-card" href="Koopman04KoopmanMPC.qmd">
+  <h3>Slides 4</h3>
+  <p>Koopman-MPC (Korda &amp; Mezić, 2018): preditores lineares, MPC denso e exemplos em Python</p>
+</a>
 </div>
 ```

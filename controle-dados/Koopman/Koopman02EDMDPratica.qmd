@@ -3,21 +3,20 @@ title: "EDMD na Prática"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 ---
 
@@ -75,7 +74,7 @@ Xnext = np.array([step(x) for x in X])
 
 ---
 
-## Python — Estimando $K$
+## Python — Estimando $K$ {.small-slide}
 
 ```{python}
 #| echo: true
@@ -93,7 +92,7 @@ Sem ruído, $K$ recupera $K_{\text{exato}}$ até erro de ponto flutuante.
 
 ---
 
-## Resultado — Predição da Trajetória
+## Resultado — Predição da Trajetória {.nostretch}
 
 ```{python}
 #| echo: true
@@ -120,7 +119,7 @@ plt.tight_layout(); plt.show()
 
 ---
 
-## Por Que o Dicionário Importa
+## Por Que o Dicionário Importa {.small-slide}
 
 Sem $x_1^2$ (DMD comum, $\phi(x)=(x_1,x_2)$):
 
@@ -158,3 +157,5 @@ melhor aproximação linear, mas erra sistematicamente.
 
 ::: {#refs}
 :::
+
+{{< include ../_encerramento.qmd >}}

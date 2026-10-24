@@ -3,21 +3,20 @@ title: "DeePC"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 ---
 
@@ -25,7 +24,7 @@ engine: knitr
 reticulate::use_python(Sys.which("python3"), required = TRUE)
 ```
 
-## O que é DeePC?
+## O que é DeePC? {.nostretch}
 
 **Data-Enabled Predictive Control**: controle preditivo formulado direto
 sobre uma trajetória de dados, sem identificar um modelo de estado da planta.
@@ -185,7 +184,7 @@ y_true = simulate(u_fut, y0=y_ini[-1])
 
 ---
 
-## Python — Resultado
+## Python — Resultado {.nostretch}
 
 ```{python}
 #| echo: true
@@ -260,3 +259,5 @@ $$
 
 ::: {#refs}
 :::
+
+{{< include ../_encerramento.qmd >}}

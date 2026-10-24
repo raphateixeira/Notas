@@ -23,6 +23,15 @@ e este nível de profundidade, não um resumo de tópicos.
 5. Ponte para o próximo bloco (1 slide)
 
 ## Convenções técnicas
+- Template dos decks: o mesmo de Notas/leituras/brunton-kutz-data-driven.
+  Cabeçalho revealjs com `center: true`, sem `self-contained`/`footer`, logo
+  da capa em `data-background-position: "top 45px center"`, `lang: pt-BR`;
+  terminar com `{{< include ../_encerramento.qmd >}}`. Usar `{.small-slide}`
+  em slides densos e `{.nostretch}` em slides com figura (senão o `r-stretch`
+  do revealjs encolhe a figura até sumir). Separar código longo (> ~12 linhas)
+  e o gráfico resultante em slides diferentes. Incluir
+  `include-in-header: ../_mathjax.html` (fonte web TeX do MathJax; sem isso
+  `\underbrace` sai quebrado e `\mathcal` vira □ com as fontes STIX do macOS).
 - Tema: TemaRTx.scss (cores UFPA: azul #002C6F, vinho #96263a, dourado #FFD700)
 - Diagramas: mermaid nativo ou TikZ via knitr (arquivos standalone em
   Notas/imgs/tikz/)

@@ -3,21 +3,20 @@ title: "DMD — Algoritmo Exato"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 ---
 
@@ -178,7 +177,7 @@ os modos exatos**, o custo extra é uma multiplicação de matrizes.
 
 ---
 
-## Exemplo: Oscilador Harmônico Amortecido
+## Exemplo: Oscilador Harmônico Amortecido {.small-slide}
 
 $$
 \ddot x + 2\zeta\omega_n\dot x + \omega_n^2 x = 0,
@@ -214,7 +213,7 @@ X, Xp = Y[:, :-1], Y[:, 1:]                  # linhas 1-2 do Algoritmo 1
 
 ---
 
-## Exemplo: Aplicando o Algoritmo (linhas 3–8)
+## Exemplo: Aplicando o Algoritmo (linhas 3–8) {.small-slide}
 
 ```{python}
 #| echo: true
@@ -240,7 +239,7 @@ erro de ponto flutuante — sem nunca formar o operador $A\in\mathbb{R}^{30\time
 
 ---
 
-## Exemplo: Modos e Reconstrução
+## Exemplo: Modos e Reconstrução {.small-slide .nostretch}
 
 ```{python}
 #| echo: true
@@ -289,3 +288,5 @@ maior. Essa extensão, e a teoria espectral que a justifica, é o assunto de
 
 ::: {#refs}
 :::
+
+{{< include ../_encerramento.qmd >}}

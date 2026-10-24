@@ -3,21 +3,20 @@ title: "Aprendizagem por Reforço"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 ---
 
@@ -25,7 +24,7 @@ engine: knitr
 reticulate::use_python(Sys.which("python3"), required = TRUE)
 ```
 
-## O que é Aprendizagem por Reforço?
+## O que é Aprendizagem por Reforço? {.nostretch}
 
 Um **agente** aprende a agir sobre um **ambiente** por tentativa e erro,
 maximizando recompensa acumulada — sem que ninguém lhe diga a ação certa.
@@ -120,3 +119,5 @@ na teoria clássica [@recht2019tour] — o exemplo a seguir mostra isso.
 
 ::: {#refs}
 :::
+
+{{< include ../_encerramento.qmd >}}

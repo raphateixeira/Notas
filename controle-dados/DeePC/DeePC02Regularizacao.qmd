@@ -3,21 +3,20 @@ title: "DeePC com Ruído"
 subtitle: "Controle Baseado em Dados"
 institute: "Universidade Federal do Pará"
 author: "Prof. Dr. Raphael Teixeira"
-lang: pt
+lang: pt-BR
 format:
   revealjs:
     theme: [simple, ../TemaRTx.scss]
-    self-contained: true
     transition: fade
     slide-number: true
-    center: false
+    center: true
     width: 1600
     height: 900
-    footer: " "
+    include-in-header: ../_mathjax.html
     title-slide-attributes:
       data-background-image: "../imgs/ufpa-colorido.png"
       data-background-size: "84px"
-      data-background-position: "top 110px center"
+      data-background-position: "top 45px center"
 engine: knitr
 ---
 
@@ -109,7 +108,7 @@ def solve_ridge(lam):
 
 ---
 
-## Resultado: Erro vs. $\lambda$
+## Resultado: Erro vs. $\lambda$ {.nostretch}
 
 ```{python}
 #| echo: true
@@ -156,3 +155,5 @@ $A^\top A$ é singular — qualquer regularização pequena já estabiliza.
 
 ::: {#refs}
 :::
+
+{{< include ../_encerramento.qmd >}}
