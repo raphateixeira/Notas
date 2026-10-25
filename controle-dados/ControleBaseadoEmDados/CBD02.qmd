@@ -6,7 +6,7 @@ author: "Prof. Dr. Raphael Teixeira"
 lang: pt-BR
 format:
   revealjs:
-    theme: [simple, ../TemaRTx.scss]
+    theme: [simple, ../../TemaRTx.scss]
     transition: fade
     slide-number: true
     center: true
@@ -391,10 +391,10 @@ a modelagem física cada vez mais cara e imprecisa. Controle baseado em
 dados oferece um caminho direto a partir do que já foi medido.
 
 Para aprofundar em cada caminho:
-[DeePC](../DeePC/index.qmd) ·
-[Koopman](../Koopman/index.qmd) ·
-[SINDy](../SINDy/index.qmd) ·
-[Aprendizagem por Reforço](../RL/index.qmd)
+[DeePC](../../index.qmd#controle-dados) ·
+[Koopman](../../index.qmd#controle-dados) ·
+[SINDy](../../index.qmd#controle-dados) ·
+[Aprendizagem por Reforço](../../index.qmd#controle-dados)
 
 ---
 

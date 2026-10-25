@@ -8,6 +8,27 @@
 project:
   type: website
   output-dir: _site
+  pre-render: scripts/pre_render.py   # figuras e galeria da coleção TikZ (tikz/_build/)
+  render:
+    - index.qmd
+    - fundamentos/**/*.qmd
+    - fundamentos/**/*.ipynb
+    - leituras/**/*.qmd
+    # Controle baseado em dados e Tópicos Especiais (ex-DataDrivenControl, ex-TEControle)
+    - controle-dados/*/*.qmd
+    - topicos-controle/*/*.qmd
+    # Coleções (ex-TikZ, ex-Manim) e programação (ex-Code)
+    - tikz/index.qmd
+    - tikz/categorias/*.qmd
+    - manim/index.qmd
+    - programacao/*.qmd
+    - programacao/*/*.qmd
+    - programacao/*/*.ipynb
+  resources:
+    - tikz/_build/**
+    - manim/*/*.gif
+    - manim/*/*.py
+    - manim/*/*.mp4
 
 execute:
   freeze: auto
@@ -39,6 +60,18 @@ website:
             href: fundamentos/controle-digital/index.qmd
           - text: "Conversores de Energia"
             href: fundamentos/conversores-energia/index.qmd
+      - text: "Controle baseado em dados"
+        href: index.qmd#controle-dados
+      - text: "Coleções"
+        menu:
+          - text: "Figuras TikZ"
+            href: tikz/index.qmd
+          - text: "Animações Manim"
+            href: manim/index.qmd
+          - text: "Programação"
+            href: programacao/index.qmd
+          - text: "Tópicos especiais em controle"
+            href: index.qmd#topicos-controle
       - text: "Livros"
         menu:
           - text: "Chan — Introduction to Probability for Data Science"

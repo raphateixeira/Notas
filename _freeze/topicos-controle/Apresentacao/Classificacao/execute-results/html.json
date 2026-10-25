@@ -1,0 +1,12 @@
+{
+  "hash": "c6ab085710ce783ec428690ac7f870ef",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Classificação\"\nsubtitle: \"Tópicos Especiais em Controle\"\nauthor: \"Raphael Teixeira\"\ndate: \"\"\nformat:\n  revealjs:\n    theme: [simple, ../../TemaRTx.scss] # Seu tema SCSS\n    slide-number: true\n    menu: false\n    transition: fade\n    title-slide-attributes:\n      data-background-image: \"imgs/ufpa-colorido.png\"\n      data-background-size: \"84px\"\n      data-background-position: \"top 45px center\"\n    embed-resources: true\n    scrollable: true\n    # Configuração da Proporção 16:9\n    width: 1600\n    height: 900\n    # ---------------------------------\neditor: visual\n---\n\n### Classificação pinguins\n\n------------------------------------------------------------------------\n\n### Classificação dados artificiais\n\n::: {#e932cd34 .cell execution_count=1}\n\n::: {.cell-output .cell-output-display}\n![](Classificacao_files/figure-revealjs/cell-2-output-1.png){width=811 height=450}\n:::\n:::\n\n\n------------------------------------------------------------------------\n\n### Classificação dados artificiais - resultado\n\n",
+    "supporting": [
+      "Classificacao_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

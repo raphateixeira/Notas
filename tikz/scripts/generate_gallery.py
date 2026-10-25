@@ -129,7 +129,7 @@ def write_index(counts: dict[str, int]) -> None:
     cards = []
     for categoria, count in sorted(counts.items()):
         cards.append(
-            f"""<a class="categoria-card" href="categorias/{categoria}.qmd">
+            f"""<a class="categoria-card" href="categorias/{categoria}.html">
   <h3>{label_for(categoria)}</h3>
   <p>{count} figura(s)</p>
 </a>"""

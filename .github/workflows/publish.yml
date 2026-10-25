@@ -15,7 +15,8 @@ jobs:
     with:
       needs_python: true
       needs_r: true
-      r_packages: "knitr, rmarkdown"
-      needs_pdf2svg: true
+      r_packages: "knitr, rmarkdown, magick, pdftools, reticulate"
+      needs_magick_system_deps: true
+      needs_pdf2svg: true             # pdf2svg + poppler-utils (figuras TikZ, quarto-tikz)
       needs_tinytex: true
-      tinytex_packages: "pgf standalone xcolor"
+      tinytex_packages: "pgf pgfplots standalone xcolor circuitikz listofitems currfile siunitx tools"

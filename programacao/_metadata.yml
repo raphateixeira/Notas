@@ -1,0 +1,3 @@
+# Antes no _quarto.yml do Code
+bibliography: referencias.bib
+csl: abnt.csl

@@ -1,8 +1,12 @@
-numpy
-scipy
-matplotlib
-pandas
-jupyter
+# requirements.txt (Notas + ex-Code + ex-TEControle + ex-DataDrivenControl)
 ipykernel
-scikit-learn
+jupyter
+jupyter_client
+jupyterlab
+matplotlib
+numpy
+pandas
 pyyaml
+scikit-learn
+scipy
+seaborn

@@ -1,0 +1,5 @@
+# Antes no _quarto.yml do TikZ
+format:
+  html:
+    toc: false
+    page-layout: article

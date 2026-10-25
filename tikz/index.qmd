@@ -28,45 +28,37 @@ Veja `SCOPE.md` para o desenho completo e `README.md` para o fluxo de contribui�
 
 ````{=html}
 <div class="categoria-grid">
-<a class="categoria-card" href="categorias/algebra-linear.qmd">
+<a class="categoria-card" href="categorias/algebra-linear.html">
   <h3>Álgebra Linear</h3>
   <p>7 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/aprendizagem-de-maquina.qmd">
+<a class="categoria-card" href="categorias/aprendizagem-de-maquina.html">
   <h3>Aprendizagem de Máquina</h3>
   <p>1 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/circuitos-ca.qmd">
+<a class="categoria-card" href="categorias/circuitos-ca.html">
   <h3>Circuitos CA</h3>
   <p>14 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/controle-classico.qmd">
+<a class="categoria-card" href="categorias/controle-classico.html">
   <h3>Controle Clássico</h3>
   <p>13 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/controle-digital.qmd">
+<a class="categoria-card" href="categorias/controle-digital.html">
   <h3>Controle Digital</h3>
   <p>5 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/controle-estados.qmd">
+<a class="categoria-card" href="categorias/controle-estados.html">
   <h3>Controle por Espaço de Estados</h3>
   <p>12 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/eletronica-potencia.qmd">
+<a class="categoria-card" href="categorias/eletronica-potencia.html">
   <h3>Eletronica Potencia</h3>
   <p>2 figura(s)</p>
 </a>
-<a class="categoria-card" href="categorias/identificacao.qmd">
-  <h3>Identificação de Sistemas</h3>
-  <p>0 figura(s)</p>
-</a>
-<a class="categoria-card" href="categorias/metodos-numericos.qmd">
+<a class="categoria-card" href="categorias/metodos-numericos.html">
   <h3>Métodos Numéricos</h3>
   <p>6 figura(s)</p>
-</a>
-<a class="categoria-card" href="categorias/mpc-dmc.qmd">
-  <h3>MPC / DMC</h3>
-  <p>0 figura(s)</p>
 </a>
 </div>
 ````

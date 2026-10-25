@@ -4,20 +4,21 @@ description: "Fundamentação teórica por tema de estudo e notas de leitura de 
 ---
 
 ::: {.rtx-hero}
-[Coleção · Fundamentos e leituras]{.rtx-eyebrow}
+[Estudo · Fundamentos, leituras e coleções]{.rtx-eyebrow}
 
 # Notas {.unnumbered .unlisted}
 
-Fundamentação teórica por tema de estudo e notas de leitura de livros-texto, em slides.
+Fundamentação teórica por tema de estudo, notas de leitura de livros-texto, controle baseado em dados
+e as coleções de apoio: figuras TikZ, animações Manim e programação.
 
 [Prof. Dr. Raphael Teixeira]{.rtx-meta}
 
 ::: {.rtx-acoes}
-[GitHub](https://github.com/raphateixeira/Notas){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+[Fundamentos](#fundamentos){.rtx-btn .rtx-btn-primario} [Controle baseado em dados](#controle-dados){.rtx-btn} [Livros](#livros){.rtx-btn} [Coleções](#colecoes){.rtx-btn} [GitHub](https://github.com/raphateixeira/Notas){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
 :::
 :::
 
-## Fundamentos
+## Fundamentos {#fundamentos}
 
 Temas sistematizados a partir das notas de leitura dos livros. Cada tema nasce aqui e, quando
 ganha volume, é promovido a repositório próprio.
@@ -60,7 +61,20 @@ ganha volume, é promovido a repositório próprio.
 </div>
 ```
 
-## Livros
+## Controle baseado em dados {#controle-dados}
+
+Projeto de controladores e identificação de dinâmicas diretamente a partir de dados experimentais,
+sem depender de um modelo matemático completo da planta. Cada técnica tem uma nota de referência
+(documento) e apresentações em slides.
+
+* **Panorama** — [A renascença dos dados](controle-dados/ControleBaseadoEmDados/CBD01.qmd) e [a renascença do controle baseado em dados](controle-dados/ControleBaseadoEmDados/CBD02.qmd): como as técnicas se interconectam.
+* **DeePC** (*Data-Enabled Predictive Control*) — [nota](controle-dados/DeePC/DeePCNota.qmd) · [introdução: lema de Willems, formulação e exemplo mínimo](controle-dados/DeePC/DeePC01Introducao.qmd) · [regularização com ruído](controle-dados/DeePC/DeePC02Regularizacao.qmd) · [três exemplos comentados](controle-dados/DeePC/DeePC03ExemplosComentados.qmd).
+* **Koopman** (linearização global de sistemas não lineares) — [nota](controle-dados/Koopman/KoopmanNota.qmd) · [introdução: autofunções, DMD e EDMD](controle-dados/Koopman/Koopman01Introducao.qmd) · [EDMD na prática](controle-dados/Koopman/Koopman02EDMDPratica.qmd) · [DMD exato](controle-dados/Koopman/Koopman03DMDAlgoritmo.qmd) · [Koopman-MPC](controle-dados/Koopman/Koopman04KoopmanMPC.qmd).
+* **SINDy** (identificação esparsa de dinâmicas não lineares) — [nota](controle-dados/SINDy/SINDyNota.qmd) · [introdução: formulação, STLSQ e extensões](controle-dados/SINDy/SINDy01Introducao.qmd) · [STLSQ na prática: Lotka–Volterra](controle-dados/SINDy/SINDy02STLSQPratica.qmd).
+* **Aprendizagem por reforço** — [nota](controle-dados/RL/RLNota.qmd) · [introdução: MDPs, Bellman, Q-learning e RL profundo](controle-dados/RL/RL01Introducao.qmd) · [Q-learning × LQR](controle-dados/RL/RL02QLearningControle.qmd).
+* Códigos MATLAB e notebooks de apoio em [`controle-dados/Codigos/`](https://github.com/raphateixeira/Notas/tree/main/controle-dados/Codigos).
+
+## Livros {#livros}
 
 Notas de leitura em slides (Quarto revealjs), uma pasta por livro-texto. Os PDFs dos livros
 não fazem parte deste repositório.
@@ -125,3 +139,28 @@ não fazem parte deste repositório.
 </a>
 </div>
 ```
+
+## Coleções {#colecoes}
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="tikz/index.html">
+  <h3>Figuras</h3>
+  <p>Coleção TikZ: figuras de controle, circuitos e matemática em PNG, SVG e EPS</p>
+</a>
+<a class="categoria-card" href="manim/index.html">
+  <h3>Animações</h3>
+  <p>Coleção Manim: animações didáticas de sistemas dinâmicos, controle e circuitos</p>
+</a>
+<a class="categoria-card" href="programacao/index.html">
+  <h3>Programação</h3>
+  <p>Notas de estudo de Python, Julia, MATLAB e R</p>
+</a>
+</div>
+```
+
+## Tópicos especiais em controle {#topicos-controle}
+
+* [Classificação](topicos-controle/Apresentacao/Classificacao.qmd) — apresentação (slides).
+* [Sintonia de PID via lugar geométrico das raízes](topicos-controle/NotasRapidas/01-PID-LGR.qmd) — nota rápida.
+* [Sintonia de PID via resposta em frequência (Bode)](topicos-controle/NotasRapidas/02-PID-Bode.qmd) — nota rápida.

@@ -14,3 +14,21 @@ __pycache__/
 
 # Tema compartilhado: baixado de raphateixeira/.github no build (ver .github/scripts/atualizar-tema.sh na raiz de GitRTx)
 /TemaRTx.scss
+
+# Coleção TikZ: figuras compiladas no pre-render (scripts/pre_render.py)
+tikz/_build/
+*.aux
+*.log
+# Manim: saídas de renderização
+manim/media/
+# Controle baseado em dados: PDFs de referência (direitos autorais), ambiente local
+controle-dados/Refs/
+_environment.local
+/_*.local
+# Programação (ex-Code)
+Manifest.toml
+.Rhistory
+.RData
+.Rproj.user/
+.venv/
+.claude/
