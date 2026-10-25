@@ -13,7 +13,7 @@ Animações matemáticas e didáticas de sistemas dinâmicos, controle e circuit
 [Prof. Dr. Raphael Teixeira]{.rtx-meta}
 
 ::: {.rtx-acoes}
-[GitHub](https://github.com/raphateixeira/Manim){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+[GitHub](https://github.com/raphateixeira/Notas/tree/main/manim){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
 :::
 :::
 
@@ -57,7 +57,7 @@ Animações matemáticas e didáticas de sistemas dinâmicos, controle e circuit
 
 ## Cálculo Numérico — Zeros de Funções {#zeros-de-funcoes}
 
-Animações produzidas para a disciplina de [Cálculo Numérico](https://raphateixeira.github.io/MetodosNumericos/), ilustrando os métodos iterativos de busca de raízes das Aulas 2 e 3 (métodos intervalares e métodos abertos).
+Animações produzidas para a disciplina de [Cálculo Numérico](https://raphateixeira.github.io/Ensino/#calculo-numerico), ilustrando os métodos iterativos de busca de raízes das Aulas 2 e 3 (métodos intervalares e métodos abertos).
 
 ```{=html}
 <div class="figura-grid">

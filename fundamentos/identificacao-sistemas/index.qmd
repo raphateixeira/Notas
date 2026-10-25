@@ -29,4 +29,4 @@ sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
 
 ## Material relacionado
 
-* [DataDrivenControl](https://raphateixeira.github.io/DataDrivenControl/) — DeePC, Koopman e SINDy usam estas notas como base
+* [DataDrivenControl](https://raphateixeira.github.io/Notas/#controle-dados) — DeePC, Koopman e SINDy usam estas notas como base

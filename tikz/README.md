@@ -70,4 +70,4 @@ instala TinyTeX (`standalone`, `pgf`, `pgfplots`, `xcolor`,
 Passo único necessário no GitHub: em **Settings → Pages → Build and
 deployment → Source**, selecionar **GitHub Actions**. Depois disso, todo
 push em `main` publica automaticamente em
-`https://raphateixeira.github.io/TikZ/`.
+`https://raphateixeira.github.io/Notas/tikz/`.

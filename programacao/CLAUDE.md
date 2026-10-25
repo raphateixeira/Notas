@@ -6,7 +6,7 @@ Contexto para sessões futuras do Claude Code neste repositório.
 
 `Code` é um satélite do hub acadêmico do Prof. Dr. Raphael Teixeira
 (`raphateixeira.github.io`, UFPA-CAMTUC-FEE), publicado em
-<https://raphateixeira.github.io/Code/>. É um **repositório único de estudo de
+<https://raphateixeira.github.io/Notas/programacao/>. É um **repositório único de estudo de
 linguagens de programação e seus pacotes**, organizado por linguagem. Formato canônico:
 Quarto (`quarto render`, `execute.freeze: auto`). Tema visual: `TemaRTx.scss` (idêntico
 ao usado por Notas, TikZ, Manim, DeepLearning, MetodosNumericos, ControleEstados,

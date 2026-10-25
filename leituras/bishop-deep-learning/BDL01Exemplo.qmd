@@ -61,7 +61,7 @@ Rascunho — links para outras notas deste repositório e para as linhas de pesq
 
 ::: {.callout-tip title="Observação"}
 Implementações de código substanciais devem ir para o satélite
-[DeepLearning](https://raphateixeira.github.io/DeepLearning/), não neste repositório.
+[DeepLearning](https://raphateixeira.github.io/Ensino/#aprendizagem-maquina), não neste repositório.
 :::
 
 ## Exercícios selecionados

@@ -25,4 +25,4 @@ sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
 
 ## Material relacionado
 
-* [DataDrivenControl](https://raphateixeira.github.io/DataDrivenControl/) — DeePC e demais técnicas de controle baseado em dados
+* [DataDrivenControl](https://raphateixeira.github.io/Notas/#controle-dados) — DeePC e demais técnicas de controle baseado em dados

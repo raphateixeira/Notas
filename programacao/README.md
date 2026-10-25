@@ -1,7 +1,7 @@
 # Code
 
 Repositório único de estudo de linguagens de programação e seus pacotes, organizado por
-linguagem, publicado em <https://raphateixeira.github.io/Code/>. Satélite do hub
+linguagem, publicado em <https://raphateixeira.github.io/Notas/programacao/>. Satélite do hub
 acadêmico [raphateixeira.github.io](https://raphateixeira.github.io).
 
 Cada linguagem é uma **pasta** (não um repositório separado); a separação lógica entre

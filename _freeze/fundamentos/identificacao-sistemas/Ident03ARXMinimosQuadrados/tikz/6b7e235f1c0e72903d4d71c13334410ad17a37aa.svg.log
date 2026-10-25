@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.6.17)  28 SEP 2026 09:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.6.17)  25 OCT 2026 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -407,7 +407,8 @@ File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count307
 )
-No file 6b7e235f1c0e72903d4d71c13334410ad17a37aa.svg.aux.
+(Ident03ARXMinimosQuadrados_files/tikz/6b7e235f1c0e72903d4d71c13334410ad17a37aa
+.svg.aux)
 \openout1 = `6b7e235f1c0e72903d4d71c13334410ad17a37aa.svg.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -424,6 +425,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
+
 (/usr/local/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count308
@@ -470,10 +472,10 @@ L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 13570 strings out of 467525
- 290572 string characters out of 5418982
- 669085 words of memory out of 5000000
- 42270 multiletter control sequences out of 15000+600000
+ 13573 strings out of 467525
+ 290805 string characters out of 5418982
+ 669076 words of memory out of 5000000
+ 42271 multiletter control sequences out of 15000+600000
  627721 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,7n,94p,564b,700s stack positions out of 10000i,1000n,20000p,200000b,200000s

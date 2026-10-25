@@ -383,8 +383,8 @@ Este mesmo estimador (ARX por mínimos quadrados) aplicado a sistemas reais e ge
 
 - [ControleCC2CC](https://raphateixeira.github.io/ControleCC2CC/) — ARX de uma bancada motor-gerador real.
 - [Projeto-Aeropendulo](https://raphateixeira.github.io/Projeto-Aeropendulo/) — mesmo estimador aplicado ao aeropêndulo.
-- [Controle MPC-FCS de gerador DFIG](https://raphateixeira.github.io/ControleDFIG/Presents/03ControleDFIGpFCS.html) (ControleDFIG) — ARX multivariável num sistema trifásico, usado como modelo de predição num MPC.
-- [SINDy](https://raphateixeira.github.io/DataDrivenControl/SINDy/SINDyNota.html) e [Koopman](https://raphateixeira.github.io/DataDrivenControl/Koopman/KoopmanNota.html) (DataDrivenControl) — o mesmo estimador de mínimos quadrados, generalizado para dinâmicas não lineares.
+- [Controle MPC-FCS de gerador DFIG](https://raphateixeira.github.io/ConversoresPotencia/DFIG/Presents/03ControleDFIGpFCS.html) (ControleDFIG) — ARX multivariável num sistema trifásico, usado como modelo de predição num MPC.
+- [SINDy](https://raphateixeira.github.io/Notas/controle-dados/SINDy/SINDyNota.html) e [Koopman](https://raphateixeira.github.io/Notas/controle-dados/Koopman/KoopmanNota.html) (DataDrivenControl) — o mesmo estimador de mínimos quadrados, generalizado para dinâmicas não lineares.
 
 ---
 

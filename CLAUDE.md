@@ -81,7 +81,7 @@ teorema, equação ou resumo de capítulo.
 
 Notas conceituais de Deep Learning ficam aqui (`bishop-deep-learning/`); implementações de
 código substanciais vão para o satélite
-[DeepLearning](https://raphateixeira.github.io/DeepLearning/).
+[DeepLearning](https://raphateixeira.github.io/Ensino/#aprendizagem-maquina).
 
 ## Fundamentos (temas, não livros)
 

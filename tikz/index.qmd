@@ -13,7 +13,7 @@ baixada em PNG, SVG, EPS ou como fonte `.tikz` / `.tex` standalone.
 [Prof. Dr. Raphael Teixeira]{.rtx-meta}
 
 ::: {.rtx-acoes}
-[GitHub](https://github.com/raphateixeira/TikZ){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+[GitHub](https://github.com/raphateixeira/Notas/tree/main/tikz){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
 :::
 :::
 

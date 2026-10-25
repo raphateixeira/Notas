@@ -24,7 +24,7 @@ Notas de estudo de linguagens de programação e pacotes (Python, Julia, MATLAB,
 [Prof. Dr. Raphael Teixeira]{.rtx-meta}
 
 ::: {.rtx-acoes}
-[Progresso](progresso.qmd){.rtx-btn .rtx-btn-primario} [Recomendações](Recomendacoes.qmd){.rtx-btn} [GitHub](https://github.com/raphateixeira/Code){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+[Progresso](progresso.qmd){.rtx-btn .rtx-btn-primario} [Recomendações](Recomendacoes.qmd){.rtx-btn} [GitHub](https://github.com/raphateixeira/Notas/tree/main/programacao){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
 :::
 :::
 
