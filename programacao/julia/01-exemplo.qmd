@@ -1,0 +1,37 @@
+---
+title: "Título da nota"
+subtitle: "Tópico 1 — Assunto"
+description: "Uma frase sobre o que a nota cobre."
+author: "Raphael Teixeira"
+date: "2026-08-04"
+date-modified: last-modified
+categories: [Fundamentos, Julia]
+linguagem: "Julia"
+ordem: 1
+status: rascunho
+lang: pt-BR
+---
+
+## Contexto
+
+<!-- TODO: por que este tópico interessa e onde se encaixa no estudo de Julia. -->
+
+## Ideias centrais
+
+<!-- TODO: conceitos e sintaxe principais, em português, com exemplos próprios. -->
+
+## Implementação
+
+<!-- TODO: bloco de código ilustrativo (não executado em CI — veja CLAUDE.md). -->
+
+```julia
+# TODO: código que ilustra as ideias centrais desta nota.
+```
+
+## Conexões
+
+<!-- TODO: links para outras notas deste repositório e para projetos onde Julia é usada. -->
+
+## Referências
+
+<!-- TODO: citar via `.bib` e citeproc, ex.: [@chave-da-referencia]. -->

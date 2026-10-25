@@ -1,0 +1,12 @@
+{
+  "hash": "47bd8af1391bcbd1a594789b923d83b7",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Título da nota\"\nsubtitle: \"Tópico 1 — Assunto\"\ndescription: \"Uma frase sobre o que a nota cobre.\"\nauthor: \"Raphael Teixeira\"\ndate: \"2026-08-04\"\ndate-modified: last-modified\ncategories: [Fundamentos, Python]\nlinguagem: \"Python\"\nordem: 1\nstatus: rascunho\nlang: pt-BR\n---\n\n## Contexto\n\n<!-- TODO: por que este tópico interessa e onde se encaixa no estudo de Python. -->\n\n## Ideias centrais\n\n<!-- TODO: conceitos e sintaxe principais, em português, com exemplos próprios. -->\n\n## Implementação\n\n::: {#68b36e49 .cell execution_count=1}\n``` {.python .cell-code}\n# TODO: código executável que ilustra as ideias centrais desta nota.\n```\n:::\n\n\n## Conexões\n\n<!-- TODO: links para outras notas deste repositório e para projetos onde Python é usado. -->\n\n## Referências\n\n<!-- TODO: citar via `.bib` e citeproc, ex.: [@chave-da-referencia]. -->\n\n",
+    "supporting": [
+      "01-exemplo_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

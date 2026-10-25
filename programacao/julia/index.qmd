@@ -1,0 +1,21 @@
+---
+title: "Julia"
+description: "Notas de estudo de Julia e seus pacotes de computação numérica."
+listing:
+  id: notas-julia
+  type: default
+  contents: "*.qmd"
+  sort: "ordem asc"
+  categories: numbered
+  fields: [date, title, description, ordem]
+page-layout: full
+---
+
+**Foco:** computação numérica de alta performance — EDOs, otimização, controle.
+
+::: {.callout-note}
+O CI de publicação deste repositório não provisiona runtime de Julia (veja
+[CLAUDE.md](https://github.com/raphateixeira/Code/blob/main/CLAUDE.md)). Blocos de
+código aqui são ilustrativos (cerca `julia` simples, não executada) até que o autor
+renderize localmente e comite o cache de `_freeze/` correspondente.
+:::

@@ -1,0 +1,36 @@
+---
+title: "Título da nota"
+subtitle: "Tópico — Assunto"
+description: "Uma frase sobre o que a nota cobre."
+author: "Raphael Teixeira"
+date: "AAAA-MM-DD"
+date-modified: last-modified
+categories: [Categoria1, Categoria2]
+linguagem: "Python"
+ordem: 1
+status: rascunho
+lang: pt-BR
+---
+
+## Contexto
+
+<!-- TODO: por que este tópico interessa e onde se encaixa no estudo da linguagem. -->
+
+## Ideias centrais
+
+<!-- TODO: conceitos e sintaxe principais, em português, com exemplos próprios. -->
+
+## Implementação
+
+```{python}
+# TODO: código executável que ilustra as ideias centrais desta nota.
+```
+
+## Conexões
+
+<!-- TODO: links para outras notas deste repositório e para projetos onde esta
+linguagem/pacote é usada. -->
+
+## Referências
+
+<!-- TODO: citar via `.bib` e citeproc, ex.: [@chave-da-referencia]. -->

@@ -1,0 +1,15 @@
+{
+  "hash": "dbc9745a1a3b6336eca4bf5edd18e961",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Título da nota\"\nsubtitle: \"Tópico 1 — Assunto\"\ndescription: \"Uma frase sobre o que a nota cobre.\"\nauthor: \"Raphael Teixeira\"\ndate: \"2026-08-04\"\ndate-modified: last-modified\ncategories: [Fundamentos, R]\nlinguagem: \"R\"\nordem: 1\nstatus: rascunho\nlang: pt-BR\n---\n\n## Contexto\n\n<!-- TODO: por que este tópico interessa e onde se encaixa no estudo de R. -->\n\n## Ideias centrais\n\n<!-- TODO: conceitos e sintaxe principais, em português, com exemplos próprios. -->\n\n## Implementação\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# TODO: código executável que ilustra as ideias centrais desta nota.\n```\n:::\n\n\n## Conexões\n\n<!-- TODO: links para outras notas deste repositório e para projetos onde R é usado. -->\n\n## Referências\n\n<!-- TODO: citar via `.bib` e citeproc, ex.: [@chave-da-referencia]. -->\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

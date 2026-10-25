@@ -1,0 +1,16 @@
+---
+title: "Python"
+description: "Notas de estudo de Python e seus pacotes de computação científica."
+listing:
+  id: notas-python
+  type: default
+  contents: "*.qmd"
+  sort: "ordem asc"
+  categories: numbered
+  fields: [date, title, description, ordem]
+page-layout: full
+---
+
+**Foco:** computação científica geral — numpy, scipy, matplotlib, pandas — com uso
+transversal em quase todos os satélites deste hub (Notas, DeepLearning, MetodosNumericos,
+DataDrivenControl).
