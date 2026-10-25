@@ -1,0 +1,17 @@
+% ---------------------------------------------------------------
+% SINDy: regressão esparsa sobre uma biblioteca de funções candidatas
+% recupera as poucas equações que governam a dinâmica.
+% ---------------------------------------------------------------
+\begin{tikzpicture}[>=Latex, line width=1.0pt, node distance=1.6cm,
+  bloco/.style={draw, minimum width=3.4cm, minimum height=1.2cm, fill=blue!8, align=center},
+  seta/.style={->}]
+
+  \node[bloco] (dados) at (0,0) {Dados $X, \dot X$};
+  \node[bloco, right=2.2cm of dados] (biblioteca) {Biblioteca $\Theta(X)$\\[-2pt]\footnotesize polinômios, trig., ...};
+  \node[bloco, right=2.2cm of biblioteca] (regressao) {Regressão esparsa\\[-2pt]\footnotesize (STLSQ)};
+
+  \draw[seta] (dados) -- (biblioteca);
+  \draw[seta] (biblioteca) -- (regressao);
+  \node[below=0.9cm of biblioteca, font=\small, align=center] {$\dot x = \Theta(x)\,\Xi$\\poucos termos não nulos};
+
+\end{tikzpicture}

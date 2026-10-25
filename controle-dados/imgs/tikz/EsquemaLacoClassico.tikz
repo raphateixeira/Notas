@@ -1,0 +1,18 @@
+% ---------------------------------------------------------------
+% Controle clássico: o Modelo (equações do sistema) é o que define
+% o Controlador antes mesmo de a malha fechar sobre a Planta real.
+% ---------------------------------------------------------------
+\begin{tikzpicture}[>=Latex, line width=1.0pt, node distance=2.2cm,
+  bloco/.style={draw, minimum width=3.2cm, minimum height=1.2cm, fill=blue!8, align=center},
+  modelo/.style={draw, dashed, minimum width=3.2cm, minimum height=1.2cm, fill=orange!15, align=center},
+  seta/.style={->}]
+
+  \node[bloco] (controlador) at (0,0) {Controlador};
+  \node[bloco, right=3.6cm of controlador] (planta) {Planta};
+  \node[modelo, above=1.8cm of controlador] (modelo) {Modelo\\[-2pt]\footnotesize equações do sistema};
+
+  \draw[seta] (controlador) -- node[above, font=\small]{$u$} (planta);
+  \draw[seta] (planta.south) -- ++(0,-1.1) -| node[below, font=\small]{$y$ (medição)} (controlador.south);
+  \draw[seta] (modelo) -- node[right, font=\small]{define} (controlador);
+
+\end{tikzpicture}

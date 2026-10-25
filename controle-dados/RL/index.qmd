@@ -1,0 +1,31 @@
+---
+title: "Aprendizagem por Reforço"
+subtitle: "Reinforcement Learning para Controle"
+institute: "Universidade Federal do Pará"
+author: "Prof. Dr. Raphael Teixeira"
+date: ""
+format:
+  html:
+    page-layout: article
+---
+
+Um agente aprende a agir sobre um ambiente por tentativa e erro,
+maximizando uma recompensa acumulada — a contraparte, orientada a dados, do
+controle ótimo.
+
+```{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="RLNota.qmd">
+  <h3>Nota</h3>
+  <p>Artigo de referência sobre aprendizagem por reforço</p>
+</a>
+<a class="categoria-card" href="RL01Introducao.qmd">
+  <h3>Slides 1</h3>
+  <p>Introdução: MDPs, Bellman, Q-learning e RL profundo</p>
+</a>
+<a class="categoria-card" href="RL02QLearningControle.qmd">
+  <h3>Slides 2</h3>
+  <p>Q-learning vs. LQR: exemplo mínimo em Python</p>
+</a>
+</div>
+```

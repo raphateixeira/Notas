@@ -1,0 +1,17 @@
+% ---------------------------------------------------------------
+% DeePC: uma trajetória de dados persistentemente excitante (Hankel)
+% substitui o modelo na formulação do problema de controle preditivo.
+% ---------------------------------------------------------------
+\begin{tikzpicture}[>=Latex, line width=1.0pt, node distance=1.5cm,
+  bloco/.style={draw, minimum width=3.6cm, minimum height=1.2cm, fill=blue!8, align=center},
+  seta/.style={->}]
+
+  \node[bloco] (dados) at (0,0) {Dados $(u,y)$\\[-2pt]\footnotesize matriz de Hankel};
+  \node[bloco, right=2.2cm of dados] (opt) {Otimização DeePC\\[-2pt]\footnotesize horizonte deslizante};
+  \node[bloco, right=2.2cm of opt] (planta) {Planta};
+
+  \draw[seta] (dados) -- (opt);
+  \draw[seta] (opt) -- node[above, font=\small]{$u^\ast$} (planta);
+  \draw[seta] (planta.south) -- ++(0,-1.0) -| node[below, font=\small]{$y$} (dados.south);
+
+\end{tikzpicture}

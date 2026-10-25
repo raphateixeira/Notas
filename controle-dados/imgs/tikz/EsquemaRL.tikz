@@ -1,0 +1,15 @@
+% ---------------------------------------------------------------
+% Ciclo agente-ambiente da aprendizagem por reforço: o agente observa
+% o estado, aplica uma ação, e recebe recompensa e o próximo estado.
+% ---------------------------------------------------------------
+\begin{tikzpicture}[>=Latex, line width=1.0pt,
+  bloco/.style={draw, minimum width=3.6cm, minimum height=1.3cm, fill=blue!8, align=center},
+  seta/.style={->}]
+
+  \node[bloco] (agente) at (0,0) {Agente\\[-2pt]\footnotesize política $\pi(a|s)$};
+  \node[bloco, right=5.2cm of agente] (ambiente) {Ambiente\\[-2pt]\footnotesize planta / MDP};
+
+  \draw[seta] (agente.north) -- ++(0,0.7) -- node[above, font=\small]{ação $a_k$} ($(ambiente.north)+(0,0.7)$) -- (ambiente.north);
+  \draw[seta] (ambiente.south) -- ++(0,-0.7) -- node[below, font=\small]{estado $s_{k+1}$, recompensa $r_k$} ($(agente.south)+(0,-0.7)$) -- (agente.south);
+
+\end{tikzpicture}

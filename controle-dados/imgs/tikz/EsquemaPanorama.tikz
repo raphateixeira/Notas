@@ -1,0 +1,25 @@
+% ---------------------------------------------------------------
+% Panorama: os quatro métodos organizados em dois eixos —
+% direto vs. indireto (como o controle é obtido) e
+% linear vs. não linear (a representação usada internamente).
+% ---------------------------------------------------------------
+\begin{tikzpicture}[>=Latex, line width=1.0pt,
+  quad/.style={draw, minimum width=6.6cm, minimum height=3.4cm, fill=blue!8, align=center, font=\Large},
+  eixo/.style={->, line width=1.2pt}]
+
+  % Quadrantes
+  \node[quad] (koopman) at (-3.5,1.8) {Koopman / DMD\\[-2pt]\normalsize\itshape identifica modelo\\\normalsize\itshape linear (em $\phi(x)$)};
+  \node[quad] (deepc)   at ( 3.5,1.8) {DeePC\\[-2pt]\normalsize\itshape sem modelo expl\'icito\\\normalsize\itshape v\'alido p/ sistemas lineares};
+  \node[quad] (sindy)   at (-3.5,-1.8) {SINDy\\[-2pt]\normalsize\itshape identifica modelo\\\normalsize\itshape não linear (equa\c{c}\~oes)};
+  \node[quad] (rl)      at ( 3.5,-1.8) {Aprendizagem por Reforço\\[-2pt]\normalsize\itshape sem modelo expl\'icito\\\normalsize\itshape qualquer din\^amica};
+
+  % Eixos
+  \draw[eixo] (-7.2,0) -- (7.2,0);
+  \draw[eixo] (0,-4.3) -- (0,4.3);
+
+  \node[font=\Large] at (-5.4,0.35) {indireto};
+  \node[font=\Large] at (5.4,0.35) {direto};
+  \node[font=\Large, align=center] at (-0.05,4.6) {linear};
+  \node[font=\Large, align=center] at (-0.05,-4.6) {não linear};
+
+\end{tikzpicture}
