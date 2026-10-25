@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+  resources:
+    - "*/*.gif"
+    - "*/*.py"
+    - "*/*.mp4"
+
+website:
+  title: "Coleção Manim"
+  description: "Animações matemáticas/didáticas de sistemas dinâmicos e conversores estáticos"
+  site-url: https://raphateixeira.github.io/Manim/
+  repo-url: https://github.com/raphateixeira/Manim
+
+format:
+  html:
+    theme: [cosmo, TemaRTx.scss]
+    lang: pt-BR
