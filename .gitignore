@@ -32,3 +32,4 @@ Manifest.toml
 .Rproj.user/
 .venv/
 .claude/
+manim/**/media/
