@@ -1,0 +1,11 @@
+_site/
+_build/
+*.aux
+*.log
+.DS_Store
+
+/.quarto/
+**/*.quarto_ipynb
+
+# Tema compartilhado: baixado de raphateixeira/.github no build (ver .github/scripts/atualizar-tema.sh na raiz de GitRTx)
+/TemaRTx.scss

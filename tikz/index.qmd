@@ -1,0 +1,72 @@
+---
+pagetitle: "Coleção TikZ"
+---
+
+::: {.rtx-hero}
+[Coleção · Figuras]{.rtx-eyebrow}
+
+# Coleção TikZ {.unnumbered .unlisted}
+
+Figuras TikZ reutilizáveis nas disciplinas e projetos de pesquisa. Cada figura pode ser
+baixada em PNG, SVG, EPS ou como fonte `.tikz` / `.tex` standalone.
+
+[Prof. Dr. Raphael Teixeira]{.rtx-meta}
+
+::: {.rtx-acoes}
+[GitHub](https://github.com/raphateixeira/TikZ){.rtx-btn} [Site do professor](https://raphateixeira.github.io){.rtx-btn}
+:::
+:::
+
+````{=html}
+<div class="hero-figura">
+  <img src="_build/aprendizagem-de-maquina/ControleNeural/ControleNeural.png" alt="Controlador neural em malha fechada">
+</div>
+````
+
+Veja `SCOPE.md` para o desenho completo e `README.md` para o fluxo de contribuição.
+
+
+````{=html}
+<div class="categoria-grid">
+<a class="categoria-card" href="categorias/algebra-linear.qmd">
+  <h3>Álgebra Linear</h3>
+  <p>7 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/aprendizagem-de-maquina.qmd">
+  <h3>Aprendizagem de Máquina</h3>
+  <p>1 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/circuitos-ca.qmd">
+  <h3>Circuitos CA</h3>
+  <p>14 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/controle-classico.qmd">
+  <h3>Controle Clássico</h3>
+  <p>13 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/controle-digital.qmd">
+  <h3>Controle Digital</h3>
+  <p>5 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/controle-estados.qmd">
+  <h3>Controle por Espaço de Estados</h3>
+  <p>12 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/eletronica-potencia.qmd">
+  <h3>Eletronica Potencia</h3>
+  <p>2 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/identificacao.qmd">
+  <h3>Identificação de Sistemas</h3>
+  <p>0 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/metodos-numericos.qmd">
+  <h3>Métodos Numéricos</h3>
+  <p>6 figura(s)</p>
+</a>
+<a class="categoria-card" href="categorias/mpc-dmc.qmd">
+  <h3>MPC / DMC</h3>
+  <p>0 figura(s)</p>
+</a>
+</div>
+````
