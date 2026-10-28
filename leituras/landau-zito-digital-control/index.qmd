@@ -21,7 +21,7 @@ Esta pasta contém apenas **notas conceituais** de leitura deste livro, em forma
 
 ### Capítulo 2 — Computer Control Systems
 
-* Nota 4 — 2.1–2.2 Controle por computador e discretização *(prevista)*
+* Nota 4 — 2.1–2.2 [Controle por computador e discretização](04-ControleComputadorDiscretizacao.qmd)
 * Nota 5 — 2.3 Modelos em tempo discreto *(prevista)*
 * Nota 6 — 2.4 Sistemas em tempo discreto em malha fechada *(prevista)*
 * Nota 7 — 2.5 Princípios dos métodos modernos de projeto de controladores digitais *(prevista)*
