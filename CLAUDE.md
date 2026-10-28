@@ -71,7 +71,7 @@ Convenção das notas (decks) de cada livro:
 Livros atuais (em `leituras/`): `chan-probabilidade`, `brunton-otimizacao`, `brunton-kutz-data-driven`,
 `bishop-deep-learning`, `strang-linear-algebra`, `ventura-geometria-diferencial`,
 `larson-calculo-multivariavel`, `hasan-advanced-control-power-converters`,
-`ljung-system-identification`, `pillonetto-regularized-system-identification`,
+`landau-zito-digital-control`, `ljung-system-identification`, `pillonetto-regularized-system-identification`,
 `waarde-data-based-linear-systems`.
 
 Ao adicionar um livro novo: criar a pasta e o `index.qmd`; adicionar a entrada em

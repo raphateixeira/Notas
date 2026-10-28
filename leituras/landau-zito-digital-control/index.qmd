@@ -1,0 +1,36 @@
+---
+title: "Digital Control Systems: Design, Identification and Implementation"
+subtitle: "Ioan Doré Landau, Gianluca Zito"
+lang: pt-BR
+toc: false
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+**Edição:** Springer, 2006 (Communications and Control Engineering)
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+### Capítulo 1 — Continuous Control Systems: A Review
+
+* Nota 1 — 1.1 Modelos em tempo contínuo *(prevista)*
+* Nota 2 — 1.2 Sistemas em malha fechada *(prevista)*
+* Nota 3 — 1.3 Controladores PI e PID *(prevista)*
+
+### Capítulo 2 — Computer Control Systems
+
+* Nota 4 — 2.1–2.2 Controle por computador e discretização *(prevista)*
+* Nota 5 — 2.3 Modelos em tempo discreto *(prevista)*
+* Nota 6 — 2.4 Sistemas em tempo discreto em malha fechada *(prevista)*
+* Nota 7 — 2.5 Princípios dos métodos modernos de projeto de controladores digitais *(prevista)*
+* Nota 8 — 2.6 Análise em frequência de sistemas amostrados em malha fechada *(prevista)*
+
+### Capítulo 3 — Robust Digital Controller Design Methods
+
+* Nota 9 — 3.1–3.2 Controlador PID digital *(prevista)*
+* Nota 10 — 3.3 Alocação de polos *(prevista)*
+* Nota 11 — 3.4 Rastreamento e regulação com objetivos independentes *(prevista)*
+* Nota 12 — 3.5 Controle por modelo interno *(prevista)*
+* Nota 13 — 3.6 Alocação de polos com modelagem das funções de sensibilidade *(prevista)*

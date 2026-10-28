@@ -90,6 +90,8 @@ website:
             href: leituras/larson-calculo-multivariavel/index.qmd
           - text: "Komurcugil et al. — Advanced Control of Power Converters"
             href: leituras/hasan-advanced-control-power-converters/index.qmd
+          - text: "Landau & Zito — Digital Control Systems"
+            href: leituras/landau-zito-digital-control/index.qmd
           - text: "Ljung — System Identification: Theory for the User"
             href: leituras/ljung-system-identification/index.qmd
           - text: "Pillonetto et al. — Regularized System Identification"

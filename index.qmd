@@ -50,7 +50,7 @@ ganha volume, é promovido a repositório próprio.
   <span class="tema-estado">em construção</span>
   <h3>Controle Digital</h3>
   <p>Discretização, estabilidade e projeto de controladores digitais.</p>
-  <div class="tema-fontes">Fontes: a definir</div>
+  <div class="tema-fontes">Fontes: Landau & Zito</div>
 </a>
 <a class="tema-card" href="fundamentos/conversores-energia/index.html">
   <span class="tema-estado">em construção</span>
@@ -124,6 +124,10 @@ não fazem parte deste repositório.
 <a class="livro-card" href="leituras/hasan-advanced-control-power-converters/index.html">
   <img src="imgs/capas/hasan-advanced-control-power-converters.jpg" alt="Capa de Advanced Control of Power Converters" loading="lazy">
   <div class="livro-info"><h3>Advanced Control of Power Converters</h3><p>Hasan Komurcugil, Sertac Bayhan, Ramon Guzman, Mariusz Malinowski, Haitham Abu-Rub</p></div>
+</a>
+<a class="livro-card" href="leituras/landau-zito-digital-control/index.html">
+  <img src="imgs/capas/landau-zito-digital-control.jpg" alt="Capa de Digital Control Systems: Design, Identification and Implementation" loading="lazy">
+  <div class="livro-info"><h3>Digital Control Systems: Design, Identification and Implementation</h3><p>Ioan Doré Landau, Gianluca Zito</p></div>
 </a>
 <a class="livro-card" href="leituras/ljung-system-identification/index.html">
   <img src="imgs/capas/ljung-system-identification.jpg" alt="Capa de System Identification: Theory for the User" loading="lazy">

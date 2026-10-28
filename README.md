@@ -24,7 +24,7 @@ navegação principal (aba **Notas**).
   capítulo/aula (`chan-probabilidade/`, `brunton-otimizacao/`, `brunton-kutz-data-driven/`,
   `bishop-deep-learning/`, `strang-linear-algebra/`, `ventura-geometria-diferencial/`,
   `larson-calculo-multivariavel/`, `hasan-advanced-control-power-converters/`,
-  `ljung-system-identification/`, `pillonetto-regularized-system-identification/`,
+  `landau-zito-digital-control/`, `ljung-system-identification/`, `pillonetto-regularized-system-identification/`,
   `waarde-data-based-linear-systems/`).
 - `imgs/` — logos da UFPA usados nos slides.
 - `referencias.bib`, `abnt.csl` — bibliografia (uma entrada por livro) e estilo.

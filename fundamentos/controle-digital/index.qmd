@@ -16,7 +16,7 @@ sistematizadas aqui. Quando ganhar volume, é promovido a repositório próprio.
 
 ## Fontes (notas de leitura)
 
-* _Ainda sem notas de livro associadas._
+* [Landau & Zito — Digital Control Systems](../../leituras/landau-zito-digital-control/index.qmd)
 
 ## Notas
 
