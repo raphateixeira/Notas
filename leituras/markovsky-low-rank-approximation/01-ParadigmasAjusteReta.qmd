@@ -1,0 +1,291 @@
+---
+title: "Paradigmas de modelagem e o ajuste de uma reta"
+subtitle: "1.1–1.2 - Markovsky: Low-Rank Approximation"
+author: "Prof. Dr. Raphael Teixeira"
+institute: "Universidade Federal do Pará"
+lang: pt-BR
+format:
+  revealjs:
+    include-in-header: ../../_mathjax.html
+    theme: [simple, ../../TemaRTx.scss]
+    transition: fade
+    slide-number: true
+    width: 1600
+    height: 900
+    center: true
+    title-slide-attributes:
+      data-background-image: "../../imgs/ufpa-colorido.png"
+      data-background-size: "84px"
+      data-background-position: "top 45px center"
+---
+
+## Ajustar modelos lineares a dados {.small-slide}
+
+```{python}
+#| include: false
+# Dados do exemplo do ajuste de reta (§1.2): 10 pontos lidos da Fig. 1.1
+import numpy as np
+import matplotlib.pyplot as plt
+
+AZUL, FUNDO = "#1B365D", "#E8EEF7"
+a = np.array([-2, -1, 0, 1, 2, -2, -1, 0, 1, 2], dtype=float)
+b = np.array([1, 4, 6, 4, 1, -1, -4, -6, -4, -1], dtype=float)
+D = np.vstack([a, b])                      # D = [d_1 ... d_N] ∈ R^{2×N}
+
+def eixos(ax, titulo):
+    ax.set_xlim(-3, 3); ax.set_ylim(-7, 7); ax.set_aspect("equal")
+    ax.set_xlabel("$a$"); ax.set_ylabel("$b$"); ax.grid(alpha=0.3)
+    ax.set_title(titulo, fontsize=15)
+```
+
+No **paradigma clássico**, ajustar um modelo linear a dados é resolver **aproximadamente** um sistema de equações lineares
+
+$$
+AX \approx B \qquad \text{(LSE)}
+$$
+
+- $A$ e $B$ são construídas a partir dos dados; $X$ **parametriza** o modelo.
+- Ferramentas: mínimos quadrados e suas variantes — regularizado, **total**, robusto…
+- Premissa: existir um modelo linear **exato** $\iff$ existir $X$ com $AX = B$.
+
+::: {.callout-warning title="Partição entrada/saída fixada a priori"}
+O modelo é um mapa linear: as variáveis de $A$ são **entradas** (causas) e as de $B$ são **saídas** (consequências). Impor essa estrutura de antemão, sem que o problema exija, é **ad hoc** e traz propriedades teóricas e numéricas **indesejáveis**.
+:::
+
+## O paradigma comportamental {.small-slide}
+
+Alternativa que **não** fixa uma partição entrada/saída a priori (*behavioral paradigm*).
+
+::: {.callout-note title="Ajuste como aproximação de posto baixo"}
+Ajustar modelos lineares a dados $\iff$ aproximar a matriz de dados $D$ por uma matriz $\widehat D$ de **posto menor**.
+:::
+
+- Existir um modelo linear **exato** para $D$ $\iff$ $D$ ser **deficiente de posto**.
+- O **posto** de $D$ está ligado à **complexidade** do modelo — a tese central do livro.
+- Essa ideia é retomada em aplicações de **sistemas e controle**, **processamento de sinais**, **álgebra computacional** e **aprendizado de máquina**, e orienta o desenvolvimento de **algoritmos numéricos** de ajuste.
+
+## Modelo exato $\iff$ deficiência de posto {.small-slide}
+
+Colunas $d_1, \dots, d_N$ de $D$ = **observações**; elementos $d_{1j}, \dots, d_{\mathtt{q}j}$ de $d_j$ = **variáveis** observadas; supõe-se $\mathtt{q} \le N$.
+
+Um modelo linear declara **relações lineares** entre as variáveis: existem vetores $r_k$ tais que
+
+$$
+r_k^\top d_j = 0, \qquad j = 1, \dots, N.
+$$
+
+::: {.callout-note title="Posto e dimensão do modelo"}
+Com $\mathtt{p}$ relações independentes, $\operatorname{rank}(D) \le \mathtt{m} := \mathtt{q} - \mathtt{p}$ e as observações estão num subespaço $\mathscr{B} \subset \mathbb{R}^{\mathtt{q}}$ de dimensão no máximo $\mathtt{m}$. O **modelo** é identificado com o conjunto $\mathscr{B}$.
+:::
+
+Obtido $\mathscr{B}$, todas as partições entrada/saída podem ser **enumeradas** — um problema de **análise** do modelo identificado. A escolha da partição pode entrar na modelagem, se desejado, mas **não precisa** ser hipótese, como no paradigma clássico.
+
+## Clássico × comportamental {.small-slide}
+
+Relacionados, mas **não equivalentes**:
+
+- $AX = B$ solúvel $\Rightarrow$ $\begin{bmatrix} A & B \end{bmatrix}$ de posto baixo; mas posto baixo **não** garante que $AX = B$ seja solúvel.
+- Essa falta de equivalência gera problemas **mal-postos** (ou mal condicionados) no paradigma clássico.
+- Mal condicionamento de (LSE): a partição entrada/saída fixada **não é corroborada** pelos dados. No comportamental, $D$ mal condicionada indica que os dados **quase** satisfazem relações lineares — uma característica **boa**.
+
+O clássico é um **caso particular**: resolver (LSE) é uma forma de obter aproximação de posto baixo. Alternativas, parametrizando núcleo e espaço coluna por bases:
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.callout-tip title="Representação por núcleo (kernel)"}
+$R \in \mathbb{R}^{\mathtt{p}\times\mathtt{q}}$ de posto linha completo tal que
+$$RD = 0$$
+:::
+:::
+::: {.column width="50%"}
+::: {.callout-tip title="Representação por imagem"}
+$P \in \mathbb{R}^{\mathtt{q}\times\mathtt{m}}$ e $L \in \mathbb{R}^{\mathtt{m}\times N}$ tais que
+$$D = PL$$
+:::
+:::
+::::
+
+## Exemplo: ajuste de uma reta pela origem {.small-slide .nostretch}
+
+:::: {.columns}
+::: {.column width="52%"}
+Dados $\{d_1, \dots, d_N\} \subset \mathbb{R}^2$, com $d_j := \operatorname{col}(a_j, b_j)$: encontrar a reta pela origem que "melhor" se ajusta aos pontos.
+
+**Abordagem clássica:** resolver por mínimos quadrados
+
+$$
+\operatorname{col}(a_1, \dots, a_N)\, x = \operatorname{col}(b_1, \dots, b_N) \qquad \text{(lse)}
+$$
+
+A reta de mínimos quadrados
+
+$$
+\mathscr{B}_{\text{ls}} := \{\, d = \operatorname{col}(a, b) \in \mathbb{R}^2 \mid a\,x_{\text{ls}} = b \,\}
+$$
+
+minimiza a soma dos quadrados das distâncias **verticais**.
+
+Com $N = 10$ pontos (Fig. 1.1), o "melhor" ajuste visual seria o **eixo vertical** — minimizar distâncias verticais não parece adequado.
+:::
+::: {.column width="48%"}
+```{python}
+#| echo: false
+plt.rcParams.update({"font.size": 14})
+x_ls = (a @ b) / (a @ a)                   # solução de mínimos quadrados de (lse)
+fig, ax = plt.subplots(figsize=(5.2, 7.0))
+for aj, bj in zip(a, b):
+    ax.plot([aj, aj], [bj, aj * x_ls], color="tab:blue", ls="--", lw=1.2)
+ax.axline((0, 0), slope=x_ls, color="tab:red", lw=2.5)
+ax.plot(a, b, "o", mfc="white", mec="tab:blue", mew=2, ms=8)
+eixos(ax, f"$a\\,x_{{ls}} = b$:  $x_{{ls}} = {x_ls:.0f}$")
+plt.tight_layout(); plt.show()
+```
+:::
+::::
+
+## Trocar os papéis de $a$ e $b$ muda o critério {.small-slide .nostretch}
+
+:::: {.columns}
+::: {.column width="52%"}
+Em (lse), $b$ é tratado como **função** de $a$ — escolha **arbitrária**. Pode-se resolver
+
+$$
+\operatorname{col}(a_1, \dots, a_N) = \operatorname{col}(b_1, \dots, b_N)\, x \qquad \text{(lse}'\text{)}
+$$
+
+agora com $a$ função de $b$. A reta
+
+$$
+\mathscr{B}'_{\text{ls}} := \{\, d \in \mathbb{R}^2 \mid a = b\,x'_{\text{ls}} \,\}
+$$
+
+minimiza as distâncias **horizontais** — e, neste exemplo, dá o ajuste desejado.
+
+::: {.callout-warning title="Clássico: representação define o critério"}
+Ao resolver um sistema linear por mínimos quadrados, a **escolha da representação** do modelo afeta o **critério de ajuste**. Seria mais natural especificar o critério **independentemente** da parametrização.
+:::
+:::
+::: {.column width="48%"}
+```{python}
+#| echo: false
+plt.rcParams.update({"font.size": 14})
+xl_ls = (a @ b) / (b @ b)                  # solução de mínimos quadrados de (lse')
+fig, ax = plt.subplots(figsize=(5.2, 7.0))
+for aj, bj in zip(a, b):
+    ax.plot([aj, bj * xl_ls], [bj, bj], color="tab:blue", ls="--", lw=1.2)
+ax.plot([0, 0], [-7, 7], color="tab:red", lw=2.5)   # a = b·x'_ls com x'_ls = 0
+ax.plot(a, b, "o", mfc="white", mec="tab:blue", mew=2, ms=8)
+eixos(ax, f"$a = b\\,x'_{{ls}}$:  $x'_{{ls}} = {xl_ls:.0f}$")
+plt.tight_layout(); plt.show()
+```
+:::
+::::
+
+## Mínimos quadrados totais {.small-slide}
+
+O método de **mínimos quadrados totais** (TLS) minimiza as distâncias **ortogonais** dos pontos à reta. Com o sistema (lse):
+
+$$
+\begin{aligned}
+\text{minimizar} \quad & \text{sobre } x \in \mathbb{R},\ \widehat a,\, \widehat b \in \mathbb{R}^N \quad \sum_{j=1}^{N} \left\| d_j - \begin{bmatrix} \widehat a_j \\ \widehat b_j \end{bmatrix} \right\|_2^2 \\
+\text{sujeito a} \quad & \widehat a_j\, x = \widehat b_j, \qquad j = 1, \dots, N.
+\end{aligned}
+\qquad \text{(tls)}
+$$
+
+Para os dados da Fig. 1.1 o problema **não tem solução**: informalmente $x_{\text{tls}} = \infty$, o ajuste pela reta **vertical**.
+
+::: {.callout-important title="TLS pode não fornecer modelo"}
+O problema (tls) pode **não ter solução** e, portanto, falhar em dar um modelo.
+:::
+
+Motivo: (lse) restringe a reta a ser o gráfico de uma função $ax = b$ — a reta vertical está **excluída a priori**, mas é justamente ela que minimiza as distâncias ortogonais.
+
+## Representações por imagem e por núcleo {.small-slide}
+
+Toda reta $\mathscr{B}$ pela origem tem representação por **imagem** e por **núcleo**: existem $P \in \mathbb{R}^{2\times 1}$ e $R \in \mathbb{R}^{1\times 2}$ com
+
+$$
+\mathscr{B} = \operatorname{image}(P) := \{\, d = P\ell \mid \ell \in \mathbb{R} \,\}, \qquad \mathscr{B} = \ker(R) := \{\, d \mid Rd = 0 \,\}.
+$$
+
+Com $D := \begin{bmatrix} d_1 & \cdots & d_N \end{bmatrix}$, $\widehat D := \begin{bmatrix} \widehat d_1 & \cdots & \widehat d_N \end{bmatrix}$ e a norma de Frobenius $\|E\|_{\mathrm F} := \|\operatorname{vec}(E)\|_2$:
+
+:::: {.columns}
+::: {.column width="50%"}
+$$
+\begin{aligned}
+\text{min} \quad & \text{sobre } P \in \mathbb{R}^{2\times1},\ L \in \mathbb{R}^{1\times N}\ \ \|D - \widehat D\|_{\mathrm F}^2 \\
+\text{s.a.} \quad & \widehat D = PL
+\end{aligned}
+\quad (\text{lra}_P)
+$$
+:::
+::: {.column width="50%"}
+$$
+\begin{aligned}
+\text{min} \quad & \text{sobre } R \in \mathbb{R}^{1\times2},\ R \ne 0,\ \widehat D \in \mathbb{R}^{2\times N}\ \ \|D - \widehat D\|_{\mathrm F}^2 \\
+\text{s.a.} \quad & R\widehat D = 0
+\end{aligned}
+\quad (\text{lra}_R)
+$$
+:::
+::::
+
+Ao contrário de (tls), $(\text{lra}_P)$ e $(\text{lra}_R)$ **sempre** têm solução (não única). No exemplo: $P^* = \operatorname{col}(0, 1)$ e $R^* = \begin{bmatrix} 1 & 0 \end{bmatrix}$, que descrevem a reta vertical $\mathscr{B}^* := \operatorname{image}(P^*) = \ker(R^*)$.
+
+## Um único problema abstrato {.small-slide .nostretch}
+
+:::: {.columns}
+::: {.column width="55%"}
+As restrições $\widehat D = PL$ e $R\widehat D = 0$ (com $R \ne 0$) equivalem a
+
+$$
+\operatorname{rank}\big(\begin{bmatrix} \widehat d_1 & \cdots & \widehat d_N \end{bmatrix}\big) \le 1,
+$$
+
+ou seja: os pontos $\widehat d_j$ estão **exatamente** numa reta pela origem.
+
+::: {.callout-note title="Aproximação de posto baixo"}
+$(\text{lra}_P)$ e $(\text{lra}_R)$ são instâncias do mesmo problema: **aproximar a matriz de dados $D$ por uma matriz $\widehat D$ de posto baixo**.
+:::
+:::
+::: {.column width="45%"}
+```{python}
+#| echo: false
+plt.rcParams.update({"font.size": 14})
+# aproximação de posto 1 calculada aqui pela SVD (não é o código do livro)
+U, s, Vt = np.linalg.svd(D)
+Dh = s[0] * np.outer(U[:, 0], Vt[0])
+fig, ax = plt.subplots(figsize=(5.2, 7.0))
+for j in range(D.shape[1]):
+    ax.plot([D[0, j], Dh[0, j]], [D[1, j], Dh[1, j]], color="tab:blue", ls="--", lw=1.2)
+ax.axline((0, 0), (U[0, 0], U[1, 0]), color="tab:red", lw=2.5)
+ax.plot(a, b, "o", mfc="white", mec="tab:blue", mew=2, ms=8)
+ax.plot(Dh[0], Dh[1], "x", color="tab:red", mew=2, ms=9)
+eixos(ax, "posto 1: $\\widehat D$ (×) e $\\mathscr{B}^*$")
+plt.tight_layout(); plt.show()
+```
+:::
+::::
+
+## O que vem no Capítulo 2 {.small-slide}
+
+O exemplo é generalizado para dados em $\mathbb{R}^{\mathtt{q}}$:
+
+::: {.callout-note title="Objetivo"}
+Dado um conjunto de pontos em $\mathbb{R}^{\mathtt{q}}$ (os **dados**), encontrar um subespaço de $\mathbb{R}^{\mathtt{q}}$ de dimensão limitada (um **modelo**) com a menor distância (norma 2) aos pontos.
+:::
+
+- **Representações** gerais de um subespaço: **núcleo** ou **imagem** de uma matriz. As equações $AX = B$ e $A = BX'$ podem **não** representar a solução ótima; núcleo e imagem não têm essa deficiência.
+- $AX = B$ e $A = BX'$ vieram do ponto de vista **algorítmico**. Interpretação: $A$ é **entrada** e $B$ é **saída** (ou o contrário) — apelo intuitivo de **causalidade**.
+
+Fixar a estrutura entrada/saída a priori leva a:
+
+- casos **excepcionais** (não genéricos), que complicam a teoria;
+- **mal condicionamento** nos casos "quase" excepcionais — algoritmos pouco robustos;
+- necessidade de **regularização**, que muda o critério de ajuste especificado.
+
+Com núcleo e imagem, resolver aproximadamente um sistema sobredeterminado vira **aproximação de posto baixo**, e esses problemas são **evitados**.
+
+{{< include ../../_encerramento.qmd >}}

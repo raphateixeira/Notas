@@ -133,6 +133,10 @@ não fazem parte deste repositório.
   <img src="imgs/capas/ljung-system-identification.jpg" alt="Capa de System Identification: Theory for the User" loading="lazy">
   <div class="livro-info"><h3>System Identification: Theory for the User</h3><p>Lennart Ljung</p></div>
 </a>
+<a class="livro-card" href="leituras/markovsky-low-rank-approximation/index.html">
+  <img src="imgs/capas/markovsky-low-rank-approximation.jpg" alt="Capa de Low-Rank Approximation: Algorithms, Implementation, Applications" loading="lazy">
+  <div class="livro-info"><h3>Low-Rank Approximation: Algorithms, Implementation, Applications</h3><p>Ivan Markovsky</p></div>
+</a>
 <a class="livro-card" href="leituras/pillonetto-regularized-system-identification/index.html">
   <img src="imgs/capas/pillonetto-regularized-system-identification.jpg" alt="Capa de Regularized System Identification: Learning Dynamic Models from Data" loading="lazy">
   <div class="livro-info"><h3>Regularized System Identification: Learning Dynamic Models from Data</h3><p>Gianluigi Pillonetto, Tianshi Chen, Alessandro Chiuso, Giuseppe De Nicolao, Lennart Ljung</p></div>

@@ -1,0 +1,34 @@
+---
+title: "Low-Rank Approximation: Algorithms, Implementation, Applications"
+subtitle: "Ivan Markovsky"
+lang: pt-BR
+toc: false
+---
+
+[⬅ Site principal](https://raphateixeira.github.io) · [⬅ Notas](../../index.qmd)
+
+**Edição:** Springer, 2012 (Communications and Control Engineering) · versão do autor de 2014,
+[disponível gratuitamente](https://imarkovs.github.io/book/book-2x1.pdf){target="_blank"}
+
+::: {.callout-note}
+Esta pasta contém apenas **notas conceituais** de leitura deste livro, em formato de slides.
+:::
+
+### Capítulo 1 — Introduction
+
+* Nota 1 — 1.1–1.2 [Paradigmas de modelagem e o ajuste de uma reta](01-ParadigmasAjusteReta.qmd)
+* Nota 2 — 1.3 Panorama de aplicações *(prevista)*
+* Nota 3 — 1.4–1.5 Panorama de algoritmos e programação literária *(prevista)*
+
+### Capítulo 2 — From data to models
+
+* Nota 4 — 2.1 Representações de modelos estáticos lineares *(prevista)*
+* Nota 5 — 2.2 Representações de modelos lineares invariantes no tempo *(prevista)*
+* Nota 6 — 2.3 Modelagem exata e aproximada de dados *(prevista)*
+* Nota 7 — 2.4–2.5 Aproximação de posto baixo não estruturada e estruturada *(prevista)*
+
+### Capítulo 3 — Algorithms
+
+* Nota 8 — 3.1 Métodos de subespaço *(prevista)*
+* Nota 9 — 3.2 Algoritmos baseados em otimização local *(prevista)*
+* Nota 10 — 3.3 Modelagem de dados pela heurística da norma nuclear *(prevista)*

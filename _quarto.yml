@@ -94,6 +94,8 @@ website:
             href: leituras/landau-zito-digital-control/index.qmd
           - text: "Ljung — System Identification: Theory for the User"
             href: leituras/ljung-system-identification/index.qmd
+          - text: "Markovsky — Low-Rank Approximation"
+            href: leituras/markovsky-low-rank-approximation/index.qmd
           - text: "Pillonetto et al. — Regularized System Identification"
             href: leituras/pillonetto-regularized-system-identification/index.qmd
           - text: "van Waarde et al. — Data-based Linear Systems and Control Theory"
