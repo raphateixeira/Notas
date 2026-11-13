@@ -20,11 +20,6 @@ DataDrivenControl/
 ├── imgs/
 │   ├── ufpa-colorido.png, ufpa-preto.png, ufpa-branco.png   brasão UFPA
 │   └── tikz/                       diagramas em TikZ, compartilhados entre os subtemas
-├── DeePC/
-│   ├── index.qmd                   sub-portal: Nota + apresentações
-│   ├── DeePCNota.qmd                artigo de referência (formato texto)
-│   ├── DeePC01Introducao.qmd        apresentação: Lema de Willems, formulação
-│   └── DeePC02Regularizacao.qmd     apresentação: ruído e regularização (Python)
 ├── Koopman/
 │   ├── index.qmd
 │   ├── KoopmanNota.qmd
@@ -75,7 +70,8 @@ pacotes necessários.
 1. Crie uma pasta no nível raiz para o novo subtema (ex.: `MFAC/`), com
    `index.qmd` (sub-portal) e `<Tema>Nota.qmd` (artigo), seguindo os
    existentes como modelo; ou adicione um novo `.qmd` a uma pasta existente
-   (ex.: `DeePC/DeePC03Aplicacoes.qmd`).
+   (ex.: `Koopman/Koopman05Aplicacoes.qmd`). DeePC saiu daqui em 2026-11-13 e tem repositório
+   próprio: [DeePC](https://raphateixeira.github.io/DeePC/).
 2. Copie o cabeçalho YAML de um `.qmd` existente — aponta para
    `../TemaRTx.scss`, para o brasão em `../imgs/ufpa-colorido.png`, e usa
    `center: false` (título sempre no topo do slide — ver nota no `TemaRTx.scss`).

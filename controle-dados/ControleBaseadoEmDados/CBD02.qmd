@@ -391,7 +391,7 @@ a modelagem física cada vez mais cara e imprecisa. Controle baseado em
 dados oferece um caminho direto a partir do que já foi medido.
 
 Para aprofundar em cada caminho:
-[DeePC](../../index.qmd#controle-dados) ·
+[DeePC](https://raphateixeira.github.io/DeePC/) ·
 [Koopman](../../index.qmd#controle-dados) ·
 [SINDy](../../index.qmd#controle-dados) ·
 [Aprendizagem por Reforço](../../index.qmd#controle-dados)

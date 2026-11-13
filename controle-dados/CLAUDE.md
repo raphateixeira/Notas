@@ -2,7 +2,7 @@
 
 ## Contexto do projeto
 Repositório de pesquisa e material didático sobre controle baseado em dados
-(DeePC, Koopman, SINDy, RL) aplicado a conversores de potência, ligado à
+(Koopman, SINDy, RL; DeePC tem repositório próprio, `DeePC`, desde 2026-11-13) aplicado a conversores de potência, ligado à
 proposta CNPq e ao grupo LINCE (UFPA/CAMTUC).
 
 ## Padrão de qualidade para slides (Quarto RevealJS)
